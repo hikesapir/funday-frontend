@@ -1,6 +1,7 @@
 <template>
   <section class="board-group">
-    <task-preview :task="task"></task-preview>
+    <!-- <group-list v-for=""></group-list>
+    <task-preview v-for="" :task="task"></task-preview> -->
   </section>
 </template>
 

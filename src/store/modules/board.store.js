@@ -27,5 +27,8 @@ export default {
     loadApp({ commit }) {
       commit('loadBoards')
     },
+    async setBoard({ commit }, { id }) {
+      const board = await boardService.getById(id)
+    },
   },
 }
