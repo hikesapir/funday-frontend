@@ -6,15 +6,17 @@
     <div class="board-app">
       <section class="board-app">
         <section class="board-app">
-          <board-header />
+          <board-header :boardTitle="board?.title" />
           <board-view-mode />
           <filter-bar />
-          <!-- <board-group
-            v-for="group in board.groups"
+          <board-group
+            v-for="group in board?.groups"
             :group="group"
             :key="group.id"
-          ></board-group> -->
-          <button @click="$router.push('/')">Back to homepage</button>
+          ></board-group>
+          <button @click="$router.push('/')">
+            Back to homepage
+          </button>
         </section>
       </section>
     </div>
@@ -22,11 +24,11 @@
 </template>
 
 <script>
-import boardGroup from "../components/board-group.vue";
-import boardHeader from "../components/board-header.vue";
-import boardViewMode from "../components/board-view-mode.vue";
-import filterBar from "../components/filter-bar.vue";
-import boardNav from "../components/board-nav.vue";
+import boardGroup from '../components/board-group.vue'
+import boardHeader from '../components/board-header.vue'
+import boardViewMode from '../components/board-view-mode.vue'
+import filterBar from '../components/filter-bar.vue'
+import boardNav from '../components/board-nav.vue'
 
 export default {
   components: {
@@ -36,14 +38,18 @@ export default {
     boardViewMode,
     filterBar,
   },
+  computed: {},
+  created() {
+    const { id } = this.$route.params
+    this.$store.dispatch({ type: 'loadBoard', id })
+  },
   computed: {
+    board() {
+      return this.$store.getters.board
+    },
     boards() {
-      return;
+      return this.$store.getters.boards
     },
   },
-  created() {
-    const { id } = this.$route.params;
-    this.$store.dispatch({ type: "loadBoard", id });
-  },
-};
+}
 </script>

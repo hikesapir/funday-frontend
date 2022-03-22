@@ -17,7 +17,6 @@ export default {
   },
   mutations: {
     setBoard(state, { board }) {
-      console.log('Got you this board', board)
       state.board = board
     },
     setBoards(state, { boards }) {
@@ -27,7 +26,6 @@ export default {
   actions: {
     async loadBoard({ commit }, { id }) {
       try {
-        console.log(id)
         const board = await boardService.getById(id)
         commit({ type: 'setBoard', board })
       } catch (err) {

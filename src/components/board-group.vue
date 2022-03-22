@@ -1,7 +1,9 @@
 <template>
   <section class="board-group">
-    <!-- <group-list v-for=""></group-list>
-    <task-preview v-for="" :task="task"></task-preview> -->
+    <task-preview
+      v-for="task in group?.tasks"
+      :key="task.id"
+    ></task-preview>
   </section>
 </template>
 
@@ -10,7 +12,7 @@ import taskPreview from './task-preview.vue'
 export default {
   name: 'board-group',
   props: {
-    task: Object,
+    group: Object,
   },
   components: {
     taskPreview,
