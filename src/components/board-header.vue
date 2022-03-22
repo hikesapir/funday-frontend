@@ -2,28 +2,36 @@
     <header class="board-header">
         <div class="up-haeder">
             <div class="board-name">
-                <h1>board name</h1>
-                <p>
-                    <fa icon="circle-info" />
-                </p>
-                <p>
-                    <fa icon="star" />
-                </p>
+                <h1>Board name</h1>
+                <button class="info">
+                    <span>
+                        <fa icon="circle-info" />
+                    </span>
+                </button>
+                <button class="star">
+                    <span>
+                        <fa icon="star" />
+                    </span>
+                </button>
             </div>
             <div class="board-header-right">
-                <p>board member</p>
-                <p>
-                    <fa icon="user-plus" />invite/3
-                </p>
-                <p>
-                    <fa icon="chart-line" />activity
-                </p>
                 <button>
-                    <fa icon="plus" />Add to board
+                    <p>board member</p>
                 </button>
-                <span>
-                    <fa icon="ellipsis" />
-                </span>
+                <button>
+                    <fa icon="user-plus" />invite/3
+                </button>
+                <button>
+                    <fa icon="chart-line" />activity
+                </button>
+                <button class="btn">
+                    <fa icon="plus" /> Add to board
+                </button>
+                <button>
+                    <span>
+                        <fa icon="ellipsis" />
+                    </span>
+                </button>
             </div>
         </div>
         <div class="description-line">
