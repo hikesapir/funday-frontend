@@ -1,21 +1,21 @@
 // SETUP
-@import 'setup/mixins';
-@import 'setup/functions';
-@import 'setup/variables';
+@import "setup/mixins";
+@import "setup/functions";
+@import "setup/variables";
 
 // BASE
-@import 'basics/fonts';
-@import 'basics/util';
-@import 'basics/base';
+@import "basics/fonts";
+@import "basics/util";
+@import "basics/base";
 
 // VIEWS
-@import 'views/app';
-@import 'views/home';
-@import 'views/login';
-@import 'views/main-app';
+@import "views/app";
+@import "views/home";
+@import "views/login";
+@import "views/board-app";
 
 // COMPONENTS
-@import 'components/app-footer';
-@import 'components/board-header';
-@import 'components/board-nav';
-@import 'components/main-nav';
+@import "components/app-footer";
+@import "components/board-header";
+@import "components/board-nav";
+@import "components/main-nav";

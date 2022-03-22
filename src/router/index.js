@@ -3,7 +3,7 @@ import {
   createWebHashHistory,
 } from 'vue-router'
 import homePage from '../views/home-page.vue'
-import mainApp from '../views/main-app.vue'
+import mainApp from '../views/board-app.vue'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -16,7 +16,7 @@ const router = createRouter({
     },
     {
       path: '/boards/:id',
-      name: 'main-app',
+      name: 'board-app',
       component: mainApp,
     },
   ],

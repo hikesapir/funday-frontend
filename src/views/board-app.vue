@@ -1,10 +1,10 @@
 <template>
-  <div class="main-app-container">
+  <div class="board-app-container">
     <div class="open-side-bar">
       <board-nav :boards="boards"></board-nav>
     </div>
-    <div class="main-app">
-      <section class="main-app">
+    <div class="board-app">
+      <section class="board-app">
         <section class="board-app">
           <board-header />
           <board-group></board-group>
