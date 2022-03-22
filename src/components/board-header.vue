@@ -7,7 +7,7 @@
                     <fa icon="circle-info" />
                 </p>
                 <p>
-                    <fa icon="user-secret" />
+                    <fa icon="star" />
                 </p>
             </div>
             <div class="board-header-right">

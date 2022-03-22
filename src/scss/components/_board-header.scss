@@ -5,6 +5,13 @@
         div{
             display: flex;
             gap: 10px;
+            align-items: center;
+            p{
+                margin: 0;
+            }
+            h1{
+                margin: 0;
+            }
         }
     }
 }
