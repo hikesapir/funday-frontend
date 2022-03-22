@@ -1,21 +1,25 @@
 <template>
-  <section class="main-app">
-    <board-nav :boards="boards"></board-nav>
-    <section class="board-app">
-      <board-header />
-      <board-group></board-group>
-      <button @click="$router.push('/')">
-        Back to homepage
-      </button>
-    </section>
-  </section>
+  <div class="main-app-container">
+    <div class="open-side-bar">
+      <board-nav :boards="boards"></board-nav>
+    </div>
+    <div class="main-app">
+      <section class="main-app">
+        <section class="board-app">
+          <board-header />
+          <board-group></board-group>
+          <button @click="$router.push('/')">Back to homepage</button>
+        </section>
+      </section>
+    </div>
+  </div>
 </template>
 
 <script>
-import boardGroup from '../components/board-group.vue'
-import boardHeader from '../components/board-header.vue'
+import boardGroup from "../components/board-group.vue";
+import boardHeader from "../components/board-header.vue";
 
-import boardNav from '../components/board-nav.vue'
+import boardNav from "../components/board-nav.vue";
 export default {
   components: {
     boardGroup,
@@ -24,8 +28,8 @@ export default {
   },
   computed: {
     boards() {
-      return this.$store.getters.boards
+      return this.$store.getters.boards;
     },
   },
-}
+};
 </script>

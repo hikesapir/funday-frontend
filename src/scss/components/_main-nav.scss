@@ -1,5 +1,17 @@
 .main-nav {
   background-color: #292f4c;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .logo {
+    background-color: aliceblue;
+    height: 40px;
+  }
+
+  a {
+    color: beige;
+  }
+
   nav {
     display: flex;
     flex-direction: column;
