@@ -1,7 +1,12 @@
 <template>
-  <main>
-    <h1>Welcome funday</h1>
-  </main>
+  <section class="home-page">
+    <h1>Welcome to Funday, your project management tool</h1>
+    <button>Start now</button>
+  </section>
 </template>
 
-<script></script>
+<script>
+export default {
+  name: 'home-page',
+}
+</script>
