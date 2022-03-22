@@ -1,16 +1,17 @@
 <template>
   <section class="task-preview">
-    <component
-      class="task-column"
-      :is="task.type"
-      :task="task"
-      @update="updateTask"
-    ></component>
+    <div v-if="task">
+      <component
+        class="task-column"
+        :is="task.type"
+        :task="task"
+        @update="updateTask"
+      ></component>
+    </div>
   </section>
 </template>
 
 <script>
-import taskPreview from './task-preview.vue'
 export default {
   name: 'task-preview',
   props: {
@@ -18,9 +19,6 @@ export default {
   },
   data() {
     return {}
-  },
-  components: {
-    taskPreview,
   },
   methods: {
     updateTask(task) {

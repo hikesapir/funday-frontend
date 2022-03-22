@@ -1,6 +1,6 @@
 <template>
   <section class="board-group">
-    <task-preview></task-preview>
+    <task-preview :task="task"></task-preview>
   </section>
 </template>
 
@@ -8,6 +8,9 @@
 import taskPreview from './task-preview.vue'
 export default {
   name: 'board-group',
+  props: {
+    task: Object,
+  },
   components: {
     taskPreview,
   },

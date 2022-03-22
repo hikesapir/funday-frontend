@@ -1,6 +1,9 @@
 <template>
   <section class="main-app">
     <board-group></board-group>
+    <button @click="$router.push('/')">
+      Back to homepage
+    </button>
   </section>
 </template>
 
