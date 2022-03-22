@@ -1,5 +1,5 @@
 import { utilService } from './util-service.js'
-import storageService from './async-storage-service.js'
+import { storageService } from './async-storage-service.js'
 
 export default {
   query,
@@ -7,11 +7,11 @@ export default {
 
 const KEY = 'board_db'
 
-const boards =
+var boards =
   utilService.loadFromStorage(KEY) || _createDemoData()
 
 function query() {
-  return Promise.resolve(boards)
+  return storageService.query(KEY)
 }
 
 function _createDemoData() {

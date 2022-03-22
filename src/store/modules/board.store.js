@@ -1,5 +1,5 @@
 // import authService from '../../services/auth.service.js'
-// import userService from '../../services/user.service.js'
+import boardService from '../../services/board-service.js'
 
 export default {
   state: {
@@ -11,6 +11,21 @@ export default {
       return boards
     },
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    async loadBoards(state) {
+      try {
+        const boards = await boardService.query()
+        state.boards = boards
+      } catch (err) {
+        console.log(
+          'BoardsStore: Had problems while loading the boards'
+        )
+      }
+    },
+  },
+  actions: {
+    loadApp({ commit }) {
+      commit('loadBoards')
+    },
+  },
 }

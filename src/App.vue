@@ -4,5 +4,8 @@
 <script>
 export default {
   components: {},
+  created() {
+    this.$store.dispatch('loadApp')
+  },
 }
 </script>
