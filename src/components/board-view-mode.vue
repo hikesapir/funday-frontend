@@ -1,7 +1,11 @@
 <template>
   <section class="board-view-mode">
-    <h1>board view mode</h1>
-    <router-link to="/">Main Table</router-link>
+    <hr />
+    <span>board view mode: </span>
+    <router-link to="/"><fa icon="table-cells" />Main Table</router-link> |
+    <router-link to="/"><fa icon="chart-simple" />Charts</router-link> |
+    <router-link to="/">Kanban</router-link> |
+    <hr />
   </section>
 </template>
 
