@@ -16,16 +16,16 @@
             </div>
             <div class="board-header-right">
                 <button>
-                    <p>board member</p>
+                    <p>Board member</p>
                 </button>
                 <button>
-                    <fa icon="user-plus" />invite/3
+                    <fa icon="user-plus" />Invite/3
                 </button>
                 <button>
-                    <fa icon="chart-line" />activity
+                    <fa icon="chart-line" />Activity
                 </button>
                 <button class="btn">
-                    <fa icon="plus" /> Add to board
+                    <fa icon="plus" />Add to board
                 </button>
                 <button>
                     <span>
@@ -44,7 +44,9 @@
 <script>
 export default {
     name: 'board-header',
-    props: [],
+    props: {
+        boardTitle: String
+    },
     emits: [],
     components: {},
     data() {
