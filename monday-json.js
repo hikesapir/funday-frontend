@@ -167,7 +167,7 @@ const board = {
             "description": {
                 "id": "c101",
                 "type": "task", //todo: maybe add group
-                "activity": "Replace Logo"
+                "activity": "change status"
             }
             // "board":{
 
