@@ -1,11 +1,13 @@
 <template>
   <section class="main-app">
     <board-nav :boards="boards"></board-nav>
-    <board-header />
-    <board-group></board-group>
-    <button @click="$router.push('/')">
-      Back to homepage
-    </button>
+    <section class="board-app">
+      <board-header />
+      <board-group></board-group>
+      <button @click="$router.push('/')">
+        Back to homepage
+      </button>
+    </section>
   </section>
 </template>
 
