@@ -4,7 +4,8 @@ import boardService from '../../services/board-service.js'
 export default {
   state: {
     // user: userService.getLoggedInUser(),
-    boards: [],
+    boards: null,
+    board: null,
   },
   getters: {
     boards({ boards }) {
@@ -12,23 +13,34 @@ export default {
     },
   },
   mutations: {
-    async loadBoards(state) {
+    setBoard(state, { board }) {
+      console.log('Got you this board', board)
+      state.board = board
+    },
+    setBoards(state, { boards }) {
+      state.boards = boards
+    },
+  },
+  actions: {
+    async loadBoard({ commit }, { id }) {
+      try {
+        const board = await boardService.getById(id)
+        commit({ type: 'setBoard', board })
+      } catch (err) {
+        console.log(
+          `BoardsStore: Had problems while loading board- ${id}`
+        )
+      }
+    },
+    async loadBoards({ commit }) {
       try {
         const boards = await boardService.query()
-        state.boards = boards
+        commit({ type: 'setBoards', boards })
       } catch (err) {
         console.log(
           'BoardsStore: Had problems while loading the boards'
         )
       }
-    },
-  },
-  actions: {
-    loadApp({ commit }) {
-      commit('loadBoards')
-    },
-    async setBoard({ commit }, { id }) {
-      const board = await boardService.getById(id)
     },
   },
 }
