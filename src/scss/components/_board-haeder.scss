@@ -1,0 +1,10 @@
+.board-header{
+    .up-haeder{
+        display: flex;
+        justify-content: space-between;
+        div{
+            display: flex;
+            gap: 10px;
+        }
+    }
+}
