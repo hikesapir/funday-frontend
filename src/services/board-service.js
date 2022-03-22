@@ -3,12 +3,18 @@ import { storageService } from './async-storage-service.js'
 
 export default {
   query,
+  getById
 }
 
 const KEY = 'board_db'
+_createDemoData()
 
 var boards =
   utilService.loadFromStorage(KEY) || _createDemoData()
+
+function getById(id) {
+  return storageService.getById(KEY, id)
+}
 
 function query() {
   return storageService.query(KEY)

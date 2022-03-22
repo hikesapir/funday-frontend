@@ -42,8 +42,8 @@ export default {
     },
   },
   created() {
-    // const { id } = this.route.params
-    // this.$store.dispatch({ type: 'setBoard', id })
+    const { id } = this.$route.params;
+    this.$store.dispatch({ type: "loadBoard", id });
   },
 };
 </script>
