@@ -1,0 +1,27 @@
+.home {
+  .info {
+    h1 {
+      color: $teal-800;
+      font-family: 'Playfair-Regular';
+      font-size: 2em;
+    }
+
+    p {
+      font-size: 1.2em;
+    }
+  }
+}
+
+.home {
+  @include for-lg-layout {
+    flex-direction: row-reverse;
+
+    // & > * {
+    //   flex: 1;
+    // }
+
+    // .info h1 {
+    //   font-size: 3em;
+    // }
+  }
+}
