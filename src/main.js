@@ -12,6 +12,7 @@ const app = createApp(App)
 // for font fontawesome
 library.add(fas)
 app.component('fa', FontAwesomeIcon)
+// app.config.productionTip = false
 
 app.use(router)
 app.use(store)
