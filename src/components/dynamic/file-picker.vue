@@ -1,4 +1,8 @@
-<template></template>
+<template>
+  <div class="filer-picker">
+    <form></form>
+  </div>
+</template>
 
 <script>
 export default {

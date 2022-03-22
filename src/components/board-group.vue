@@ -3,6 +3,8 @@
     <task-preview
       v-for="task in group?.tasks"
       :key="task.id"
+      :task="task"
+      :cmps="group.cmpsOrder"
     ></task-preview>
   </section>
 </template>
