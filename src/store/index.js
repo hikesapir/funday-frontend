@@ -1,6 +1,6 @@
 import { createStore } from 'vuex'
 import boardStore from './modules/board.store.js'
-import userStore from './modules/user.store.js'
+// import userStore from './modules/user.store.js'
 const store = createStore({
   strict: true,
   state() {
@@ -10,11 +10,11 @@ const store = createStore({
   mutations: {},
   modules: {
     boardStore,
-    userStore,
+    // userStore,
   },
   actions: {
     loadApp({ dispatch }) {
-      // dispatch('loadBoards')
+      dispatch('loadBoards')
       // dispatch('loadUser')
     },
   },
