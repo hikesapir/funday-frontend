@@ -1,6 +1,6 @@
 <template>
   <div class="title-picker">
-    <!-- <p class="task-title">{{ task?.title }}</p> -->
+    <p class="task-title">{{ task?.title }}</p>
   </div>
 </template>
 
