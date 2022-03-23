@@ -6,7 +6,14 @@
       class="timeline"
       :style="labelColor"
       >{{ content }}
-      <input type="date" hidden />
+      <div hidden>
+        <el-date-picker
+          v-model="range"
+          @change="setTimeline"
+          type="daterange"
+          class="datepicker"
+        />
+      </div>
     </label>
   </div>
 </template>
@@ -20,10 +27,7 @@ export default {
   },
   data() {
     return {
-      timeline: {
-        start: '',
-        end: '',
-      },
+      range: '',
       isHovering: false,
       monthNames: [
         'Jan',
@@ -42,6 +46,19 @@ export default {
     }
   },
   methods: {
+    setTimeline() {
+      const timeline = {
+        start: this.range[0].getTime(),
+        end: this.range[1].getTime(),
+      }
+      if (timeline.start > timeline.end) return
+      this.range = ''
+      this.$emit('update', {
+        cmpType: 'timeline-picker',
+        timeline,
+        task: this.task,
+      })
+    },
     toggleContent() {
       this.isHovering = !this.isHovering
     },
