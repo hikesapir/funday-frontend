@@ -12,7 +12,7 @@
             description: board?.description,
             isStarred:board?.isStarred,
           }"
-          @stared="updateBoard"
+          @starred="updateBoard"
         />
         <board-view-mode />
         <filter-bar />

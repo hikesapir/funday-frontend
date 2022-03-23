@@ -67,7 +67,7 @@ export default {
     },
     methods: {
         staerred() {
-            this.$emit('stared', 'star')
+            this.$emit('starred', 'star')
         }
     },
     computed: {
