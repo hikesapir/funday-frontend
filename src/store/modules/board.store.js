@@ -34,6 +34,22 @@ export default {
     },
   },
   actions: {
+    async updateTask({ commit }, { data }) {
+      switch (data.cmpType) {
+        case 'timeline-picker':
+          const { id } = data.task
+          // data.timeline
+          console.log(
+            'id, data.timeline',
+            id,
+            data.timeline
+          )
+          break
+
+        default:
+          break
+      }
+    },
     async saveTask({ commit, state }, { groupId, task }) {
       var savedTask = null
       const idx = state.board.groups.findIndex(
