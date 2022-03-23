@@ -6,6 +6,7 @@
       :is="cmp.cmpName"
       :key="cmp"
       :task="task"
+      :groupId="groupId"
       @update="updateTask"
     ></component>
   </section>
@@ -23,6 +24,7 @@ import titlePicker from './dynamic/title-picker.vue'
 export default {
   name: 'task-preview',
   props: {
+    groupId: String,
     task: Object,
   },
   data() {
