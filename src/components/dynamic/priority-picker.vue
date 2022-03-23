@@ -1,8 +1,5 @@
 <template>
-  <div :style="getStyle" class="priority-picker-col">
-    {{ selectedPriorty?.txt }}
-  </div>
-  <!-- {{ selectedPriorty }} -->
+  <div :style="getStyle" class="priority-picker-col">{{ selectedPriorty?.txt }}</div>
 </template>
 
 <script>
