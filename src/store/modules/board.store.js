@@ -40,16 +40,17 @@ export default {
       const taskIdx = group.tasks.findIndex(
         (task) => task.id === updatedTask.id
       )
-      state.board.groups[groupIdx].tasks.splice(
-        taskIdx,
+      state.board.groups[groupIdx].tasks[taskIdx] =
         updatedTask
-      )
     },
     saveBoard(state, { savedBoard }) {
-      const idx = state.boards.findIndex((board) => board._id === savedBoard._id)
-      if (idx !== -1) state.boards.splice(idx, 1, savedBoard)
+      const idx = state.boards.findIndex(
+        (board) => board._id === savedBoard._id
+      )
+      if (idx !== -1)
+        state.boards.splice(idx, 1, savedBoard)
       else state.boards.push(savedBoard)
-    }
+    },
   },
   actions: {
     async updateTask({ commit, state }, { data }) {
@@ -59,7 +60,6 @@ export default {
       switch (cmpType) {
         case 'timeline-picker':
           task.timeline = data.timeline
-          console.log('data.timeline', data.timeline)
           await boardService.saveTask(
             state.board._id,
             groupId,
@@ -77,6 +77,12 @@ export default {
         case 'tag-picker':
           break
         case 'title-picker':
+          task.title = data.title
+          await boardService.saveTask(
+            state.board._id,
+            groupId,
+            task
+          )
           break
       }
       commit({
@@ -117,11 +123,16 @@ export default {
     },
     async saveBoard(context, { board }) {
       try {
-        const savedBoard = await boardService.saveBoard(board)
-        context.commit({ type: 'saveBoard', board: savedBoard })
+        const savedBoard = await boardService.saveBoard(
+          board
+        )
+        context.commit({
+          type: 'saveBoard',
+          board: savedBoard,
+        })
       } catch (err) {
-        console.log('saveBoard err', err);
+        console.log('saveBoard err', err)
       }
-    }
+    },
   },
 }
