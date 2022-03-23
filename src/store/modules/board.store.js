@@ -44,6 +44,7 @@ export default {
         updatedTask
     },
     saveBoard(state, { savedBoard }) {
+      console.log(savedBoard);
       const idx = state.boards.findIndex(
         (board) => board._id === savedBoard._id
       )
@@ -63,6 +64,9 @@ export default {
     saveGroups(state, groups) {
       state.board.groups = groups
     },
+    setGroupsOrder(state, { newOrder }) {
+      state.board.groups = newOrder
+    }
   },
   actions: {
     async onSetFilter({ commit, state }, { filterBy }) {
@@ -192,7 +196,7 @@ export default {
         )
         context.commit({
           type: 'saveBoard',
-          board: savedBoard,
+          savedBoard,
         })
       } catch (err) {
         console.log('saveBoard err', err)
@@ -207,5 +211,14 @@ export default {
         console.log('removeBoard err', err)
       }
     },
+    changeOrderGroups(context, { dropResult, entities, entityType }) {
+      console.log({ dropResult, entities, entityType });
+      var board = JSON.parse(JSON.stringify(context.state.board))
+      var movedItem = entities.splice(dropResult.removedIndex, 1)[0]
+      entities.splice(dropResult.addedIndex, 0, movedItem)
+      board[entityType] = entities
+      context.dispatch({ type: 'saveBoard', board })
+      context.commit({ type: 'setGroupsOrder', newOrder: entities })
+    }
   },
 }
