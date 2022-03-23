@@ -40,7 +40,7 @@ async function saveTask(boardId, groupId, task) {
   return Promise.reject('Boardservice: could not save task')
 }
 
-function removeTask(taskId) {}
+function removeTask(taskId) { }
 
 function getEmptyTask() {
   return {
@@ -182,7 +182,7 @@ function _createDemoData() {
                 color: '#26de81',
               },
               title: 'Make it happen',
-              status: 's001',
+              status: 's002',
               priority: 'p001',
               dueDate: 16156215211,
               timeline: {
@@ -226,7 +226,7 @@ function _createDemoData() {
                 color: '#26de81',
               },
               title: 'Deploying to heroku',
-              status: 's001',
+              status: 's003',
               priority: 'p003',
               dueDate: 1648928976136,
               timeline: {
