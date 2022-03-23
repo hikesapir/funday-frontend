@@ -166,7 +166,7 @@ function _createDemoData() {
           id: 'g101',
           title: 'Preparing for demo 1',
           style: {
-            color: '#33d391',
+            color: '#0073EA',
           },
           tasks: [
             {
