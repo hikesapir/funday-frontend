@@ -1,7 +1,11 @@
 .task-preview {
   display: flex;
+  border-bottom: 1px $main-gray solid;
+  height: 40px;
+
   img {
     border-radius: 50%;
     width: 4rem;
+    height: 40px;
   }
 }

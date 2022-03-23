@@ -1,7 +1,53 @@
-.board-group{
+.board-group {
+  .table-head {
+    display: flex;
+    // gap: 15px;
+    border-bottom: 1px $main-gray solid;
+    font-size: 14px;
+    text-align: center;
+  }
 
-    .table-head{
-        display: flex;
-        gap: 15px;
-    }
+  .th-title {
+    font-size: 18px;
+    text-align: left;
+  }
+
+  .th-title,
+  .task-title {
+    width: 262px;
+    height: 40px;
+  }
+
+  font-size: 13px;
+  vertical-align: middle;
+  line-height: 40px;
+  margin-bottom: 40px;
+}
+
+.member-picker-col {
+  width: 98px;
+  img {
+    height: 25px;
+    object-fit: contain;
+  }
+}
+
+.priority-picker-col {
+  width: 130px;
+}
+
+.status-picker-col {
+  width: 130px;
+}
+
+.timeline-picker-col {
+  width: 178px;
+}
+
+.tag-picker-col {
+  width: 130px;
+}
+
+.file-picker-col {
+  width: 130px;
 }
