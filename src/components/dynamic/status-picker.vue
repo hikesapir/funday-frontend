@@ -2,7 +2,7 @@
   <div class="status-picker-col" :style="style" @click="toggleDropDown">
     {{ txt }}
     <div v-if="isDropOpen">
-      <drop-down />
+      <drop-down :labels="statuses" @update="updateTask" type="status" />
     </div>
   </div>
 </template>
@@ -22,6 +22,13 @@ export default {
     };
   },
   methods: {
+    updateTask(val) {
+      this.$emit("update", {
+        cmpType: `status-picker`,
+        val,
+        task: this.task,
+      });
+    },
     toggleDropDown() {
       console.log(this.isDropOpen);
       this.isDropOpen = !this.isDropOpen;
