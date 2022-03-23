@@ -73,9 +73,9 @@ async function saveTask(boardId, groupId, taskToSave) {
   }
 }
 
-async function getGroupById(boardIdx, groupId) {}
+async function getGroupById(boardIdx, groupId) { }
 
-function removeTask(taskId) {}
+function removeTask(taskId) { }
 
 function getEmptyTask() {
   return {
@@ -143,6 +143,9 @@ function _createDemoData() {
       style: {
         view: 'table',
       },
+      // members: [{
+
+      // ],
       labels: {
         status: [
           {
@@ -194,7 +197,18 @@ function _createDemoData() {
           _id: 'u101',
           fullname: 'Sapir Hiki',
           imgUrl:
-            'https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+            'https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070371/a1avc0ofryx5enjnbklv.jpg',
+        },
+        {
+          _id: 'u102',
+          fullname: 'Lior Amar',
+          imgUrl:
+            'https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070372/w1hcqybgmllnpl8ld2zh.jpg',
+        }, {
+          _id: 'u103',
+          fullname: 'Roee Furman',
+          imgUrl:
+            'https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070370/qpolx3ucumsiscnf0ymk.jpg',
         },
       ],
       groups: [
@@ -212,7 +226,7 @@ function _createDemoData() {
                 _id: 'u101',
                 fullname: 'Sapir Hiki',
                 imgUrl:
-                  'https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+                  'https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070371/a1avc0ofryx5enjnbklv.jpg',
               },
               style: {
                 color: '#26de81',
@@ -236,21 +250,21 @@ function _createDemoData() {
                     _id: 'u101',
                     fullname: 'Sapir Hiki',
                     imgUrl:
-                      'https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+                      'https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070371/a1avc0ofryx5enjnbklv.jpg',
                   },
                 },
               ],
               members: [
                 {
-                  _id: 'u101',
-                  fullname: 'Sapir Hiki',
+                  _id: 'u103',
+                  fullname: 'Roee Furman',
                   imgUrl:
-                    'https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
-                },
+                    'https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070370/qpolx3ucumsiscnf0ymk.jpg',
+                }
               ],
             },
             {
-              id: 't102',
+              id: 't109',
               createdAt: 1647967976136,
               byMember: {
                 _id: 'u101',
@@ -280,7 +294,7 @@ function _createDemoData() {
                     _id: 'u101',
                     fullname: 'Sapir Hiki',
                     imgUrl:
-                      'https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+                      'https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070371/a1avc0ofryx5enjnbklv.jpg',
                   },
                 },
                 {
@@ -291,16 +305,16 @@ function _createDemoData() {
                     _id: 'u101',
                     fullname: 'Sapir Hiki',
                     imgUrl:
-                      'https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+                      'https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070371/a1avc0ofryx5enjnbklv.jpg',
                   },
                 },
               ],
               members: [
                 {
-                  _id: 'u101',
-                  fullname: 'Sapir Hiki',
+                  _id: 'u102',
+                  fullname: 'Lior Amar',
                   imgUrl:
-                    'https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+                    'https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070372/w1hcqybgmllnpl8ld2zh.jpg',
                 },
               ],
             },
@@ -314,7 +328,7 @@ function _createDemoData() {
           },
           tasks: [
             {
-              id: 't101',
+              id: 't105',
               createdAt: 1640999730348,
               byMember: {
                 _id: 'u101',
@@ -344,7 +358,7 @@ function _createDemoData() {
                     _id: 'u101',
                     fullname: 'Sapir Hiki',
                     imgUrl:
-                      'https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+                      'https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070371/a1avc0ofryx5enjnbklv.jpg',
                   },
                 },
               ],
@@ -353,7 +367,7 @@ function _createDemoData() {
                   _id: 'u101',
                   fullname: 'Sapir Hiki',
                   imgUrl:
-                    'https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+                    'https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070371/a1avc0ofryx5enjnbklv.jpg',
                 },
               ],
             },
@@ -388,7 +402,7 @@ function _createDemoData() {
                     _id: 'u101',
                     fullname: 'Sapir Hiki',
                     imgUrl:
-                      'https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+                      'https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070371/a1avc0ofryx5enjnbklv.jpg',
                   },
                 },
                 {
@@ -399,7 +413,7 @@ function _createDemoData() {
                     _id: 'u101',
                     fullname: 'Sapir Hiki',
                     imgUrl:
-                      'https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+                      'https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070371/a1avc0ofryx5enjnbklv.jpg',
                   },
                 },
               ],
@@ -408,7 +422,7 @@ function _createDemoData() {
                   _id: 'u101',
                   fullname: 'Sapir Hiki',
                   imgUrl:
-                    'https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+                    'https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070371/a1avc0ofryx5enjnbklv.jpg',
                 },
               ],
             },

@@ -107,6 +107,11 @@ export default {
         case 'file-picker':
           break
         case 'member-picker':
+          console.log(data.members)
+          await boardService.saveTask(
+            state.board._id,
+            groupId,
+            task)
           break
         case 'priority-picker':
           console.log(data.val, 'priority')
