@@ -1,5 +1,11 @@
 <template>
-    <li v-if="board" class="board-preview" @mouseover="mouseOver" @mouseleave="mouseLeve">
+    <li
+        @click="selectBoard"
+        v-if="board"
+        class="board-preview"
+        @mouseover="mouseOver"
+        @mouseleave="mouseLeve"
+    >
         <form v-if="chengeName">
             <input @keyup.enter="updateBoard" @blur="updateBoard" type="text" v-model="board.title" />
         </form>
@@ -77,10 +83,13 @@ export default {
             const newBoard = JSON.parse(JSON.stringify(this.board))
             newBoard.title = newBoard.title + ' -copy'
             newBoard._id = null
-            this.$store.dispatch({ type: 'saveBoard', board: newBoard})
+            this.$store.dispatch({ type: 'saveBoard', board: newBoard })
+        },
+        selectBoard(){
+            console.log(this.board._id);
+            this.$store.commit({ type: 'loadBoard', id: this.board._id })
+            this.$router.push(`/boards/${this.board._id}`)
         }
-
-
     },
     computed: {
 
