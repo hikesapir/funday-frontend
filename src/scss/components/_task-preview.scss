@@ -5,9 +5,16 @@
   line-height: 35px;
   vertical-align: middle;
   .timeline-picker {
-    label {
-      padding: 1rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    label.timeline {
+      height: 22px;
+      line-height: 22px;
+      width: 155px;
       border-radius: 1rem;
+      color: white;
+      text-align: center;
     }
   }
 }

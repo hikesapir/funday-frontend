@@ -1,15 +1,13 @@
 <template>
-  <div class="timeline-pick">
-    <form @submit.prevent="setTimeline">
-      <label
-        @mouseover="toggleContent"
-        @mouseleave="toggleContent"
-        class="timeline"
-        :style="labelColor"
-        >{{ content }}
-        <input type="date" hidden />
-      </label>
-    </form>
+  <div class="timeline-picker">
+    <label
+      @mouseover="toggleContent"
+      @mouseleave="toggleContent"
+      class="timeline"
+      :style="labelColor"
+      >{{ content }}
+      <input type="date" hidden />
+    </label>
   </div>
 </template>
 
