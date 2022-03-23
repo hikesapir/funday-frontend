@@ -23,8 +23,11 @@ export default {
   },
   methods: {
     onSubmit() {
-      this.$emit('taskAdded', this.task)
-      this.task = ''
+      this.$emit(
+        'taskAdded',
+        JSON.parse(JSON.stringify(this.task))
+      )
+      this.task = boardService.getEmptyTask()
     },
   },
 }

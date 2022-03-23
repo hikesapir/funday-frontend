@@ -1,15 +1,16 @@
 import { utilService } from './util-service.js'
 import { storageService } from './async-storage-service.js'
-
+import userService from './user-service.js'
 export default {
   query,
-  saveBoard,
+  saveTask,
   getById,
   getEmptyTask,
 }
 
 const KEY = 'board_db'
-_createDemoData()
+
+localStorage[KEY] ? '' : _createDemoData()
 
 function getById(id) {
   return storageService.getById(KEY, id)
@@ -19,9 +20,24 @@ function query() {
   return storageService.query(KEY)
 }
 
-function saveBoard(board) {
-  console.log('board', board)
-  return storageService.put(KEY, board)
+async function saveTask(boardId, groupId, task) {
+  const boards = await query()
+  const board = boards.find(
+    (board) => board._id === boardId
+  )
+  if (board) {
+    const idx = board.groups.findIndex(
+      (group) => (group.id = groupId)
+    )
+    if (idx !== -1) {
+      task.createdAt = Date.now()
+      task.byMember = userService.getLoggedinUser()
+      board.groups[idx].tasks.push(task)
+      await storageService.put(KEY, board)
+      return task
+    }
+  }
+  return Promise.reject('Boardservice: could not save task')
 }
 
 function removeTask(taskId) {}

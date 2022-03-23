@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     addTask(task) {
-      this.$store.commit({
+      this.$store.dispatch({
         type: 'saveTask',
         task,
         groupId: this.group.id,

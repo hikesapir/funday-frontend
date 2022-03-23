@@ -29,18 +29,30 @@ export default {
     setBoards(state, { boards }) {
       state.boards = boards
     },
+    addTask(state, { groupIdx, savedTask }) {
+      state.board.groups[groupIdx].tasks.push(savedTask)
+    },
   },
   actions: {
-    async saveTask({ board }, { groupId, task }) {
-      const group = board.groups.find(
+    async saveTask({ commit, state }, { groupId, task }) {
+      var savedTask = null
+      const idx = state.board.groups.findIndex(
         (group) => group.id === groupId
       )
-      if (group) {
-        const savedTask = await boardService.saveTask(
-          groupId
+      if (idx !== -1) {
+        savedTask = await boardService.saveTask(
+          state.board._id,
+          groupId,
+          task
         )
       }
-      group.tasks.push(savedTask)
+      console.log('savedTask', savedTask)
+      commit({
+        type: 'addTask',
+        groupIdx: idx,
+        savedTask,
+      })
+      // group.tasks.push(savedTask)
     },
     async loadBoards({ commit }) {
       try {
