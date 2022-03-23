@@ -1,16 +1,22 @@
 .tag-picker-col {
-  width: 130px;
   text-align: center;
-  .add-tag {
-    display: none;
-  }
-  .tag-picker-val {
-    &:hover {
-      background-color: aqua;
 
-      .add-tag {
-        display: inline-block;
-      }
+  .tag-picker-val {
+    width: 100px;
+    display: inline-block;
+    justify-content: space-between;
+  }
+
+  .add-tag {
+    opacity: 0;
+    display: inline-block;
+    flex-basis: 1;
+  }
+  &:hover {
+    .add-tag {
+      color: $primary-blue;
+      cursor: pointer;
+      opacity: 1;
     }
   }
 }
