@@ -1,5 +1,9 @@
 .board-view-mode {
-  margin: 0 10px 0 10px;
-  font-size: 14px;
+  padding: 0 30px ;
+  // margin: 0 10px 0 10px;
   color: $main-text-gray;
+  border-bottom: 1px solid $main-border;
+  button{
+    @include btn(em(7px) em(16px))
+}
 }

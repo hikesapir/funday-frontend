@@ -1,11 +1,17 @@
 <template>
   <section class="board-view-mode">
-    <hr />
-    <span>board view mode: </span>
-    <router-link to="/"><fa icon="table-cells" />Main Table</router-link> |
-    <router-link to="/"><fa icon="chart-simple" />Charts</router-link> |
-    <router-link to="/">Kanban</router-link> |
-    <hr />
+    <!-- <span>board view mode: </span> -->
+    <button>
+      <fa icon="table-cells" />Main Table
+    </button>
+    <button>
+      <fa icon="chart-simple" />Charts
+    </button>
+    <button>Kanban</button> |
+    <button>
+      <span>more</span>
+      <fa icon="chevron-down" />
+    </button>
   </section>
 </template>
 

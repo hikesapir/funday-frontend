@@ -1,18 +1,31 @@
 .filter-bar {
-  margin: 0 10px 0 10px;
-  font-size: 14px;
-  color: $main-text-gray;
-
+  display: flex;
+  padding: 16px 30px;
+  button{
+    @include btn()
+  }
   .new-item-btn {
     background-color: $primary-blue;
     color: $main-white;
     padding: 4px 8px;
-    font-size: 14px;
-    border-radius: 3px;
-    margin-right: 10px;
+    margin: 0;
+    height: 32px;
+    &:hover {
+      background-color: $primary-blue-hover;
+    }
   }
 
-  button {
-    margin: 0 5px;
+  .new-item-btn-container{
+    display: flex;
+    align-items: center;
   }
+
+  .new-item{
+    border-radius: 4px 0 0 4px;
+  }
+  .chevron{
+    border-radius: 0 4px 4px 0;
+    border-left: 1px solid $primary-blue-hover ;
+  }
+  
 }

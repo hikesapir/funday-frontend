@@ -2,7 +2,7 @@
     <header class="board-header">
         <div class="up-haeder">
             <div class="board-name">
-                <h1>Board name</h1>
+                <h1>{{boardDetails.title}}</h1>
                 <button class="info">
                     <span>
                         <fa icon="circle-info" />
@@ -25,7 +25,8 @@
                     <fa icon="chart-line" />Activity
                 </button>
                 <button class="btn">
-                    <fa icon="plus" />Add to board
+                    <fa icon="plus" />
+                    <span> Add to board</span>
                 </button>
                 <button>
                     <span>
@@ -35,7 +36,7 @@
             </div>
         </div>
         <div class="description-line">
-            <span class="text-content">Description</span>
+            <span class="text-content">{{boardDetails.description}}</span>
         </div>
     </header>
 </template>
@@ -45,7 +46,7 @@
 export default {
     name: 'board-header',
     props: {
-        boardTitle: String
+        boardDetails: Object
     },
     emits: [],
     components: {},

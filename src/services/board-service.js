@@ -25,6 +25,7 @@ function _createDemoData() {
     {
       _id: 'b101',
       title: 'Sprint 4 - Monday GO!!!!',
+      description: "Final project E2E",
       createdAt: 1647966887053,
       createdBy: {
         _id: 'u101',
@@ -33,14 +34,35 @@ function _createDemoData() {
           'https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
       },
       cmpsOrder: [
-        'title-picker',
-        'member-picker',
-        'priority-picker',
-        'status-picker',
-        'timeline-picker',
-        'tag-picker',
-        'file-picker',
-      ],
+        {
+            "cmpName": "title-picker",
+            "preName": ""
+        },
+        {
+            "cmpName":  "member-picker",
+            "preName": "People"
+        },
+        {
+            "cmpName":  "priority-picker",
+            "preName": "Priority"
+        },
+        {
+            "cmpName":  "status-picker",
+            "preName": "Status"
+        },
+        {
+            "cmpName":  "timeline-picker",
+            "preName": "Timeline"
+        },
+        {
+            "cmpName":  "tag-picker",
+            "preName": "Tags"
+        },
+        {
+            "cmpName":  "file-picker",
+            "preName": "Files"
+        }
+    ],
       style: {
         view: 'table',
       },

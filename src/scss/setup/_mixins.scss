@@ -76,9 +76,9 @@
 ) {
   cursor: pointer;
   display: inline-flex;
+  gap: 3px;
   align-items: center;
   text-decoration: none;
-  text-transform: uppercase;
   padding: $padding;
   line-height: 1.25;
   font-size: em(14px);
@@ -90,7 +90,6 @@
   
   &:hover {
     background-color: #dcdfec;
-    // color: $clr3;
   }
 
   // font-variation-settings: 'wght' 430;
