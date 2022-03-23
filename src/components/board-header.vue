@@ -9,7 +9,7 @@
                     class="info"
                 >
                     <span>
-                        <fa icon="circle-info" />
+                        <i class="fa-solid fa-circle-info"></i>
                     </span>
                 </button>
                 <button :title="starTitle + ' favorites'" @click="staerred" class="star">
@@ -24,18 +24,18 @@
                     <p>Board member</p>
                 </button>
                 <button>
-                    <fa icon="user-plus" />Invite/3
+                    <i class="fa-solid fa-user-plus"></i>Invite/3
                 </button>
                 <button>
-                    <fa icon="chart-line" />Activity
+                    <i class="fa-solid fa-chart-line"></i>Activity
                 </button>
                 <button class="btn">
-                    <fa icon="plus" />
+                    <i class="fa-solid fa-plus"></i>
                     <span>Add to board</span>
                 </button>
                 <button>
                     <span>
-                        <fa icon="ellipsis" />
+                       <i class="fa-solid fa-ellipsis"></i>
                     </span>
                 </button>
             </div>
