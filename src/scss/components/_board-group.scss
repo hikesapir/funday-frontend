@@ -50,6 +50,7 @@
 
 .status-picker-col {
   width: 130px;
+  text-align: center;
 }
 
 .timeline-picker-col {
@@ -58,6 +59,13 @@
 
 .tag-picker-col {
   width: 130px;
+  text-align: center;
+
+  .tag-picker-val {
+    &:hover {
+      background-color: aqua;
+    }
+  }
 }
 
 .file-picker-col {
