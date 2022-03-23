@@ -1,6 +1,6 @@
 <template>
   <section class="board-nav">
-    <p>Workspace</p>
+    <span>Workspace</span>
     <div class="workspace-dropdwon">
       <h2>Main workspace</h2>
       <fa icon="chevron-down"/>
