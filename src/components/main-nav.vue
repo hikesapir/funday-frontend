@@ -1,7 +1,7 @@
 <template>
   <section class="main-nav">
     <nav class="upper-nav">
-      <div class="logo"><img src="../assets/logo.png" alt=""></div>
+      <div class="logo" @click="$router.push('/')"><img src="../assets/logo.png" alt=""></div>
       <router-link to="/">Workspaces</router-link>
       <router-link to="/">Notification</router-link>
       <router-link to="/">Inbox</router-link>
