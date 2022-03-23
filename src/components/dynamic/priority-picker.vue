@@ -1,5 +1,7 @@
 <template>
-  <div :style="getStyle" class="priority-picker-col">{{ selectedPriorty.txt }}</div>
+  <div :style="getStyle" class="priority-picker-col">
+    {{ selectedPriorty?.txt }}
+  </div>
   <!-- {{ selectedPriorty }} -->
 </template>
 
@@ -12,19 +14,20 @@ export default {
   data() {
     return {
       prioritys: this.$store.getters.board.labels.priority,
-      selectedPriorty: ''
-
+      selectedPriorty: '',
     }
   },
   created() {
-    this.selectedPriorty = this.prioritys.find(priority => priority.id === this.task.priority)
+    this.selectedPriorty = this.prioritys.find(
+      (priority) => priority.id === this.task.priority
+    )
   },
   computed: {
     getStyle() {
       return {
-        backgroundColor: this.selectedPriorty.color
+        backgroundColor: this.selectedPriorty?.color,
       }
-    }
+    },
   },
 }
 </script>
