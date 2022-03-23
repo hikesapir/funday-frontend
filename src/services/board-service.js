@@ -3,27 +3,33 @@ import { storageService } from './async-storage-service.js'
 import userService from './user-service.js'
 export default {
   query,
-  saveTask,
   getById,
+  saveTask,
   getEmptyTask,
   saveBoard,
+  removeBoard,
+
 }
 
 const KEY = 'board_db'
 
 localStorage[KEY] ? '' : _createDemoData()
 
-function getById(id) {
-  return storageService.getById(KEY, id)
-}
-
 function query() {
   return storageService.query(KEY)
+}
+
+function getById(id) {
+  return storageService.getById(KEY, id)
 }
 
 function saveBoard(board) {
   if (board._id) return storageService.put(KEY, board)
   return storageService.post(KEY, board)
+}
+
+function removeBoard(boardId) {
+  return storageService.remove(KEY, boardId)
 }
 
 
@@ -77,6 +83,7 @@ function getEmptyTask() {
     members: [],
   }
 }
+
 
 function _createDemoData() {
   const boards = [
