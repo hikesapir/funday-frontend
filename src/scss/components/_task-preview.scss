@@ -5,17 +5,9 @@
   line-height: 35px;
   vertical-align: middle;
   background-color: $main-task-gray;
-  // padding: 0 0 0 30px;
-
+  font-weight: 500;
   &:hover {
     background-color: $main-hover-gray;
-    .edit-title-btn {
-      opacity: 1;
-      pointer-events: all;
-      &:hover {
-        background-color: #fefefe;
-      }
-    }
   }
 
   .timeline-picker {

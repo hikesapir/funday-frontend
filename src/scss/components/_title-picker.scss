@@ -29,5 +29,16 @@
     height: 24px;
     border-radius: 4px;
     padding: 2px 8px;
+    &:hover {
+      background-color: #fefefe;
+    }
+  }
+
+  &:hover {
+    color: $title-hover-blue;
+    .edit-title-btn {
+      opacity: 1;
+      pointer-events: all;
+    }
   }
 }

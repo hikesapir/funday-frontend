@@ -16,7 +16,7 @@ $main-hover-gray: #e6e9ef;
 $main-nav-dark-blue: #1c1f3b;
 $main-nav-dark-blue-hover: #10131e;
 $primary-hover-gray-button: #dcdfec;
-
+$title-hover-blue: #3383c9;
 // animation
 $transition: 0.2s ease-in-out;
 
@@ -28,21 +28,21 @@ $x-large: 1200px;
 
 // positions - flex / grid
 $justify-positions: (
-  "justify-center": center,
-  "justify-between": space-between,
-  "justify-around": space-around,
+  'justify-center': center,
+  'justify-between': space-between,
+  'justify-around': space-around,
 );
 
 $items-positions: (
-  "items-center": center,
-  "items-start": flex-start,
-  "items-end": flex-end,
+  'items-center': center,
+  'items-start': flex-start,
+  'items-end': flex-end,
 );
 
 $sizes: (
-  "1": 0.5rem,
-  "2": 1rem,
-  "3": 2rem,
-  "4": 4rem,
-  "5": 5rem,
+  '1': 0.5rem,
+  '2': 1rem,
+  '3': 2rem,
+  '4': 4rem,
+  '5': 5rem,
 );
