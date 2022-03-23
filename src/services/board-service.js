@@ -48,9 +48,9 @@ async function saveTask(boardId, groupId, taskToSave) {
   }
 }
 
-async function getGroupById(boardIdx, groupId) { }
+async function getGroupById(boardIdx, groupId) {}
 
-function removeTask(taskId) { }
+function removeTask(taskId) {}
 
 function getEmptyTask() {
   return {
@@ -307,7 +307,7 @@ function _createDemoData() {
                 start: 1640999730348,
                 end: 1640999730348,
               },
-              tags: [{ txt: 'importent', color: 'green' }],
+              tags: [{ txt: 'important', color: 'green' }],
               files: [],
               updates: [
                 {
