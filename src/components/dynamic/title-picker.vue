@@ -55,6 +55,11 @@ export default {
     },
     saveTitle() {
       this.isEditing = false
+      this.$emit('update', {
+        cmpType: 'title-picker',
+        title: this.title,
+        task: this.task,
+      })
     },
   },
 }
