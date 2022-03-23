@@ -1,9 +1,9 @@
 <template>
   <section class="task-preview">
     <component
-      class="task-column"
       v-for="cmp in cmpsOrder"
-      :is="cmp"
+      :class="cmp.cmpName + '-col'"
+      :is="cmp.cmpName"
       :key="cmp"
       :task="task"
       @update="updateTask"
