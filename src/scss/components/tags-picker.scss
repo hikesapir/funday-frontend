@@ -1,0 +1,16 @@
+.tag-picker-col {
+  width: 130px;
+  text-align: center;
+  .add-tag {
+    display: none;
+  }
+  .tag-picker-val {
+    &:hover {
+      background-color: aqua;
+
+      .add-tag {
+        display: inline-block;
+      }
+    }
+  }
+}

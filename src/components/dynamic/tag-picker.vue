@@ -8,6 +8,7 @@
     >
       #{{ tag.txt }}
     </div>
+    <div class="add-tag"><fa icon="circle-plus" /></div>
   </div>
 </template>
 

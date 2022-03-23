@@ -57,22 +57,11 @@
   width: 178px;
 }
 
-.tag-picker-col {
-  width: 130px;
-  text-align: center;
-
-  .tag-picker-val {
-    &:hover {
-      background-color: aqua;
-    }
-  }
-}
-
 .file-picker-col {
   width: 130px;
-  button{
+  button {
     @include btn();
-    font-size:16px;   
+    font-size: 16px;
     color: $primary-blue;
   }
 }
