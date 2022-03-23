@@ -10,17 +10,6 @@
     text-align: center;
   }
 
-  .th-title {
-    font-size: 18px;
-    text-align: left;
-  }
-
-  .th-title,
-  .task-title {
-    width: 262px;
-    height: 40px;
-  }
-
   font-size: 13px;
   vertical-align: middle;
   line-height: 40px;
@@ -39,6 +28,13 @@
   }
 }
 
+.th-title {
+  width: 262px;
+  text-align: left;
+  font-size: 18px;
+  padding: 0 2px;
+}
+
 .priority-picker-col {
   width: 130px;
   text-align: center;
@@ -51,6 +47,8 @@
 .status-picker-col {
   width: 130px;
   text-align: center;
+  height: 34px;
+  border-left: 1px solid white;
 }
 
 .timeline-picker-col {
