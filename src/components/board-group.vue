@@ -16,6 +16,7 @@
       v-for="task in group?.tasks"
       :key="task.id"
       :task="task"
+      :groupId="group.id"
     />
     <add-task @taskAdded="addTask"></add-task>
   </section>
