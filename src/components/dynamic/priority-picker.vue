@@ -1,5 +1,5 @@
 <template>
-{{task}}
+<!-- {{task}} -->
 </template>
 
 <script>
