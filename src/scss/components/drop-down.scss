@@ -6,7 +6,6 @@
   body {
     background: #4aa6fb;
     display: flex;
-    // font-family: sans-serif;
     justify-content: center;
     margin: 0;
   }
@@ -163,16 +162,12 @@
     display: flex;
     height: 200px;
     justify-content: center;
-    // border: 1px solid black;
-    // left: 50%;
     overflow: hidden;
     position: absolute;
-    // transform: translateX(-50%);
+    top: -13px;
     transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
     width: 144px;
-
-    -webkit-box-shadow: -2px 18px 20px 7px rgba(0, 0, 0, 0.4);
-    box-shadow: -2px 18px 20px 7px rgba(0, 0, 0, 0.4);
+    border: 1px solid $main-gray;
   }
   .dot {
     background: #fff;
@@ -194,29 +189,22 @@
   }
 
   .list {
-    // left: 50%;
     color: white;
-    // position: absolute;
     transform: translate(-50%, 0%);
-    top: 35px;
+    top: 16px;
     width: 130px;
     position: relative;
     padding: 16px 16px 0 0;
   }
+
   .list ul {
     margin: 0;
     padding: 0;
-
-    // opacity: 0;
-    // border: 10px solid black;
-    position: relative;
-    transform: translate(0, 0);
   }
   .list li {
     align-items: center;
     border-bottom: 1px solid #bdbdbd;
-    display: flex;
-    font-size: 12px;
+    font-size: 13px;
     height: 32px;
     width: 112px;
     margin-left: 10px;
@@ -224,8 +212,6 @@
     opacity: 0;
     list-style: none;
     transition: opacity 100ms cubic-bezier(0.4, 0, 0.2, 1);
-    user-select: none;
-    -moz-user-select: none;
   }
   .list li:hover {
     background: #f5f5f5;
