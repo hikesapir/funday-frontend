@@ -1,39 +1,47 @@
 <template>
-  <div class="status-picker-col" :style="style">
+  <div class="status-picker-col" :style="style" @click="toggleDropDown">
     {{ txt }}
+    <div v-if="isDropOpen">
+      <drop-down />
+    </div>
   </div>
 </template>
 
 <script>
+import dropDown from "./drop-down.vue";
 export default {
-  name: 'status-picker',
+  components: { dropDown },
+  name: "status-picker",
   props: {
     task: Object,
   },
   data() {
     return {
+      isDropOpen: false,
       statuses: this.$store.getters.board?.labels.status,
-    }
+    };
   },
   methods: {
+    toggleDropDown() {
+      console.log(this.isDropOpen);
+      this.isDropOpen = !this.isDropOpen;
+    },
     getStatus() {
-      return this.statuses.find(
-        (status) => status.id === this.task?.status
-      )
+      return this.statuses.find((status) => status.id === this.task?.status);
     },
   },
   computed: {
     txt() {
-      const status = this.getStatus()
-      return status.txt
+      const status = this.getStatus();
+      return status.txt;
     },
     style() {
-      const status = this.getStatus()
+      const status = this.getStatus();
       return {
         backgroundColor: status?.color,
-        color: 'white',
-      }
+        color: "white",
+      };
     },
   },
-}
+};
 </script>
