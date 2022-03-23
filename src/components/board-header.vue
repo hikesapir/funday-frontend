@@ -3,14 +3,19 @@
         <div class="up-haeder">
             <div class="board-name">
                 <h1>{{ boardDetails.title }}</h1>
-                <button class="info">
+                <button
+                    :title="descriptionTitle + ' board description'"
+                    @click="isDescriptionOpen = !isDescriptionOpen"
+                    class="info"
+                >
                     <span>
                         <fa icon="circle-info" />
                     </span>
                 </button>
-                <button @click="staerred" class="star">
+                <button :title="starTitle + ' favorites'" @click="staerred" class="star">
                     <span>
-                        <fa icon="star" />
+                        <i v-if="boardDetails.isStarred" class="fa-solid fa-star"></i>
+                        <i v-else class="fa-regular fa-star"></i>
                     </span>
                 </button>
             </div>
@@ -36,7 +41,7 @@
             </div>
         </div>
         <div class="description-line">
-            <span class="text-content">{{ boardDetails.description }}</span>
+            <span v-if="isDescriptionOpen" class="text-content">{{ boardDetails.description }}</span>
         </div>
     </header>
 </template>
@@ -51,7 +56,9 @@ export default {
     emits: [],
     components: {},
     data() {
-        return {}
+        return {
+            isDescriptionOpen: true,
+        }
     },
     created() {
 
@@ -60,10 +67,16 @@ export default {
     },
     methods: {
         staerred() {
-            this.$emit('stared','star')
+            this.$emit('stared', 'star')
         }
     },
     computed: {
+        descriptionTitle() {
+            return this.isDescriptionOpen ? 'Hide' : 'Show'
+        },
+        starTitle() {
+            return this.boardDetails.isStarred ? 'Remove from' : 'Add to'
+        }
     },
     unmounted() {
     },

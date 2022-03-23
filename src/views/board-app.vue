@@ -10,6 +10,7 @@
           :boardDetails="{
             title: board?.title,
             description: board?.description,
+            isStarred:board?.isStarred,
           }"
           @stared="updateBoard"
         />
