@@ -1,4 +1,7 @@
 .board-group {
+  padding: 18px 0 40px 16px;
+  line-height: 35px;
+
   .table-head {
     display: flex;
     // gap: 15px;
@@ -21,18 +24,26 @@
   font-size: 13px;
   vertical-align: middle;
   line-height: 40px;
-  margin-bottom: 40px;
 }
 
 .member-picker-col {
   width: 98px;
+  text-align: center;
+
   img {
-    height: 25px;
+    height: 30px;
+    width: 30px;
+    border-radius: 20px;
     object-fit: contain;
+    margin-top: 0 -4px;
   }
 }
 
 .priority-picker-col {
+  width: 130px;
+}
+
+.file-picker-col {
   width: 130px;
 }
 
