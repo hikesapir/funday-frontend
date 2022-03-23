@@ -13,6 +13,20 @@
   .workspace-dropdwon{
     display: flex;
     justify-content: space-between;
-    border: 1px solid black;
+    align-items: center;
+    padding: 6px;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #676879;;
+    border-radius: 4px;
+  }
+
+  button{
+    @include btn()
+  }
+  .spacer{
+    border-bottom: 1px solid;
+    border-color: rgb(208, 212, 228);
+    margin: 0 20px;
   }
 }

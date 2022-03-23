@@ -2,21 +2,27 @@
   <section class="board-nav">
     <p>Workspace</p>
     <div class="workspace-dropdwon">
-      <fa icon="plus" />
       <h2>Main workspace</h2>
+      <fa icon="chevron-down"/>
     </div>
     <ul>
       <li>
-        <button>Add</button>
+        <button>
+          <fa icon="plus" />Add
+        </button>
       </li>
       <li>
-        <button>Filters</button>
+        <button>
+          <fa icon="filter" />Filters
+        </button>
       </li>
       <li>
-        <button>Search</button>
+        <button>
+          <fa icon="magnifying-glass" />Search
+        </button>
       </li>
     </ul>
-    <hr />
+    <div class="spacer"></div>
     <div class="curr-workspace"></div>
     <ul>
       <li v-for="board in boards" :key="board._id">
