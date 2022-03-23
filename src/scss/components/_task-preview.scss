@@ -4,4 +4,10 @@
   height: 35px;
   line-height: 35px;
   vertical-align: middle;
+  .timeline-picker {
+    label {
+      padding: 1rem 2rem;
+      border-radius: 1rem;
+    }
+  }
 }

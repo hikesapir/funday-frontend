@@ -50,21 +50,18 @@
 
 .status-picker-col {
   width: 130px;
+  text-align: center;
 }
 
 .timeline-picker-col {
   width: 178px;
 }
 
-.tag-picker-col {
-  width: 130px;
-}
-
 .file-picker-col {
   width: 130px;
-  button{
+  button {
     @include btn();
-    font-size:16px;   
+    font-size: 16px;
     color: $primary-blue;
   }
 }

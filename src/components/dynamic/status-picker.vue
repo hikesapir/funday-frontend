@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div class="status-picker-col" :style="{ 'background-color': style.color }">
+    <div
+      class="status-picker-col"
+      :style="{ 'background-color': style.color, color: 'white' }"
+    >
       {{ style.txt }}
     </div>
   </div>
@@ -18,11 +21,7 @@ export default {
     };
   },
   computed: {
-    // getStatus() {
-    //   this.
-    // },
     style() {
-      // console.log(this.statuses);
       return this.statuses.find((status) => status.id === this.task.status);
     },
   },
