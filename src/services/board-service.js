@@ -78,6 +78,7 @@ function _createDemoData() {
       title: 'Sprint 4 - Monday GO!!!!',
       description: 'Final project E2E',
       createdAt: 1647966887053,
+      "isStarred": true,
       createdBy: {
         _id: 'u101',
         fullname: 'Sapir Hiki',
