@@ -2,7 +2,7 @@
   <section class="main-nav">
     <nav class="upper-nav">
       <div class="logo" @click="$router.push('/')">
-        <img src="../assets/logo.png" alt />
+        <img src="../assets/favicon.png" alt />
       </div>
       <span title="Workspace">
         <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" data-v-ba633cb8>

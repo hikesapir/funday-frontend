@@ -15,21 +15,27 @@
         {{ cmp.preName }}
       </div>
     </div>
-    <task-preview
-      v-for="task in group?.tasks"
-      :key="task.id"
-      :task="task"
-      :groupId="group.id"
-    />
-    <add-task
-      :groupId="group.id"
-      @taskAdded="addTask"
-    ></add-task>
+    <Container
+      v-if="group?.tasks"
+      @drop="onDrop"
+      drag-handle-selector=".task-drag-handle"
+    >
+      <Draggable
+        v-for="task in group?.tasks"
+        :key="task.id"
+      >
+        <task-preview :task="task" :groupId="group.id" />
+      </Draggable>
+    </Container>
+
+    <add-task :groupId="group.id" @taskAdded="addTask" />
   </section>
 </template>
 
 <script>
 import taskPreview from './task-preview.vue'
+import { Container, Draggable } from 'vue3-smooth-dnd'
+
 import addTask from './add-task.vue'
 export default {
   name: 'board-group',
@@ -40,6 +46,8 @@ export default {
   components: {
     taskPreview,
     addTask,
+    Container,
+    Draggable,
   },
   computed: {
     cmps() {
@@ -54,6 +62,14 @@ export default {
       this.$store.dispatch({
         type: 'saveTask',
         task,
+        groupId: this.group.id,
+      })
+    },
+    onDrop(dragResult) {
+      this.$store.dispatch({
+        type: 'applyDrag',
+        tasksOrder: this.group.tasks,
+        dragResult,
         groupId: this.group.id,
       })
     },
