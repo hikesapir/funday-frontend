@@ -40,8 +40,8 @@ export default {
     titlePicker,
   },
   methods: {
-    updateTask(task) {
-      console.log('task', task)
+    updateTask(data) {
+      this.$store.dispatch({ type: 'updateTask', data })
     },
   },
   computed: {

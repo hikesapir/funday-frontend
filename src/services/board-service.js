@@ -40,15 +40,17 @@ async function saveTask(boardId, groupId, task) {
   return Promise.reject('Boardservice: could not save task')
 }
 
-function removeTask(taskId) { }
+async function getGroupById(boardIdx, groupId) {}
+
+function removeTask(taskId) {}
 
 function getEmptyTask() {
   return {
     title: '',
     createdAt: '',
     byMember: {},
-    status: '',
-    priority: '',
+    status: 's000',
+    priority: 'p000',
     dueDate: '',
     timeline: {
       start: '',
@@ -166,7 +168,7 @@ function _createDemoData() {
           id: 'g101',
           title: 'Preparing for demo 1',
           style: {
-            color: '#33d391',
+            color: '#0073EA',
           },
           tasks: [
             {

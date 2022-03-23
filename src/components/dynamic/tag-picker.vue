@@ -24,11 +24,11 @@ export default {
     };
   },
   computed: {
-    style() {
-      console.log(this.tags);
-      // console.log(this.statuses);
-      // return this.statuses.find((status) => status.id === this.task.status);
-    },
+    // style() {
+    // console.log(this.tags);
+    // console.log(this.statuses);
+    // return this.statuses.find((status) => status.id === this.task.status);
+    // },
   },
 };
 </script>

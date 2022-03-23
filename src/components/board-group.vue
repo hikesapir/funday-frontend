@@ -1,7 +1,10 @@
 <template>
   <section class="board-group">
     <div class="table-head">
-      <div class="th-title title-picker-col">
+      <div
+        class="th-title title-picker-col"
+        :style="{ color: group.style.color }"
+      >
         {{ group.title }}
       </div>
       <div v-for="cmp in cmps" :class="cmp.cmpName + '-col'" :key="cmp.cmpName">
@@ -38,6 +41,7 @@ export default {
       return cmps;
     },
   },
+  // },
   methods: {
     addTask(task) {
       this.$store.dispatch({
