@@ -1,5 +1,6 @@
 <template>
   <div class="member-picker">
+    <div class="add-tag"><fa icon="circle-plus" @click="addMember" /></div>
     <img
       v-for="member in members"
       :src="member.imgUrl"

@@ -1,0 +1,18 @@
+.member-picker-col {
+  text-align: center;
+  //   display: flex;
+  justify-content: space-between;
+
+  .add-tag {
+    opacity: 0;
+    display: inline-block;
+    flex-basis: 1;
+  }
+  &:hover {
+    .add-tag {
+      color: $primary-blue;
+      cursor: pointer;
+      opacity: 1;
+    }
+  }
+}
