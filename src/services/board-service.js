@@ -3,14 +3,13 @@ import { storageService } from './async-storage-service.js'
 
 export default {
   query,
-  getById
+  saveBoard,
+  getById,
+  getEmptyTask,
 }
 
 const KEY = 'board_db'
 _createDemoData()
-
-var boards =
-  utilService.loadFromStorage(KEY) || _createDemoData()
 
 function getById(id) {
   return storageService.getById(KEY, id)
@@ -20,12 +19,38 @@ function query() {
   return storageService.query(KEY)
 }
 
+function saveBoard(board) {
+  console.log('board', board)
+  return storageService.put(KEY, board)
+}
+
+function removeTask(taskId) {}
+
+function getEmptyTask() {
+  return {
+    title: '',
+    createdAt: '',
+    byMember: {},
+    status: '',
+    priority: '',
+    dueDate: '',
+    timeline: {
+      start: '',
+      end: '',
+    },
+    tags: [],
+    files: [],
+    updates: [],
+    members: [],
+  }
+}
+
 function _createDemoData() {
-  boards = [
+  const boards = [
     {
       _id: 'b101',
       title: 'Sprint 4 - Monday GO!!!!',
-      description: "Final project E2E",
+      description: 'Final project E2E',
       createdAt: 1647966887053,
       createdBy: {
         _id: 'u101',
@@ -35,34 +60,34 @@ function _createDemoData() {
       },
       cmpsOrder: [
         {
-            "cmpName": "title-picker",
-            "preName": ""
+          cmpName: 'title-picker',
+          preName: '',
         },
         {
-            "cmpName":  "member-picker",
-            "preName": "People"
+          cmpName: 'member-picker',
+          preName: 'People',
         },
         {
-            "cmpName":  "priority-picker",
-            "preName": "Priority"
+          cmpName: 'priority-picker',
+          preName: 'Priority',
         },
         {
-            "cmpName":  "status-picker",
-            "preName": "Status"
+          cmpName: 'status-picker',
+          preName: 'Status',
         },
         {
-            "cmpName":  "timeline-picker",
-            "preName": "Timeline"
+          cmpName: 'timeline-picker',
+          preName: 'Timeline',
         },
         {
-            "cmpName":  "tag-picker",
-            "preName": "Tags"
+          cmpName: 'tag-picker',
+          preName: 'Tags',
         },
         {
-            "cmpName":  "file-picker",
-            "preName": "Files"
-        }
-    ],
+          cmpName: 'file-picker',
+          preName: 'Files',
+        },
+      ],
       style: {
         view: 'table',
       },

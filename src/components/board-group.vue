@@ -1,9 +1,11 @@
 <template>
   <section class="board-group">
     <div class="table-head">
-      <div class="th-title">{{ group.title }}</div>
+      <div class="th-title title-picker-col">
+        {{ group.title }}
+      </div>
       <div
-        v-for="cmp in cmpsOrder"
+        v-for="cmp in cmps"
         :class="cmp.cmpName + '-col'"
         :key="cmp.cmpName"
       >
@@ -14,13 +16,14 @@
       v-for="task in group?.tasks"
       :key="task.id"
       :task="task"
-      :cmps="group.cmpsOrder"
-    ></task-preview>
+    />
+    <add-task @taskAdded="addTask"></add-task>
   </section>
 </template>
 
 <script>
 import taskPreview from './task-preview.vue'
+import addTask from './add-task.vue'
 export default {
   name: 'board-group',
   props: {
@@ -29,6 +32,23 @@ export default {
   },
   components: {
     taskPreview,
+    addTask,
+  },
+  computed: {
+    cmps() {
+      const cmps = this.$store.getters.board.cmpsOrder
+      cmps.unshift()
+      return cmps
+    },
+  },
+  methods: {
+    addTask(task) {
+      this.$store.commit({
+        type: 'saveTask',
+        task,
+        groupId: this.group.id,
+      })
+    },
   },
 }
 </script>

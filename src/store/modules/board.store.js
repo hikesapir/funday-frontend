@@ -16,23 +16,31 @@ export default {
     },
   },
   mutations: {
-    setBoard(state, { board }) {
-      state.board = board
+    loadBoard(state, { id }) {
+      const board = state.boards.find(
+        (board) => board._id === id
+      )
+      if (board) state.board = board
+      else
+        console.log(
+          'Board store could not load board- ' + id
+        )
     },
     setBoards(state, { boards }) {
       state.boards = boards
     },
   },
   actions: {
-    async loadBoard({ commit }, { id }) {
-      try {
-        const board = await boardService.getById(id)
-        commit({ type: 'setBoard', board })
-      } catch (err) {
-        console.log(
-          `BoardsStore: Had problems while loading board- ${id}`
+    async saveTask({ board }, { groupId, task }) {
+      const group = board.groups.find(
+        (group) => group.id === groupId
+      )
+      if (group) {
+        const savedTask = await boardService.saveTask(
+          groupId
         )
       }
+      group.tasks.push(savedTask)
     },
     async loadBoards({ commit }) {
       try {
