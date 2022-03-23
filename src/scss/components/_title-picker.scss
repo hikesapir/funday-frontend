@@ -1,0 +1,22 @@
+.title-picker {
+  display: flex;
+  .task-title {
+    width: 262px;
+    height: 40px;
+  }
+
+  .left-indicator-inner {
+    width: 10px;
+    background-color: aqua;
+    display: inline-block;
+  }
+  .th-title {
+    font-size: 18px;
+    text-align: left;
+  }
+
+  .task-title {
+    padding: 0 0 0 10px;
+    display: inline-block;
+  }
+}

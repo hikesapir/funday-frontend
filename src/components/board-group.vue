@@ -4,11 +4,7 @@
       <div class="th-title title-picker-col">
         {{ group.title }}
       </div>
-      <div
-        v-for="cmp in cmps"
-        :class="cmp.cmpName + '-col'"
-        :key="cmp.cmpName"
-      >
+      <div v-for="cmp in cmps" :class="cmp.cmpName + '-col'" :key="cmp.cmpName">
         {{ cmp.preName }}
       </div>
     </div>
@@ -23,10 +19,10 @@
 </template>
 
 <script>
-import taskPreview from './task-preview.vue'
-import addTask from './add-task.vue'
+import taskPreview from "./task-preview.vue";
+import addTask from "./add-task.vue";
 export default {
-  name: 'board-group',
+  name: "board-group",
   props: {
     group: Object,
     cmpsOrder: Array,
@@ -37,19 +33,19 @@ export default {
   },
   computed: {
     cmps() {
-      const cmps = this.$store.getters.board.cmpsOrder
-      cmps.unshift()
-      return cmps
+      const cmps = this.$store.getters.board.cmpsOrder;
+      cmps.unshift();
+      return cmps;
     },
   },
   methods: {
     addTask(task) {
       this.$store.dispatch({
-        type: 'saveTask',
+        type: "saveTask",
         task,
         groupId: this.group.id,
-      })
+      });
     },
   },
-}
+};
 </script>
