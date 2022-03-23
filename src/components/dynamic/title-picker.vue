@@ -1,5 +1,5 @@
 <template>
-  <div class="title-picker">
+  <div class="title-picker task-drag-handle">
     <div
       class="left-indicator-inner"
       :style="{

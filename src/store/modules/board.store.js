@@ -52,11 +52,46 @@ export default {
       else state.boards.push(savedBoard)
     },
     removeBoard(state, { boardId }) {
-      const idx = state.boards.findIndex((board) => board._id === boardId)
+      const idx = state.boards.findIndex(
+        (board) => board._id === boardId
+      )
       state.boards.splice(idx, 1)
+    },
+    setTasksOrder(state, { result, idx }) {
+      state.board.groups[idx].tasks = result
     },
   },
   actions: {
+    async applyDrag(
+      { commit, state },
+      { tasksOrder, dragResult, groupId }
+    ) {
+      tasksOrder = JSON.parse(JSON.stringify(tasksOrder))
+
+      const { removedIndex, addedIndex, payload } =
+        dragResult
+      var result = [...tasksOrder]
+      if (!removedIndex && !addedIndex) {
+        result = tasksOrder
+      } else {
+        let itemToAdd = payload
+        if (removedIndex !== null) {
+          itemToAdd = result.splice(removedIndex, 1)[0]
+        }
+        if (addedIndex !== null) {
+          result.splice(addedIndex, 0, itemToAdd)
+        }
+      }
+      const idx = state.board.groups.findIndex(
+        (group) => group.id === groupId
+      )
+      commit({ type: 'setTasksOrder', result, idx })
+      await boardService.saveTasksOrder(
+        state.board._id,
+        idx,
+        result
+      )
+    },
     async updateTask({ commit, state }, { data }) {
       const { cmpType, groupId } = data
       var { task } = data
@@ -139,7 +174,7 @@ export default {
       }
     },
     async removeBoard(context, { boardId }) {
-      console.log(boardId);
+      console.log(boardId)
       try {
         await boardService.removeBoard(boardId)
         context.commit({ type: 'removeBoard', boardId })
