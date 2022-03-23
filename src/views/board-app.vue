@@ -1,16 +1,31 @@
 <template>
   <div class="board-app-container">
     <div class="open-side-bar">
-      <board-nav @selectBoard="setBoard" :boards="boards"></board-nav>
+      <board-nav
+        @selectBoard="setBoard"
+        :boards="boards"
+      ></board-nav>
     </div>
     <div class="board-app">
       <section class="board-app">
         <!-- <section class="board-app"> -->
-          <board-header :boardDetails="{ title: board?.title, description: board?.description }" />
-          <board-view-mode />
-          <filter-bar />
-          <board-group v-for="group in board?.groups" :group="group" :cmpsOrder="board?.cmpsOrder" :key="group.id"></board-group>
-          <button @click="$router.push('/')">Back to homepage</button>
+        <board-header
+          :boardDetails="{
+            title: board?.title,
+            description: board?.description,
+          }"
+        />
+        <board-view-mode />
+        <filter-bar />
+        <board-group
+          v-for="group in board?.groups"
+          :group="group"
+          :cmpsOrder="board?.cmpsOrder"
+          :key="group.id"
+        ></board-group>
+        <button @click="$router.push('/')">
+          Back to homepage
+        </button>
         <!-- </section> -->
       </section>
     </div>
@@ -36,13 +51,12 @@ export default {
   computed: {},
   created() {
     const { id } = this.$route.params
-    this.$store.dispatch({ type: 'loadBoard', id })
+    this.$store.commit({ type: 'loadBoard', id })
   },
   methods: {
     setBoard(boardId) {
-      this.$store.dispatch({ type: 'loadBoard', boardId })
+      this.$store.commit({ type: 'loadBoard', id: boardId })
     },
-
   },
   computed: {
     board() {
