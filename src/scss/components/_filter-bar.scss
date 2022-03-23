@@ -1,8 +1,9 @@
 .filter-bar {
   display: flex;
   padding: 16px 30px;
-  button{
-    @include btn()
+  margin-bottom: 18px;
+  button {
+    @include btn();
   }
   .new-item-btn {
     background-color: $primary-blue;
@@ -15,17 +16,16 @@
     }
   }
 
-  .new-item-btn-container{
+  .new-item-btn-container {
     display: flex;
     align-items: center;
   }
 
-  .new-item{
+  .new-item {
     border-radius: 4px 0 0 4px;
   }
-  .chevron{
+  .chevron {
     border-radius: 0 4px 4px 0;
-    border-left: 1px solid $primary-blue-hover ;
+    border-left: 1px solid $primary-blue-hover;
   }
-  
 }

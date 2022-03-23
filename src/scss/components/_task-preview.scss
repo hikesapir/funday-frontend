@@ -4,7 +4,13 @@
   height: 35px;
   line-height: 35px;
   vertical-align: middle;
-  background-color: #f5f6f8;
+  background-color: $main-task-gray;
+  // padding: 0 0 0 30px;
+
+  &:hover {
+    background-color: $main-hover-gray;
+  }
+
   .timeline-picker {
     display: flex;
     justify-content: center;

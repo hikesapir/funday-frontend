@@ -48,9 +48,9 @@ async function saveTask(boardId, groupId, taskToSave) {
   }
 }
 
-async function getGroupById(boardIdx, groupId) {}
+async function getGroupById(boardIdx, groupId) { }
 
-function removeTask(taskId) {}
+function removeTask(taskId) { }
 
 function getEmptyTask() {
   return {
@@ -176,7 +176,7 @@ function _createDemoData() {
           id: 'g101',
           title: 'Preparing for demo 1',
           style: {
-            color: '#33d391',
+            color: '#0073EA',
           },
           tasks: [
             {
@@ -199,7 +199,7 @@ function _createDemoData() {
                 start: 1647967976136,
                 end: 1648928976136,
               },
-              tags: [{ txt: 'first', color: 'red' }],
+              tags: [{ txt: 'first', color: '#e2445c' }],
               files: [],
               updates: [
                 {
