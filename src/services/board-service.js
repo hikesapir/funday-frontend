@@ -8,7 +8,7 @@ export default {
   getEmptyTask,
   saveBoard,
   removeBoard,
-
+  saveTasksOrder,
 }
 
 const KEY = 'board_db'
@@ -23,6 +23,19 @@ function getById(id) {
   return storageService.getById(KEY, id)
 }
 
+async function saveTasksOrder(boardId, idx, tasksOrder) {
+  const boards = await query()
+  const board = boards.find(
+    (board) => board._id === boardId
+  )
+  try {
+    board.groups[idx].tasks = tasksOrder
+    await storageService.put(KEY, board)
+  } catch (err) {
+    console.log('Boardservice: could not save tasksOrder')
+  }
+}
+
 function saveBoard(board) {
   if (board._id) return storageService.put(KEY, board)
   return storageService.post(KEY, board)
@@ -31,7 +44,6 @@ function saveBoard(board) {
 function removeBoard(boardId) {
   return storageService.remove(KEY, boardId)
 }
-
 
 async function saveTask(boardId, groupId, taskToSave) {
   const boards = await query()
@@ -61,9 +73,9 @@ async function saveTask(boardId, groupId, taskToSave) {
   }
 }
 
-async function getGroupById(boardIdx, groupId) { }
+async function getGroupById(boardIdx, groupId) {}
 
-function removeTask(taskId) { }
+function removeTask(taskId) {}
 
 function getEmptyTask() {
   return {
@@ -84,7 +96,6 @@ function getEmptyTask() {
   }
 }
 
-
 function _createDemoData() {
   const boards = [
     {
@@ -92,7 +103,7 @@ function _createDemoData() {
       title: 'Sprint 4 - Monday GO!!!!',
       description: 'Final project E2E',
       createdAt: 1647966887053,
-      "isStarred": true,
+      isStarred: true,
       createdBy: {
         _id: 'u101',
         fullname: 'Sapir Hiki',
