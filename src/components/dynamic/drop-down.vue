@@ -1,23 +1,20 @@
 <template>
   <div class="drop-down">
-    <!-- <div class="dots"> -->
     <div class="dots active">
-      <!-- <div class="dot"></div> -->
-      <!-- <div class="dot"></div> -->
-      <!-- <div class="shadow cut"></div> -->
       <div class="container cut">
         <div class="drop cut2"></div>
       </div>
       <div class="list">
-        <ul>
-          <li>Mark as read</li>
-          <li>Flag as important</li>
-          <li>Save for later</li>
-          <li>Move to trash</li>
-          <li>Mark as spam</li>
+        <ul v-for="label in labels" :key="label">
+          <li
+            @click="updateTask(label.txt)"
+            :style="{ 'background-color': label.color }"
+          >
+            {{ label.txt }}
+            {{ type }}
+          </li>
         </ul>
       </div>
-      <!-- <div class="dot"></div> -->
     </div>
     <div
       class="cursor"
@@ -30,30 +27,15 @@
 export default {
   name: "drop-down",
   props: {
-    labels: Object,
+    labels: Array,
+    type: String,
   },
-  data() {
-    return {
-      statuses: this.$store.getters.board?.labels.status,
-    };
-  },
+  //   data() {},
   methods: {
-    // getStatus() {
-    //   return this.statuses.find((status) => status.id === this.task?.status);
-    // },
+    updateTask(val) {
+      this.$emit("update", { val });
+    },
   },
-  computed: {
-    // txt() {
-    //   const status = this.getStatus();
-    //   return status.txt;
-    // },
-    // style() {
-    //   const status = this.getStatus();
-    //   return {
-    //     backgroundColor: status?.color,
-    //     color: "white",
-    //   };
-    // },
-  },
+  computed: {},
 };
 </script>
