@@ -26,6 +26,7 @@ export default {
     getStyle() {
       return {
         backgroundColor: this.selectedPriorty?.color,
+        color: 'white'
       }
     },
   },

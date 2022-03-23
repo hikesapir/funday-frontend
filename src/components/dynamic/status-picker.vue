@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="status-picker-col" style="background-color: black">
-      {{ task.status }}
+    <div class="status-picker-col" :style="{ 'background-color': style.color }">
+      {{ style.txt }}
     </div>
   </div>
 </template>
@@ -12,6 +12,19 @@ export default {
   props: {
     task: Object,
   },
-  name: "status-picker",
+  data() {
+    return {
+      statuses: this.$store.getters.board?.labels.status,
+    };
+  },
+  computed: {
+    // getStatus() {
+    //   this.
+    // },
+    style() {
+      // console.log(this.statuses);
+      return this.statuses.find((status) => status.id === this.task.status);
+    },
+  },
 };
 </script>

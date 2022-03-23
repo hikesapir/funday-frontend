@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: 'member-picker',
+  name: "member-picker",
   props: {
     task: Object,
   },
@@ -20,8 +20,8 @@ export default {
     members() {
       return this.task.members.length > 2
         ? this.task.members.slice(0, 2)
-        : this.task.members
+        : this.task.members;
     },
   },
-}
+};
 </script>
