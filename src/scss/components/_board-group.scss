@@ -62,6 +62,7 @@
 
 .file-picker-col {
   width: 130px;
+  text-align: center;
   button {
     @include btn();
     font-size: 16px;

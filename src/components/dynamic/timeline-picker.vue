@@ -16,6 +16,7 @@ export default {
   name: 'timeline-picker',
   props: {
     task: Object,
+    groupId: String,
   },
   data() {
     return {
@@ -53,6 +54,15 @@ export default {
       var endDay = endTime.getDay()
       return { startMonth, endMonth, startDay, endDay }
     },
+    calcTimeProgress(startTime, endTime) {
+      const now = Date.now()
+      const tillNow = now - startTime
+      const total = endTime - startTime
+      if (total < 1000 * 60 * 60 * 24 && total > 0)
+        return progress
+      else if (total === 0) return 100
+      return (tillNow / total) * 100
+    },
   },
   computed: {
     content() {
@@ -76,11 +86,21 @@ export default {
       }
     },
     labelColor() {
-      const group = this.$store.board?.groups.find(
+      const group = this.$store.getters.board?.groups.find(
         (group) => group.id === this.groupId
       )
-      if (group) {
-        return { 'background-color': group.style.color }
+      var startTime = this.task?.timeline.start
+      var endTime = this.task?.timeline.end
+      if (!startTime && !endTime)
+        return { 'background-color': '#ababab' }
+      const progress = this.calcTimeProgress(
+        startTime,
+        endTime
+      )
+      if (group?.style) {
+        return {
+          background: `linear-gradient(to right, ${group?.style.color} ${progress}%, #333 ${progress}%`,
+        }
       }
       return { 'background-color': '#333' }
     },
