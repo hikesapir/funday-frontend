@@ -57,8 +57,14 @@
   width: 178px;
 }
 
+.tag-picker-col {
+  text-align: center;
+  width: 130px;
+}
+
 .file-picker-col {
   width: 130px;
+  text-align: center;
   button {
     @include btn();
     font-size: 16px;

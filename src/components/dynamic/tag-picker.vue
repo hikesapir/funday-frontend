@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="tag-picker">
+    <div class="add-tag"><fa icon="circle-plus" /></div>
     <div
       v-for="tag in task.tags"
       :key="tag"
@@ -8,7 +9,6 @@
     >
       #{{ tag.txt }}
     </div>
-    <div class="add-tag"><fa icon="circle-plus" /></div>
   </div>
 </template>
 

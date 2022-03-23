@@ -23,9 +23,6 @@
           :cmpsOrder="board?.cmpsOrder"
           :key="group.id"
         ></board-group>
-        <button @click="$router.push('/')">
-          Back to homepage
-        </button>
         <!-- </section> -->
       </section>
     </div>
