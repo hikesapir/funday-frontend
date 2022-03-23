@@ -40,7 +40,7 @@ export default {
   computed: {
     txt() {
       const status = this.getStatus();
-      return status.txt;
+      return status?.txt;
     },
     style() {
       const status = this.getStatus();
