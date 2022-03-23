@@ -9,7 +9,7 @@ export default {
   },
   getters: {
     boards({ boards }) {
-      return boards
+      return JSON.parse(JSON.stringify(boards))
     },
     board({ board }) {
       return JSON.parse(JSON.stringify(board))

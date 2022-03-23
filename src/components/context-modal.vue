@@ -3,7 +3,7 @@
         <button @click="openNewTab">Open Board in New Tab</button>
         <button @click="renameBoard">Rename Board</button>
         <button @click="starred">Add to favorites</button>
-        <button>Duplicate Board</button>
+        <button @click="duplicate">Duplicate Board</button>
         <button @click="remove">Delete</button>
     </section>
 </template>
@@ -15,7 +15,7 @@ export default {
     name: 'context-modal',
     props: {
     },
-    emits: ['openNewTab', 'remove','starred','renameBoard'],
+    emits: ['openNewTab', 'remove', 'starred', 'renameBoard', 'duplicate'],
     components: {},
     data() {
         return {
@@ -39,6 +39,10 @@ export default {
         },
         starred() {
             this.$emit('starred')
+        },
+        duplicate() {
+            this.$emit('duplicate')
+
         }
     },
     computed: {
