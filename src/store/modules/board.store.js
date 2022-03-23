@@ -45,6 +45,11 @@ export default {
         updatedTask
       )
     },
+    saveBoard(state, { savedBoard }) {
+      const idx = state.boards.findIndex((board) => board._id === savedBoard._id)
+      if (idx !== -1) state.boards.splice(idx, 1, savedBoard)
+      else state.boards.push(savedBoard)
+    }
   },
   actions: {
     async updateTask({ commit, state }, { data }) {
@@ -111,7 +116,12 @@ export default {
       }
     },
     async saveBoard(context, { board }) {
-
+      try {
+        const savedBoard = await boardService.saveBoard(board)
+        context.commit({ type: 'saveBoard', board: savedBoard })
+      } catch (err) {
+        console.log('saveBoard err', err);
+      }
     }
   },
 }

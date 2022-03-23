@@ -6,6 +6,7 @@ export default {
   saveTask,
   getById,
   getEmptyTask,
+  saveBoard,
 }
 
 const KEY = 'board_db'
@@ -19,6 +20,12 @@ function getById(id) {
 function query() {
   return storageService.query(KEY)
 }
+
+function saveBoard(board) {
+  if (board._id) return storageService.put(KEY, board)
+  return storageService.post(KEY, board)
+}
+
 
 async function saveTask(boardId, groupId, taskToSave) {
   const boards = await query()
@@ -48,9 +55,9 @@ async function saveTask(boardId, groupId, taskToSave) {
   }
 }
 
-async function getGroupById(boardIdx, groupId) {}
+async function getGroupById(boardIdx, groupId) { }
 
-function removeTask(taskId) {}
+function removeTask(taskId) { }
 
 function getEmptyTask() {
   return {

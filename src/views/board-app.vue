@@ -52,9 +52,11 @@ export default {
     setBoard(boardId) {
       this.$store.commit({ type: 'loadBoard', id: boardId })
     },
-    updateBoard() {
-      this.board.isStarred = !this.board.isStarred
-      console.log(this.board);
+    updateBoard(type) {
+      if (type === 'star') {
+        this.board.isStarred = !this.board.isStarred
+        console.log(this.board);
+      }
       this.$store.dispatch({ type: 'saveBoard', board: this.board })
     },
 
