@@ -20,24 +20,32 @@ function query() {
   return storageService.query(KEY)
 }
 
-async function saveTask(boardId, groupId, task) {
+async function saveTask(boardId, groupId, taskToSave) {
   const boards = await query()
   const board = boards.find(
     (board) => board._id === boardId
   )
-  if (board) {
-    const idx = board.groups.findIndex(
-      (group) => (group.id = groupId)
-    )
-    if (idx !== -1) {
-      task.createdAt = Date.now()
-      task.byMember = userService.getLoggedinUser()
-      board.groups[idx].tasks.push(task)
+  const idx = board.groups.findIndex(
+    (group) => (group.id = groupId)
+  )
+  try {
+    if (taskToSave.id) {
+      const taskIdx = board.groups[idx].tasks.findIndex(
+        (task) => task.id === taskToSave.id
+      )
+      board.groups[idx].tasks[taskIdx] = taskToSave
       await storageService.put(KEY, board)
-      return task
+    } else {
+      taskToSave.createdAt = Date.now()
+      taskToSave.id = utilService.makeId(8)
+      taskToSave.byMember = userService.getLoggedinUser()
+      board.groups[idx].tasks.push(taskToSave)
+      await storageService.put(KEY, board)
+      return taskToSave
     }
+  } catch (err) {
+    console.log('Boardservice: could not save task')
   }
-  return Promise.reject('Boardservice: could not save task')
 }
 
 async function getGroupById(boardIdx, groupId) { }
