@@ -33,4 +33,19 @@
     @include btn()
   }
 
+
+    
+  
+  
+}
+.context-modal{
+  padding: 8px;
+  background-color: white;
+  box-shadow: 0px 0px 19px -4px rgba(0,0,0,0.48);
+  position: relative;
+  left: 193px;
+  top: -10px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
 }
