@@ -3,7 +3,7 @@
     <div class="table-head">
       <div
         class="th-title title-picker-col"
-        :style="{ color: group.style.color }"
+        :style="{ color: group.style?.color }"
       >
         {{ group.title }}
       </div>
