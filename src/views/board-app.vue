@@ -1,10 +1,7 @@
 <template>
   <div class="board-app-container">
     <div class="open-side-bar">
-      <board-nav
-        @selectBoard="setBoard"
-        :boards="boards"
-      ></board-nav>
+      <board-nav @selectBoard="setBoard" :boards="boards"></board-nav>
     </div>
     <div class="board-app">
       <section class="board-app">
@@ -13,7 +10,9 @@
           :boardDetails="{
             title: board?.title,
             description: board?.description,
+            isStarred:board?.isStarred,
           }"
+          @stared="updateBoard"
         />
         <board-view-mode />
         <filter-bar />
@@ -54,6 +53,14 @@ export default {
     setBoard(boardId) {
       this.$store.commit({ type: 'loadBoard', id: boardId })
     },
+    updateBoard(type) {
+      if (type === 'star') {
+        this.board.isStarred = !this.board.isStarred
+        console.log(this.board);
+      }
+      this.$store.dispatch({ type: 'saveBoard', board: this.board })
+    },
+
   },
   computed: {
     board() {

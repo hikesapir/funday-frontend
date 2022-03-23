@@ -1,4 +1,5 @@
 .title-picker {
+  cursor: pointer;
   display: flex;
   width: 262px;
 
@@ -14,6 +15,30 @@
 
   .task-title {
     padding: 0 0 0 10px;
+    width: auto;
     display: inline-block;
+  }
+
+  .edit-title-btn {
+    opacity: 0;
+    pointer-events: none;
+    cursor: pointer;
+    color: #676879;
+    background-color: none;
+    border: none;
+    height: 24px;
+    border-radius: 4px;
+    padding: 2px 8px;
+    &:hover {
+      background-color: #fefefe;
+    }
+  }
+
+  &:hover {
+    color: $title-hover-blue;
+    .edit-title-btn {
+      opacity: 1;
+      pointer-events: all;
+    }
   }
 }

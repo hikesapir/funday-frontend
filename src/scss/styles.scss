@@ -1,20 +1,21 @@
 // SETUP
-@import "setup/mixins";
-@import "setup/functions";
-@import "setup/variables";
+@import 'setup/mixins';
+@import 'setup/functions';
+@import 'setup/variables';
 
 // BASE
-@import "basics/fonts";
-@import "basics/util";
-@import "basics/base";
+@import 'basics/fonts';
+@import 'basics/util';
+@import 'basics/base';
 
 // VIEWS
-@import "views/app";
-@import "views/home";
-@import "views/login";
-@import "views/board-app";
+@import 'views/app';
+@import 'views/home';
+@import 'views/login';
+@import 'views/board-app';
 
 // COMPONENTS
+<<<<<<< HEAD
 @import "components/app-footer";
 @import "components/board-header";
 @import "components/filter-bar";
@@ -27,4 +28,17 @@
 @import "components/title-picker";
 @import "components/status-picker";
 @import "components/drop-down";
+=======
+@import 'components/app-footer';
+@import 'components/board-header';
+@import 'components/filter-bar';
+@import 'components/board-nav';
+@import 'components/board-view-mode';
+@import 'components/main-nav';
+@import 'components/task-preview';
+@import 'components/board-group';
+@import 'components/tags-picker';
+@import 'components/title-picker';
+@import 'components/add-task';
+>>>>>>> 1faf09a990b9a5180c4c842af4d08ea62a0bf8ec
 // @import "components/group-table";

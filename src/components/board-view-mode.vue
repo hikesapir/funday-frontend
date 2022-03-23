@@ -12,6 +12,7 @@
       <span>more</span>
       <fa icon="chevron-down" />
     </button>
+    <div class="spacer"></div>
   </section>
 </template>
 

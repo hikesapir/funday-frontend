@@ -1,16 +1,24 @@
 .board-nav {
+  width: 245px;
   background-color: $grey-background-color;
   border-right: 1px $main-gray solid;
   padding: 12px 16px;
   .bord-title {
+    display: flex;
+    justify-content: space-between;
     border-radius: 4px;
     padding: 8px;
     cursor: pointer;
     &:hover {
       background-color: #dcdfec;
     }
+    button{
+      padding: 0;
+      font-size: rem(20px);
+    }
   }
   .workspace-dropdwon{
+    margin-top: 4px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -24,9 +32,5 @@
   button{
     @include btn()
   }
-  .spacer{
-    border-bottom: 1px solid;
-    border-color: rgb(208, 212, 228);
-    margin: 0 20px;
-  }
+
 }
