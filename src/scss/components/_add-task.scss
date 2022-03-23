@@ -4,6 +4,7 @@
   .left-indicator-inner {
     width: 10px;
     display: inline-block;
+    transition: opacity 0.1s ease;
   }
   form {
     display: flex;

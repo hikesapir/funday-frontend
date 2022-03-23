@@ -51,7 +51,7 @@ export default {
       console.log('group?.style.color', group?.style.color)
       return {
         'background-color': group?.style.color,
-        opacity: 0.6,
+        opacity: this.isFocused ? 1 : 0.6,
       }
     },
     btnClass() {
