@@ -48,17 +48,17 @@
         {
           "id": "s001",
           "txt": "Done",
-          "color": "#33d391"
+          "color": "#00c875"
         },
         {
           "id": "s002",
           "txt": "Working on it",
-          "color": "#fdbc64"
+          "color": "#fdab3d"
         },
         {
           "id": "s003",
           "txt": "Stuck",
-          "color": "#e8697d"
+          "color": "#e2445c"
         },
         {
           "id": "s000",
@@ -70,17 +70,17 @@
         {
           "id": "p001",
           "txt": "High",
-          "color": "#33d391"
+          "color": "#e2445c"
         },
         {
           "id": "p002",
           "txt": "Medium",
-          "color": "#fdbc64"
+          "color": "#f9a0f0"
         },
         {
           "id": "p003",
           "txt": "Low",
-          "color": "#e8697d"
+          "color": "#00c875"
         },
         {
           "id": "p000",
@@ -123,7 +123,7 @@
               "start": 1647967976136,
               "end": 1648928976136
             },
-            "tags": ["first"],
+            "tags": [{ "txt": "first", "color": "#e2445c" }],
             "files": [],
             "updates": [
               {
@@ -161,10 +161,163 @@
             "priority": "p003",
             "dueDate": 1648928976136,
             "timeline": {
-              "start": 1647969348820,
-              "end": 1648928976136
+              "start": 1649797200000,
+              "end": 1647468000000
             },
-            "tags": ["second"],
+            "tags": [{ "txt": "second", "color": "blue" }],
+            "files": [],
+            "updates": [
+              {
+                "id": "u101",
+                "txt": "First update for this task",
+                "createdAt": 1647968252227,
+                "byMember": {
+                  "_id": "u101",
+                  "fullname": "Sapir Hiki",
+                  "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                }
+              },
+              {
+                "id": "u101",
+                "txt": "Second update for this task",
+                "createdAt": 1647969252227,
+                "byMember": {
+                  "_id": "u101",
+                  "fullname": "Sapir Hiki",
+                  "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                }
+              }
+            ],
+            "members": [
+              {
+                "_id": "u101",
+                "fullname": "Sapir Hiki",
+                "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+              }
+            ]
+          },
+          {
+            "id": "t103",
+            "createdAt": 1647967976136,
+            "byMember": {
+              "_id": "u101",
+              "fullname": "Sapir Hiki",
+              "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+            },
+            "style": {
+              "color": "#26de81"
+            },
+            "title": "Open git repository",
+            "status": "s001",
+            "priority": "p002",
+            "dueDate": 1648928976136,
+            "timeline": {
+              "start": 1648414800000,
+              "end": 1647295200000
+            },
+            "tags": [],
+            "files": [],
+            "updates": [
+              {
+                "id": "u101",
+                "txt": "First update for this task",
+                "createdAt": 1647968252227,
+                "byMember": {
+                  "_id": "u101",
+                  "fullname": "Sapir Hiki",
+                  "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                }
+              },
+              {
+                "id": "u101",
+                "txt": "Second update for this task",
+                "createdAt": 1647969252227,
+                "byMember": {
+                  "_id": "u101",
+                  "fullname": "Sapir Hiki",
+                  "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                }
+              }
+            ],
+            "members": [
+              {
+                "_id": "u101",
+                "fullname": "Sapir Hiki",
+                "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+              }
+            ]
+          },
+          {
+            "id": "t104",
+            "createdAt": 1647967976136,
+            "byMember": {
+              "_id": "u101",
+              "fullname": "Sapir Hiki",
+              "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+            },
+            "style": {
+              "color": "#26de81"
+            },
+            "title": "Add board/user/auth/ services",
+            "status": "s000",
+            "priority": "p003",
+            "dueDate": 1648928976136,
+            "timeline": {
+              "start": 1646258400000,
+              "end": 1646172000000
+            },
+            "tags": [],
+            "files": [],
+            "updates": [
+              {
+                "id": "u101",
+                "txt": "First update for this task",
+                "createdAt": 1647968252227,
+                "byMember": {
+                  "_id": "u101",
+                  "fullname": "Sapir Hiki",
+                  "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                }
+              },
+              {
+                "id": "u101",
+                "txt": "Second update for this task",
+                "createdAt": 1647969252227,
+                "byMember": {
+                  "_id": "u101",
+                  "fullname": "Sapir Hiki",
+                  "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                }
+              }
+            ],
+            "members": [
+              {
+                "_id": "u101",
+                "fullname": "Sapir Hiki",
+                "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+              }
+            ]
+          },
+          {
+            "id": "t105",
+            "createdAt": 1647967976136,
+            "byMember": {
+              "_id": "u101",
+              "fullname": "Sapir Hiki",
+              "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+            },
+            "style": {
+              "color": "#26de81"
+            },
+            "title": "Define what feature we support ",
+            "status": "s002",
+            "priority": "p001",
+            "dueDate": 1648928976136,
+            "timeline": {
+              "start": 1647971548820,
+              "end": 1648929976136
+            },
+            "tags": [],
             "files": [],
             "updates": [
               {
@@ -206,8 +359,8 @@
         },
         "tasks": [
           {
-            "id": "t101",
-            "createdAt": 1640999730348,
+            "id": "t106",
+            "createdAt": 1648077401126,
             "byMember": {
               "_id": "u101",
               "fullname": "Sapir Hiki",
@@ -219,12 +372,12 @@
             "title": "Creating demo data",
             "status": "s001",
             "priority": "p001",
-            "dueDate": 1640999730348,
+            "dueDate": 164807401126,
             "timeline": {
-              "start": 1640999730348,
-              "end": 16409922222
+              "start": 1649106000000,
+              "end": 1648242000000
             },
-            "tags": ["important"],
+            "tags": [{ "txt": "important", "color": "green" }],
             "files": [],
             "updates": [
               {
@@ -247,7 +400,7 @@
             ]
           },
           {
-            "id": "t102",
+            "id": "t107",
             "createdAt": 1647967976136,
             "byMember": {
               "_id": "u101",
@@ -265,7 +418,159 @@
               "start": 1647969348820,
               "end": 1648928976136
             },
-            "tags": ["second"],
+            "tags": [{ "txt": "second", "color": "blue" }],
+            "files": [],
+            "updates": [
+              {
+                "id": "u101",
+                "txt": "First update for this task",
+                "createdAt": 1647968252227,
+                "byMember": {
+                  "_id": "u101",
+                  "fullname": "Sapir Hiki",
+                  "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                }
+              },
+              {
+                "id": "u101",
+                "txt": "Second update for this task",
+                "createdAt": 1647969252227,
+                "byMember": {
+                  "_id": "u101",
+                  "fullname": "Sapir Hiki",
+                  "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                }
+              }
+            ],
+            "members": [
+              {
+                "_id": "u101",
+                "fullname": "Sapir Hiki",
+                "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+              }
+            ]
+          },
+          {
+            "id": "t108",
+            "createdAt": 1647967976136,
+            "byMember": {
+              "_id": "u101",
+              "fullname": "Sapir Hiki",
+              "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+            },
+            "style": {
+              "color": "#26de81"
+            },
+            "title": "Create components files",
+            "status": "s002",
+            "priority": "p000",
+            "dueDate": 1648928976136,
+            "timeline": {
+              "start": 1647969348820,
+              "end": 1648928976136
+            },
+            "tags": [{ "txt": "second", "color": "blue" }],
+            "files": [],
+            "updates": [
+              {
+                "id": "u101",
+                "txt": "First update for this task",
+                "createdAt": 1647968252227,
+                "byMember": {
+                  "_id": "u101",
+                  "fullname": "Sapir Hiki",
+                  "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                }
+              },
+              {
+                "id": "u101",
+                "txt": "Second update for this task",
+                "createdAt": 1647969252227,
+                "byMember": {
+                  "_id": "u101",
+                  "fullname": "Sapir Hiki",
+                  "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                }
+              }
+            ],
+            "members": [
+              {
+                "_id": "u101",
+                "fullname": "Sapir Hiki",
+                "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+              }
+            ]
+          },
+          {
+            "id": "t109",
+            "createdAt": 1648077924927,
+            "byMember": {
+              "_id": "u101",
+              "fullname": "Sapir Hiki",
+              "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+            },
+            "style": {
+              "color": "#26de81"
+            },
+            "title": "CRUDL",
+            "status": "s001",
+            "priority": "p001",
+            "dueDate": 1648077924927,
+            "timeline": {
+              "start": 1647969348820,
+              "end": 1648928976136
+            },
+            "tags": [{ "txt": "CRUDL", "color": "red" }],
+            "files": [],
+            "updates": [
+              {
+                "id": "u101",
+                "txt": "First update for this task",
+                "createdAt": 1647968252227,
+                "byMember": {
+                  "_id": "u101",
+                  "fullname": "Sapir Hiki",
+                  "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                }
+              },
+              {
+                "id": "u101",
+                "txt": "Second update for this task",
+                "createdAt": 1647969252227,
+                "byMember": {
+                  "_id": "u101",
+                  "fullname": "Sapir Hiki",
+                  "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                }
+              }
+            ],
+            "members": [
+              {
+                "_id": "u101",
+                "fullname": "Sapir Hiki",
+                "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+              }
+            ]
+          }, {
+            "id": "t110",
+            "createdAt": 1648078924927,
+            "byMember": {
+              "_id": "u101",
+              "fullname": "Sapir Hiki",
+              "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+            },
+            "style": {
+              "color": "#26de81"
+            },
+            "title": "Create folder structure for scss",
+            "status": "s002",
+            "priority": "p003",
+            "dueDate": 1648077924927,
+            "timeline": {
+              "start": 1647969348820,
+              "end": 1648928976136
+            },
+            "tags": [{ "txt": "style", "color": "pink" }],
             "files": [],
             "updates": [
               {
@@ -297,6 +602,262 @@
               }
             ]
           }
+
+        ]
+      },
+      {
+        "id": "g103",
+        "title": "Backend",
+        "style": {
+          "color": "#ffcb00"
+        },
+        "tasks": [
+          {
+            "id": "t111",
+            "createdAt": 1648077901326,
+            "byMember": {
+              "_id": "u101",
+              "fullname": "Sapir Hiki",
+              "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+            },
+            "style": {
+              "color": "#26de81"
+            },
+            "title": "Set up basic storage service",
+            "status": "s001",
+            "priority": "p002",
+            "dueDate": 164807401126,
+            "timeline": {
+              "start": 1640999730348,
+              "end": 16409922222
+            },
+            "tags": [{ "txt": "service", "color": "#1acd83" }],
+            "files": [],
+            "updates": [
+              {
+                "id": "u101",
+                "txt": "First update for this task",
+                "createdAt": 1647968252227,
+                "byMember": {
+                  "_id": "u101",
+                  "fullname": "Sapir Hiki",
+                  "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                }
+              }
+            ],
+            "members": [
+              {
+                "_id": "u101",
+                "fullname": "Sapir Hiki",
+                "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+              }
+            ]
+          },
+          {
+            "id": "t112",
+            "createdAt": 1647967976136,
+            "byMember": {
+              "_id": "u101",
+              "fullname": "Sapir Hiki",
+              "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+            },
+            "style": {
+              "color": "#26de81"
+            },
+            "title": "Backend folder structure",
+            "status": "s002",
+            "priority": "p001",
+            "dueDate": 1648928976136,
+            "timeline": {
+              "start": 1647969348820,
+              "end": 1648928976136
+            },
+            "tags": [],
+            "files": [],
+            "updates": [
+              {
+                "id": "u101",
+                "txt": "First update for this task",
+                "createdAt": 1647968252227,
+                "byMember": {
+                  "_id": "u101",
+                  "fullname": "Sapir Hiki",
+                  "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                }
+              },
+              {
+                "id": "u101",
+                "txt": "Second update for this task",
+                "createdAt": 1647969252227,
+                "byMember": {
+                  "_id": "u101",
+                  "fullname": "Sapir Hiki",
+                  "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                }
+              }
+            ],
+            "members": [
+              {
+                "_id": "u101",
+                "fullname": "Sapir Hiki",
+                "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+              }
+            ]
+          },
+          {
+            "id": "t113",
+            "createdAt": 1647967976136,
+            "byMember": {
+              "_id": "u101",
+              "fullname": "Sapir Hiki",
+              "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+            },
+            "style": {
+              "color": "#26de81"
+            },
+            "title": "APIs>Api routes, controller, service",
+            "status": "s000",
+            "priority": "p002",
+            "dueDate": 1648928976136,
+            "timeline": {
+              "start": 1647969348820,
+              "end": 1648928976136
+            },
+            "tags": [{ "txt": "server", "color": "#4eccc6" }],
+            "files": [],
+            "updates": [
+              {
+                "id": "u101",
+                "txt": "First update for this task",
+                "createdAt": 1647968252227,
+                "byMember": {
+                  "_id": "u101",
+                  "fullname": "Sapir Hiki",
+                  "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                }
+              },
+              {
+                "id": "u101",
+                "txt": "Second update for this task",
+                "createdAt": 1647969252227,
+                "byMember": {
+                  "_id": "u101",
+                  "fullname": "Sapir Hiki",
+                  "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                }
+              }
+            ],
+            "members": [
+              {
+                "_id": "u101",
+                "fullname": "Sapir Hiki",
+                "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+              }
+            ]
+          },
+          {
+            "id": "t114",
+            "createdAt": 1648077924927,
+            "byMember": {
+              "_id": "u101",
+              "fullname": "Sapir Hiki",
+              "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+            },
+            "style": {
+              "color": "#26de81"
+            },
+            "title": "Test all routes with Postman",
+            "status": "s003",
+            "priority": "p002",
+            "dueDate": 1648077924927,
+            "timeline": {
+              "start": 1647969348820,
+              "end": 1648928976136
+            },
+            "tags": [{ "txt": "safety", "color": "#401694" }],
+            "files": [],
+            "updates": [
+              {
+                "id": "u101",
+                "txt": "First update for this task",
+                "createdAt": 1647968252227,
+                "byMember": {
+                  "_id": "u101",
+                  "fullname": "Sapir Hiki",
+                  "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                }
+              },
+              {
+                "id": "u101",
+                "txt": "Second update for this task",
+                "createdAt": 1647969252227,
+                "byMember": {
+                  "_id": "u101",
+                  "fullname": "Sapir Hiki",
+                  "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                }
+              }
+            ],
+            "members": [
+              {
+                "_id": "u101",
+                "fullname": "Sapir Hiki",
+                "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+              }
+            ]
+          }, 
+          {
+            "id": "t115",
+            "createdAt": 1648078924927,
+            "byMember": {
+              "_id": "u101",
+              "fullname": "Sapir Hiki",
+              "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+            },
+            "style": {
+              "color": "#26de81"
+            },
+            "title": "Set up MongoDB and Atlas",
+            "status": "s002",
+            "priority": "p003",
+            "dueDate": 1648077924927,
+            "timeline": {
+              "start": 1647969348820,
+              "end": 1648928976136
+            },
+            "tags": [{ "txt": "fun", "color": "pink" }],
+            "files": [],
+            "updates": [
+              {
+                "id": "u101",
+                "txt": "First update for this task",
+                "createdAt": 1647968252227,
+                "byMember": {
+                  "_id": "u101",
+                  "fullname": "Sapir Hiki",
+                  "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                }
+              },
+              {
+                "id": "u101",
+                "txt": "Second update for this task",
+                "createdAt": 1647969252227,
+                "byMember": {
+                  "_id": "u101",
+                  "fullname": "Sapir Hiki",
+                  "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                }
+              }
+            ],
+            "members": [
+              {
+                "_id": "u101",
+                "fullname": "Sapir Hiki",
+                "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+              }
+            ]
+          }
+
         ]
       }
     ],
@@ -317,3 +878,4 @@
     ]
   }
 ]
+
