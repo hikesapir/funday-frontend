@@ -48,14 +48,12 @@ export default {
       const group = this.$store.getters.board?.groups.find(
         (group) => group.id === this.groupId
       )
-      console.log('group?.style.color', group?.style.color)
       return {
-        'background-color': group?.style.color,
+        'background-color': group?.style?.color,
         opacity: this.isFocused ? 1 : 0.6,
       }
     },
     btnClass() {
-      console.log('this.isFocused', this.isFocused)
       return this.isFocused ? 'focus' : ''
     },
   },

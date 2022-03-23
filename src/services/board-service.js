@@ -15,7 +15,32 @@ const KEY = 'board_db'
 
 localStorage[KEY] ? '' : _createDemoData()
 
-function query() {
+async function query(filterBy = null) {
+  if (filterBy) {
+    try {
+      const boards = await storageService.query(KEY)
+      const board = boards.find(
+        (board) => board._id === filterBy.boardId
+      )
+      const filteredGroups = []
+      if (filterBy.txt) {
+        const regex = new RegExp(filterBy.txt, 'i')
+        board.groups.forEach((group) => {
+          const filterGroup = group.tasks.filter((task) =>
+            regex.test(task.title)
+          )
+          filteredGroups.push(...filterGroup)
+        })
+      }
+
+      return filteredGroups
+    } catch (err) {
+      console.log(
+        'boardService: could not load boards with filter- ' +
+          filterBy
+      )
+    }
+  }
   return storageService.query(KEY)
 }
 

@@ -60,8 +60,16 @@ export default {
     setTasksOrder(state, { result, idx }) {
       state.board.groups[idx].tasks = result
     },
+    saveGroups(state, groups) {
+      state.board.groups = groups
+    },
   },
   actions: {
+    async onSetFilter({ commit, state }, { filterBy }) {
+      filterBy.boardId = state.board._id
+      const groups = await boardService.query(filterBy)
+      commit('saveGroups', groups)
+    },
     async applyDrag(
       { commit, state },
       { tasksOrder, dragResult, groupId }
