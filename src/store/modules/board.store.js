@@ -32,23 +32,53 @@ export default {
     addTask(state, { groupIdx, savedTask }) {
       state.board.groups[groupIdx].tasks.push(savedTask)
     },
+    updateTask(state, { groupId, updatedTask }) {
+      const groupIdx = state.board.groups.findIndex(
+        (group) => group.id === groupId
+      )
+      const group = state.board.groups[groupIdx]
+      const taskIdx = group.tasks.findIndex(
+        (task) => task.id === updatedTask.id
+      )
+      state.board.groups[groupIdx].tasks.splice(
+        taskIdx,
+        updatedTask
+      )
+    },
   },
   actions: {
-    async updateTask({ commit }, { data }) {
-      switch (data.cmpType) {
+    async updateTask({ commit, state }, { data }) {
+      const { cmpType, groupId } = data
+      var { task } = data
+      task = JSON.parse(JSON.stringify(task))
+      switch (cmpType) {
         case 'timeline-picker':
-          const { id } = data.task
-          // data.timeline
-          console.log(
-            'id, data.timeline',
-            id,
-            data.timeline
+          task.timeline = data.timeline
+          console.log('data.timeline', data.timeline)
+          await boardService.saveTask(
+            state.board._id,
+            groupId,
+            task
           )
           break
-
-        default:
+        case 'file-picker':
+          break
+        case 'member-picker':
+          break
+        case 'priority-picker':
+          break
+        case 'status-picker':
+          break
+        case 'tag-picker':
+          break
+        case 'title-picker':
           break
       }
+      commit({
+        type: 'updateTask',
+        groupId,
+        updatedTask: task,
+      })
     },
     async saveTask({ commit, state }, { groupId, task }) {
       var savedTask = null

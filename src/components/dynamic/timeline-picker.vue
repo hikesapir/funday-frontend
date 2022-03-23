@@ -67,8 +67,8 @@ export default {
       endTime = new Date(endTime)
       var startMonth = startTime.getMonth()
       var endMonth = endTime.getMonth()
-      var startDay = startTime.getDay()
-      var endDay = endTime.getDay()
+      var startDay = startTime.getDate()
+      var endDay = endTime.getDate()
       return { startMonth, endMonth, startDay, endDay }
     },
     calcTimeProgress(startTime, endTime) {
