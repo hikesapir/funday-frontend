@@ -9,7 +9,7 @@ export default {
   },
   getters: {
     boards({ boards }) {
-      return boards
+      return JSON.parse(JSON.stringify(boards))
     },
     board({ board }) {
       return JSON.parse(JSON.stringify(board))
@@ -110,7 +110,6 @@ export default {
           await boardService.saveTask(
             state.board._id,
             groupId,
-            task
           )
           break
         case 'file-picker':
@@ -118,8 +117,21 @@ export default {
         case 'member-picker':
           break
         case 'priority-picker':
+          console.log(data.val, 'priority')
+          task.priority = data.val
+          await boardService.saveTask(
+            state.board._id,
+            groupId,
+            task)
           break
         case 'status-picker':
+          console.log(data.val)
+          task.status = data.val
+          await boardService.saveTask(
+            state.board._id,
+            groupId,
+            task
+          )
           break
         case 'tag-picker':
           break

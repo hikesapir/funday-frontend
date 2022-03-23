@@ -23,12 +23,6 @@ export default {
       tags: this.$store.getters.board,
     };
   },
-  computed: {
-    // style() {
-    // console.log(this.tags);
-    // console.log(this.statuses);
-    // return this.statuses.find((status) => status.id === this.task.status);
-    // },
-  },
+  computed: {},
 };
 </script>

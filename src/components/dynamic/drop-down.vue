@@ -7,11 +7,10 @@
       <div class="list">
         <ul v-for="label in labels" :key="label">
           <li
-            @click="updateTask(label.txt)"
+            @click="updateTask(label.id)"
             :style="{ 'background-color': label.color }"
           >
             {{ label.txt }}
-            {{ type }}
           </li>
         </ul>
       </div>
@@ -30,10 +29,9 @@ export default {
     labels: Array,
     type: String,
   },
-  //   data() {},
   methods: {
     updateTask(val) {
-      this.$emit("update", { val });
+      this.$emit("update", val);
     },
   },
   computed: {},

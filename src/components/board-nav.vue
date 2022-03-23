@@ -42,11 +42,7 @@ export default {
     boardPreview,
   },
   methods: {
-    selectBoard(boardId) {
-      console.log(boardId);
-      // this.$emit('selectBoard', boardId)
-    },
-
+    
   },
 }
 </script>
