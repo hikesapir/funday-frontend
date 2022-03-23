@@ -40,9 +40,9 @@ async function saveTask(boardId, groupId, task) {
   return Promise.reject('Boardservice: could not save task')
 }
 
-async function getGroupById(boardIdx, groupId) {}
+async function getGroupById(boardIdx, groupId) { }
 
-function removeTask(taskId) {}
+function removeTask(taskId) { }
 
 function getEmptyTask() {
   return {
@@ -191,7 +191,7 @@ function _createDemoData() {
                 start: 1647967976136,
                 end: 1648928976136,
               },
-              tags: [{ txt: 'first', color: 'red' }],
+              tags: [{ txt: 'first', color: '#e2445c' }],
               files: [],
               updates: [
                 {
