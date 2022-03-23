@@ -12,7 +12,7 @@ export default {
       return boards
     },
     board({ board }) {
-      return board
+      return JSON.parse(JSON.stringify(board))
     },
   },
   mutations: {
@@ -110,5 +110,8 @@ export default {
         )
       }
     },
+    async saveBoard(context, { board }) {
+
+    }
   },
 }

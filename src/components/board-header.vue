@@ -2,13 +2,13 @@
     <header class="board-header">
         <div class="up-haeder">
             <div class="board-name">
-                <h1>{{boardDetails.title}}</h1>
+                <h1>{{ boardDetails.title }}</h1>
                 <button class="info">
                     <span>
                         <fa icon="circle-info" />
                     </span>
                 </button>
-                <button class="star">
+                <button @click="staerred" class="star">
                     <span>
                         <fa icon="star" />
                     </span>
@@ -26,7 +26,7 @@
                 </button>
                 <button class="btn">
                     <fa icon="plus" />
-                    <span> Add to board</span>
+                    <span>Add to board</span>
                 </button>
                 <button>
                     <span>
@@ -36,7 +36,7 @@
             </div>
         </div>
         <div class="description-line">
-            <span class="text-content">{{boardDetails.description}}</span>
+            <span class="text-content">{{ boardDetails.description }}</span>
         </div>
     </header>
 </template>
@@ -58,7 +58,11 @@ export default {
     },
     mounted() {
     },
-    methods: {},
+    methods: {
+        staerred() {
+            this.$emit('stared','star')
+        }
+    },
     computed: {
     },
     unmounted() {

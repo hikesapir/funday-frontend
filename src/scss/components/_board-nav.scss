@@ -11,6 +11,7 @@
     }
   }
   .workspace-dropdwon{
+    margin-top: 4px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -24,9 +25,5 @@
   button{
     @include btn()
   }
-  .spacer{
-    border-bottom: 1px solid;
-    border-color: rgb(208, 212, 228);
-    margin: 0 20px;
-  }
+
 }
