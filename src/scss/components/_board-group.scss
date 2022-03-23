@@ -62,4 +62,9 @@
 
 .file-picker-col {
   width: 130px;
+  button{
+    @include btn();
+    font-size:16px;   
+    color: $primary-blue;
+  }
 }
