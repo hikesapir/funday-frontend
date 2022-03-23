@@ -1,6 +1,10 @@
 <template>
   <section class="board-nav">
     <p>Workspace</p>
+    <div class="workspace-dropdwon">
+      <fa icon="plus" />
+      <h2>Main workspace</h2>
+    </div>
     <ul>
       <li>
         <button>Add</button>
