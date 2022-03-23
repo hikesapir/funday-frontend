@@ -1,7 +1,12 @@
 <template>
   <div>
-    <div v-for="tag in task.tags" :key="tag" class="tag-picker-val">
-      #{{ tag }}
+    <div
+      v-for="tag in task.tags"
+      :key="tag"
+      class="tag-picker-val"
+      :style="{ color: tag.color }"
+    >
+      #{{ tag.txt }}
     </div>
   </div>
 </template>

@@ -189,7 +189,7 @@ function _createDemoData() {
                 start: 1647967976136,
                 end: 1648928976136,
               },
-              tags: ['first'],
+              tags: [{ txt: 'first', color: 'red' }],
               files: [],
               updates: [
                 {
@@ -233,7 +233,7 @@ function _createDemoData() {
                 start: 1647969348820,
                 end: 1648928976136,
               },
-              tags: ['second'],
+              tags: [{ txt: 'second', color: 'blue' }],
               files: [],
               updates: [
                 {
@@ -297,7 +297,7 @@ function _createDemoData() {
                 start: 1640999730348,
                 end: 1640999730348,
               },
-              tags: ['importent'],
+              tags: [{ txt: 'importent', color: 'green' }],
               files: [],
               updates: [
                 {
@@ -341,7 +341,7 @@ function _createDemoData() {
                 start: 1647969348820,
                 end: 1648928976136,
               },
-              tags: ['second'],
+              tags: [{ txt: 'second', color: 'blue' }],
               files: [],
               updates: [
                 {
