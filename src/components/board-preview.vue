@@ -16,6 +16,7 @@
         @openNewTab="openNewTab"
         @renameBoard="renameBoard"
         @starred="starred"
+        @duplicate="duplicate"
     />
 </template>
 
@@ -68,10 +69,15 @@ export default {
             this.chengeName = false
         },
         starred() {
-            console.log('star');
             this.board.isStarred = !this.board.isStarred
-            
-            // this.$store.dispatch({ type: 'saveBoard', board: this.board })
+            this.$store.dispatch({ type: 'saveBoard', board: this.board })
+        },
+        duplicate() {
+            console.log('duplicate');
+            const newBoard = JSON.parse(JSON.stringify(this.board))
+            newBoard.title = newBoard.title + ' -copy'
+            newBoard._id = null
+            this.$store.dispatch({ type: 'saveBoard', board: newBoard})
         }
 
 
