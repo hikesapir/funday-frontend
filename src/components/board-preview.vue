@@ -15,6 +15,7 @@
         @remove="remove"
         @openNewTab="openNewTab"
         @renameBoard="renameBoard"
+        @starred="starred"
     />
 </template>
 
@@ -67,8 +68,10 @@ export default {
             this.chengeName = false
         },
         starred() {
+            console.log('star');
             this.board.isStarred = !this.board.isStarred
-            this.$store.dispatch({ type: 'saveBoard', board: this.board })
+            
+            // this.$store.dispatch({ type: 'saveBoard', board: this.board })
         }
 
 

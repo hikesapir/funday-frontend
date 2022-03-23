@@ -2,7 +2,7 @@
     <section class="context-modal">
         <button @click="openNewTab">Open Board in New Tab</button>
         <button @click="renameBoard">Rename Board</button>
-        <button @click="staerred">Add to favorites</button>
+        <button @click="starred">Add to favorites</button>
         <button>Duplicate Board</button>
         <button @click="remove">Delete</button>
     </section>
@@ -15,7 +15,7 @@ export default {
     name: 'context-modal',
     props: {
     },
-    emits: ['openNewTab', 'remove'],
+    emits: ['openNewTab', 'remove','starred','renameBoard'],
     components: {},
     data() {
         return {
@@ -38,7 +38,6 @@ export default {
             this.$emit('renameBoard')
         },
         starred() {
-            console.log('star');
             this.$emit('starred')
         }
     },
