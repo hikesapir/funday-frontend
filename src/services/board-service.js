@@ -133,8 +133,8 @@ function _createDemoData() {
       "createdAt": 1647966887053,
       "isStarred": true,
       "createdBy": {
-        "_id": "u101",
-        "fullname": "Sapir Hiki",
+        "_id": "u104",
+        "fullname": "Someone",
         "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
       },
       "cmpsOrder": [
@@ -223,14 +223,19 @@ function _createDemoData() {
           "imgUrl": "https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070371/a1avc0ofryx5enjnbklv.jpg"
         },
         {
-          "_id": "u101",
+          "_id": "u102",
           "fullname": "Lior Amar",
           "imgUrl": "https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070372/w1hcqybgmllnpl8ld2zh.jpg"
         },
         {
-          "_id": "u101",
+          "_id": "u103",
           "fullname": "Roee Furman",
           "imgUrl": "https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070370/qpolx3ucumsiscnf0ymk.jpg"
+        },
+        {
+          "_id": "u104",
+          "fullname": "Someone",
+          "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
         },
       ],
       "groups": [
@@ -245,8 +250,8 @@ function _createDemoData() {
               "id": "t101",
               "createdAt": 1590999730348,
               "byMember": {
-                "_id": "u101",
-                "fullname": "Sapir Hiki",
+                "_id": "u104",
+                "fullname": "Someone",
                 "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
               },
               "style": {
@@ -264,20 +269,20 @@ function _createDemoData() {
               "files": [],
               "updates": [
                 {
-                  "id": "u101",
+                  "id": "u104",
                   "txt": "First update for this task",
                   "createdAt": 1647968252227,
                   "byMember": {
-                    "_id": "u101",
-                    "fullname": "Sapir Hiki",
+                    "_id": "u104",
+                    "fullname": "Someone",
                     "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                   }
                 }
               ],
               "members": [
                 {
-                  "_id": "u101",
-                  "fullname": "Sapir Hiki",
+                  "_id": "u104",
+                  "fullname": "Someone",
                   "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                 }
               ]
@@ -286,8 +291,8 @@ function _createDemoData() {
               "id": "t102",
               "createdAt": 1647967976136,
               "byMember": {
-                "_id": "u101",
-                "fullname": "Sapir Hiki",
+                "_id": "u104",
+                "fullname": "Someone",
                 "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
               },
               "style": {
@@ -309,8 +314,8 @@ function _createDemoData() {
                   "txt": "First update for this task",
                   "createdAt": 1647968252227,
                   "byMember": {
-                    "_id": "u101",
-                    "fullname": "Sapir Hiki",
+                    "_id": "u104",
+                    "fullname": "Someone",
                     "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                   }
                 },
@@ -319,26 +324,31 @@ function _createDemoData() {
                   "txt": "Second update for this task",
                   "createdAt": 1647969252227,
                   "byMember": {
-                    "_id": "u101",
-                    "fullname": "Sapir Hiki",
+                    "_id": "u104",
+                    "fullname": "Someone",
                     "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                   }
                 }
               ],
               "members": [
                 {
-                  "_id": "u101",
-                  "fullname": "Sapir Hiki",
+                  "_id": "u104",
+                  "fullname": "Someone",
                   "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-                }
+                },
+                {
+                  "_id": "u103",
+                  "fullname": "Roee Furman",
+                  "imgUrl": "https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070370/qpolx3ucumsiscnf0ymk.jpg"
+                },
               ]
             },
             {
               "id": "t103",
               "createdAt": 1647967976136,
               "byMember": {
-                "_id": "u101",
-                "fullname": "Sapir Hiki",
+                "_id": "u104",
+                "fullname": "Someone",
                 "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
               },
               "style": {
@@ -360,8 +370,8 @@ function _createDemoData() {
                   "txt": "First update for this task",
                   "createdAt": 1647968252227,
                   "byMember": {
-                    "_id": "u101",
-                    "fullname": "Sapir Hiki",
+                    "_id": "u104",
+                    "fullname": "Someone",
                     "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                   }
                 },
@@ -370,8 +380,8 @@ function _createDemoData() {
                   "txt": "Second update for this task",
                   "createdAt": 1647969252227,
                   "byMember": {
-                    "_id": "u101",
-                    "fullname": "Sapir Hiki",
+                    "_id": "u104",
+                    "fullname": "Someone",
                     "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                   }
                 }
@@ -380,6 +390,11 @@ function _createDemoData() {
                 {
                   "_id": "u101",
                   "fullname": "Sapir Hiki",
+                  "imgUrl": "https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070371/a1avc0ofryx5enjnbklv.jpg"
+                },
+                {
+                  "_id": "u104",
+                  "fullname": "Someone",
                   "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                 }
               ]
@@ -388,8 +403,8 @@ function _createDemoData() {
               "id": "t104",
               "createdAt": 1647967976136,
               "byMember": {
-                "_id": "u101",
-                "fullname": "Sapir Hiki",
+                "_id": "u104",
+                "fullname": "Someone",
                 "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
               },
               "style": {
@@ -411,8 +426,8 @@ function _createDemoData() {
                   "txt": "First update for this task",
                   "createdAt": 1647968252227,
                   "byMember": {
-                    "_id": "u101",
-                    "fullname": "Sapir Hiki",
+                    "_id": "u104",
+                    "fullname": "Someone",
                     "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                   }
                 },
@@ -421,8 +436,8 @@ function _createDemoData() {
                   "txt": "Second update for this task",
                   "createdAt": 1647969252227,
                   "byMember": {
-                    "_id": "u101",
-                    "fullname": "Sapir Hiki",
+                    "_id": "u104",
+                    "fullname": "Someone",
                     "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                   }
                 }
@@ -431,6 +446,16 @@ function _createDemoData() {
                 {
                   "_id": "u101",
                   "fullname": "Sapir Hiki",
+                  "imgUrl": "https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070371/a1avc0ofryx5enjnbklv.jpg"
+                },
+                {
+                  "_id": "u103",
+                  "fullname": "Roee Furman",
+                  "imgUrl": "https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070370/qpolx3ucumsiscnf0ymk.jpg"
+                },
+                {
+                  "_id": "u104",
+                  "fullname": "Someone",
                   "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                 }
               ]
@@ -439,8 +464,8 @@ function _createDemoData() {
               "id": "t105",
               "createdAt": 1647967976136,
               "byMember": {
-                "_id": "u101",
-                "fullname": "Sapir Hiki",
+                "_id": "u104",
+                "fullname": "Someone",
                 "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
               },
               "style": {
@@ -462,8 +487,8 @@ function _createDemoData() {
                   "txt": "First update for this task",
                   "createdAt": 1647968252227,
                   "byMember": {
-                    "_id": "u101",
-                    "fullname": "Sapir Hiki",
+                    "_id": "u104",
+                    "fullname": "Someone",
                     "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                   }
                 },
@@ -472,18 +497,23 @@ function _createDemoData() {
                   "txt": "Second update for this task",
                   "createdAt": 1647969252227,
                   "byMember": {
-                    "_id": "u101",
-                    "fullname": "Sapir Hiki",
+                    "_id": "u104",
+                    "fullname": "Someone",
                     "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                   }
                 }
               ],
               "members": [
                 {
-                  "_id": "u101",
-                  "fullname": "Sapir Hiki",
+                  "_id": "u104",
+                  "fullname": "Someone",
                   "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-                }
+                },
+                {
+                  "_id": "u103",
+                  "fullname": "Roee Furman",
+                  "imgUrl": "https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070370/qpolx3ucumsiscnf0ymk.jpg"
+                },
               ]
             }
           ]
@@ -499,8 +529,8 @@ function _createDemoData() {
               "id": "t106",
               "createdAt": 1648077401126,
               "byMember": {
-                "_id": "u101",
-                "fullname": "Sapir Hiki",
+                "_id": "u104",
+                "fullname": "Someone",
                 "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
               },
               "style": {
@@ -522,16 +552,16 @@ function _createDemoData() {
                   "txt": "First update for this task",
                   "createdAt": 1647968252227,
                   "byMember": {
-                    "_id": "u101",
-                    "fullname": "Sapir Hiki",
+                    "_id": "u104",
+                    "fullname": "Someone",
                     "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                   }
                 }
               ],
               "members": [
                 {
-                  "_id": "u101",
-                  "fullname": "Sapir Hiki",
+                  "_id": "u104",
+                  "fullname": "Someone",
                   "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                 }
               ]
@@ -540,8 +570,8 @@ function _createDemoData() {
               "id": "t107",
               "createdAt": 1647967976136,
               "byMember": {
-                "_id": "u101",
-                "fullname": "Sapir Hiki",
+                "_id": "u104",
+                "fullname": "Someone",
                 "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
               },
               "style": {
@@ -563,8 +593,8 @@ function _createDemoData() {
                   "txt": "First update for this task",
                   "createdAt": 1647968252227,
                   "byMember": {
-                    "_id": "u101",
-                    "fullname": "Sapir Hiki",
+                    "_id": "u104",
+                    "fullname": "Someone",
                     "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                   }
                 },
@@ -573,26 +603,31 @@ function _createDemoData() {
                   "txt": "Second update for this task",
                   "createdAt": 1647969252227,
                   "byMember": {
-                    "_id": "u101",
-                    "fullname": "Sapir Hiki",
+                    "_id": "u104",
+                    "fullname": "Someone",
                     "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                   }
                 }
               ],
               "members": [
                 {
-                  "_id": "u101",
-                  "fullname": "Sapir Hiki",
+                  "_id": "u104",
+                  "fullname": "Someone",
                   "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-                }
+                },
+                {
+                  "_id": "u102",
+                  "fullname": "Lior Amar",
+                  "imgUrl": "https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070372/w1hcqybgmllnpl8ld2zh.jpg"
+                },
               ]
             },
             {
               "id": "t108",
               "createdAt": 1647967976136,
               "byMember": {
-                "_id": "u101",
-                "fullname": "Sapir Hiki",
+                "_id": "u104",
+                "fullname": "Someone",
                 "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
               },
               "style": {
@@ -614,8 +649,8 @@ function _createDemoData() {
                   "txt": "First update for this task",
                   "createdAt": 1647968252227,
                   "byMember": {
-                    "_id": "u101",
-                    "fullname": "Sapir Hiki",
+                    "_id": "u104",
+                    "fullname": "Someone",
                     "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                   }
                 },
@@ -624,16 +659,21 @@ function _createDemoData() {
                   "txt": "Second update for this task",
                   "createdAt": 1647969252227,
                   "byMember": {
-                    "_id": "u101",
-                    "fullname": "Sapir Hiki",
+                    "_id": "u104",
+                    "fullname": "Someone",
                     "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                   }
                 }
               ],
               "members": [
                 {
-                  "_id": "u101",
-                  "fullname": "Sapir Hiki",
+                  "_id": "u102",
+                  "fullname": "Lior Amar",
+                  "imgUrl": "https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070372/w1hcqybgmllnpl8ld2zh.jpg"
+                },
+                {
+                  "_id": "u104",
+                  "fullname": "Someone",
                   "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                 }
               ]
@@ -642,8 +682,8 @@ function _createDemoData() {
               "id": "t109",
               "createdAt": 1648077924927,
               "byMember": {
-                "_id": "u101",
-                "fullname": "Sapir Hiki",
+                "_id": "u104",
+                "fullname": "Someone",
                 "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
               },
               "style": {
@@ -665,8 +705,8 @@ function _createDemoData() {
                   "txt": "First update for this task",
                   "createdAt": 1647968252227,
                   "byMember": {
-                    "_id": "u101",
-                    "fullname": "Sapir Hiki",
+                    "_id": "u104",
+                    "fullname": "Someone",
                     "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                   }
                 },
@@ -675,16 +715,16 @@ function _createDemoData() {
                   "txt": "Second update for this task",
                   "createdAt": 1647969252227,
                   "byMember": {
-                    "_id": "u101",
-                    "fullname": "Sapir Hiki",
+                    "_id": "u104",
+                    "fullname": "Someone",
                     "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                   }
                 }
               ],
               "members": [
                 {
-                  "_id": "u101",
-                  "fullname": "Sapir Hiki",
+                  "_id": "u104",
+                  "fullname": "Someone",
                   "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                 }
               ]
@@ -715,8 +755,8 @@ function _createDemoData() {
                   "txt": "First update for this task",
                   "createdAt": 1647968252227,
                   "byMember": {
-                    "_id": "u101",
-                    "fullname": "Sapir Hiki",
+                    "_id": "u104",
+                    "fullname": "Someone",
                     "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                   }
                 },
@@ -725,16 +765,21 @@ function _createDemoData() {
                   "txt": "Second update for this task",
                   "createdAt": 1647969252227,
                   "byMember": {
-                    "_id": "u101",
-                    "fullname": "Sapir Hiki",
+                    "_id": "u104",
+                    "fullname": "Someone",
                     "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                   }
                 }
               ],
               "members": [
                 {
-                  "_id": "u101",
-                  "fullname": "Sapir Hiki",
+                  "_id": "u102",
+                  "fullname": "Lior Amar",
+                  "imgUrl": "https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070372/w1hcqybgmllnpl8ld2zh.jpg"
+                },
+                {
+                  "_id": "u104",
+                  "fullname": "Someone",
                   "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                 }
               ]
@@ -753,8 +798,8 @@ function _createDemoData() {
               "id": "t111",
               "createdAt": 1648077901326,
               "byMember": {
-                "_id": "u101",
-                "fullname": "Sapir Hiki",
+                "_id": "u104",
+                "fullname": "Someone",
                 "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
               },
               "style": {
@@ -776,16 +821,16 @@ function _createDemoData() {
                   "txt": "First update for this task",
                   "createdAt": 1647968252227,
                   "byMember": {
-                    "_id": "u101",
-                    "fullname": "Sapir Hiki",
+                    "_id": "u104",
+                    "fullname": "Someone",
                     "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                   }
                 }
               ],
               "members": [
                 {
-                  "_id": "u101",
-                  "fullname": "Sapir Hiki",
+                  "_id": "u104",
+                  "fullname": "Someone",
                   "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                 }
               ]
@@ -794,8 +839,8 @@ function _createDemoData() {
               "id": "t112",
               "createdAt": 1647967976136,
               "byMember": {
-                "_id": "u101",
-                "fullname": "Sapir Hiki",
+                "_id": "u104",
+                "fullname": "Someone",
                 "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
               },
               "style": {
@@ -817,8 +862,8 @@ function _createDemoData() {
                   "txt": "First update for this task",
                   "createdAt": 1647968252227,
                   "byMember": {
-                    "_id": "u101",
-                    "fullname": "Sapir Hiki",
+                    "_id": "u104",
+                    "fullname": "Someone",
                     "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                   }
                 },
@@ -827,8 +872,8 @@ function _createDemoData() {
                   "txt": "Second update for this task",
                   "createdAt": 1647969252227,
                   "byMember": {
-                    "_id": "u101",
-                    "fullname": "Sapir Hiki",
+                    "_id": "u104",
+                    "fullname": "Someone",
                     "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                   }
                 }
@@ -837,6 +882,11 @@ function _createDemoData() {
                 {
                   "_id": "u101",
                   "fullname": "Sapir Hiki",
+                  "imgUrl": "https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070371/a1avc0ofryx5enjnbklv.jpg"
+                },
+                {
+                  "_id": "u104",
+                  "fullname": "Someone",
                   "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                 }
               ]
@@ -845,8 +895,8 @@ function _createDemoData() {
               "id": "t113",
               "createdAt": 1647967976136,
               "byMember": {
-                "_id": "u101",
-                "fullname": "Sapir Hiki",
+                "_id": "u104",
+                "fullname": "Someone",
                 "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
               },
               "style": {
@@ -868,8 +918,8 @@ function _createDemoData() {
                   "txt": "First update for this task",
                   "createdAt": 1647968252227,
                   "byMember": {
-                    "_id": "u101",
-                    "fullname": "Sapir Hiki",
+                    "_id": "u104",
+                    "fullname": "Someone",
                     "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                   }
                 },
@@ -878,16 +928,16 @@ function _createDemoData() {
                   "txt": "Second update for this task",
                   "createdAt": 1647969252227,
                   "byMember": {
-                    "_id": "u101",
-                    "fullname": "Sapir Hiki",
+                    "_id": "u104",
+                    "fullname": "Someone",
                     "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                   }
                 }
               ],
               "members": [
                 {
-                  "_id": "u101",
-                  "fullname": "Sapir Hiki",
+                  "_id": "u104",
+                  "fullname": "Someone",
                   "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                 }
               ]
@@ -896,8 +946,8 @@ function _createDemoData() {
               "id": "t114",
               "createdAt": 1648077924927,
               "byMember": {
-                "_id": "u101",
-                "fullname": "Sapir Hiki",
+                "_id": "u104",
+                "fullname": "Someone",
                 "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
               },
               "style": {
@@ -919,8 +969,8 @@ function _createDemoData() {
                   "txt": "First update for this task",
                   "createdAt": 1647968252227,
                   "byMember": {
-                    "_id": "u101",
-                    "fullname": "Sapir Hiki",
+                    "_id": "u104",
+                    "fullname": "Someone",
                     "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                   }
                 },
@@ -929,16 +979,16 @@ function _createDemoData() {
                   "txt": "Second update for this task",
                   "createdAt": 1647969252227,
                   "byMember": {
-                    "_id": "u101",
-                    "fullname": "Sapir Hiki",
+                    "_id": "u104",
+                    "fullname": "Someone",
                     "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                   }
                 }
               ],
               "members": [
                 {
-                  "_id": "u101",
-                  "fullname": "Sapir Hiki",
+                  "_id": "u104",
+                  "fullname": "Someone",
                   "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                 }
               ]
@@ -947,8 +997,8 @@ function _createDemoData() {
               "id": "t115",
               "createdAt": 1648078924927,
               "byMember": {
-                "_id": "u101",
-                "fullname": "Sapir Hiki",
+                "_id": "u104",
+                "fullname": "Someone",
                 "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
               },
               "style": {
@@ -970,8 +1020,8 @@ function _createDemoData() {
                   "txt": "First update for this task",
                   "createdAt": 1647968252227,
                   "byMember": {
-                    "_id": "u101",
-                    "fullname": "Sapir Hiki",
+                    "_id": "u104",
+                    "fullname": "Someone",
                     "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                   }
                 },
@@ -980,17 +1030,21 @@ function _createDemoData() {
                   "txt": "Second update for this task",
                   "createdAt": 1647969252227,
                   "byMember": {
-                    "_id": "u101",
-                    "fullname": "Sapir Hiki",
+                    "_id": "u104",
+                    "fullname": "Someone",
                     "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                   }
                 }
               ],
               "members": [
                 {
+                  "_id": "u104",
+                  "fullname": "Someone",
+                  "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                },{
                   "_id": "u101",
                   "fullname": "Sapir Hiki",
-                  "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                  "imgUrl": "https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070371/a1avc0ofryx5enjnbklv.jpg"
                 }
               ]
             }
@@ -1003,8 +1057,8 @@ function _createDemoData() {
           "id": "a101",
           "createdAt": 1647967977136,
           "byMember": {
-            "_id": "u101",
-            "fullname": "Sapir Hiki",
+            "_id": "u104",
+            "fullname": "Someone",
             "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
           },
           "description": {
@@ -1015,11 +1069,6 @@ function _createDemoData() {
       ]
     }
   ]
-
-
-
-
-
 
   utilService.saveToStorage(KEY, boards)
 }
