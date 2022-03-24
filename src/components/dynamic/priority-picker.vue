@@ -1,17 +1,25 @@
 <template>
-  <div :style="getStyle" class="priority-picker-col" @click="toggleDropDown">
+  <div
+    :style="getStyle"
+    class="priority-picker-col"
+    @click="toggleDropDown"
+  >
     {{ selectedPriorty?.txt }}
     <div v-if="isDropOpen">
-      <drop-down :labels="prioritys" @update="updateTask" type="status" />
+      <drop-down
+        :labels="prioritys"
+        @update="updateTask"
+        type="status"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import dropDown from "./drop-down.vue";
+import dropDown from './drop-down.vue'
 export default {
   components: { dropDown },
-  name: "priority-picker",
+  name: 'priority-picker',
   props: {
     task: Object,
   },
@@ -19,35 +27,33 @@ export default {
     return {
       isDropOpen: false,
       prioritys: this.$store.getters.board.labels.priority,
-      selectedPriorty: "",
-    };
+      selectedPriorty: '',
+    }
   },
   created() {
     this.selectedPriorty = this.prioritys.find(
       (priority) => priority.id === this.task.priority
-    );
+    )
   },
   methods: {
     updateTask(val) {
-      console.log(val);
-      this.$emit("update", {
+      this.$emit('update', {
         cmpType: `priority-picker`,
         val,
         task: this.task,
-      });
+      })
     },
     toggleDropDown() {
-      console.log(this.isDropOpen);
-      this.isDropOpen = !this.isDropOpen;
+      this.isDropOpen = !this.isDropOpen
     },
   },
   computed: {
     getStyle() {
       return {
         backgroundColor: this.selectedPriorty?.color,
-        color: "white",
-      };
+        color: 'white',
+      }
     },
   },
-};
+}
 </script>

@@ -14,7 +14,9 @@
       <label>People</label>
       <span v-for="member in membersList" :key="member">
         <img :src="member.imgUrl" />
-        <span @click="addMember(member)">{{ member.fullname }}</span>
+        <span @click="addMember(member)">{{
+          member.fullname
+        }}</span>
       </span>
     </section>
   </div>
@@ -22,7 +24,7 @@
 
 <script>
 export default {
-  name: "member-picker",
+  name: 'member-picker',
   props: {
     task: Object,
   },
@@ -30,29 +32,28 @@ export default {
     return {
       addMembersMode: false,
       membersList: this.$store.getters.board.members,
-    };
+    }
   },
   computed: {
     members() {
       return this.task.members.length > 2
         ? this.task.members.slice(0, 2)
-        : this.task.members;
+        : this.task.members
     },
     displayMembers() {},
   },
   methods: {
     addMembers() {
-      this.addMembersMode = !this.addMembersMode;
+      this.addMembersMode = !this.addMembersMode
     },
     addMember(member) {
-      this.members.push(JSON.parse(JSON.stringify(member)));
-      console.log(this.members);
-      this.$emit("update", {
+      this.members.push(JSON.parse(JSON.stringify(member)))
+      this.$emit('update', {
         cmpType: `member-picker`,
         members: this.members,
         task: this.task,
-      });
+      })
     },
   },
-};
+}
 </script>

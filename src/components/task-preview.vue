@@ -13,22 +13,22 @@
 </template>
 
 <script>
-import filePicker from "./dynamic/file-picker.vue";
-import memberPicker from "./dynamic/member-picker.vue";
-import statusPicker from "./dynamic/status-picker.vue";
-import tagPicker from "./dynamic/tag-picker.vue";
-import timelinePicker from "./dynamic/timeline-picker.vue";
-import priorityPicker from "./dynamic/priority-picker.vue";
-import titlePicker from "./dynamic/title-picker.vue";
+import filePicker from './dynamic/file-picker.vue'
+import memberPicker from './dynamic/member-picker.vue'
+import statusPicker from './dynamic/status-picker.vue'
+import tagPicker from './dynamic/tag-picker.vue'
+import timelinePicker from './dynamic/timeline-picker.vue'
+import priorityPicker from './dynamic/priority-picker.vue'
+import titlePicker from './dynamic/title-picker.vue'
 
 export default {
-  name: "task-preview",
+  name: 'task-preview',
   props: {
     groupId: String,
     task: Object,
   },
   data() {
-    return {};
+    return {}
   },
   components: {
     filePicker,
@@ -41,15 +41,14 @@ export default {
   },
   methods: {
     updateTask(data) {
-      console.log(data);
-      data.groupId = this.groupId;
-      this.$store.dispatch({ type: "updateTask", data });
+      data.groupId = this.groupId
+      this.$store.dispatch({ type: 'updateTask', data })
     },
   },
   computed: {
     cmpsOrder() {
-      return this.$store.getters.board.cmpsOrder;
+      return this.$store.getters.board.cmpsOrder
     },
   },
-};
+}
 </script>

@@ -44,7 +44,6 @@ export default {
         updatedTask
     },
     saveBoard(state, { savedBoard }) {
-      console.log(savedBoard);
       const idx = state.boards.findIndex(
         (board) => board._id === savedBoard._id
       )
@@ -66,7 +65,7 @@ export default {
     },
     setGroupsOrder(state, { newOrder }) {
       state.board.groups = newOrder
-    }
+    },
   },
   actions: {
     async onSetFilter({ commit, state }, { filterBy }) {
@@ -113,28 +112,27 @@ export default {
           task.timeline = data.timeline
           await boardService.saveTask(
             state.board._id,
-            groupId,
+            groupId
           )
           break
         case 'file-picker':
           break
         case 'member-picker':
-          console.log(data.members)
           await boardService.saveTask(
             state.board._id,
             groupId,
-            task)
+            task
+          )
           break
         case 'priority-picker':
-          console.log(data.val, 'priority')
           task.priority = data.val
           await boardService.saveTask(
             state.board._id,
             groupId,
-            task)
+            task
+          )
           break
         case 'status-picker':
-          console.log(data.val)
           task.status = data.val
           await boardService.saveTask(
             state.board._id,
@@ -171,7 +169,6 @@ export default {
           task
         )
       }
-      console.log('savedTask', savedTask)
       commit({
         type: 'addTask',
         groupIdx: idx,
@@ -203,7 +200,6 @@ export default {
       }
     },
     async removeBoard(context, { boardId }) {
-      console.log(boardId)
       try {
         await boardService.removeBoard(boardId)
         context.commit({ type: 'removeBoard', boardId })
@@ -211,14 +207,24 @@ export default {
         console.log('removeBoard err', err)
       }
     },
-    changeOrderGroups(context, { dropResult, entities, entityType }) {
-      console.log({ dropResult, entities, entityType });
-      var board = JSON.parse(JSON.stringify(context.state.board))
-      var movedItem = entities.splice(dropResult.removedIndex, 1)[0]
+    changeOrderGroups(
+      context,
+      { dropResult, entities, entityType }
+    ) {
+      var board = JSON.parse(
+        JSON.stringify(context.state.board)
+      )
+      var movedItem = entities.splice(
+        dropResult.removedIndex,
+        1
+      )[0]
       entities.splice(dropResult.addedIndex, 0, movedItem)
       board[entityType] = entities
       context.dispatch({ type: 'saveBoard', board })
-      context.commit({ type: 'setGroupsOrder', newOrder: entities })
-    }
+      context.commit({
+        type: 'setGroupsOrder',
+        newOrder: entities,
+      })
+    },
   },
 }
