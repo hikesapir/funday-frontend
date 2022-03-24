@@ -7,7 +7,7 @@ import { Chart } from 'highcharts-vue'
 
 export default {
   name: 'bar-chart',
-  props: { data: Object },
+  props: { data: Object, categories: Object },
   components: {
     Chart,
   },
@@ -17,20 +17,12 @@ export default {
         series: [
           {
             type: 'column',
-            data: [
-              { y: 4, color: '#333', name: 'Achieved' },
-              {
-                y: 12,
-                color: '#229922',
-                name: 'In Progress',
-              },
-              { y: 1, color: '#336699', name: 'Stuck' },
-            ],
+            data: this.data,
           },
         ],
-        // xAxis: {
-        //   categories: ['Done', 'Delay', 'Stuck'],
-        // },
+        xAxis: {
+          categories: this.categories,
+        },
         yAxis: {
           min: 0,
           title: {
@@ -41,7 +33,10 @@ export default {
     }
   },
   created() {
-    const data = this.$store.getters.statusData
+    console.log(
+      'this.chartOptions.series[0].data',
+      this.categories
+    )
   },
 }
 </script>

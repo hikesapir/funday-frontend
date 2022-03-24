@@ -23,6 +23,34 @@ export default {
     cmpsOrder({ board }) {
       return board.cmpsOrder
     },
+    chartData({ board }) {
+      var statusMapCount = null
+      var priorityMapCount = null
+      if (!board?.groups) return
+      const groups = JSON.parse(
+        JSON.stringify(board.groups)
+      )
+      groups.forEach((group) => {
+        statusMapCount = group.tasks.reduce((acc, task) => {
+          if (!task.status) return acc
+          acc[task.status] = acc[task.status]
+            ? acc[task.status]++
+            : 1
+          return acc
+        }, {})
+        priorityMapCount = group.tasks.reduce(
+          (acc, task) => {
+            if (!task.priority) return
+            acc[task.priority] = acc[task.priority]
+              ? acc[task.priority]++
+              : 1
+            return acc
+          },
+          {}
+        )
+      })
+      return { statusMapCount, priorityMapCount }
+    },
   },
   mutations: {
     loadBoards(state, { boards }) {
