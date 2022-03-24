@@ -1,7 +1,7 @@
 <template>
   <div
     :style="getStyle"
-    class="priority-picker-col"
+    class="priority-picker-col priority"
     @click="toggleDropDown"
     tabindex="0"
     @blur="toggleDropDown"
