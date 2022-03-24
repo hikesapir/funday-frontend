@@ -40,9 +40,13 @@
 
 .file-picker-col {
   text-align: center;
-  button {
+  .btn {
     @include btn();
     font-size: 16px;
     color: $primary-blue;
+    &:hover{
+      background-color: rgba(255, 255, 255, 0);
+    }
   }
+  
 }

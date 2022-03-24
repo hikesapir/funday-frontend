@@ -16,7 +16,7 @@
         @starred="updateBoard"
       />
       <board-view-mode :boardId="board?._id" />
-      <filter-bar />
+      <filter-bar :board='board'/>
       <router-view></router-view>
     </section>
   </div>

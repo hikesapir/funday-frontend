@@ -12,7 +12,7 @@
       </button>
       <div v-else>
         <input
-          @input="onSearch"
+          @input="search"
           @blur="openSearching = false"
           v-model="filterBy.txt"
           placeholder="Search"
@@ -20,9 +20,30 @@
         />
       </div>
     </div>
-    <button>
+    <button @click="openPersonModal = !openPersonModal">
       <i class="fa-solid fa-circle-user"></i>Person
     </button>
+    <div class="relative">
+      <section v-if="openPersonModal" class="context-modal"  tabindex="0" @blur="openPersonModal = false">
+        <h2>Quick person filter</h2>
+        <div class="spacer"></div>
+        <div class="flex members">
+          <label v-for="member in board?.members" :key="member">
+            <input
+              @change="search"
+              type="radio"
+              :value="member._id"
+              v-model="filterBy.member"
+              
+              hidden
+            />
+            <img :src="member.imgUrl" :class="{ active: filterBy.member === member._id }" />
+          </label>
+        </div>
+      </section>
+      <!-- <pre>{{filterBy}}</pre> -->
+    </div>
+
     <button>
       <i class="fa-solid fa-filter"></i>Filter
     </button>
@@ -33,17 +54,22 @@
 <script>
 export default {
   name: 'filterBar',
+  props: {
+    board: Object
+  },
   data() {
     return {
       filterBy: {
         txt: '',
+        member: ''
       },
       openSearching: false,
+      openPersonModal: false,
     }
   },
   components: {},
   methods: {
-    onSearch() {
+    search() {
       const filterBy = JSON.parse(JSON.stringify(this.filterBy))
       this.$store.commit({ type: 'onSetFilter', filterBy })
     },
