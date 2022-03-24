@@ -3,28 +3,28 @@
     <div class="open-side-bar">
       <board-nav @selectBoard="setBoard" :boards="boards"></board-nav>
     </div>
-    <div class="board-app">
+    <!-- <div class="board-app"> -->
       <section class="board-app">
         <!-- <section class="board-app"> -->
         <board-header
           :boardDetails="{
             title: board?.title,
             description: board?.description,
-            isStarred:board?.isStarred,
+            isStarred: board?.isStarred,
           }"
           @starred="updateBoard"
         />
         <board-view-mode />
         <filter-bar />
-        <board-group
-          v-for="group in board?.groups"
-          :group="group"
-          :cmpsOrder="board?.cmpsOrder"
-          :key="group.id"
-        ></board-group>
+
+        <Container v-if="board?.groups" @drop="onDrop" drag-handle-selector=".drag-handle">
+          <Draggable v-for="group in board?.groups" :key="group.id">
+            <board-group :group="group" :cmpsOrder="board?.cmpsOrder" :key="group.id"></board-group>
+          </Draggable>
+        </Container>
         <!-- </section> -->
       </section>
-    </div>
+    <!-- </div> -->
   </div>
 </template>
 
@@ -34,6 +34,7 @@ import boardHeader from '../components/board-header.vue'
 import boardViewMode from '../components/board-view-mode.vue'
 import filterBar from '../components/filter-bar.vue'
 import boardNav from '../components/board-nav.vue'
+import { Container, Draggable } from 'vue3-smooth-dnd'
 
 export default {
   name: 'board-app',
@@ -43,6 +44,8 @@ export default {
     boardNav,
     boardViewMode,
     filterBar,
+    Container,
+    Draggable
   },
   computed: {},
   created() {
@@ -60,6 +63,15 @@ export default {
       }
       this.$store.dispatch({ type: 'saveBoard', board: this.board })
     },
+        onDrop(dropResult) {
+      console.log(dropResult);
+      this.$store.dispatch({
+        type: 'changeOrderGroups',
+        dropResult,
+        entities: this.board.groups,
+        entityType: 'groups',
+      })
+    }
 
   },
   computed: {

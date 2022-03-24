@@ -2,15 +2,20 @@
   <section class="board-view-mode">
     <!-- <span>board view mode: </span> -->
     <button>
-      <fa icon="table-cells" />Main Table
+      <i class="fa-solid fa-table-cells"></i>Main Table
     </button>
     <button>
-      <fa icon="chart-simple" />Charts
+      <i class="fa-solid fa-chart-pie"></i>Charts
     </button>
-    <button>Kanban</button> |
+    <button>
+      <span class="upsidedwon">
+        <i class="fa-solid fa-chart-simple"></i>
+      </span>
+      Kanban
+    </button> |
     <button>
       <span>more</span>
-      <fa icon="chevron-down" />
+      <i class="fa-solid fa-chevron-down"></i>
     </button>
     <div class="spacer"></div>
   </section>

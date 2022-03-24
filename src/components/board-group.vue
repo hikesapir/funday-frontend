@@ -1,29 +1,18 @@
 <template>
   <section class="board-group">
     <div class="table-head">
+      <span class="drag-handle">
+        <i class="fa-solid fa-grip-vertical"></i>
+      </span>
+
       <div
         class="th-title title-picker-col"
         :style="{ color: group.style?.color }"
-      >
-        {{ group.title }}
-      </div>
-      <div
-        v-for="cmp in cmps"
-        :class="cmp.cmpName + '-col'"
-        :key="cmp.cmpName"
-      >
-        {{ cmp.preName }}
-      </div>
+      >{{ group.title }}</div>
+      <div v-for="cmp in cmps" :class="cmp.cmpName + '-col'" :key="cmp.cmpName">{{ cmp.preName }}</div>
     </div>
-    <Container
-      v-if="group?.tasks"
-      @drop="onDrop"
-      drag-handle-selector=".task-drag-handle"
-    >
-      <Draggable
-        v-for="task in group?.tasks"
-        :key="task.id"
-      >
+    <Container v-if="group?.tasks" @drop="onDrop" drag-handle-selector=".task-drag-handle">
+      <Draggable v-for="task in group?.tasks" :key="task.id">
         <task-preview :task="task" :groupId="group.id" />
       </Draggable>
     </Container>

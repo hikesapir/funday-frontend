@@ -3,29 +3,29 @@
     <span>Workspace</span>
     <div class="workspace-dropdwon">
       <h2>Main workspace</h2>
-      <fa icon="chevron-down" />
+      <i class="fa-solid fa-chevron-down"></i>
     </div>
     <ul>
       <li>
         <button>
-          <fa icon="plus" />Add
+          <i class="fa-solid fa-plus"></i>Add
         </button>
       </li>
       <li>
         <button>
-          <fa icon="filter" />Filters
+          <i class="fa-solid fa-filter"></i>Filters
         </button>
       </li>
       <li>
         <button>
-          <fa icon="magnifying-glass" />Search
+          <i class="fa-solid fa-magnifying-glass"></i>Search
         </button>
       </li>
     </ul>
     <div class="spacer"></div>
     <div class="curr-workspace"></div>
     <ul>
-      <board-preview v-for="board in boards" :key="board._id" :board="board"/>
+      <board-preview v-for="board in boards" :key="board._id" :board="board" />
     </ul>
   </section>
 </template>
@@ -42,7 +42,7 @@ export default {
     boardPreview,
   },
   methods: {
-    
+
   },
 }
 </script>

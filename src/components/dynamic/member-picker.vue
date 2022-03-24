@@ -34,8 +34,11 @@ export default {
   },
   computed: {
     members() {
-      return this.task.members;
+      return this.task.members.length > 2
+        ? this.task.members.slice(0, 2)
+        : this.task.members;
     },
+    displayMembers() {},
   },
   methods: {
     addMembers() {
