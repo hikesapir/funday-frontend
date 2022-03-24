@@ -20,6 +20,9 @@ export default {
     board({ boardForDisplay }) {
       return JSON.parse(JSON.stringify(boardForDisplay))
     },
+    cmpsOrder({ board }) {
+      return JSON.parse(JSON.stringify(board.cmpsOrder))
+    },
   },
   mutations: {
     loadBoards(state, { boards }) {
@@ -27,19 +30,27 @@ export default {
     },
     loadBoard(state, { board }) {
       state.board = JSON.parse(JSON.stringify(board))
-      state.boardForDisplay = JSON.parse(JSON.stringify(board))
+      state.boardForDisplay = JSON.parse(
+        JSON.stringify(board)
+      )
     },
     onSetFilter(state, { filterBy }) {
-      state.filterBy =  JSON.parse(JSON.stringify(filterBy)) 
+      state.filterBy = JSON.parse(JSON.stringify(filterBy))
       const board = JSON.parse(JSON.stringify(state.board))
       const regex = new RegExp(filterBy.txt, 'i')
-      const filteredGroups = board.groups.filter(group => {
-        if (regex.test(group.title)) return group
-        const tasks = group.tasks.filter(task => regex.test(task.title))
-        group.tasks = tasks
-        if (group.tasks.length > 0) return group
-      })
-      state.boardForDisplay.groups =  JSON.parse(JSON.stringify(filteredGroups))
+      const filteredGroups = board.groups.filter(
+        (group) => {
+          if (regex.test(group.title)) return group
+          const tasks = group.tasks.filter((task) =>
+            regex.test(task.title)
+          )
+          group.tasks = tasks
+          if (group.tasks.length > 0) return group
+        }
+      )
+      state.boardForDisplay.groups = JSON.parse(
+        JSON.stringify(filteredGroups)
+      )
     },
     toggleGroupDragMode(state) {
       state.isDraggingGroup = !state.isDraggingGroup
@@ -73,7 +84,7 @@ export default {
       state.boards.splice(idx, 1)
     },
     setTasksOrder(state, { result, idx }) {
-      state.board.groups[idx].tasks = result
+      state.boardForDisplay.groups[idx].tasks = result
     },
     saveGroups(state, groups) {
       state.board.groups = groups
@@ -83,6 +94,9 @@ export default {
     },
     setIsLoading(state, { isLoading }) {
       state.isLoading = isLoading
+    },
+    setCmpsOrder(state, { newOrder }) {
+      state.board.cmpsOrder = newOrder
     },
   },
   actions: {
@@ -100,14 +114,20 @@ export default {
       }
     },
     async loadBoard(context, { id }) {
-      context.commit({ type: 'setIsLoading', isLoading: true })
+      context.commit({
+        type: 'setIsLoading',
+        isLoading: true,
+      })
       try {
         const board = await boardService.getById(id)
         context.commit({ type: 'loadBoard', board })
       } catch (err) {
-        console.log('loadBoard err', err);
+        console.log('loadBoard err', err)
       } finally {
-        context.commit({ type: 'setIsLoading', isLoading: false })
+        context.commit({
+          type: 'setIsLoading',
+          isLoading: false,
+        })
       }
     },
     async saveBoard(context, { board }) {
@@ -130,36 +150,6 @@ export default {
       } catch (err) {
         console.log('removeBoard err', err)
       }
-    },
-    async applyDrag(
-      { commit, state },
-      { tasksOrder, dragResult, groupId }
-    ) {
-      tasksOrder = JSON.parse(JSON.stringify(tasksOrder))
-
-      const { removedIndex, addedIndex, payload } =
-        dragResult
-      var result = [...tasksOrder]
-      if (!removedIndex && !addedIndex) {
-        result = tasksOrder
-      } else {
-        let itemToAdd = payload
-        if (removedIndex !== null) {
-          itemToAdd = result.splice(removedIndex, 1)[0]
-        }
-        if (addedIndex !== null) {
-          result.splice(addedIndex, 0, itemToAdd)
-        }
-      }
-      const idx = state.board.groups.findIndex(
-        (group) => group.id === groupId
-      )
-      commit({ type: 'setTasksOrder', result, idx })
-      await boardService.saveTasksOrder(
-        state.board._id,
-        idx,
-        result
-      )
     },
     async updateTask({ commit, state }, { data }) {
       const { cmpType, groupId } = data
@@ -232,27 +222,74 @@ export default {
         groupIdx: idx,
         savedTask,
       })
-
-      // group.tasks.push(savedTask)
     },
-    changeOrderGroups(
+    changeOrder(
       context,
       { dropResult, entities, entityType }
     ) {
       var board = JSON.parse(
         JSON.stringify(context.state.board)
       )
-      var movedItem = entities.splice(
-        dropResult.removedIndex,
-        1
-      )[0]
-      entities.splice(dropResult.addedIndex, 0, movedItem)
-      board[entityType] = entities
-      context.dispatch({ type: 'saveBoard', board })
-      context.commit({
-        type: 'setGroupsOrder',
-        newOrder: entities,
-      })
+      entities = JSON.parse(JSON.stringify(entities))
+      var groupId = ''
+      if (entityType === 'tasks') {
+        groupId = entities.groupId
+        entities = entities.tasks
+      }
+      if (
+        !dropResult.removedIndex &&
+        !dropResult.addedIndex
+      ) {
+        entities = entities
+      } else {
+        let itemToAdd = dropResult.payload
+        if (dropResult.removedIndex !== null) {
+          itemToAdd = entities.splice(
+            dropResult.removedIndex,
+            1
+          )[0]
+        }
+        if (dropResult.addedIndex !== null) {
+          entities.splice(
+            dropResult.addedIndex,
+            0,
+            itemToAdd
+          )
+        }
+      }
+      if (entityType === 'tasks') {
+        const idx = context.state.board.groups.findIndex(
+          (group) => group.id === groupId
+        )
+        context.commit({
+          type: 'setTasksOrder',
+          result: entities,
+          idx,
+        })
+        boardService.saveTasksOrder(
+          context.state.board._id,
+          idx,
+          entities
+        )
+      } else {
+        board[entityType] = entities
+        context.dispatch({ type: 'saveBoard', board })
+        if (entityType === 'cmpsOrder') {
+          context.commit({
+            type: 'setCmpsOrder',
+            newOrder: entities,
+          })
+        } else if (entityType === 'groups') {
+          context.commit({
+            type: 'setGroupsOrder',
+            newOrder: entities,
+          })
+        }
+        context.dispatch({
+          type: 'loadBoard',
+          id: context.state.board._id,
+        })
+      }
     },
   },
 }
