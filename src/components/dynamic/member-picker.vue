@@ -8,7 +8,12 @@
       :alt="member.fullname"
       :title="member.fullname"
     />
-    <fa icon="circle-plus" @click="addMembers()" />
+    <fa
+      icon="circle-plus"
+      @click="addMembers"
+      tabindex="0"
+      @blur="addMembers"
+    />
     <section class="context-modal" v-if="addMembersMode">
       <input type="text" placeholder="Enter name" />
       <label>People</label>

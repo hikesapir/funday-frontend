@@ -2,7 +2,9 @@
   <div
     class="status-picker-col"
     :style="style"
+    tabindex="0"
     @click="toggleDropDown"
+    @blur="toggleDropDown"
   >
     {{ txt }}
     <div v-if="isDropOpen">

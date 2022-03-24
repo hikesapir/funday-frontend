@@ -3,6 +3,8 @@
     :style="getStyle"
     class="priority-picker-col"
     @click="toggleDropDown"
+    tabindex="0"
+    @blur="toggleDropDown"
   >
     {{ selectedPriorty?.txt }}
     <div v-if="isDropOpen">
