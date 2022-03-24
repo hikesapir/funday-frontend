@@ -18,7 +18,7 @@
       <span title="Inbox">
         <fa icon="inbox" />
       </span>
-      <span title="My Work">
+      <span title="My Work" @click="this.$router.push(`/my-work`)">
         <fa icon="calendar-check" />
       </span>
     </nav>

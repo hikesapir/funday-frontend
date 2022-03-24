@@ -1,0 +1,61 @@
+.my-work{
+    width: 100%;
+    padding: 30px;
+
+    .spacer{
+        border-bottom: 2px solid;
+        border-color: rgb(208, 212, 228);
+        margin-top: 8px;
+        margin-bottom: 16px;
+    }
+    
+    .search{
+        width: 213px;
+        // box-sizing: border-box;
+        position: relative;
+        input{
+            padding: 8px 24px 8px 16px;
+            border-radius: 4px;
+        }
+        .fa-solid{
+            position: absolute;
+            top: 30%;
+            right: 4px;
+            width: 24px;
+            height: 24px;
+        }
+    }
+
+    .content{
+        .table-wrapper{
+            margin-top: 32px;
+            .title-col-my-work{
+                min-width: 520px;
+            }
+            .Board-col-my-work{
+                text-align: center;
+                width: 210px;
+            }
+            .Group-col-my-work{
+                width: 180px;
+                text-align: center;
+    
+            }
+            .Group-col-my-work{
+                width: 120px;
+                text-align: center;
+    
+            }
+            .Date-col-my-work{
+                width: 140px;
+                text-align: center;
+    
+            }
+            .Status-col-my-work{
+                width: 140px;
+                text-align: center;
+    
+            }
+        }
+    }
+}
