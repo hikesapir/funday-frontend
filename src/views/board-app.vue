@@ -3,7 +3,7 @@
     <div class="open-side-bar">
       <board-nav @selectBoard="setBoard" :boards="boards"></board-nav>
     </div>
-    <div class="board-app">
+    <!-- <div class="board-app"> -->
       <section class="board-app">
         <!-- <section class="board-app"> -->
         <board-header
@@ -24,7 +24,7 @@
         </Container>
         <!-- </section> -->
       </section>
-    </div>
+    <!-- </div> -->
   </div>
 </template>
 
