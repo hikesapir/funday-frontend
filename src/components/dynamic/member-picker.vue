@@ -8,22 +8,31 @@
       :alt="member.fullname"
       :title="member.fullname"
     />
-    <fa
-      icon="circle-plus"
-      @click="addMembers"
-      tabindex="0"
-      @blur="addMembers"
-    />
-    <section class="context-modal" v-if="addMembersMode">
-      <input type="text" placeholder="Enter name" />
-      <label>People</label>
-      <span v-for="member in membersList" :key="member">
+    <fa icon="circle-plus" @click.stop="addMembers" />
+
+    <div
+      v-if="addMembersMode"
+      class="context-modal member-picker-modal-item"
+    >
+      <label class="member-picker-modal-item">
+        <input
+          class="member-picker-modal-item"
+          type="text"
+          placeholder="Enter name"
+        />
+      </label>
+      <div class="member-picker-modal-item">People</div>
+      <span
+        class="member-picker-modal-item"
+        v-for="member in membersList"
+        :key="member"
+      >
         <img :src="member.imgUrl" />
-        <span @click="addMember(member)">{{
+        <span @click.stop="addMember(member)">{{
           member.fullname
         }}</span>
       </span>
-    </section>
+    </div>
   </div>
 </template>
 
@@ -50,6 +59,15 @@ export default {
   methods: {
     addMembers() {
       this.addMembersMode = !this.addMembersMode
+      document.body.addEventListener('click', (e) => {
+        e.stopPropagation()
+        if (
+          !e.target.classList.contains(
+            'member-picker-modal-item'
+          )
+        )
+          this.addMembersMode = false
+      })
     },
     addMember(member) {
       this.members.push(JSON.parse(JSON.stringify(member)))
