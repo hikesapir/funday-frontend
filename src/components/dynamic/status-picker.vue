@@ -2,16 +2,19 @@
   <div
     class="status-picker-col"
     :style="style"
-    tabindex="0"
-    @click.prevent="toggleDropDown"
-    @blur="toggleDropDown"
+    data-toggle="s-dropdown"
+    @click="isDropOpen = !isDropOpen"
   >
     {{ txt }}
     <div v-if="isDropOpen">
       <drop-down
         :labels="statuses"
         @update="updateTask"
+        role="menu"
+        :aria-labelledby="'menu-s' + task.id"
+        tabindex="-1"
         type="status"
+        @blur="isDropOpen = false"
       />
     </div>
   </div>
@@ -31,32 +34,32 @@ export default {
       statuses: this.$store.getters.board?.labels.status,
     }
   },
+
   methods: {
     updateTask(val) {
+      this.isDropOpen = false
       this.$emit('update', {
         cmpType: `status-picker`,
         val,
         task: this.task,
       })
     },
-    toggleDropDown() {
-      this.isDropOpen = !this.isDropOpen
-    },
-    getStatus() {
-      return this.statuses.find(
-        (status) => status.id === this.task?.status
-      )
-    },
   },
   computed: {
     txt() {
-      const status = this.getStatus()
-      return status?.txt
+      const { status } = this.$store.getters.board?.labels
+      const currStatus = status?.find(
+        (s) => s.id === this.task.status
+      )
+      return currStatus.txt
     },
     style() {
-      const status = this.getStatus()
+      const { status } = this.$store.getters.board?.labels
+      const currStyle = status?.find(
+        (s) => s.id === this.task.status
+      )
       return {
-        backgroundColor: status?.color,
+        backgroundColor: currStyle.color,
         color: 'white',
       }
     },

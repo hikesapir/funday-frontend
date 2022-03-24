@@ -6,14 +6,12 @@
       class="timeline"
       :style="labelColor"
       >{{ content }}
-      <!-- <div class="datepicker-container" > -->
-        <el-date-picker
+      <el-date-picker
         class="datepicker-container"
-          v-model="range"
-          @change="setTimeline"
-          type="daterange"
-        />
-      <!-- </div> -->
+        v-model="range"
+        @change="setTimeline"
+        type="daterange"
+      />
     </label>
   </div>
 </template>
@@ -126,7 +124,7 @@ export default {
 </script>
 
 <style>
-.datepicker-container{
+.datepicker-container {
   visibility: hidden;
 }
 </style>

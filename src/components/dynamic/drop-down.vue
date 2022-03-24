@@ -7,6 +7,7 @@
       <div class="list">
         <ul v-for="label in labels" :key="label">
           <li
+            tabindex="-1"
             @click.stop="updateTask(label.id)"
             :style="{ 'background-color': label.color }"
           >

@@ -2,15 +2,18 @@
   <div
     :style="getStyle"
     class="priority-picker-col"
-    @click="toggleDropDown"
-    tabindex="0"
-    @blur="toggleDropDown"
+    data-toggle="p-dropdown"
+    @click="isDropOpen = !isDropOpen"
   >
-    {{ selectedPriorty?.txt }}
+    {{ selectedPriority?.txt }}
     <div v-if="isDropOpen">
       <drop-down
-        :labels="prioritys"
+        :labels="priorities"
         @update="updateTask"
+        role="menu"
+        :aria-labelledby="'menu-p' + task.id"
+        tabindex="-1"
+        @blur="isDropOpen = false"
         type="status"
       />
     </div>
@@ -28,31 +31,34 @@ export default {
   data() {
     return {
       isDropOpen: false,
-      prioritys: this.$store.getters.board.labels.priority,
-      selectedPriorty: '',
+      priorities: this.$store.getters.board.labels.priority,
+      selectedPriority: '',
     }
   },
   created() {
-    this.selectedPriorty = this.prioritys.find(
+    this.selectedPriority = this.priorities.find(
       (priority) => priority.id === this.task.priority
     )
   },
   methods: {
     updateTask(val) {
+      this.isDropOpen = false
+
       this.$emit('update', {
         cmpType: `priority-picker`,
         val,
         task: this.task,
       })
     },
-    toggleDropDown() {
-      this.isDropOpen = !this.isDropOpen
-    },
   },
   computed: {
     getStyle() {
+      const { priority } = this.$store.getters.board?.labels
+      const currPriority = priority?.find(
+        (s) => s.id === this.task.priority
+      )
       return {
-        backgroundColor: this.selectedPriorty?.color,
+        backgroundColor: currPriority?.color,
         color: 'white',
       }
     },
