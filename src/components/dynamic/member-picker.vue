@@ -10,28 +10,21 @@
     />
     <fa icon="circle-plus" @click.stop="addMembers" />
 
-    <div
-      v-if="addMembersMode"
-      class="context-modal member-picker-modal-item"
-    >
+    <div v-if="addMembersMode" class="context-modal member-picker-modal-item">
       <label class="member-picker-modal-item">
-        <input
-          class="member-picker-modal-item"
-          type="text"
-          placeholder="Enter name"
-        />
+        <input class="member-picker-modal-item" type="text" placeholder="Enter name" />
       </label>
-      <div class="member-picker-modal-item">People</div>
-      <span
-        class="member-picker-modal-item"
-        v-for="member in membersList"
-        :key="member"
-      >
-        <img :src="member.imgUrl" />
-        <span @click.stop="addMember(member)">{{
-          member.fullname
-        }}</span>
-      </span>
+
+      <div class="test">
+        <span class="people">People</span>
+      </div>
+
+        <span class="member-preview flex" v-for="member in membersList" :key="member">
+          <img :src="member.imgUrl" />
+          <span @click.stop="addMember(member)">
+            {{ member.fullname }}
+          </span>
+        </span>
     </div>
   </div>
 </template>
@@ -54,7 +47,7 @@ export default {
         ? this.task.members.slice(0, 2)
         : this.task.members
     },
-    displayMembers() {},
+    displayMembers() { },
   },
   methods: {
     addMembers() {
