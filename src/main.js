@@ -7,7 +7,6 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
-
 import '../src/scss/styles.scss'
 
 const app = createApp(App)

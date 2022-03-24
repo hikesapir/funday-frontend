@@ -1,30 +1,30 @@
 <template>
   <section class="board-view-mode">
-    <!-- <span>board view mode: </span> -->
-    <button>
+    <router-link :to="'/boards/' + boardId">
       <i class="fa-solid fa-table-cells"></i>Main Table
-    </button>
-    <button>
+    </router-link>
+    <router-link :to="'/boards/' + boardId + '/chart'">
       <i class="fa-solid fa-chart-pie"></i>Charts
-    </button>
-    <button>
+    </router-link>
+    <router-link :to="'/boards/' + boardId">
       <span class="upsidedwon">
         <i class="fa-solid fa-chart-simple"></i>
       </span>
       Kanban
-    </button> |
-    <button>
+    </router-link>
+    <router-link :to="'/boards/' + boardId">
       <span>more</span>
       <i class="fa-solid fa-chevron-down"></i>
-    </button>
+    </router-link>
     <div class="spacer"></div>
   </section>
 </template>
 
 <script>
 export default {
-  name: "board-view-mode",
-
-  components: {},
-};
+  name: 'board-view-mode',
+  props: {
+    boardId: String,
+  },
+}
 </script>

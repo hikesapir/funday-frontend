@@ -6,9 +6,7 @@
         :boards="boards"
       ></board-nav>
     </div>
-    <!-- <div class="board-app"> -->
     <section class="board-app">
-      <!-- <section class="board-app"> -->
       <board-header
         :boardDetails="{
           title: board?.title,
@@ -17,49 +15,26 @@
         }"
         @starred="updateBoard"
       />
-      <board-view-mode />
+      <board-view-mode :boardId="board?._id" />
       <filter-bar />
-
-      <Container
-        v-if="board?.groups"
-        @drop="onDrop"
-        drag-handle-selector=".drag-handle"
-      >
-        <Draggable
-          v-for="group in board?.groups"
-          :key="group.id"
-        >
-          <board-group
-            :group="group"
-            :cmpsOrder="board?.cmpsOrder"
-            :key="group.id"
-          ></board-group>
-        </Draggable>
-      </Container>
-      <!-- </section> -->
+      <router-view></router-view>
     </section>
-    <!-- </div> -->
   </div>
 </template>
 
 <script>
-import boardGroup from '../components/board-group.vue'
 import boardHeader from '../components/board-header.vue'
 import boardViewMode from '../components/board-view-mode.vue'
 import filterBar from '../components/filter-bar.vue'
 import boardNav from '../components/board-nav.vue'
-import { Container, Draggable } from 'vue3-smooth-dnd'
 
 export default {
   name: 'board-app',
   components: {
-    boardGroup,
     boardHeader,
     boardNav,
     boardViewMode,
     filterBar,
-    Container,
-    Draggable,
   },
   computed: {},
   created() {
@@ -77,14 +52,6 @@ export default {
       this.$store.dispatch({
         type: 'saveBoard',
         board: this.board,
-      })
-    },
-    onDrop(dropResult) {
-      this.$store.dispatch({
-        type: 'changeOrderGroups',
-        dropResult,
-        entities: this.board.groups,
-        entityType: 'groups',
       })
     },
   },

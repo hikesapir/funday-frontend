@@ -1,7 +1,7 @@
 .board-view-mode {
   padding: 0 28px;
   color: $main-text-gray;
-  button {
+  a {
     @include btn(em(7px) em(16px));
     color: $main-task-text-gray;
   }
