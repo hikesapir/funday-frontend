@@ -16,6 +16,7 @@ const KEY = 'board_db'
 localStorage[KEY] ? '' : _createDemoData()
 
 async function query(filterBy = null) {
+  console.log(filterBy);
   if (filterBy) {
     try {
       const boards = await storageService.query(KEY)
@@ -44,8 +45,9 @@ async function query(filterBy = null) {
   return storageService.query(KEY)
 }
 
-function getById(id) {
-  return storageService.getById(KEY, id)
+async function getById(id, filterBy) {
+  const board = await storageService.get(KEY, id)
+
 }
 
 async function saveTasksOrder(boardId, idx, tasksOrder) {
