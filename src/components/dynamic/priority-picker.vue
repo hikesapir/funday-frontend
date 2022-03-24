@@ -58,7 +58,6 @@ export default {
       const currPriority = priority?.find(
         (s) => s.id === this.task.priority
       )
-      console.log('currPriority', currPriority)
       return currPriority.txt
     },
     getStyle() {

@@ -12,7 +12,8 @@
   }
 
   .drag-task {
-    transform: rotate(1deg);
+    transition: transform 0.1s ease;
+    transform: rotate(2deg);
   }
 
   font-size: 13px;
