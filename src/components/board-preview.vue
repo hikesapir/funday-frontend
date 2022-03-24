@@ -3,20 +3,32 @@
     @click="selectBoard"
     v-if="board"
     class="board-preview"
-    @mouseover="mouseOver"
-    @mouseleave="mouseLeve"
+    @mouseover="isHover = true"
+    @mouseleave="isHover = false"
   >
-    <form v-if="chengeName">
-      <input @keyup.enter="updateBoard" @blur="updateBoard" type="text" v-model="board.title" />
-    </form>
+    <label v-if="changeName">
+      <input
+        @keyup.enter="updateBoard"
+        @blur="updateBoard"
+        type="text"
+        v-model="newTitle"
+      />
+    </label>
     <div v-else class="bord-title">
       <span>{{ board.title }}</span>
-      <button @click="openModal = !openModal" v-if="isHover || openModal" >
-        <i class="fa-solid fa-ellipsis"></i>
+      <button
+        @click="openModal = !openModal"
+        v-if="isHover || openModal"
+      >
+        <i
+          tabindex="0"
+          @blur="openModal = false"
+          class="fa-solid fa-ellipsis"
+        ></i>
       </button>
     </div>
   </li>
-  <div class="relative" tabindex="0" @blur="openModal = false">
+  <div class="relative">
     <context-modal
       v-if="openModal"
       @remove="remove"
@@ -43,18 +55,13 @@ export default {
     return {
       isHover: false,
       openModal: false,
-      chengeName: false,
+      changeName: false,
+      newTitle: '',
     }
   },
-  created() { },
-  mounted() { },
+  created() {},
+  mounted() {},
   methods: {
-    mouseOver() {
-      this.isHover = true
-    },
-    mouseLeve() {
-      this.isHover = false
-    },
     remove() {
       this.$store.dispatch({
         type: 'removeBoard',
@@ -65,26 +72,30 @@ export default {
     openNewTab() {
       window.open(
         window.location.origin +
-        `/#/boards/${this.board._id}`
+          `/#/boards/${this.board._id}`
       )
       this.openModal = false
     },
     renameBoard() {
-      this.chengeName = true
+      this.newTitle = this.board.title
+      this.changeName = true
       this.openModal = false
     },
     updateBoard() {
+      const board = JSON.parse(JSON.stringify(this.board))
+      board.title = this.newTitle
       this.$store.dispatch({
         type: 'saveBoard',
-        board: this.board,
+        board,
       })
-      this.chengeName = false
+      this.changeName = false
     },
     starred() {
-      this.board.isStarred = !this.board.isStarred
+      const board = JSON.parse(JSON.stringify(this.board))
+      board.isStarred = !board.isStarred
       this.$store.dispatch({
         type: 'saveBoard',
-        board: this.board,
+        board,
       })
     },
     duplicate() {
@@ -107,6 +118,6 @@ export default {
     },
   },
   computed: {},
-  unmounted() { },
+  unmounted() {},
 }
 </script>
