@@ -51,7 +51,6 @@ export default {
         : this.task.members
     },
     membersList() {
-      console.log(this.filterBy);
       var membersList = this.$store.getters.board.members
       const regex = new RegExp(this.filterBy, 'i')
       membersList = membersList.filter(member => regex.test(member.fullname))

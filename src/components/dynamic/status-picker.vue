@@ -1,6 +1,6 @@
 <template>
   <div
-    class="status-picker-col"
+    class="status-picker-col status"
     :style="style"
     data-toggle="s-dropdown"
     @click="isDropOpen = !isDropOpen"

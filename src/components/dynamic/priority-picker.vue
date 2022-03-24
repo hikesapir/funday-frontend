@@ -1,7 +1,7 @@
 <template>
   <div
     :style="getStyle"
-    class="priority-picker-col"
+    class="priority-picker-col priority"
     data-toggle="p-dropdown"
     @click="isDropOpen = !isDropOpen"
   >
