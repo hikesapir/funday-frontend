@@ -8,11 +8,40 @@
       <div
         class="th-title title-picker-col"
         :style="{ color: group.style?.color }"
-      >{{ group.title }}</div>
-      <div v-for="cmp in cmps" :class="cmp.cmpName + '-col'" :key="cmp.cmpName">{{ cmp.preName }}</div>
+      >
+        {{ group.title }}
+      </div>
+
+      <Container
+        lock-axis="x"
+        orientation="horizontal"
+        @drop="onDrop($event, 'cmpsOrder')"
+        drag-handle-selector=".cols-drag-handle"
+        class="title-head"
+      >
+        <Draggable
+          v-for="cmp in cmps"
+          :class="
+            cmp.cmpName +
+            '-col' +
+            ' cols-drag-handle title-head'
+          "
+          :key="cmp.cmpName"
+        >
+          {{ cmp.preName }}
+        </Draggable>
+      </Container>
     </div>
-    <Container v-if="group?.tasks" @drop="onDrop" drag-handle-selector=".task-drag-handle">
-      <Draggable v-for="task in group?.tasks" :key="task.id">
+
+    <Container
+      v-if="group?.tasks"
+      @drop="onDrop($event, 'tasks')"
+      drag-handle-selector=".task-drag-handle"
+    >
+      <Draggable
+        v-for="task in group?.tasks"
+        :key="task.id"
+      >
         <task-preview :task="task" :groupId="group.id" />
       </Draggable>
     </Container>
@@ -54,12 +83,21 @@ export default {
         groupId: this.group.id,
       })
     },
-    onDrop(dragResult) {
+
+    onDrop(dropResult, entityType) {
+      var entities = null
+      if (entityType === 'cmpsOrder')
+        entities = this.$store.getters.board.cmpsOrder
+      else if (entityType === 'tasks')
+        entities = {
+          groupId: this.group.id,
+          tasks: this.group.tasks,
+        }
       this.$store.dispatch({
-        type: 'applyDrag',
-        tasksOrder: this.group.tasks,
-        dragResult,
-        groupId: this.group.id,
+        type: 'changeOrder',
+        dropResult,
+        entities,
+        entityType,
       })
     },
   },

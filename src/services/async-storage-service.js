@@ -6,8 +6,9 @@ export const storageService = {
   remove,
 }
 
-function query(entityType, delay = 1000) {
-  var entities = JSON.parse(localStorage.getItem(entityType)) || []
+function query(entityType, delay = 100) {
+  var entities =
+    JSON.parse(localStorage.getItem(entityType)) || []
   return new Promise((resolve) => {
     // setTimeout(() => {
     resolve(entities)
@@ -31,7 +32,9 @@ function post(entityType, newEntity) {
 
 function put(entityType, updatedEntity) {
   return query(entityType).then((entities) => {
-    const idx = entities.findIndex((entity) => entity._id === updatedEntity._id)
+    const idx = entities.findIndex(
+      (entity) => entity._id === updatedEntity._id
+    )
     entities.splice(idx, 1, updatedEntity)
     _save(entityType, entities)
     return updatedEntity
@@ -40,8 +43,11 @@ function put(entityType, updatedEntity) {
 
 function remove(entityType, entityId) {
   return query(entityType).then((entities) => {
-    const idx = entities.findIndex((entity) => entity._id === entityId)
-    if (idx < 0) throw new Error(`Unknown Entity ${entityId}`)
+    const idx = entities.findIndex(
+      (entity) => entity._id === entityId
+    )
+    if (idx < 0)
+      throw new Error(`Unknown Entity ${entityId}`)
     entities.splice(idx, 1)
     _save(entityType, entities)
   })
@@ -53,9 +59,12 @@ function _save(entityType, entities) {
 
 function _makeId(length = 5) {
   var text = ''
-  var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  var possible =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
   for (var i = 0; i < length; i++) {
-    text += possible.charAt(Math.floor(Math.random() * possible.length))
+    text += possible.charAt(
+      Math.floor(Math.random() * possible.length)
+    )
   }
   return text
 }

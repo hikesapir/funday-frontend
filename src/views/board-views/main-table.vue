@@ -39,7 +39,7 @@ export default {
   methods: {
     onDrop(dropResult) {
       this.$store.dispatch({
-        type: 'changeOrderGroups',
+        type: 'changeOrder',
         dropResult,
         entities: this.board.groups,
         entityType: 'groups',
