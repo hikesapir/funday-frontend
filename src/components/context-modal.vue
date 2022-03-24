@@ -1,5 +1,5 @@
 <template>
-    <section class="context-modal">
+    <section class="context-modal" >
         <button @click="openNewTab">Open Board in New Tab</button>
         <button @click="renameBoard">Rename Board</button>
         <button @click="starred">Add to favorites</button>

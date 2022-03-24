@@ -1,8 +1,9 @@
 <template>
-  <div @mouseover="mouseOver" @mouseleave="mouseLeve" class="filer-picker">
-    <button v-if="isHover">
+  <div @mouseover="mouseOver" @mouseleave="mouseLeave" class="filer-picker">
+    <label class="btn" v-if="isHover">
       <fa icon="circle-plus" />
-    </button>
+      <input type="file" @change="test" hidden/>
+    </label>
   </div>
 </template>
 
@@ -12,6 +13,7 @@ export default {
   data() {
     return {
       isHover: false,
+      val: null
     }
   },
 
@@ -19,9 +21,13 @@ export default {
     mouseOver() {
       this.isHover = true
     },
-    mouseLeve() {
+    mouseLeave() {
       this.isHover = false
     },
+    test(e){
+      console.log('im defined');
+      console.log(e);
+    }
   }
 
 }

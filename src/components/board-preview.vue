@@ -7,31 +7,25 @@
     @mouseleave="mouseLeve"
   >
     <form v-if="chengeName">
-      <input
-        @keyup.enter="updateBoard"
-        @blur="updateBoard"
-        type="text"
-        v-model="board.title"
-      />
+      <input @keyup.enter="updateBoard" @blur="updateBoard" type="text" v-model="board.title" />
     </form>
     <div v-else class="bord-title">
       <span>{{ board.title }}</span>
-      <button
-        @click="openModal = !openModal"
-        v-if="isHover || openModal"
-      >
+      <button @click="openModal = !openModal" v-if="isHover || openModal" >
         <i class="fa-solid fa-ellipsis"></i>
       </button>
     </div>
   </li>
-  <context-modal
-    v-if="openModal"
-    @remove="remove"
-    @openNewTab="openNewTab"
-    @renameBoard="renameBoard"
-    @starred="starred"
-    @duplicate="duplicate"
-  />
+  <div class="relative" tabindex="0" @blur="openModal = false">
+    <context-modal
+      v-if="openModal"
+      @remove="remove"
+      @openNewTab="openNewTab"
+      @renameBoard="renameBoard"
+      @starred="starred"
+      @duplicate="duplicate"
+    />
+  </div>
 </template>
 
 <script>
@@ -52,8 +46,8 @@ export default {
       chengeName: false,
     }
   },
-  created() {},
-  mounted() {},
+  created() { },
+  mounted() { },
   methods: {
     mouseOver() {
       this.isHover = true
@@ -71,7 +65,7 @@ export default {
     openNewTab() {
       window.open(
         window.location.origin +
-          `/#/boards/${this.board._id}`
+        `/#/boards/${this.board._id}`
       )
       this.openModal = false
     },
@@ -113,6 +107,6 @@ export default {
     },
   },
   computed: {},
-  unmounted() {},
+  unmounted() { },
 }
 </script>
