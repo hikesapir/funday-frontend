@@ -6,12 +6,11 @@
       class="timeline"
       :style="labelColor"
       >{{ content }}
-      <div hidden>
+      <div class="datepicker-container" hidden>
         <el-date-picker
           v-model="range"
           @change="setTimeline"
           type="daterange"
-          class="datepicker"
         />
       </div>
     </label>

@@ -7,22 +7,30 @@
       }"
     ></div>
     <div class="editable-component">
-      <div v-if="isEditing" class="edit-title">
+      <div v-show="isEditing" class="edit-title">
         <input
           type="text"
           @keyup.enter="saveTitle"
           @blur="saveTitle"
           v-model="title"
+          ref="input"
         />
       </div>
-      <div v-else class="task-title">
+      <div v-show="!isEditing" class="task-title">
         <span>
           {{ task?.title }}
         </span>
       </div>
     </div>
-    <div class="edit-icon">
-      <button class="edit-title-btn" @click="editTask">
+    <div
+      class="edit-icon"
+      tabindex="0"
+      @blur="toggleEditTask"
+    >
+      <button
+        class="edit-title-btn"
+        @click="toggleEditTask"
+      >
         Edit
       </button>
     </div>
@@ -50,8 +58,9 @@ export default {
     },
   },
   methods: {
-    editTask() {
-      this.isEditing = true
+    toggleEditTask() {
+      this.isEditing = !this.isEditing
+      setTimeout(() => this.$refs.input.focus(), 0)
     },
     saveTitle() {
       this.isEditing = false
