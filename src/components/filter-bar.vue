@@ -7,12 +7,18 @@
       </button>
     </div>
     <div class="search">
-      <button v-if="!isSearching" @click="isSearching = true">
+      <button v-if="!openSearching" @click="openSearching = true">
         <i class="fa-solid fa-magnifying-glass"></i>Search
       </button>
-      <form v-else @submit.prevent="onSearch">
-        <input @blur="isSearching = false" v-model="filterBy.txt" placeholder="Search" type="text" />
-      </form>
+      <div v-else>
+        <input
+          @input="onSearch"
+          @blur="openSearching = false"
+          v-model="filterBy.txt"
+          placeholder="Search"
+          type="text"
+        />
+      </div>
     </div>
     <button>
       <i class="fa-solid fa-circle-user"></i>Person
@@ -32,22 +38,20 @@ export default {
       filterBy: {
         txt: '',
       },
-      isSearching: false,
+      openSearching: false,
     }
   },
   components: {},
   methods: {
     onSearch() {
-      this.isSearching = false
-      if (!this.filterBy.txt) return
-      const filterBy = JSON.parse(
-        JSON.stringify(this.filterBy)
-      )
-      this.$store.dispatch({
-        type: 'onSetFilter',
-        filterBy,
-      })
+      const filterBy = JSON.parse(JSON.stringify(this.filterBy))
+      this.$store.commit({ type: 'onSetFilter', filterBy })
     },
+  },
+  computed: {
+    isSearching() {
+      return this.filterBy.txt ? true : false
+    }
   },
 }
 </script>

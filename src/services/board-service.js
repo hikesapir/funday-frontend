@@ -45,8 +45,9 @@ async function query(filterBy = null) {
   return storageService.query(KEY)
 }
 
-async function getById(id, filterBy) {
-  const board = await storageService.get(KEY, id)
+async function getById(id) {
+  const board = await storageService.getById(KEY, id)
+  return board
 
 }
 

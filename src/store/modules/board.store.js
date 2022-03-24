@@ -4,35 +4,45 @@ import boardService from '../../services/board-service.js'
 
 export default {
   state: {
-    // user: userService.getLoggedInUser(),
+    isLoading: false,
     boards: null,
     board: null,
+    boardForDisplay: null,
     isDraggingGroup: false,
+    filterBy: {
+      txt: '',
+    },
   },
   getters: {
     boards({ boards }) {
       return JSON.parse(JSON.stringify(boards))
     },
-    board({ board }) {
-      return JSON.parse(JSON.stringify(board))
+    board({ boardForDisplay }) {
+      return JSON.parse(JSON.stringify(boardForDisplay))
     },
   },
   mutations: {
+    loadBoards(state, { boards }) {
+      state.boards = JSON.parse(JSON.stringify(boards))
+    },
+    loadBoard(state, { board }) {
+      state.board = JSON.parse(JSON.stringify(board))
+      state.boardForDisplay = JSON.parse(JSON.stringify(board))
+    },
+    onSetFilter(state, { filterBy }) {
+      state.filterBy =  JSON.parse(JSON.stringify(filterBy)) 
+      const board = JSON.parse(JSON.stringify(state.board))
+      const regex = new RegExp(filterBy.txt, 'i')
+      const filteredGroups = board.groups.filter(group => {
+        if (regex.test(group.title)) return group
+        const tasks = group.tasks.filter(task => regex.test(task.title))
+        group.tasks = tasks
+        if (group.tasks.length > 0) return group
+      })
+      state.boardForDisplay.groups =  JSON.parse(JSON.stringify(filteredGroups))
+    },
     toggleGroupDragMode(state) {
       state.isDraggingGroup = !state.isDraggingGroup
-    },
-    loadBoard(state, { id }) {
-      const board = state.boards.find(
-        (board) => board._id === id
-      )
-      if (board) state.board = board
-      else
-        console.log(
-          'Board store could not load board- ' + id
-        )
-    },
-    setBoards(state, { boards }) {
-      state.boards = boards
     },
     addTask(state, { groupIdx, savedTask }) {
       state.board.groups[groupIdx].tasks.push(savedTask)
@@ -71,12 +81,55 @@ export default {
     setGroupsOrder(state, { newOrder }) {
       state.board.groups = newOrder
     },
+    setIsLoading(state, { isLoading }) {
+      state.isLoading = isLoading
+    },
   },
   actions: {
-    async onSetFilter({ commit, state }, { filterBy }) {
-      filterBy.boardId = state.board._id
-      const groups = await boardService.query(filterBy)
-      commit('saveGroups', groups)
+    async loadBoards({ commit }) {
+      commit({ type: 'setIsLoading', isLoading: true })
+      try {
+        const boards = await boardService.query()
+        commit({ type: 'loadBoards', boards })
+      } catch (err) {
+        console.log(
+          'BoardsStore: Had problems while loading the boards'
+        )
+      } finally {
+        commit({ type: 'setIsLoading', isLoading: false })
+      }
+    },
+    async loadBoard(context, { id }) {
+      context.commit({ type: 'setIsLoading', isLoading: true })
+      try {
+        const board = await boardService.getById(id)
+        context.commit({ type: 'loadBoard', board })
+      } catch (err) {
+        console.log('loadBoard err', err);
+      } finally {
+        context.commit({ type: 'setIsLoading', isLoading: false })
+      }
+    },
+    async saveBoard(context, { board }) {
+      try {
+        const savedBoard = await boardService.saveBoard(
+          board
+        )
+        context.commit({
+          type: 'saveBoard',
+          savedBoard,
+        })
+      } catch (err) {
+        console.log('saveBoard err', err)
+      }
+    },
+    async removeBoard(context, { boardId }) {
+      try {
+        await boardService.removeBoard(boardId)
+        context.commit({ type: 'removeBoard', boardId })
+      } catch (err) {
+        console.log('removeBoard err', err)
+      }
     },
     async applyDrag(
       { commit, state },
@@ -181,37 +234,6 @@ export default {
       })
 
       // group.tasks.push(savedTask)
-    },
-    async loadBoards({ commit }) {
-      try {
-        const boards = await boardService.query()
-        commit({ type: 'setBoards', boards })
-      } catch (err) {
-        console.log(
-          'BoardsStore: Had problems while loading the boards'
-        )
-      }
-    },
-    async saveBoard(context, { board }) {
-      try {
-        const savedBoard = await boardService.saveBoard(
-          board
-        )
-        context.commit({
-          type: 'saveBoard',
-          savedBoard,
-        })
-      } catch (err) {
-        console.log('saveBoard err', err)
-      }
-    },
-    async removeBoard(context, { boardId }) {
-      try {
-        await boardService.removeBoard(boardId)
-        context.commit({ type: 'removeBoard', boardId })
-      } catch (err) {
-        console.log('removeBoard err', err)
-      }
     },
     changeOrderGroups(
       context,

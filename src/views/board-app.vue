@@ -39,7 +39,7 @@ export default {
   computed: {},
   created() {
     const { id } = this.$route.params
-    this.$store.commit({ type: 'loadBoard', id })
+    this.$store.dispatch({ type: 'loadBoard', id })
   },
   methods: {
     setBoard(boardId) {
