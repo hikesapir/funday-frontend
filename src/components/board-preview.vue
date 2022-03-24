@@ -99,7 +99,7 @@ export default {
       })
     },
     selectBoard() {
-      this.$store.commit({
+      this.$store.dispatch({
         type: 'loadBoard',
         id: this.board._id,
       })
