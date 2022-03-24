@@ -20,6 +20,9 @@ export default {
     board({ boardForDisplay }) {
       return JSON.parse(JSON.stringify(boardForDisplay))
     },
+    cmpsOrder({ board }) {
+      return JSON.parse(JSON.stringify(board.cmpsOrder))
+    }
   },
   mutations: {
     loadBoards(state, { boards }) {
@@ -30,7 +33,7 @@ export default {
       state.boardForDisplay = JSON.parse(JSON.stringify(board))
     },
     onSetFilter(state, { filterBy }) {
-      state.filterBy =  JSON.parse(JSON.stringify(filterBy)) 
+      state.filterBy = JSON.parse(JSON.stringify(filterBy))
       const board = JSON.parse(JSON.stringify(state.board))
       const regex = new RegExp(filterBy.txt, 'i')
       const filteredGroups = board.groups.filter(group => {
@@ -39,7 +42,7 @@ export default {
         group.tasks = tasks
         if (group.tasks.length > 0) return group
       })
-      state.boardForDisplay.groups =  JSON.parse(JSON.stringify(filteredGroups))
+      state.boardForDisplay.groups = JSON.parse(JSON.stringify(filteredGroups))
     },
     toggleGroupDragMode(state) {
       state.isDraggingGroup = !state.isDraggingGroup
@@ -83,6 +86,9 @@ export default {
     },
     setIsLoading(state, { isLoading }) {
       state.isLoading = isLoading
+    },
+    setCmpsOrder(state, { newOrder }) {
+      state.board.cmpsOrder = newOrder
     },
   },
   actions: {
@@ -235,23 +241,48 @@ export default {
 
       // group.tasks.push(savedTask)
     },
-    changeOrderGroups(
-      context,
-      { dropResult, entities, entityType }
-    ) {
+    changeOrderGroups(context, { dropResult, entities, entityType, element }) {
+      // console.log(element, 'element store')
       var board = JSON.parse(
         JSON.stringify(context.state.board)
       )
+      element === 'task' ? entities = entities.tasks : entities
+      // console.log(entities, 'entities store')
       var movedItem = entities.splice(
         dropResult.removedIndex,
         1
       )[0]
       entities.splice(dropResult.addedIndex, 0, movedItem)
-      board[entityType] = entities
-      context.dispatch({ type: 'saveBoard', board })
-      context.commit({
-        type: 'setGroupsOrder',
-        newOrder: entities,
+
+      if (element !== 'task') {
+        board[entityType] = entities
+        context.dispatch({ type: 'saveBoard', board })
+      }
+
+      if (element === 'task') {
+        context.commit({ type: 'setTasksOrder', entities, idx })
+        // await boardService.saveTasksOrder(
+        //   state.board._id,
+        //   idx,
+        //   result
+        // )
+      }
+      if (element === 'cmps') {
+        // console.log('its cmps!@#')
+        context.commit({
+          type: 'setCmpsOrder',
+          newOrder: entities,
+        })
+      }
+      if (entityType === 'groups') {
+        context.commit({
+          type: 'setGroupsOrder',
+          newOrder: entities,
+        })
+      }
+      context.dispatch({
+        type: 'loadBoard',
+        id: context.state.board._id
       })
     },
   },
