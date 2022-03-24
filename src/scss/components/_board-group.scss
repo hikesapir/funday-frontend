@@ -2,6 +2,7 @@
   padding: 0 0 0 30px;
   line-height: 35px;
   color: $group-header-gray;
+  cursor: pointer;
 
   .table-head {
     display: flex;
@@ -18,6 +19,9 @@
 .member-picker-col {
   width: 98px;
   text-align: center;
+  &:hover {
+    background-color: $main-task-gray;
+  }
 }
 
 .th-title {
@@ -36,6 +40,9 @@
 .priority-picker-col {
   text-align: center;
   width: 130px;
+  &:hover {
+    background-color: $main-task-gray;
+  }
 }
 
 .file-picker-col {
@@ -44,9 +51,8 @@
     @include btn();
     font-size: 16px;
     color: $primary-blue;
-    &:hover{
+    &:hover {
       background-color: rgba(255, 255, 255, 0);
     }
   }
-  
 }

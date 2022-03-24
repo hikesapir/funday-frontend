@@ -1,4 +1,13 @@
 .board-nav {
+  .workspace-title {
+    display: flex;
+    justify-content: space-between;
+  }
+  .fa-ellipsis {
+    font-size: 20px;
+    color: $main-text-gray;
+  }
+  color: $group-header-gray;
   width: 245px;
   background-color: $grey-background-color;
   border-right: 1px $main-gray solid;
@@ -12,12 +21,12 @@
     &:hover {
       background-color: #dcdfec;
     }
-    button{
+    button {
       padding: 0;
       font-size: rem(20px);
     }
   }
-  .workspace-dropdwon{
+  .workspace-dropdwon {
     margin-top: 4px;
     display: flex;
     justify-content: space-between;
@@ -25,14 +34,26 @@
     padding: 6px;
     display: flex;
     justify-content: space-between;
-    border: 1px solid #676879;;
+    border: 1px solid #676879;
     border-radius: 4px;
+
+    .main-workspace-icon {
+      // background-color: $second-pink;
+      // color: $main-white;
+      width: 24px;
+      text-align: center;
+      border-radius: 7px;
+      font-size: 16px;
+      font-weight: 700;
+      display: inline-block;
+    }
   }
 
-  button{
-    @include btn()
+  button {
+    @include btn();
+    // color: $main-task-gray;
   }
-  .context-modal{
+  .context-modal {
     width: 220px;
   }
 }

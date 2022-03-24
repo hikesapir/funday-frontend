@@ -30,7 +30,6 @@
     margin: 0 -4px;
   }
 
-
   .context-modal {
     width: 248px;
     position: absolute;
@@ -42,16 +41,15 @@
       line-height: 44px;
       text-align: center;
     }
-
   }
-  .test{
-    .people{
+  .test {
+    .people {
       padding: 10px;
       position: relative;
       left: 87px;
       background-color: white;
     }
-    &::before{
+    &::before {
       content: "";
       height: 1px;
       background-color: #c5c7d0;
@@ -61,18 +59,18 @@
       top: 70px;
     }
   }
-  
-  .member-preview{
+
+  .member-preview {
     gap: 13px;
     padding: 4px 8px;
     align-items: center;
     line-height: 20px;
     vertical-align: middle;
     width: 230px;
-  
+
     &:hover {
       background-color: $primary-blue;
       border-radius: 5px;
     }
   }
-  }
+}
