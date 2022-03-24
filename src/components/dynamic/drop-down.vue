@@ -7,7 +7,7 @@
       <div class="list">
         <ul v-for="label in labels" :key="label">
           <li
-            @click="updateTask(label.id)"
+            @click.stop="updateTask(label.id)"
             :style="{ 'background-color': label.color }"
           >
             {{ label.txt }}
@@ -24,16 +24,16 @@
 
 <script>
 export default {
-  name: "drop-down",
+  name: 'drop-down',
   props: {
     labels: Array,
     type: String,
   },
   methods: {
     updateTask(val) {
-      this.$emit("update", val);
+      this.$emit('update', val)
     },
   },
   computed: {},
-};
+}
 </script>

@@ -8,26 +8,37 @@
       :alt="member.fullname"
       :title="member.fullname"
     />
-    <fa
-      icon="circle-plus"
-      @click="addMembers"
-      tabindex="0"
-      @blur="addMembers"
-    />
-    <section class="context-modal" v-if="addMembersMode">
-      <input type="text" placeholder="Enter name" />
-      <label>People</label>
-      <span v-for="member in membersList" :key="member">
+    <fa icon="circle-plus" @click.stop="addMembers" />
+
+    <div
+      v-if="addMembersMode"
+      class="context-modal member-picker-modal-item"
+    >
+      <label class="member-picker-modal-item">
+        <input
+          class="member-picker-modal-item"
+          type="text"
+          placeholder="Enter name"
+        />
+      </label>
+      <div class="member-picker-modal-item">People</div>
+      <span
+        class="member-picker-modal-item"
+        v-for="member in membersList"
+        :key="member"
+      >
         <img :src="member.imgUrl" />
-        <span @click="addMember(member)">{{ member.fullname }}</span>
+        <span @click.stop="addMember(member)">{{
+          member.fullname
+        }}</span>
       </span>
-    </section>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "member-picker",
+  name: 'member-picker',
   props: {
     task: Object,
   },
@@ -35,29 +46,38 @@ export default {
     return {
       addMembersMode: false,
       membersList: this.$store.getters.board.members,
-    };
+    }
   },
   computed: {
     members() {
       return this.task.members.length > 2
         ? this.task.members.slice(0, 2)
-        : this.task.members;
+        : this.task.members
     },
     displayMembers() {},
   },
   methods: {
     addMembers() {
-      this.addMembersMode = !this.addMembersMode;
+      this.addMembersMode = !this.addMembersMode
+      document.body.addEventListener('click', (e) => {
+        e.stopPropagation()
+        if (
+          !e.target.classList.contains(
+            'member-picker-modal-item'
+          )
+        )
+          this.addMembersMode = false
+      })
     },
     addMember(member) {
-      console.log(member);
-      this.members.push(JSON.parse(JSON.stringify(member)));
-      this.$emit("update", {
+      console.log(member)
+      this.members.push(JSON.parse(JSON.stringify(member)))
+      this.$emit('update', {
         cmpType: `member-picker`,
         members: this.members,
         task: this.task,
-      });
+      })
     },
   },
-};
+}
 </script>
