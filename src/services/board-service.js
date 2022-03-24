@@ -37,7 +37,7 @@ async function query(filterBy = null) {
     } catch (err) {
       console.log(
         'boardService: could not load boards with filter- ' +
-          filterBy
+        filterBy
       )
     }
   }
@@ -217,8 +217,18 @@ function _createDemoData() {
         {
           "_id": "u101",
           "fullname": "Sapir Hiki",
-          "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-        }
+          "imgUrl": "https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070371/a1avc0ofryx5enjnbklv.jpg"
+        },
+        {
+          "_id": "u101",
+          "fullname": "Lior Amar",
+          "imgUrl": "https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070372/w1hcqybgmllnpl8ld2zh.jpg"
+        },
+        {
+          "_id": "u101",
+          "fullname": "Roee Furman",
+          "imgUrl": "https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070370/qpolx3ucumsiscnf0ymk.jpg"
+        },
       ],
       "groups": [
         {
@@ -726,7 +736,7 @@ function _createDemoData() {
                 }
               ]
             }
-  
+
           ]
         },
         {
@@ -929,7 +939,7 @@ function _createDemoData() {
                   "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                 }
               ]
-            }, 
+            },
             {
               "id": "t115",
               "createdAt": 1648078924927,
@@ -981,7 +991,7 @@ function _createDemoData() {
                 }
               ]
             }
-  
+
           ]
         }
       ],
@@ -1002,11 +1012,11 @@ function _createDemoData() {
       ]
     }
   ]
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
   utilService.saveToStorage(KEY, boards)
 }

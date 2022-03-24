@@ -70,6 +70,7 @@ export default {
       })
     },
     addMember(member) {
+      console.log(member)
       this.members.push(JSON.parse(JSON.stringify(member)))
       this.$emit('update', {
         cmpType: `member-picker`,
