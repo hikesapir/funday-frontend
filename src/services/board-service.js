@@ -126,7 +126,7 @@ function _createDemoData() {
     {
       "_id": "b101",
       "title": "Sprint 4 - Monday GO!!!!",
-      "descirption": "Final project E2E",
+      "description": "Final project E2E",
       "createdAt": 1647966887053,
       "isStarred": true,
       "createdBy": {

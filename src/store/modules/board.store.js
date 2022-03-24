@@ -1,5 +1,6 @@
 // import authService from '../../services/auth.service.js'
 import boardService from '../../services/board-service.js'
+// import { socketService, SOCKET_EVENT_TASK_ADDED } from '../../services/socket.service.js'
 
 export default {
   state: {
@@ -174,6 +175,7 @@ export default {
         groupIdx: idx,
         savedTask,
       })
+
       // group.tasks.push(savedTask)
     },
     async loadBoards({ commit }) {
