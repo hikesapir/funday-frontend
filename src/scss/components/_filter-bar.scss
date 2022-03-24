@@ -2,8 +2,11 @@
   display: flex;
   padding: 16px 30px;
   margin-bottom: 18px;
+  color: $main-task-text-gray;
+
   button {
     @include btn();
+    color: $main-task-text-gray;
   }
   .new-item-btn {
     background-color: $primary-blue;

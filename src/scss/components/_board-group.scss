@@ -1,7 +1,11 @@
 .board-group {
   padding: 0 0 0 30px;
-
   line-height: 35px;
+  color: $group-header-gray;
+
+  > div {
+    border: 1px white solid;
+  }
 
   .table-head {
     display: flex;
@@ -27,26 +31,18 @@
   padding: 0 2px;
 }
 
-.priority-picker-col {
-  width: 130px;
-  text-align: center;
-}
-
-.file-picker-col {
-  width: 130px;
-}
-
 .timeline-picker-col {
   width: 178px;
 }
 
-.tag-picker-col {
+.tag-picker-col,
+.file-picker-col,
+.priority-picker-col {
   text-align: center;
   width: 130px;
 }
 
 .file-picker-col {
-  width: 130px;
   text-align: center;
   button {
     @include btn();

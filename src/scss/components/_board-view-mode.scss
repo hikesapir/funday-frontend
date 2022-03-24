@@ -1,12 +1,11 @@
 .board-view-mode {
-  padding: 0 28px ;
-  // margin: 0 10px 0 10px;
+  padding: 0 28px;
   color: $main-text-gray;
-  // border-bottom: 1px solid $main-border;
-  button{
-    @include btn(em(7px) em(16px))
+  button {
+    @include btn(em(7px) em(16px));
+    color: $main-task-text-gray;
   }
-  .upsidedwon{
+  .upsidedwon {
     transform: rotate(180deg);
-    }
+  }
 }

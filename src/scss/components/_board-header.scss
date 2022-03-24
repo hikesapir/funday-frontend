@@ -1,35 +1,40 @@
-.board-header{
-    padding: 16px 30px 0;
-    .description-line{
-        padding: 2px;
-        margin-bottom: 5px;
-    }
-    .up-haeder{
-        display: flex;
-        justify-content: space-between;
-        div{
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            button{
-                @include btn()
-            }
-            h1{
-                @media (max-width: 1440px) {
-                    font-size: rem(24px);                }
-            }
-            .btn{
-                border:1px solid rgb(133, 133, 133);
-                padding: 8px;
-                border-radius: 4px;
-                font-size: 14px;
-            }
-            .star{
-                color: #ffcb00;
-            }
-            .info{
-                color: #676879;
-            }
+.board-header {
+  padding: 16px 30px 0;
+  .description-line {
+    padding: 2px;
+    margin-bottom: 5px;
+  }
+
+  .up-haeder {
+    display: flex;
+    justify-content: space-between;
+    div {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      button {
+        color: $main-task-text-gray;
+        @include btn();
+      }
+      h1 {
+        letter-spacing: -0.05em;
+        @media (max-width: 1440px) {
+          font-size: rem(24px);
         }
+      }
+      .btn {
+        border: 1px solid rgb(133, 133, 133);
+        padding: 8px;
+        border-radius: 4px;
+        font-size: 14px;
+        color: $main-task-text-gray;
+      }
+      .star {
+        color: #ffcb00;
+      }
+      .info {
+        color: #676879;
+      }
     }
+  }
 }

@@ -1,8 +1,8 @@
 .member-picker-col {
   text-align: center;
-  //   display: flex;
   justify-content: space-between;
   position: relative;
+  border: 1px white solid;
 
   .add-tag {
     opacity: 0;
@@ -39,7 +39,6 @@
 
     label {
       line-height: 44px;
-      // text-decoration: line-through;
       text-align: center;
     }
     span {
