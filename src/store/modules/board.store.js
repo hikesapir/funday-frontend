@@ -6,6 +6,7 @@ export default {
     // user: userService.getLoggedInUser(),
     boards: null,
     board: null,
+    isDraggingGroup: false,
   },
   getters: {
     boards({ boards }) {
@@ -16,6 +17,9 @@ export default {
     },
   },
   mutations: {
+    toggleGroupDragMode(state) {
+      state.isDraggingGroup = !state.isDraggingGroup
+    },
     loadBoard(state, { id }) {
       const board = state.boards.find(
         (board) => board._id === id
