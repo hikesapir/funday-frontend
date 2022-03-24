@@ -15,10 +15,7 @@
         </ul>
       </div>
     </div>
-    <div
-      class="cursor"
-      onclick="document.querySelector('.dots').classList.toggle('active');"
-    ></div>
+    <div class="cursor"></div>
   </div>
 </template>
 

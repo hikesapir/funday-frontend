@@ -66,6 +66,7 @@ export default {
       const taskIdx = group.tasks.findIndex(
         (task) => task.id === updatedTask.id
       )
+      console.log('group, taskIdx', group, taskIdx)
       state.board.groups[groupIdx].tasks[taskIdx] =
         updatedTask
     },
@@ -87,16 +88,16 @@ export default {
       state.boardForDisplay.groups[idx].tasks = result
     },
     saveGroups(state, groups) {
-      state.board.groups = groups
+      state.boardForDisplay.groups = groups
     },
     setGroupsOrder(state, { newOrder }) {
-      state.board.groups = newOrder
+      state.boardForDisplay.groups = newOrder
     },
     setIsLoading(state, { isLoading }) {
       state.isLoading = isLoading
     },
     setCmpsOrder(state, { newOrder }) {
-      state.board.cmpsOrder = newOrder
+      state.boardForDisplay.cmpsOrder = newOrder
     },
   },
   actions: {
@@ -155,6 +156,11 @@ export default {
       const { cmpType, groupId } = data
       var { task } = data
       task = JSON.parse(JSON.stringify(task))
+      commit({
+        type: 'updateTask',
+        groupId,
+        updatedTask: task,
+      })
       switch (cmpType) {
         case 'timeline-picker':
           task.timeline = data.timeline
@@ -199,11 +205,6 @@ export default {
           )
           break
       }
-      commit({
-        type: 'updateTask',
-        groupId,
-        updatedTask: task,
-      })
     },
     async saveTask({ commit, state }, { groupId, task }) {
       var savedTask = null
@@ -285,10 +286,6 @@ export default {
             newOrder: entities,
           })
         }
-        context.dispatch({
-          type: 'loadBoard',
-          id: context.state.board._id,
-        })
       }
     },
   },

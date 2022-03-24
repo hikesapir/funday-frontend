@@ -3,7 +3,7 @@
     class="status-picker-col"
     :style="style"
     tabindex="0"
-    @click="toggleDropDown"
+    @click.prevent="toggleDropDown"
     @blur="toggleDropDown"
   >
     {{ txt }}
