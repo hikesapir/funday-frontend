@@ -4,8 +4,9 @@
     class="priority-picker-col priority"
     data-toggle="p-dropdown"
     @click="isDropOpen = !isDropOpen"
+    tabindex="-1"
   >
-    {{ selectedPriority?.txt }}
+    {{ txt }}
     <div v-if="isDropOpen">
       <drop-down
         :labels="priorities"
@@ -52,6 +53,14 @@ export default {
     },
   },
   computed: {
+    txt() {
+      const { priority } = this.$store.getters.board?.labels
+      const currPriority = priority?.find(
+        (s) => s.id === this.task.priority
+      )
+      console.log('currPriority', currPriority)
+      return currPriority.txt
+    },
     getStyle() {
       const { priority } = this.$store.getters.board?.labels
       const currPriority = priority?.find(
