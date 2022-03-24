@@ -2,12 +2,14 @@
   <div @mouseover="mouseOver" @mouseleave="mouseLeave" class="filer-picker">
     <label class="btn" v-if="isHover">
       <fa icon="circle-plus" />
-      <input type="file" @change="test" hidden/>
+      <input type="file" @change="handleFile" hidden />
     </label>
   </div>
 </template>
 
 <script>
+  import {uploadFile} from '../../services/files-upload-service.js';
+
 export default {
   name: 'file-picker',
   data() {
@@ -24,10 +26,21 @@ export default {
     mouseLeave() {
       this.isHover = false
     },
-    test(e){
-      console.log('im defined');
-      console.log(e);
-    }
+    handleFile(ev) {
+      //added to determine if its change from input or drop , and gets the file
+      let file;
+      if (ev.type === 'change') file = ev.target.files[0];
+      else if (ev.type === 'drop') file = ev.dataTransfer.files[0];
+      console.log('ev', ev);
+      this.onUploadFile(file); // send the file to upload it
+    },
+    async onUploadFile(file) {
+      console.log(file);
+      const res = await uploadFile(file);
+      console.log(res);
+      // this.$emit('save', res.url);
+      // this.isLoading = false;
+    },
   }
 
 }
