@@ -63,19 +63,24 @@ export default {
       )
     },
     onSetFilter(state, { filterBy }) {
+      console.log(filterBy);
       state.filterBy = JSON.parse(JSON.stringify(filterBy))
       const board = JSON.parse(JSON.stringify(state.board))
       const regex = new RegExp(filterBy.txt, 'i')
-      const filteredGroups = board.groups.filter(
+      var filteredGroups = board.groups.filter(
         (group) => {
-          if (regex.test(group.title)) return group
-          const tasks = group.tasks.filter((task) =>
+          if (regex.test(group.title) && !filterBy.member) return group
+          var tasks = group.tasks.filter((task) =>
             regex.test(task.title)
           )
+          tasks=tasks.filter(task => {
+            return task.members.some(member => member._id === filterBy.member)
+          })
           group.tasks = tasks
           if (group.tasks.length > 0) return group
         }
       )
+      // filteredGroups = filteredGroups.filter(group)
       state.boardForDisplay.groups = JSON.parse(
         JSON.stringify(filteredGroups)
       )

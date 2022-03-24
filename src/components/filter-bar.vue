@@ -20,11 +20,21 @@
         />
       </div>
     </div>
-    <button @click="openPersonModal = !openPersonModal">
+    <button v-if="filterBy.member" class="search-btn" @click="clearSearchMember">
+      <img :src="currMember.imgUrl" /> Persons
+      <i class="fa-solid fa-circle-xmark"></i>
+    </button>
+    <button v-else @click="openPersonModal = !openPersonModal">
       <i class="fa-solid fa-circle-user"></i>Person
     </button>
+
     <div class="relative">
-      <section v-if="openPersonModal" class="context-modal"  tabindex="0" @blur="openPersonModal = false">
+      <section
+        v-if="openPersonModal"
+        class="context-modal"
+        tabindex="0"
+        @blur="openPersonModal = false"
+      >
         <h2>Quick person filter</h2>
         <div class="spacer"></div>
         <div class="flex members">
@@ -34,7 +44,6 @@
               type="radio"
               :value="member._id"
               v-model="filterBy.member"
-              
               hidden
             />
             <img :src="member.imgUrl" :class="{ active: filterBy.member === member._id }" />
@@ -73,10 +82,19 @@ export default {
       const filterBy = JSON.parse(JSON.stringify(this.filterBy))
       this.$store.commit({ type: 'onSetFilter', filterBy })
     },
+    clearSearchMember() {
+      this.filterBy.member = ''
+      this.search()
+    },
   },
   computed: {
     isSearching() {
       return this.filterBy.txt ? true : false
+    },
+    currMember() {
+      if (this.filterBy.member) {
+        return this.board.members.find(member => member._id === this.filterBy.member)
+      }
     }
   },
 }
