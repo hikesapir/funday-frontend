@@ -10,6 +10,7 @@
       "fullname": "Someone",
       "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
     },
+    "charts": [{ "type": "status" }, { "type": "status" }],
     "cmpsOrder": [
       {
         "cmpName": "title-picker",
@@ -109,7 +110,7 @@
         "_id": "u104",
         "fullname": "Someone",
         "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-      },
+      }
     ],
     "groups": [
       {
@@ -138,7 +139,9 @@
               "start": 1647967976136,
               "end": 1648928976136
             },
-            "tags": [{ "txt": "first", "color": "#e2445c" }],
+            "tags": [
+              { "txt": "first", "color": "#e2445c" }
+            ],
             "files": [],
             "updates": [
               {
@@ -213,7 +216,7 @@
                 "_id": "u103",
                 "fullname": "Roee Furman",
                 "imgUrl": "https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070370/qpolx3ucumsiscnf0ymk.jpg"
-              },
+              }
             ]
           },
           {
@@ -386,7 +389,7 @@
                 "_id": "u103",
                 "fullname": "Roee Furman",
                 "imgUrl": "https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070370/qpolx3ucumsiscnf0ymk.jpg"
-              },
+              }
             ]
           }
         ]
@@ -417,7 +420,9 @@
               "start": 1649106000000,
               "end": 1648242000000
             },
-            "tags": [{ "txt": "important", "color": "green" }],
+            "tags": [
+              { "txt": "important", "color": "green" }
+            ],
             "files": [],
             "updates": [
               {
@@ -492,7 +497,7 @@
                 "_id": "u102",
                 "fullname": "Lior Amar",
                 "imgUrl": "https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070372/w1hcqybgmllnpl8ld2zh.jpg"
-              },
+              }
             ]
           },
           {
@@ -601,7 +606,8 @@
                 "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
               }
             ]
-          }, {
+          },
+          {
             "id": "t110",
             "createdAt": 1648078924927,
             "byMember": {
@@ -657,7 +663,6 @@
               }
             ]
           }
-
         ]
       },
       {
@@ -686,7 +691,9 @@
               "start": 1640999730348,
               "end": 16409922222
             },
-            "tags": [{ "txt": "service", "color": "#1acd83" }],
+            "tags": [
+              { "txt": "service", "color": "#1acd83" }
+            ],
             "files": [],
             "updates": [
               {
@@ -783,7 +790,9 @@
               "start": 1647969348820,
               "end": 1648928976136
             },
-            "tags": [{ "txt": "server", "color": "#4eccc6" }],
+            "tags": [
+              { "txt": "server", "color": "#4eccc6" }
+            ],
             "files": [],
             "updates": [
               {
@@ -834,7 +843,9 @@
               "start": 1647969348820,
               "end": 1648928976136
             },
-            "tags": [{ "txt": "safety", "color": "#401694" }],
+            "tags": [
+              { "txt": "safety", "color": "#401694" }
+            ],
             "files": [],
             "updates": [
               {
@@ -914,14 +925,14 @@
                 "_id": "u104",
                 "fullname": "Someone",
                 "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-              },{
+              },
+              {
                 "_id": "u101",
                 "fullname": "Sapir Hiki",
                 "imgUrl": "https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070371/a1avc0ofryx5enjnbklv.jpg"
               }
             ]
           }
-
         ]
       }
     ],
