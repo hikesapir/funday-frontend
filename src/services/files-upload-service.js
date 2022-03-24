@@ -1,7 +1,7 @@
-import { httpService } from './http.service'
+import axios from 'axios';
 
 // AXIOS
-export const uploadImg = async (file) => {
+export const uploadFile = async (file) => {
   //gets the file and upload it to cloudinary
   // Defining our variables
   const UPLOAD_PRESET = 'misterToy'; // Insert yours
@@ -13,8 +13,8 @@ export const uploadImg = async (file) => {
   FORM_DATA.append('upload_preset', UPLOAD_PRESET);
   // Sending a post method request to Cloudniarys' API
   try {
-    const res = await httpService.post(UPLOAD_URL, FORM_DATA);
-    return res;
+    const res = await axios.post(UPLOAD_URL, FORM_DATA);
+    return res.data;
   } catch (err) {
     console.error('ERROR!', err);
   }
