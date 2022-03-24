@@ -15,13 +15,13 @@ export default {
   },
   getters: {
     boards({ boards }) {
-      return JSON.parse(JSON.stringify(boards))
+      return boards
     },
     board({ boardForDisplay }) {
-      return JSON.parse(JSON.stringify(boardForDisplay))
+      return boardForDisplay
     },
     cmpsOrder({ board }) {
-      return JSON.parse(JSON.stringify(board.cmpsOrder))
+      return board.cmpsOrder
     },
   },
   mutations: {

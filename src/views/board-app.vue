@@ -16,7 +16,7 @@
         @starred="updateBoard"
       />
       <board-view-mode :boardId="board?._id" />
-      <filter-bar :board='board'/>
+      <filter-bar :board="board" />
       <router-view></router-view>
     </section>
   </div>
@@ -46,12 +46,16 @@ export default {
       this.$store.commit({ type: 'loadBoard', id: boardId })
     },
     updateBoard(type) {
+      const board = JSON.parse(
+        JSON.stringify(this.$store.getters.board)
+      )
+
       if (type === 'star') {
-        this.board.isStarred = !this.board.isStarred
+        board.isStarred = !board.isStarred
       }
       this.$store.dispatch({
         type: 'saveBoard',
-        board: this.board,
+        board: board,
       })
     },
   },
