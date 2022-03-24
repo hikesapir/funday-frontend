@@ -87,16 +87,19 @@ export default {
       state.board.groups[groupIdx].tasks.push(savedTask)
     },
     updateTask(state, { groupId, updatedTask }) {
-      const groupIdx = state.board.groups.findIndex(
-        (group) => group.id === groupId
-      )
-      const group = state.board.groups[groupIdx]
+      const groupIdx =
+        state.boardForDisplay.groups.findIndex(
+          (group) => group.id === groupId
+        )
+      const group = state.boardForDisplay.groups[groupIdx]
       const taskIdx = group.tasks.findIndex(
         (task) => task.id === updatedTask.id
       )
-      console.log('group, taskIdx', group, taskIdx)
-      state.board.groups[groupIdx].tasks[taskIdx] =
-        updatedTask
+      console.log(`Try to update task index ${taskIdx}`)
+      if (taskIdx === -1) return
+      state.boardForDisplay.groups[groupIdx].tasks[
+        taskIdx
+      ] = updatedTask
     },
     saveBoard(state, { savedBoard }) {
       const idx = state.boards.findIndex(
@@ -184,11 +187,6 @@ export default {
       const { cmpType, groupId } = data
       var { task } = data
       task = JSON.parse(JSON.stringify(task))
-      commit({
-        type: 'updateTask',
-        groupId,
-        updatedTask: task,
-      })
       switch (cmpType) {
         case 'timeline-picker':
           task.timeline = data.timeline
@@ -233,6 +231,11 @@ export default {
           )
           break
       }
+      commit({
+        type: 'updateTask',
+        groupId,
+        updatedTask: task,
+      })
     },
     async saveTask({ commit, state }, { groupId, task }) {
       var savedTask = null
