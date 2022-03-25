@@ -19,7 +19,7 @@ export default {
       return boards
     },
     board({ boardForDisplay }) {
-      return JSON.parse(JSON.stringify(boardForDisplay))
+      return boardForDisplay
     },
     cmpsOrder({ board }) {
       return board.cmpsOrder

@@ -1,16 +1,9 @@
 <template>
   <div class="main-table">
-    <Container
-      v-if="board?.groups"
-      @drop="onDrop"
-      drag-handle-selector=".drag-handle"
-    >
-      <Draggable
-        v-for="group in board?.groups"
-        :key="group.id"
-      >
+    <Container v-if="board?.groups" @drop="onDrop" drag-handle-selector=".drag-handle">
+      <Draggable v-for="group in board?.groups" :key="group.id">
         <board-group
-          :group="group"
+          :group="JSON.parse(JSON.stringify(group))"
           :cmpsOrder="board?.cmpsOrder"
           :key="group.id"
         ></board-group>

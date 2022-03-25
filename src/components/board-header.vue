@@ -55,7 +55,7 @@ export default {
     props: {
         boardDetails: Object
     },
-    emits: [],
+    emits: ['starred'],
     components: {},
     data() {
         return {
