@@ -1,9 +1,9 @@
 <template>
-  <i
+  <!-- <i
     class="collapse-icon fa fa-angle-right"
     :class="isNavOpen ? 'pinned' : ''"
     @click="toggleNav"
-  ></i>
+  ></i> -->
   <section v-if="isNavOpen" class="board-nav">
     <span>Workspace</span>
     <div class="workspace-dropdwon">
