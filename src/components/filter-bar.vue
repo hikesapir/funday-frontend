@@ -95,6 +95,7 @@ export default {
     },
     addGroup() {
       this.$store.dispatch({ type: 'saveGroup' })
+      this.openItemModal = false
     }
   },
   computed: {

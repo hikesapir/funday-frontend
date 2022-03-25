@@ -10,11 +10,14 @@ export default {
   removeBoard,
   saveTasksOrder,
   getEmptyGroup,
+  saveGroup,
 }
 
 const KEY = 'board_db'
 
 localStorage[KEY] ? '' : _createDemoData()
+
+//board
 
 async function query(filterBy = null) {
   if (filterBy) {
@@ -45,22 +48,9 @@ async function query(filterBy = null) {
   return storageService.query(KEY)
 }
 
-async function getById(id) {
-  const board = await storageService.getById(KEY, id)
-  return board
-}
+function getById(id) {
+  return storageService.getById(KEY, id)
 
-async function saveTasksOrder(boardId, idx, tasksOrder) {
-  const boards = await query()
-  const board = boards.find(
-    (board) => board._id === boardId
-  )
-  try {
-    board.groups[idx].tasks = tasksOrder
-    await storageService.put(KEY, board)
-  } catch (err) {
-    console.log('Boardservice: could not save tasksOrder')
-  }
 }
 
 function saveBoard(board) {
@@ -71,6 +61,32 @@ function saveBoard(board) {
 function removeBoard(boardId) {
   return storageService.remove(KEY, boardId)
 }
+
+// group
+
+async function getGroupById(boardIdx, groupId) { }
+
+function saveGroup(group, board) {
+  if (!group.id) {
+    group.id = utilService.makeId()
+    board.groups.unshift(group)
+  } else {
+    const idx = board.groups.findIndex(bGroup => bGroup.id === group.id)
+    board.groups.splice(idx, 1, group)
+  }
+  return saveBoard(board)
+}
+
+function getEmptyGroup() {
+  return {
+    // id: utilService.makeId(),
+    title: 'New Group',
+    style: {color: utilService.getRandomColor()},
+    tasks: [],
+  }
+}
+
+//task
 
 async function saveTask(boardId, groupId, taskToSave) {
   const boards = await query()
@@ -102,17 +118,20 @@ async function saveTask(boardId, groupId, taskToSave) {
   }
 }
 
-async function getGroupById(boardIdx, groupId) { }
-
-function removeTask(taskId) { }
-
-function getEmptyGroup(){
-  return{
-    title: 'New Group',
-    style:'',
-    tasks:'',
+async function saveTasksOrder(boardId, idx, tasksOrder) {
+  const boards = await query()
+  const board = boards.find(
+    (board) => board._id === boardId
+  )
+  try {
+    board.groups[idx].tasks = tasksOrder
+    await storageService.put(KEY, board)
+  } catch (err) {
+    console.log('Boardservice: could not save tasksOrder')
   }
 }
+
+function removeTask(taskId) { }
 
 function getEmptyTask() {
   return {

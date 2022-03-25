@@ -12,6 +12,7 @@ export default {
     filterBy: {
       txt: '',
     },
+    boardMapByGroups: []
   },
   getters: {
     boards({ boards }) {
@@ -116,6 +117,7 @@ export default {
 
 
         boardMapByGroups.push(groupSumMap)
+        // console.log(boardMapByGroups)
 
       })
       statusMapCount = statusMapCount.reduce(
@@ -228,6 +230,9 @@ export default {
     setCmpsOrder(state, { newOrder }) {
       state.boardForDisplay.cmpsOrder = newOrder
     },
+    addGroup(state, { group }) {
+
+    }
   },
   actions: {
     async loadBoards({ commit }) {
@@ -244,6 +249,7 @@ export default {
       }
     },
     async loadBoard(context, { id }) {
+      console.log('get it');
       context.commit({
         type: 'setIsLoading',
         isLoading: true,
@@ -420,9 +426,11 @@ export default {
         context.dispatch({ type: 'saveBoard', board })
       }
     },
-    saveGroup({ commit, state }, { group }) {
+    async saveGroup({ commit, state,dispatch }, { group }) {
       const groupToSave = group || boardService.getEmptyGroup()
-      console.log(groupToSave);
+      const board = await boardService.saveGroup(groupToSave, JSON.parse(JSON.stringify(state.board)))
+      console.log(board);
+      dispatch({ type: 'loadBoard', id: board._id })
     }
   },
 }
