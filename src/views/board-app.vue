@@ -7,6 +7,7 @@
       ></board-nav>
     </div>
     <section class="board-app">
+      <div class="bord-header-wrapper">
       <board-header
         :boardDetails="{
           title: board?.title,
@@ -17,6 +18,7 @@
       />
       <board-view-mode :boardId="board?._id" />
       <filter-bar :board="board" />
+      </div>
       <router-view></router-view>
     </section>
   </div>

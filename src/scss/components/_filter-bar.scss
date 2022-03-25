@@ -66,13 +66,17 @@
 
   .context-modal{
     text-align: center;
-    left: -160px;
-    top: 30px;
+    left: 0;
+    top: 35px;
     }
 
     .members{
       margin: 10px 0;
     }
+    .item-modal{
+      white-space: nowrap;
+    }
+
 
 
 }

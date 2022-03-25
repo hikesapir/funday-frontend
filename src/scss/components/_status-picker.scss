@@ -6,11 +6,14 @@
   height: 34px;
   border-left: 1px solid white;
   border-bottom: 1px solid white;
-
-  &.status{
+  .confetti {
+    object-position: center;
+    object-fit: cover;
+  }
+  &.status {
     position: relative;
     &:before {
-      content: "";
+      content: '';
       transition: border-width 0.5s ease-in-out;
       border-style: solid;
       border-color: #d9d9d9 white;
@@ -29,4 +32,3 @@
     }
   }
 }
-  

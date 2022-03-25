@@ -420,5 +420,9 @@ export default {
         context.dispatch({ type: 'saveBoard', board })
       }
     },
+    saveGroup({ commit, state }, { group }) {
+      const groupToSave = group || boardService.getEmptyGroup()
+      console.log(groupToSave);
+    }
   },
 }
