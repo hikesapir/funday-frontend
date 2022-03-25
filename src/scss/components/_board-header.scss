@@ -4,36 +4,38 @@
     padding: 2px;
     margin-bottom: 5px;
   }
-
+  .btn {
+    border: 1px solid rgb(133, 133, 133);
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    color: $main-task-text-gray;
+  }
+  button {
+    color: $main-task-text-gray;
+    @include btn();
+  }
   .up-haeder {
     display: flex;
     justify-content: space-between;
-    div {
+    .board-name {
       display: flex;
       gap: 10px;
       align-items: center;
-      button {
-        color: $main-task-text-gray;
-        @include btn();
-      }
       h1 {
         letter-spacing: -0.05em;
         @media (max-width: 1440px) {
           font-size: rem(24px);
         }
       }
-      .btn {
-        border: 1px solid rgb(133, 133, 133);
-        padding: 8px;
-        border-radius: 4px;
-        font-size: 14px;
-        color: $main-task-text-gray;
-      }
       .star {
         color: #ffcb00;
       }
       .info {
         color: #676879;
+      }
+      .star, .info{
+        @include btn(4px 8px);
       }
     }
   }

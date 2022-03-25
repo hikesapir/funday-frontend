@@ -20,7 +20,11 @@
       >
         <Draggable
           v-for="cmp in cmps"
-          :class="cmp.cmpName + '-col' + ' cols-drag-handle title-head'"
+          :class="
+            cmp.cmpName +
+            '-col' +
+            ' cols-drag-handle title-head'
+          "
           :key="cmp.cmpName"
         >
           <!-- <i class="fa-solid fa-grip-vertical"></i> -->
@@ -33,8 +37,12 @@
       v-if="group?.tasks"
       @drop="onDrop($event, 'tasks')"
       drag-handle-selector=".task-drag-handle"
+      drag-class="drag-task"
     >
-      <Draggable v-for="task in group?.tasks" :key="task.id">
+      <Draggable
+        v-for="task in group?.tasks"
+        :key="task.id"
+      >
         <task-preview :task="task" :groupId="group.id" />
       </Draggable>
     </Container>
@@ -44,12 +52,12 @@
 </template>
 
 <script>
-import taskPreview from "./task-preview.vue";
-import { Container, Draggable } from "vue3-smooth-dnd";
+import taskPreview from './task-preview.vue'
+import { Container, Draggable } from 'vue3-smooth-dnd'
 
-import addTask from "./add-task.vue";
+import addTask from './add-task.vue'
 export default {
-  name: "board-group",
+  name: 'board-group',
   props: {
     group: Object,
     cmpsOrder: Array,
@@ -62,37 +70,37 @@ export default {
   },
   computed: {
     cmps() {
-      const cmps = this.$store.getters.board.cmpsOrder;
-      cmps.unshift();
-      return cmps;
+      const cmps = this.$store.getters.board.cmpsOrder
+      cmps.unshift()
+      return cmps
     },
   },
   // },
   methods: {
     addTask(task) {
       this.$store.dispatch({
-        type: "saveTask",
+        type: 'saveTask',
         task,
         groupId: this.group.id,
-      });
+      })
     },
 
     onDrop(dropResult, entityType) {
-      var entities = null;
-      if (entityType === "cmpsOrder")
-        entities = this.$store.getters.board.cmpsOrder;
-      else if (entityType === "tasks")
+      var entities = null
+      if (entityType === 'cmpsOrder')
+        entities = this.$store.getters.board.cmpsOrder
+      else if (entityType === 'tasks')
         entities = {
           groupId: this.group.id,
           tasks: this.group.tasks,
-        };
+        }
       this.$store.dispatch({
-        type: "changeOrder",
+        type: 'changeOrder',
         dropResult,
         entities,
         entityType,
-      });
+      })
     },
   },
-};
+}
 </script>

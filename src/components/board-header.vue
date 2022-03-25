@@ -3,21 +3,23 @@
         <div class="up-haeder">
             <div class="board-name">
                 <h1>{{ boardDetails.title }}</h1>
-                <button
-                    :title="descriptionTitle + ' board description'"
-                    @click="isDescriptionOpen = !isDescriptionOpen"
-                    class="info"
-                >
-                    <span>
-                        <i class="fa-solid fa-circle-info"></i>
-                    </span>
-                </button>
-                <button :title="starTitle + ' favorites'" @click="staerred" class="star">
-                    <span>
-                        <i v-if="boardDetails.isStarred" class="fa-solid fa-star"></i>
-                        <i v-else class="fa-regular fa-star"></i>
-                    </span>
-                </button>
+                <div>
+                    <button
+                        :title="descriptionTitle + ' board description'"
+                        @click="isDescriptionOpen = !isDescriptionOpen"
+                        class="info"
+                    >
+                        <span>
+                            <i class="fa-solid fa-circle-info"></i>
+                        </span>
+                    </button>
+                    <button :title="starTitle + ' favorites'" @click="staerred" class="star">
+                        <span>
+                            <i v-if="boardDetails.isStarred" class="fa-solid fa-star"></i>
+                            <i v-else class="fa-regular fa-star"></i>
+                        </span>
+                    </button>
+                </div>
             </div>
             <div class="board-header-right">
                 <button>
@@ -35,7 +37,7 @@
                 </button>
                 <button>
                     <span>
-                       <i class="fa-solid fa-ellipsis"></i>
+                        <i class="fa-solid fa-ellipsis"></i>
                     </span>
                 </button>
             </div>

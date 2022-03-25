@@ -18,24 +18,27 @@ export default {
   },
   computed: {
     statusChart() {
-      const statusMap =
+      const statusMapCount =
         this.$store.getters.chartData?.statusMapCount
-
       const statuses =
         this.$store.getters.board?.labels.status
 
-      if (!statuses || !statusMap) return
+      if (!statuses || !statusMapCount) return
       var data = []
-      for (var key in statusMap) {
-        data = statuses.map((status) => {
-          if (!status.txt) return
-          return {
-            y: statusMap[key],
+      for (var key in statusMapCount) {
+        const status = statuses.find(
+          (status) => status.id === key
+        )
+        if (status.txt) {
+          const statusData = {
+            y: statusMapCount[key],
             color: status.color,
             name: status.txt,
           }
-        })
+          data.push(statusData)
+        }
       }
+      console.log('data', data)
       return data
     },
     statuses() {

@@ -184,6 +184,7 @@ const user = {
     "username": "abi@ababmi.com",
     "password": "aBambi123",
     "imgUrl": "http://some-img.jpg",
+    "boards": ["b101", "b102"],
     "mentions": [{
         "id": "m101",
         "boardId": "m101",

@@ -6,6 +6,7 @@ import homePage from '../views/home-page.vue'
 import mainApp from '../views/board-app.vue'
 import mainTable from '../views/board-views/main-table.vue'
 import chart from '../views/board-views/chart.vue'
+import myWork from '../views/my-work.vue'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -24,6 +25,11 @@ const router = createRouter({
         { path: '', component: mainTable },
         { path: 'chart', component: chart },
       ],
+    },
+    {
+      path: '/my-work',
+      name: 'my-work',
+      component: myWork,
     },
   ],
 })
