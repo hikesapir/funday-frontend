@@ -7,8 +7,8 @@
     <form @submit.prevent="onSubmit">
       <input
         type="text"
-        @focus="toggleFocues"
-        @blur="toggleFocues"
+        @focus="toggleFocus"
+        @blur="onSubmit"
         v-model="task.title"
         placeholder="+ Add task"
       />
@@ -33,13 +33,15 @@ export default {
   },
   methods: {
     onSubmit() {
+      this.isFocused = false
+      if (!this.task.title) return
       this.$emit(
         'taskAdded',
         JSON.parse(JSON.stringify(this.task))
       )
       this.task = boardService.getEmptyTask()
     },
-    toggleFocues() {
+    toggleFocus() {
       this.isFocused = !this.isFocused
     },
   },

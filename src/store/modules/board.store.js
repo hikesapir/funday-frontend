@@ -84,13 +84,12 @@ export default {
       state.boards = JSON.parse(JSON.stringify(boards))
     },
     loadBoard(state, { board }) {
-      state.board = JSON.parse(JSON.stringify(board))
+      state.board = board
       state.boardForDisplay = JSON.parse(
         JSON.stringify(board)
       )
     },
     onSetFilter(state, { filterBy }) {
-      console.log(filterBy)
       state.filterBy = JSON.parse(JSON.stringify(filterBy))
       const board = JSON.parse(JSON.stringify(state.board))
       const regex = new RegExp(filterBy.txt, 'i')
@@ -117,7 +116,9 @@ export default {
       state.isDraggingGroup = !state.isDraggingGroup
     },
     addTask(state, { groupIdx, savedTask }) {
-      state.board.groups[groupIdx].tasks.push(savedTask)
+      state.boardForDisplay.groups[groupIdx].tasks.push(
+        savedTask
+      )
     },
     updateTask(state, { groupId, updatedTask }) {
       const groupIdx =
@@ -225,7 +226,8 @@ export default {
           task.timeline = data.timeline
           await boardService.saveTask(
             state.board._id,
-            groupId
+            groupId,
+            task
           )
           break
         case 'file-picker':
@@ -272,16 +274,18 @@ export default {
     },
     async saveTask({ commit, state }, { groupId, task }) {
       var savedTask = null
-      const idx = state.board.groups.findIndex(
+      const idx = state.boardForDisplay.groups.findIndex(
         (group) => group.id === groupId
       )
+      console.log('groupId', groupId)
       if (idx !== -1) {
         savedTask = await boardService.saveTask(
-          state.board._id,
+          state.boardForDisplay._id,
           groupId,
           task
         )
       }
+      console.log('savedTask', savedTask)
       commit({
         type: 'addTask',
         groupIdx: idx,
@@ -293,7 +297,7 @@ export default {
       { dropResult, entities, entityType }
     ) {
       var board = JSON.parse(
-        JSON.stringify(context.state.board)
+        JSON.stringify(context.state.boardForDisplay)
       )
       entities = JSON.parse(JSON.stringify(entities))
       var groupId = ''
@@ -323,16 +327,17 @@ export default {
         }
       }
       if (entityType === 'tasks') {
-        const idx = context.state.board.groups.findIndex(
-          (group) => group.id === groupId
-        )
+        const idx =
+          context.state.boardForDisplay.groups.findIndex(
+            (group) => group.id === groupId
+          )
         context.commit({
           type: 'setTasksOrder',
           result: entities,
           idx,
         })
         boardService.saveTasksOrder(
-          context.state.board._id,
+          context.state.boardForDisplay._id,
           idx,
           entities
         )

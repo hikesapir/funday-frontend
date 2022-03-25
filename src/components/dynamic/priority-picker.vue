@@ -3,11 +3,11 @@
     :style="getStyle"
     class="priority-picker-col priority"
     data-toggle="p-dropdown"
-    @click="isDropOpen = !isDropOpen"
+    @click="toggleDropDown"
     tabindex="-1"
   >
     {{ txt }}
-    <div v-if="isDropOpen">
+    <div v-show="isDropOpen">
       <drop-down
         :labels="priorities"
         @update="updateTask"
@@ -50,6 +50,9 @@ export default {
         val,
         task: this.task,
       })
+    },
+    toggleDropDown() {
+      this.isDropOpen = !this.isDropOpen
     },
   },
   computed: {

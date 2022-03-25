@@ -37,7 +37,7 @@ async function query(filterBy = null) {
     } catch (err) {
       console.log(
         'boardService: could not load boards with filter- ' +
-        filterBy
+          filterBy
       )
     }
   }
@@ -76,8 +76,9 @@ async function saveTask(boardId, groupId, taskToSave) {
   const board = boards.find(
     (board) => board._id === boardId
   )
+
   const idx = board.groups.findIndex(
-    (group) => (group.id = groupId)
+    (group) => group.id === groupId
   )
   try {
     if (taskToSave.id) {
@@ -91,6 +92,7 @@ async function saveTask(boardId, groupId, taskToSave) {
       taskToSave.id = utilService.makeId(8)
       taskToSave.byMember = userService.getLoggedinUser()
       board.groups[idx].tasks.push(taskToSave)
+
       await storageService.put(KEY, board)
       return taskToSave
     }
@@ -99,9 +101,9 @@ async function saveTask(boardId, groupId, taskToSave) {
   }
 }
 
-async function getGroupById(boardIdx, groupId) { }
+async function getGroupById(boardIdx, groupId) {}
 
-function removeTask(taskId) { }
+function removeTask(taskId) {}
 
 function getEmptyTask() {
   return {
