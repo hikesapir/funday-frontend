@@ -5,7 +5,12 @@
     data-toggle="s-dropdown"
     @click="isDropOpen = !isDropOpen"
   >
-    {{ txt }}
+    <img
+      v-if="isAchieved"
+      class="confetti"
+      src="https://sunday-app-pro.herokuapp.com/img/done.900c9a2e.gif"
+    />
+    <p>{{ txt }}</p>
     <div v-if="isDropOpen">
       <drop-down
         :labels="statuses"
@@ -32,12 +37,17 @@ export default {
     return {
       isDropOpen: false,
       statuses: this.$store.getters.board?.labels.status,
+      isAchieved: false,
     }
   },
 
   methods: {
     updateTask(val) {
       this.isDropOpen = false
+      if (val === 's001') {
+        this.isAchieved = true
+        setTimeout(() => (this.isAchieved = false), 2000)
+      }
       this.$emit('update', {
         cmpType: `status-picker`,
         val,
