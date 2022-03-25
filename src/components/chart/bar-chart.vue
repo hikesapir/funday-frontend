@@ -14,6 +14,7 @@ export default {
   data() {
     return {
       chartOptions: {
+        title: '',
         series: [
           {
             type: 'column',
@@ -32,11 +33,6 @@ export default {
       },
     }
   },
-  created() {
-    console.log(
-      'this.chartOptions.series[0].data',
-      this.categories
-    )
-  },
+  created() {},
 }
 </script>

@@ -5,8 +5,10 @@
         <div class="drop cut2"></div>
       </div>
       <div class="list">
-        <ul v-for="label in labels" :key="label">
+        <ul>
           <li
+            v-for="label in labels"
+            :key="label.id"
             tabindex="-1"
             @click.stop="updateTask(label.id)"
             :style="{ 'background-color': label.color }"

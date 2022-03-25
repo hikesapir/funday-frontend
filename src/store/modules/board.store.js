@@ -23,22 +23,26 @@ export default {
     cmpsOrder({ board }) {
       return board.cmpsOrder
     },
-    chartData({ board }) {
-      var statusMapCount = null
-      var priorityMapCount = null
-      if (!board?.groups) return
+    chartData({ boardForDisplay }) {
+      var statusMapCount = []
+      var priorityMapCount = []
+      if (!boardForDisplay?.groups) return
       const groups = JSON.parse(
-        JSON.stringify(board.groups)
+        JSON.stringify(boardForDisplay.groups)
       )
       groups.forEach((group) => {
-        statusMapCount = group.tasks.reduce((acc, task) => {
-          if (!task.status) return acc
-          acc[task.status] = acc[task.status]
-            ? acc[task.status]++
-            : 1
-          return acc
-        }, {})
-        priorityMapCount = group.tasks.reduce(
+        const groupStatusCount = group.tasks.reduce(
+          (acc, task) => {
+            if (!task.status) return acc
+            acc[task.status] = acc[task.status]
+              ? acc[task.status]++
+              : 1
+            return acc
+          },
+          {}
+        )
+        statusMapCount.push(groupStatusCount)
+        const groupPriCount = group.tasks.reduce(
           (acc, task) => {
             if (!task.priority) return
             acc[task.priority] = acc[task.priority]
@@ -48,7 +52,30 @@ export default {
           },
           {}
         )
+        priorityMapCount.push(groupPriCount)
       })
+      statusMapCount = statusMapCount.reduce(
+        (acc, statusMap) => {
+          for (var status in statusMap) {
+            const statusCount = statusMap[status]
+            if (!acc[status]) acc[status] = statusCount
+            else acc[status] += statusCount
+          }
+          return acc
+        },
+        {}
+      )
+      priorityMapCount = priorityMapCount.reduce(
+        (acc, priMap) => {
+          for (var pri in priMap) {
+            const priCount = priMap[pri]
+            if (!acc[pri]) acc[pri] = priCount
+            else acc[pri] += priCount
+          }
+          return acc
+        },
+        {}
+      )
       return { statusMapCount, priorityMapCount }
     },
   },
@@ -63,23 +90,24 @@ export default {
       )
     },
     onSetFilter(state, { filterBy }) {
-      console.log(filterBy);
+      console.log(filterBy)
       state.filterBy = JSON.parse(JSON.stringify(filterBy))
       const board = JSON.parse(JSON.stringify(state.board))
       const regex = new RegExp(filterBy.txt, 'i')
-      var filteredGroups = board.groups.filter(
-        (group) => {
-          if (regex.test(group.title) && !filterBy.member) return group
-          var tasks = group.tasks.filter((task) =>
-            regex.test(task.title)
+      var filteredGroups = board.groups.filter((group) => {
+        if (regex.test(group.title) && !filterBy.member)
+          return group
+        var tasks = group.tasks.filter((task) =>
+          regex.test(task.title)
+        )
+        tasks = tasks.filter((task) => {
+          return task.members.some(
+            (member) => member._id === filterBy.member
           )
-          tasks=tasks.filter(task => {
-            return task.members.some(member => member._id === filterBy.member)
-          })
-          group.tasks = tasks
-          if (group.tasks.length > 0) return group
-        }
-      )
+        })
+        group.tasks = tasks
+        if (group.tasks.length > 0) return group
+      })
       // filteredGroups = filteredGroups.filter(group)
       state.boardForDisplay.groups = JSON.parse(
         JSON.stringify(filteredGroups)
