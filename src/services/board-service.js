@@ -1,6 +1,7 @@
 import { utilService } from './util-service.js'
 import { storageService } from './async-storage-service.js'
 import userService from './user-service.js'
+
 export default {
   query,
   getById,
@@ -11,6 +12,7 @@ export default {
   saveTasksOrder,
   getEmptyGroup,
   saveGroup,
+  removeGroup,
 }
 
 const KEY = 'board_db'
@@ -77,11 +79,18 @@ function saveGroup(group, board) {
   return saveBoard(board)
 }
 
+function removeGroup(groupId, board) {
+  console.log(groupId);
+  const idx = board.groups.findIndex(group => group.id === groupId)
+  board.groups.splice(idx, 1)
+  return saveBoard(board)
+}
+
 function getEmptyGroup() {
   return {
     // id: utilService.makeId(),
     title: 'New Group',
-    style: {color: utilService.getRandomColor()},
+    style: { color: utilService.getRandomColor() },
     tasks: [],
   }
 }

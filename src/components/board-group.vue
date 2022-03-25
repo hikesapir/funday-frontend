@@ -17,7 +17,7 @@
       </div>
       <section v-if="openContext" class="context-modal">
         <button>Rename Group</button>
-        <button>Delete</button>
+        <button @click="remove">Delete</button>
       </section>
       <Container
         orientation="horizontal"
@@ -117,6 +117,9 @@ export default {
         entityType,
       })
     },
+    remove(){
+        this.$store.dispatch({type:'removeGroup',id:this.group.id})
+    }
   },
 }
 </script>

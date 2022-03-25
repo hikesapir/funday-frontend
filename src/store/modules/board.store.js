@@ -435,10 +435,23 @@ export default {
       }
     },
     async saveGroup({ state, dispatch }, { group }) {
-      const groupToSave = group || boardService.getEmptyGroup()
-      const board = await boardService.saveGroup(groupToSave, JSON.parse(JSON.stringify(state.board)))
-      console.log(board);
-      dispatch({ type: 'loadBoard', id: board._id })
-    }
+      try {
+        const groupToSave = group || boardService.getEmptyGroup()
+        const board = await boardService.saveGroup(groupToSave, JSON.parse(JSON.stringify(state.board)))
+        console.log(board);
+        dispatch({ type: 'loadBoard', id: board._id })
+      } catch (err) {
+        console.log('saveGroup err', err)
+      }
+    },
+    async removeGroup({ state, dispatch }, { id }) {
+      try {
+        await boardService.removeGroup(id, JSON.parse(JSON.stringify(state.board)))
+        // context.commit({ type: 'removeBoard', boardId })
+        dispatch({ type: 'loadBoard', id: state.board._id })
+      } catch (err) {
+        console.log('removeGroup err', err)
+      }
+    },
   },
 }
