@@ -22,57 +22,56 @@
 </template>
 
 <script>
-import dropDown from './drop-down.vue'
+import dropDown from "./drop-down.vue";
 export default {
   components: { dropDown },
-  name: 'priority-picker',
+  name: "priority-picker",
   props: {
     task: Object,
+    groupId: String,
   },
   data() {
     return {
       isDropOpen: false,
       priorities: this.$store.getters.board.labels.priority,
-      selectedPriority: '',
-    }
+    };
   },
   created() {
     this.selectedPriority = this.priorities.find(
       (priority) => priority.id === this.task.priority
-    )
+    );
   },
   methods: {
     updateTask(val) {
-      this.isDropOpen = false
+      this.isDropOpen = false;
 
-      this.$emit('update', {
+      this.$emit("update", {
         cmpType: `priority-picker`,
         val,
         task: this.task,
-      })
+      });
     },
     toggleDropDown() {
-      this.isDropOpen = !this.isDropOpen
+      this.isDropOpen = !this.isDropOpen;
     },
   },
   computed: {
     txt() {
-      const { priority } = this.$store.getters.board?.labels
-      const currPriority = priority?.find(
-        (s) => s.id === this.task.priority
-      )
-      return currPriority.txt
+      const { priority } = this.$store.getters.board?.labels;
+      const currPriority = priority?.find((s) => s.id === this.task.priority);
+      return currPriority.txt;
     },
     getStyle() {
-      const { priority } = this.$store.getters.board?.labels
-      const currPriority = priority?.find(
-        (s) => s.id === this.task.priority
-      )
+      const { priority } = this.$store.getters.board?.labels;
+      const currPriority = priority?.find((s) => s.id === this.task.priority);
       return {
         backgroundColor: currPriority?.color,
-        color: 'white',
-      }
+        color: "white",
+      };
+    },
+    groupMapObject() {
+      return this.$store.getters.groupMapObject;
     },
   },
-}
+};
 </script>

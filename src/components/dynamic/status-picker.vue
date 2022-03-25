@@ -5,9 +5,16 @@
     data-toggle="s-dropdown"
     @click="isDropOpen = !isDropOpen"
   >
-    <ConfettiExplosion :particleCount="200" :force="0.3" />
-
-    {{ txt }}
+    <!-- <ConfettiExplosion
+      v-if="isAchieved"
+      :particleCount="200"
+      :force="0.3"
+    /> -->
+    <img
+      v-if="isAchieved"
+      src="https://sunday-app-pro.herokuapp.com/img/done.900c9a2e.gif"
+    />
+    <p>{{ txt }}</p>
     <div v-if="isDropOpen">
       <drop-down
         :labels="statuses"
@@ -23,7 +30,6 @@
 </template>
 
 <script>
-import ConfettiExplosion from 'vue-confetti-explosion'
 import dropDown from './drop-down.vue'
 export default {
   components: { dropDown },
@@ -35,12 +41,16 @@ export default {
     return {
       isDropOpen: false,
       statuses: this.$store.getters.board?.labels.status,
+      isAchieved: false,
     }
   },
 
   methods: {
     updateTask(val) {
       this.isDropOpen = false
+      this.isAchieved = true
+
+      setTimeout(() => (this.isAchieved = false), 2000)
       this.$emit('update', {
         cmpType: `status-picker`,
         val,

@@ -24,16 +24,20 @@
 
 <script>
 export default {
-  name: 'drop-down',
+  name: "drop-down",
   props: {
     labels: Array,
     type: String,
   },
   methods: {
     updateTask(val) {
-      this.$emit('update', val)
+      this.$emit("update", val);
+    },
+    addLabel() {
+      console.log(this.type);
+      this.$emit("labelAdded", val);
     },
   },
   computed: {},
-}
+};
 </script>
