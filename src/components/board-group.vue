@@ -23,6 +23,7 @@
           :class="cmp.cmpName + '-col' + ' cols-drag-handle title-head'"
           :key="cmp.cmpName"
         >
+          <!-- <i class="fa-solid fa-grip-vertical"></i> -->
           {{ cmp.preName }}
         </Draggable>
       </Container>
