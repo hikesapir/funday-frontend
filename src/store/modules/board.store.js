@@ -12,7 +12,7 @@ export default {
     filterBy: {
       txt: '',
     },
-    boardMapByGroups: []
+    boardMapByGroups: [],
   },
   getters: {
     boards({ boards }) {
@@ -40,8 +40,8 @@ export default {
           (acc, task) => {
             if (!task.status) return acc
             acc[task.status]
-              ? acc[task.status] += 1
-              : acc[task.status] = 1
+              ? (acc[task.status] += 1)
+              : (acc[task.status] = 1)
             return acc
           },
           {}
@@ -54,8 +54,8 @@ export default {
           (acc, task) => {
             if (!task.priority) return acc
             acc[task.priority]
-              ? acc[task.priority] += 1
-              : acc[task.priority] = 1
+              ? (acc[task.priority] += 1)
+              : (acc[task.priority] = 1)
             return acc
           },
           {}
@@ -66,14 +66,13 @@ export default {
 
         const timelineMap = {
           start: [],
-          end: []
+          end: [],
         }
 
-        group.tasks.forEach(task => {
-          timelineMap.start.push(task.timeline.start);
-          timelineMap.end.push(task.timeline.end);
-        }
-        )
+        group.tasks.forEach((task) => {
+          timelineMap.start.push(task.timeline.start)
+          timelineMap.end.push(task.timeline.end)
+        })
 
         const groupTimelineCalc = {
           start: Math.min(...timelineMap.start),
@@ -83,27 +82,33 @@ export default {
         //Tags Summary:
 
         const groupTagsMap = []
-        group.tasks.forEach(task => {
+        group.tasks.forEach((task) => {
           let taskTags = task.tags
-          taskTags.forEach(taskTag => {
-            if (!groupTagsMap.length || !groupTagsMap.some(tag => {
-              return tag.txt === taskTag.txt
-            })) groupTagsMap.push(taskTag)
-          }
-          )
+          taskTags.forEach((taskTag) => {
+            if (
+              !groupTagsMap.length ||
+              !groupTagsMap.some((tag) => {
+                return tag.txt === taskTag.txt
+              })
+            )
+              groupTagsMap.push(taskTag)
+          })
         })
 
         //Members Summary:
 
         const groupMemberMap = []
-        group.tasks.forEach(task => {
+        group.tasks.forEach((task) => {
           let taskMembers = task.members
-          taskMembers.forEach(taskMember => {
-            if (!groupMemberMap.length || !groupMemberMap.some(member => {
-              return member._id === taskMember._id
-            })) groupMemberMap.push(taskMember)
-          }
-          )
+          taskMembers.forEach((taskMember) => {
+            if (
+              !groupMemberMap.length ||
+              !groupMemberMap.some((member) => {
+                return member._id === taskMember._id
+              })
+            )
+              groupMemberMap.push(taskMember)
+          })
         })
 
         const groupSumMap = {
@@ -112,13 +117,11 @@ export default {
           tags: groupTagsMap,
           timeline: groupTimelineCalc,
           priority: groupPriCount,
-          groupStatusCount: groupStatusCount
+          groupStatusCount: groupStatusCount,
         }
-
 
         boardMapByGroups.push(groupSumMap)
         // console.log(boardMapByGroups)
-
       })
       statusMapCount = statusMapCount.reduce(
         (acc, statusMap) => {
@@ -142,7 +145,11 @@ export default {
         },
         {}
       )
-      return { statusMapCount, priorityMapCount, boardMapByGroups }
+      return {
+        statusMapCount,
+        priorityMapCount,
+        boardMapByGroups,
+      }
     },
   },
   mutations: {
@@ -391,6 +398,12 @@ export default {
           )
         }
       }
+      console.log(
+        'dropResult',
+        dropResult,
+        entityType,
+        groupId
+      )
       if (entityType === 'tasks') {
         const idx =
           context.state.boardForDisplay.groups.findIndex(
@@ -401,11 +414,7 @@ export default {
           result: entities,
           idx,
         })
-        boardService.saveTasksOrder(
-          context.state.boardForDisplay._id,
-          idx,
-          entities
-        )
+        context.dispatch({ type: 'saveBoard', board })
       } else {
         board[entityType] = entities
         if (entityType === 'cmpsOrder') {
