@@ -233,6 +233,7 @@ export default {
         case 'file-picker':
           break
         case 'member-picker':
+          task.members = data.members
           await boardService.saveTask(
             state.board._id,
             groupId,
@@ -277,7 +278,6 @@ export default {
       const idx = state.boardForDisplay.groups.findIndex(
         (group) => group.id === groupId
       )
-      console.log('groupId', groupId)
       if (idx !== -1) {
         savedTask = await boardService.saveTask(
           state.boardForDisplay._id,
@@ -285,7 +285,6 @@ export default {
           task
         )
       }
-      console.log('savedTask', savedTask)
       commit({
         type: 'addTask',
         groupIdx: idx,
@@ -343,7 +342,6 @@ export default {
         )
       } else {
         board[entityType] = entities
-        context.dispatch({ type: 'saveBoard', board })
         if (entityType === 'cmpsOrder') {
           context.commit({
             type: 'setCmpsOrder',
@@ -355,6 +353,7 @@ export default {
             newOrder: entities,
           })
         }
+        context.dispatch({ type: 'saveBoard', board })
       }
     },
   },

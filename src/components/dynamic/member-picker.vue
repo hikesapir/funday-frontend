@@ -10,7 +10,10 @@
     />
     <fa icon="circle-plus" @click.stop="addMembers" />
 
-    <div v-if="addMembersMode" class="context-modal member-picker-modal-item">
+    <div
+      v-if="addMembersMode"
+      class="context-modal member-picker-modal-item"
+    >
       <label class="member-picker-modal-item">
         <input
           class="member-picker-modal-item"
@@ -24,9 +27,15 @@
         <span class="people">People</span>
       </div>
 
-      <span class="member-preview flex" v-for="member in membersList" :key="member">
+      <span
+        class="member-preview flex"
+        v-for="member in membersList"
+        :key="member"
+      >
         <img :src="member.imgUrl" />
-        <span @click.stop="addMember(member)">{{ member.fullname }}</span>
+        <span @click.stop="addMember(member)">{{
+          member.fullname
+        }}</span>
       </span>
     </div>
   </div>
@@ -53,7 +62,9 @@ export default {
     membersList() {
       var membersList = this.$store.getters.board.members
       const regex = new RegExp(this.filterBy, 'i')
-      membersList = membersList.filter(member => regex.test(member.fullname))
+      membersList = membersList.filter((member) =>
+        regex.test(member.fullname)
+      )
       return membersList
     },
   },
@@ -71,11 +82,13 @@ export default {
       })
     },
     addMember(member) {
-      console.log(member)
-      this.members.push(JSON.parse(JSON.stringify(member)))
+      const members = JSON.parse(
+        JSON.stringify(this.task.members)
+      )
+      members.push(JSON.parse(JSON.stringify(member)))
       this.$emit('update', {
         cmpType: `member-picker`,
-        members: this.members,
+        members,
         task: this.task,
       })
     },
