@@ -1,6 +1,22 @@
 .board-app-container {
   display: flex;
   width: 100%;
+<<<<<<< HEAD
+=======
+  
+  .bord-header-wrapper{
+    // background-color: blueviolet;
+    position: sticky;
+    left: 0px;
+    /* z-index: 3000; */
+    width: 100%;
+  }
+
+  .main-table {
+    padding: 0 30px;
+
+  }
+>>>>>>> 47b0dffb5d319ec75a0febb76dc64175303ffde8
 
   .board-nav {
     height: 100%;
