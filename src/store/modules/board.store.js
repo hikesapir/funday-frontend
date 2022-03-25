@@ -12,6 +12,7 @@ export default {
     filterBy: {
       txt: '',
     },
+    boardMapByGroups: []
   },
   getters: {
     boards({ boards }) {
@@ -23,36 +24,101 @@ export default {
     cmpsOrder({ board }) {
       return board.cmpsOrder
     },
-    chartData({ boardForDisplay }) {
+    boardData({ boardForDisplay }) {
       var statusMapCount = []
       var priorityMapCount = []
       if (!boardForDisplay?.groups) return
       const groups = JSON.parse(
         JSON.stringify(boardForDisplay.groups)
       )
+
+      //Status calculation:
+      const boardMapByGroups = []
+
       groups.forEach((group) => {
         const groupStatusCount = group.tasks.reduce(
           (acc, task) => {
             if (!task.status) return acc
-            acc[task.status] = acc[task.status]
-              ? acc[task.status]++
-              : 1
+            acc[task.status]
+              ? acc[task.status] += 1
+              : acc[task.status] = 1
             return acc
           },
           {}
         )
         statusMapCount.push(groupStatusCount)
+
+        //Priority calculation:
+
         const groupPriCount = group.tasks.reduce(
           (acc, task) => {
-            if (!task.priority) return
-            acc[task.priority] = acc[task.priority]
-              ? acc[task.priority]++
-              : 1
+            if (!task.priority) return acc
+            acc[task.priority]
+              ? acc[task.priority] += 1
+              : acc[task.priority] = 1
             return acc
           },
           {}
         )
         priorityMapCount.push(groupPriCount)
+
+        // Timeline calculation:
+
+        const timelineMap = {
+          start: [],
+          end: []
+        }
+
+        group.tasks.forEach(task => {
+          timelineMap.start.push(task.timeline.start);
+          timelineMap.end.push(task.timeline.end);
+        }
+        )
+
+        const groupTimelineCalc = {
+          start: Math.min(...timelineMap.start),
+          end: Math.min(...timelineMap.end),
+        }
+
+        //Tags Summary:
+
+        const groupTagsMap = []
+        group.tasks.forEach(task => {
+          let taskTags = task.tags
+          taskTags.forEach(taskTag => {
+            if (!groupTagsMap.length || !groupTagsMap.some(tag => {
+              return tag.txt === taskTag.txt
+            })) groupTagsMap.push(taskTag)
+          }
+          )
+        })
+
+        //Members Summary:
+
+        const groupMemberMap = []
+        group.tasks.forEach(task => {
+          let taskMembers = task.members
+          taskMembers.forEach(taskMember => {
+            if (!groupMemberMap.length || !groupMemberMap.some(member => {
+              return member._id === taskMember._id
+            })) groupMemberMap.push(taskMember)
+          }
+          )
+        })
+
+        const groupSumMap = {
+          _id: group.id,
+          member: groupMemberMap,
+          tags: groupTagsMap,
+          timeline: groupTimelineCalc,
+          priority: groupPriCount,
+          groupStatusCount: groupStatusCount
+        }
+
+
+        boardMapByGroups.push(groupSumMap)
+        // console.log(boardMapByGroups)
+
       })
       statusMapCount = statusMapCount.reduce(
         (acc, statusMap) => {
@@ -76,7 +142,7 @@ export default {
         },
         {}
       )
-      return { statusMapCount, priorityMapCount }
+      return { statusMapCount, priorityMapCount, boardMapByGroups }
     },
   },
   mutations: {

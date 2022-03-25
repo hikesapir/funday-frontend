@@ -22,54 +22,45 @@
         </span>
       </div>
     </div>
-    <div
-      class="edit-icon"
-      tabindex="0"
-      @blur="toggleEditTask"
-    >
-      <button
-        class="edit-title-btn"
-        @click="toggleEditTask"
-      >
-        Edit
-      </button>
+    <div class="edit-icon" tabindex="0" @blur="toggleEditTask">
+      <button class="edit-title-btn" @click="toggleEditTask">Edit</button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'title-picker',
+  name: "title-picker",
   props: {
     task: Object,
     groupId: String,
   },
   data() {
-    return { isEditing: false, title: '' }
+    return { isEditing: false, title: "" };
   },
   created() {
-    this.title = this.task.title
+    this.title = this.task.title;
   },
   computed: {
     labelColor() {
       return this.$store.getters.board?.groups.find(
         (group) => group.id === this.groupId
-      )
+      );
     },
   },
   methods: {
     toggleEditTask() {
-      this.isEditing = !this.isEditing
-      setTimeout(() => this.$refs.input.focus(), 0)
+      this.isEditing = !this.isEditing;
+      setTimeout(() => this.$refs.input.focus(), 0);
     },
     saveTitle() {
-      this.isEditing = false
-      this.$emit('update', {
-        cmpType: 'title-picker',
+      this.isEditing = false;
+      this.$emit("update", {
+        cmpType: "title-picker",
         title: this.title,
         task: this.task,
-      })
+      });
     },
   },
-}
+};
 </script>
