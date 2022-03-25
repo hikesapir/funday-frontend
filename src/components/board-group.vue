@@ -1,11 +1,11 @@
 <template>
   <section class="board-group">
-    <div class="table-head">
+    <div class="table-head" style="cursor: default;" >
       <div
         class="th-title title-picker-col"
         :style="{ color: group.style?.color }"
       >
-        <span class="drag-handle">
+        <span class="drag-handle" style="cursor: grab;" >
           <i class="fa-solid fa-grip-vertical"></i>
         </span>
         {{ group.title }}
