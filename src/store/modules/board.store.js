@@ -19,7 +19,7 @@ export default {
       return boards
     },
     board({ boardForDisplay }) {
-      return  JSON.parse(JSON.stringify(boardForDisplay)) 
+      return JSON.parse(JSON.stringify(boardForDisplay))
     },
     cmpsOrder({ board }) {
       return board.cmpsOrder
@@ -274,13 +274,8 @@ export default {
     },
     async saveBoard(context, { board }) {
       try {
-        const savedBoard = await boardService.saveBoard(
-          board
-        )
-        context.commit({
-          type: 'saveBoard',
-          savedBoard,
-        })
+        await boardService.saveBoard(board)
+        context.dispatch({ type: 'loadBoard', id: board._id })
       } catch (err) {
         console.log('saveBoard err', err)
       }
