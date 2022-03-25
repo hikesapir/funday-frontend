@@ -1,10 +1,24 @@
 <template>
   <section class="sum-preview">
-    <pre> {{ boardMapByGroup }}</pre>
+    <component
+      v-for="cmp in cmpsOrder"
+      :class="cmp + '-sum'"
+      :is="cmp"
+      :key="cmp"
+      :data="boardData"
+      :groupId="groupId"
+    ></component>
   </section>
 </template>
 
 <script>
+import fileSum from "./dynamic/sum-cmps/file-sum.vue";
+import membersSum from "./dynamic/sum-cmps/member-sum.vue";
+import prioritySum from "./dynamic/sum-cmps/priority-sum.vue";
+import statusSum from "./dynamic/sum-cmps/status-sum.vue";
+import tagsSum from "./dynamic/sum-cmps/tags-sum.vue";
+import timelineSum from "./dynamic/sum-cmps/timeline-sum.vue";
+
 export default {
   name: "sum-preview",
   props: {
@@ -13,12 +27,30 @@ export default {
   data() {
     return {};
   },
+  components: {
+    fileSum,
+    membersSum,
+    prioritySum,
+    statusSum,
+    tagsSum,
+    timelineSum,
+  },
+  methods: {},
   computed: {
-    boardMapByGroup() {
-      return this.$store.getters.boardData.boardMapByGroups;
+    cmpsOrder() {
+      return [
+        "file-sum",
+        "members-sum",
+        "priority-sum",
+        "status-sum",
+        "tags-sum",
+        "timeline-sum",
+      ];
+    },
+    boardData() {
+      const { boardMapByGroups } = this.$store.getters.boardData;
+      return boardMapByGroups;
     },
   },
-
-  methods: {},
 };
 </script>

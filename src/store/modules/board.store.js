@@ -12,7 +12,6 @@ export default {
     filterBy: {
       txt: '',
     },
-    boardMapByGroups: []
   },
   getters: {
     boards({ boards }) {
@@ -117,7 +116,6 @@ export default {
 
 
         boardMapByGroups.push(groupSumMap)
-        // console.log(boardMapByGroups)
 
       })
       statusMapCount = statusMapCount.reduce(
