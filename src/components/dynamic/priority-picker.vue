@@ -69,9 +69,6 @@ export default {
         color: "white",
       };
     },
-    groupMapObject() {
-      return this.$store.getters.groupMapObject;
-    },
   },
 };
 </script>

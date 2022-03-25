@@ -1,0 +1,19 @@
+.sum-preview {
+  display: flex;
+  justify-content: space-between;
+  height: 35px;
+
+  .members-sum-sum {
+    display: flex;
+    // background-color:;
+
+    img {
+      height: 30px;
+      width: 30px;
+      border: 2px solid white;
+      border-radius: 20px;
+      object-fit: contain;
+      margin: 0 -4px;
+    }
+  }
+}

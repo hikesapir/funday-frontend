@@ -9,6 +9,7 @@ export default {
   saveBoard,
   removeBoard,
   saveTasksOrder,
+  getEmptyGroup,
 }
 
 const KEY = 'board_db'
@@ -104,6 +105,14 @@ async function saveTask(boardId, groupId, taskToSave) {
 async function getGroupById(boardIdx, groupId) { }
 
 function removeTask(taskId) { }
+
+function getEmptyGroup(){
+  return{
+    title: 'New Group',
+    style:'',
+    tasks:'',
+  }
+}
 
 function getEmptyTask() {
   return {

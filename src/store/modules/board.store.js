@@ -12,7 +12,6 @@ export default {
     filterBy: {
       txt: '',
     },
-    boardMapByGroups: [],
   },
   getters: {
     boards({ boards }) {
@@ -121,7 +120,6 @@ export default {
         }
 
         boardMapByGroups.push(groupSumMap)
-        // console.log(boardMapByGroups)
       })
       statusMapCount = statusMapCount.reduce(
         (acc, statusMap) => {
@@ -430,6 +428,11 @@ export default {
         }
         context.dispatch({ type: 'saveBoard', board })
       }
+    },
+    saveGroup({ commit, state }, { group }) {
+      const groupToSave =
+        group || boardService.getEmptyGroup()
+      console.log(groupToSave)
     },
   },
 }
