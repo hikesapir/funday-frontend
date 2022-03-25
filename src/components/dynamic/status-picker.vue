@@ -5,6 +5,8 @@
     data-toggle="s-dropdown"
     @click="isDropOpen = !isDropOpen"
   >
+    <ConfettiExplosion :particleCount="200" :force="0.3" />
+
     {{ txt }}
     <div v-if="isDropOpen">
       <drop-down
@@ -21,6 +23,7 @@
 </template>
 
 <script>
+import ConfettiExplosion from 'vue-confetti-explosion'
 import dropDown from './drop-down.vue'
 export default {
   components: { dropDown },
