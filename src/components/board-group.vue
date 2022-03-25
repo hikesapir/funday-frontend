@@ -1,16 +1,24 @@
 <template>
   <section class="board-group">
-    <div class="table-head" style="cursor: default">
+    <div class="table-head relative" style="cursor: default">
       <div
         class="th-title title-picker-col"
         :style="{ color: group.style?.color }"
+        @mouseover="isHover = true"
+        @mouseleave="isHover = false"
       >
-        <span class="drag-handle" style="cursor: grab">
+        <span @click="openContext = !openContext">
+          <i class="fa-solid fa-circle-chevron-down"></i>
+        </span>
+        <span v-if="isHover" class="drag-handle" style="cursor: grab">
           <i class="fa-solid fa-grip-vertical"></i>
         </span>
         {{ group.title }}
       </div>
-
+      <section v-if="openContext" class="context-modal">
+        <button>Rename Group</button>
+        <button>Delete</button>
+      </section>
       <Container
         orientation="horizontal"
         @drop="onDrop($event, 'cmpsOrder')"
@@ -39,10 +47,7 @@
       drag-handle-selector=".task-drag-handle"
       drag-class="drag-task"
     >
-      <Draggable
-        v-for="task in group?.tasks"
-        :key="task.id"
-      >
+      <Draggable v-for="task in group?.tasks" :key="task.id">
         <task-preview :task="task" :groupId="group.id" />
       </Draggable>
     </Container>
@@ -70,6 +75,12 @@ export default {
     addTask,
     Container,
     Draggable,
+  },
+  data() {
+    return {
+      isHover: false,
+      openContext: false,
+    }
   },
   computed: {
     cmps() {
@@ -109,3 +120,4 @@ export default {
   },
 }
 </script>
+

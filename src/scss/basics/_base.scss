@@ -4,6 +4,7 @@
 
 * button {
   cursor: pointer;
+  @include btn();
 }
 
 html {
