@@ -2,9 +2,15 @@
   <section class="filter-bar">
     <div class="new-item-btn-container">
       <button class="new-item-btn new-item">New Item</button>
-      <button class="new-item-btn chevron">
-        <i class="fa-solid fa-chevron-down"></i>
-      </button>
+      <div class="relative">
+        <button class="new-item-btn chevron" @click="openItemModal = !openItemModal">
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <section v-if="openItemModal" class="context-modal item-modal">
+          <button @click="addGroup">New group of Items</button>
+        </section>
+        <!-- <pre>{{filterBy}}</pre> -->
+      </div>
     </div>
     <div class="search">
       <button v-if="!openSearching" @click="openSearching = true">
@@ -20,15 +26,15 @@
         />
       </div>
     </div>
-    <button v-if="filterBy.member" class="search-btn" @click="clearSearchMember">
-      <img :src="currMember.imgUrl" /> Persons
-      <i class="fa-solid fa-circle-xmark"></i>
-    </button>
-    <button v-else @click="openPersonModal = !openPersonModal">
-      <i class="fa-solid fa-circle-user"></i>Person
-    </button>
-
     <div class="relative">
+      <button v-if="filterBy.member" class="search-btn" @click="clearSearchMember">
+        <img :src="currMember.imgUrl" /> Persons
+        <i class="fa-solid fa-circle-xmark"></i>
+      </button>
+      <button v-else @click="openPersonModal = !openPersonModal">
+        <i class="fa-solid fa-circle-user"></i>Person
+      </button>
+
       <section
         v-if="openPersonModal"
         class="context-modal"
@@ -74,6 +80,7 @@ export default {
       },
       openSearching: false,
       openPersonModal: false,
+      openItemModal: false,
     }
   },
   components: {},
@@ -86,6 +93,9 @@ export default {
       this.filterBy.member = ''
       this.search()
     },
+    addGroup() {
+      this.$store.dispatch({ type: 'saveGroup' })
+    }
   },
   computed: {
     isSearching() {
