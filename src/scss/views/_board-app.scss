@@ -2,11 +2,18 @@
   display: flex;
   width: 100%;
   
+  .bord-header-wrapper{
+    // background-color: blueviolet;
+    position: sticky;
+    left: 0px;
+    /* z-index: 3000; */
+    width: 100%;
+  }
 
-  // .main-table {
-  //   display: flex;
-  //   overflow-x: auto;
-  // }
+  .main-table {
+    padding: 0 30px;
+
+  }
 
   .board-nav {
     height: 100%;
