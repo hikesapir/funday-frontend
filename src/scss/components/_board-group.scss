@@ -11,6 +11,12 @@
     text-align: center;
   }
 
+  // .drag-cols {
+  //   color: aqua;
+  //   transition: transform 0.1s ease;
+  //   transform: rotate(2deg);
+  // }
+
   .drag-task {
     transition: transform 0.1s ease;
     transform: rotate(2deg);
@@ -24,6 +30,7 @@
 .member-picker-col {
   width: 98px;
   text-align: center;
+
   &:hover {
     background-color: $main-task-gray;
   }

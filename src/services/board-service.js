@@ -37,7 +37,7 @@ async function query(filterBy = null) {
     } catch (err) {
       console.log(
         'boardService: could not load boards with filter- ' +
-          filterBy
+        filterBy
       )
     }
   }
@@ -101,9 +101,9 @@ async function saveTask(boardId, groupId, taskToSave) {
   }
 }
 
-async function getGroupById(boardIdx, groupId) {}
+async function getGroupById(boardIdx, groupId) { }
 
-function removeTask(taskId) {}
+function removeTask(taskId) { }
 
 function getEmptyTask() {
   return {
@@ -315,7 +315,7 @@ function _createDemoData() {
                 start: 1649797200000,
                 end: 1647468000000,
               },
-              tags: [{ txt: 'second', color: 'blue' }],
+              tags: [{ txt: 'first', color: '#e2445c' }],
               files: [],
               updates: [
                 {
