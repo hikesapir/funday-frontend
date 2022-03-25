@@ -13,10 +13,19 @@
         <span v-if="isHover" class="drag-handle" style="cursor: grab">
           <i class="fa-solid fa-grip-vertical"></i>
         </span>
-        {{ group.title }}
+        <span>{{ group.title }}</span>
+        <label v-if="changeName">
+          <input
+            @keyup.enter="updateGroup"
+            @blur="updateGroup"
+            type="text"
+            v-model="group.title"
+            autofocus
+          />
+        </label>
       </div>
       <section v-if="openContext" class="context-modal">
-        <button>Rename Group</button>
+        <button @click="changeName = true, openContext = false">Rename Group</button>
         <button @click="remove">Delete</button>
       </section>
       <Container
@@ -80,6 +89,7 @@ export default {
     return {
       isHover: false,
       openContext: false,
+      changeName: false,
     }
   },
   computed: {
@@ -89,7 +99,6 @@ export default {
       return cmps
     },
   },
-  // },
   methods: {
     addTask(task) {
       this.$store.dispatch({
@@ -117,8 +126,12 @@ export default {
         entityType,
       })
     },
-    remove(){
-        this.$store.dispatch({type:'removeGroup',id:this.group.id})
+    remove() {
+      this.$store.dispatch({ type: 'removeGroup', id: this.group.id })
+    },
+    updateGroup() {
+      this.$store.dispatch({ type: 'saveGroup', group: this.group })
+      this.changeName = false
     }
   },
 }

@@ -19,7 +19,7 @@ export default {
       return boards
     },
     board({ boardForDisplay }) {
-      return boardForDisplay
+      return  JSON.parse(JSON.stringify(boardForDisplay)) 
     },
     cmpsOrder({ board }) {
       return board.cmpsOrder
@@ -438,7 +438,6 @@ export default {
       try {
         const groupToSave = group || boardService.getEmptyGroup()
         const board = await boardService.saveGroup(groupToSave, JSON.parse(JSON.stringify(state.board)))
-        console.log(board);
         dispatch({ type: 'loadBoard', id: board._id })
       } catch (err) {
         console.log('saveGroup err', err)

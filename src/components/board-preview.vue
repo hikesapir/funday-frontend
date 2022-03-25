@@ -1,34 +1,24 @@
 <template>
   <li
-    @click="selectBoard"
     v-if="board"
     class="board-preview"
     @mouseover="isHover = true"
     @mouseleave="isHover = false"
   >
     <label v-if="changeName">
-      <input
-        @keyup.enter="updateBoard"
-        @blur="updateBoard"
-        type="text"
-        v-model="newTitle"
-      />
+      <input @keyup.enter="updateBoard" @blur="updateBoard" type="text" v-model="newTitle" autofocus/>
     </label>
-    <div v-else class="bord-title">
+    <div v-else class="bord-title"  @click="selectBoard">
       <span>{{ board.title }}</span>
       <button
-        @click="openModal = !openModal"
+        @click.stop="openModal = !openModal"
         v-if="isHover || openModal"
       >
-        <i
-          tabindex="0"
-          @blur="openModal = false"
-          class="fa-solid fa-ellipsis"
-        ></i>
+        <i class="fa-solid fa-ellipsis"></i>
       </button>
     </div>
   </li>
-  <div class="relative">
+  <div class="relative" >
     <context-modal
       v-if="openModal"
       @remove="remove"
@@ -38,6 +28,8 @@
       @duplicate="duplicate"
     />
   </div>
+  <!-- tabindex="0"
+        @blur="openModal = false" -->
 </template>
 
 <script>
@@ -59,8 +51,8 @@ export default {
       newTitle: '',
     }
   },
-  created() {},
-  mounted() {},
+  created() { },
+  mounted() { },
   methods: {
     remove() {
       this.$store.dispatch({
@@ -72,11 +64,12 @@ export default {
     openNewTab() {
       window.open(
         window.location.origin +
-          `/#/boards/${this.board._id}`
+        `/#/boards/${this.board._id}`
       )
       this.openModal = false
     },
     renameBoard() {
+      console.log('got it');
       this.newTitle = this.board.title
       this.changeName = true
       this.openModal = false
@@ -118,6 +111,6 @@ export default {
     },
   },
   computed: {},
-  unmounted() {},
+  unmounted() { },
 }
 </script>
