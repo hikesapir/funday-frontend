@@ -2,6 +2,7 @@
   cursor: pointer;
   display: flex;
   width: 262px;
+  position: relative;
 
   .left-indicator-inner {
     width: 10px;
@@ -33,9 +34,18 @@
       background-color: #fefefe;
     }
   }
-
+  .start-conversation-container {
+    position: absolute;
+    right: 0;
+  }
   &:hover {
     color: $title-hover-blue;
+    .start-conversation-container {
+      color: $main-text-gray;
+      &:hover {
+        color: $title-hover-blue;
+      }
+    }
     .edit-title-btn {
       opacity: 1;
       pointer-events: all;
