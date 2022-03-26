@@ -1,9 +1,14 @@
 <template>
   <section class="filter-bar">
     <div class="new-item-btn-container">
-      <button class="new-item-btn new-item" @click="addNewItem">New Item</button>
+      <button class="new-item-btn new-item" @click="addNewItem">
+        New Item
+      </button>
       <div class="relative">
-        <button class="new-item-btn chevron" @click="openItemModal = !openItemModal">
+        <button
+          class="new-item-btn chevron"
+          @click="openItemModal = !openItemModal"
+        >
           <i class="fa-solid fa-chevron-down"></i>
         </button>
         <section v-if="openItemModal" class="context-modal item-modal">
@@ -17,6 +22,7 @@
       </button>
       <div v-else>
         <input
+          class="search-input"
           @input="search"
           @blur="openSearching = false"
           v-model="filterBy.txt"
@@ -26,7 +32,11 @@
       </div>
     </div>
     <div class="relative">
-      <button v-if="filterBy.member" class="search-btn" @click="clearSearchMember">
+      <button
+        v-if="filterBy.member"
+        class="search-btn"
+        @click="clearSearchMember"
+      >
         <img :src="currMember.imgUrl" /> Persons
         <i class="fa-solid fa-circle-xmark"></i>
       </button>
@@ -51,63 +61,66 @@
               v-model="filterBy.member"
               hidden
             />
-            <img :src="member.imgUrl" :class="{ active: filterBy.member === member._id }" />
+            <img
+              :src="member.imgUrl"
+              :class="{ active: filterBy.member === member._id }"
+            />
           </label>
         </div>
       </section>
     </div>
 
-    <button>
-      <i class="fa-solid fa-filter"></i>Filter
-    </button>
+    <button><i class="fa-solid fa-filter"></i>Filter</button>
     <button>Sort</button>
   </section>
 </template>
 
 <script>
 export default {
-  name: 'filterBar',
+  name: "filterBar",
   props: {
-    board: Object
+    board: Object,
   },
   data() {
     return {
       filterBy: {
-        txt: '',
-        member: ''
+        txt: "",
+        member: "",
       },
       openSearching: false,
       openPersonModal: false,
       openItemModal: false,
-    }
+    };
   },
   components: {},
   methods: {
     search() {
-      const filterBy = JSON.parse(JSON.stringify(this.filterBy))
-      this.$store.commit({ type: 'onSetFilter', filterBy })
+      const filterBy = JSON.parse(JSON.stringify(this.filterBy));
+      this.$store.commit({ type: "onSetFilter", filterBy });
     },
     clearSearchMember() {
-      this.filterBy.member = ''
-      this.search()
+      this.filterBy.member = "";
+      this.search();
     },
     addGroup() {
-      this.$store.dispatch({ type: 'saveGroup' })
-      this.openItemModal = false
+      this.$store.dispatch({ type: "saveGroup" });
+      this.openItemModal = false;
     },
     addNewItem() {
-      this.$store.dispatch('addItem')
-    }
+      this.$store.dispatch("addItem");
+    },
   },
   computed: {
     isSearching() {
-      return this.filterBy.txt ? true : false
+      return this.filterBy.txt ? true : false;
     },
     currMember() {
       if (this.filterBy.member) {
-        return this.board.members.find(member => member._id === this.filterBy.member)
+        return this.board.members.find(
+          (member) => member._id === this.filterBy.member
+        );
       }
-    }
+    },
   },
-}
+};
 </script>

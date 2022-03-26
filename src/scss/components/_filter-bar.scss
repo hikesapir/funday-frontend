@@ -4,7 +4,7 @@
   margin-bottom: 18px;
   color: $main-task-text-gray;
   align-items: center;
-  
+
   button {
     @include btn();
     color: $main-task-text-gray;
@@ -28,23 +28,28 @@
     border-radius: 50%;
     object-fit: contain;
     margin: 0 4px;
-    &.active{
+    &.active {
       border-color: orange;
     }
   }
 
-  .search-btn{
+  .search-btn {
     img {
       height: 18px;
       width: 18px;
       border: none;
     }
     background-color: $primary-light-blue;
-    
-    &:hover{
+
+    &:hover {
       background-color: $primary-light-blue;
     }
-      
+  }
+  .search-input {
+    padding: 8px;
+    margin-left: 8px;
+    border: $primary-blue 1px solid;
+    border-radius: 5px;
   }
 
   .new-item-btn-container {
@@ -60,23 +65,20 @@
     border-left: 1px solid $primary-blue-hover;
   }
 
-  .relative{
+  .relative {
     position: relative;
   }
 
-  .context-modal{
+  .context-modal {
     text-align: center;
     left: 0;
     top: 35px;
-    }
+  }
 
-    .members{
-      margin: 10px 0;
-    }
-    .item-modal{
-      white-space: nowrap;
-    }
-
-
-
+  .members {
+    margin: 10px 0;
+  }
+  .item-modal {
+    white-space: nowrap;
+  }
 }
