@@ -21,6 +21,9 @@ export default {
     boards({ boards }) {
       return boards
     },
+    groupDragMode({ isDraggingGroup }) {
+      return isDraggingGroup
+    },
     board({ boardForDisplay }) {
       return boardForDisplay
     },
@@ -196,8 +199,8 @@ export default {
     setOpenModal(state, { boolean }) {
       state.isModalOpen = boolean
     },
-    toggleGroupDragMode(state) {
-      state.isDraggingGroup = !state.isDraggingGroup
+    toggleGroupDragMode(state, isDraggingGroup) {
+      state.isDraggingGroup = isDraggingGroup
     },
     addTask(state, { groupIdx, savedTask }) {
       state.boardForDisplay.groups[groupIdx].tasks.push(
@@ -248,7 +251,7 @@ export default {
     setCmpsOrder(state, { newOrder }) {
       state.boardForDisplay.cmpsOrder = newOrder
     },
-    addGroup(state, { group }) { },
+    addGroup(state, { group }) {},
   },
   actions: {
     async loadBoards({ commit }) {
@@ -473,10 +476,17 @@ export default {
     },
     async addItem({ state, dispatch }) {
       try {
-        const task = boardService.getEmptyTask('New Item', utilService.makeId())
-        const board = JSON.parse(JSON.stringify(state.board))
+        const task = boardService.getEmptyTask(
+          'New Item',
+          utilService.makeId()
+        )
+        const board = JSON.parse(
+          JSON.stringify(state.board)
+        )
         board.groups[0].tasks.unshift(task)
-        const savedBoard = await boardService.saveBoard(board)
+        const savedBoard = await boardService.saveBoard(
+          board
+        )
         dispatch({ type: 'loadBoard', id: savedBoard._id })
       } catch (err) {
         console.log('addItem err', err)

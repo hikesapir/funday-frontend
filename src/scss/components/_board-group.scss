@@ -91,6 +91,7 @@
 
 .group-th {
   position: relative;
+  cursor: grab;
   i {
     position: absolute;
     left: calc(10% - 4px);
@@ -98,7 +99,7 @@
     opacity: 0;
     transition: opacity 0.1s ease;
     transform: translateY(-50%);
-    cursor: grab;
+    cursor: move;
   }
   &:hover {
     background-color: $main-task-gray;
