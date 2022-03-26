@@ -246,7 +246,7 @@ export default {
     setCmpsOrder(state, { newOrder }) {
       state.boardForDisplay.cmpsOrder = newOrder
     },
-    addGroup(state, { group }) { },
+    addGroup(state, { group }) {},
   },
   actions: {
     async loadBoards({ commit }) {
@@ -282,8 +282,9 @@ export default {
     },
     async saveBoard(context, { board }) {
       try {
-
-        const savedBoard = await boardService.saveBoard(JSON.parse(JSON.stringify(board)))
+        const savedBoard = await boardService.saveBoard(
+          JSON.parse(JSON.stringify(board))
+        )
         if (board._id) {
           context.dispatch({
             type: 'loadBoard',
@@ -291,8 +292,8 @@ export default {
           })
         } else {
           context.dispatch('loadBoards')
-          console.log(savedBoard._id);
-            // this.$router.push(`/boards/${savedBoard._id}`)
+          console.log(savedBoard._id)
+          // this.$router.push(`/boards/${savedBoard._id}`)
         }
       } catch (err) {
         console.log('saveBoard err', err)
@@ -441,7 +442,7 @@ export default {
             newOrder: entities,
           })
         }
-        context.dispatch({ type: 'saveBoard', board })
+        await boardService.saveBoard(board)
       }
     },
     async saveGroup({ state, dispatch }, { group }) {
