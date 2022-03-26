@@ -254,14 +254,10 @@ export default {
     setCmpsOrder(state, { newOrder }) {
       state.boardForDisplay.cmpsOrder = newOrder
     },
-<<<<<<< HEAD
     saveBoard(state, { board }) {
       const idx = state.boards.findIndex(currBoard => currBoard._id === board._id)
       state.boards.splice(idx, 1, board)
-      console.log(state.boards);
     }
-=======
->>>>>>> d093e127a6bc4f998156a594a4d36f8ba8d75b40
   },
   actions: {
     async loadBoards({ commit }) {
