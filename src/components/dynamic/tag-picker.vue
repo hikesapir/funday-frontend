@@ -1,6 +1,8 @@
 <template>
   <div class="tag-picker">
-    <div class="add-tag"><fa icon="circle-plus" /></div>
+    <div @click="isModalOpen = true" class="add-tag">
+      <fa icon="circle-plus" />
+    </div>
     <div
       v-for="tag in task.tags"
       :key="tag"
@@ -14,15 +16,16 @@
 
 <script>
 export default {
-  name: "tag-picker",
+  name: 'tag-picker',
   props: {
     task: Object,
   },
   data() {
     return {
       tags: this.$store.getters.board,
-    };
+      isModalOpen: false,
+    }
   },
-  computed: {},
-};
+  methods: {},
+}
 </script>

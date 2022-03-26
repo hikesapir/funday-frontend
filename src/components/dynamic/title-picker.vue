@@ -19,7 +19,7 @@
       <div v-show="!isEditing" class="task-title">
         <span
           :style="{
-            border: hoverEdit ? '1px dashed #333' : 'none',
+            border: hoverEdit ? '1px solid #333' : 'none',
           }"
         >
           {{ task?.title }}
