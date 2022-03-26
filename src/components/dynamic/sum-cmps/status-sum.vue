@@ -1,6 +1,10 @@
 <template>
   <section class="status-sum">
-    <div v-for="status in statusMapBy" :key="status" class="status-sum-display">
+    <div
+      v-for="status in groupStatusData"
+      :key="status"
+      class="status-sum-display"
+    >
       <div
         class="status-sum-display"
         :style="{
@@ -14,56 +18,47 @@
 
 <script>
 export default {
-  name: "status-sum",
+  name: 'status-sum',
   props: {
     data: Array,
     groupId: String,
   },
   data() {
     return {
-      statusMapBy: null,
-      // groupData: null,
       statuses: this.$store.getters.board.labels.status,
-    };
+    }
   },
-  created() {
-    // const groupData = this.data.filter(
-    //   (groupData) => groupData._id === this.groupId
-    // );
-    // this.groupData = groupData[0];
-    this.createMap();
-  },
+
   computed: {
     groupData() {
-      const groupData = this.data.filter(
+      const groupData = this.data.find(
         (groupData) => groupData._id === this.groupId
-      );
-      return groupData[0];
+      )
+      return groupData
     },
-    statusesMap() {
-      return this.groupData.groupStatusCount;
+
+    groupStatusData() {
+      let currGroup = {}
+      const groupData = this.groupData.groupStatusCount
+      for (const key in groupData) {
+        currGroup[key] = {
+          count: groupData[key],
+          style: this.statuses.find(
+            (pri) => pri.id === key
+          ),
+        }
+      }
+      return currGroup
     },
+
     statusesSum() {
-      let sum = 0;
-      for (const p in this.statusesMap) {
-        sum += this.statusesMap[p];
+      let sum = 0
+      const statusMapCount = this.groupData.groupStatusCount
+      for (const p in statusMapCount) {
+        sum += statusMapCount[p]
       }
-      return sum;
+      return sum
     },
   },
-  methods: {
-    createMap() {
-      let currGroup = {};
-      for (const p in this.statusesMap) {
-        currGroup[p] = {
-          count: this.statusesMap[p],
-          style: this.statuses.find((pri) => pri.id === p),
-        };
-      }
-      // console.log(currGroup, "curr");
-      this.statusMapBy = currGroup;
-      return currGroup;
-    },
-  },
-};
+}
 </script>
