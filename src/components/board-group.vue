@@ -177,9 +177,7 @@ export default {
     },
     editCmpTitle(cmp) {
       this.prevCmpTitle = cmp
-      if (cmp) {
-        this.newCmpTitle = cmp
-      }
+      this.newCmpTitle = cmp
     },
     saveCmpTitle() {
       this.$store.dispatch({
@@ -188,9 +186,10 @@ export default {
         newCmpTitle: this.newCmpTitle,
       })
       this.prevCmpTitle = ''
+      this.newCmpTitle = ''
     },
     isEditing(cmp) {
-      return this.prevCmpTitle === cmp
+      return this.prevCmpTitle === cmp && cmp
     },
     toggleChangeNameMode() {
       this.changeName = !this.changeName

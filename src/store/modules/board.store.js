@@ -255,9 +255,11 @@ export default {
       state.boardForDisplay.cmpsOrder = newOrder
     },
     saveBoard(state, { board }) {
-      const idx = state.boards.findIndex(currBoard => currBoard._id === board._id)
+      const idx = state.boards.findIndex(
+        (currBoard) => currBoard._id === board._id
+      )
       state.boards.splice(idx, 1, board)
-    }
+    },
   },
   actions: {
     async loadBoards({ commit }) {
@@ -300,7 +302,10 @@ export default {
             type: 'loadBoard',
             board: savedBoard,
           })
-          context.commit({ type: 'saveBoard', board: savedBoard })
+          context.commit({
+            type: 'saveBoard',
+            board: savedBoard,
+          })
         } else {
           context.dispatch('loadBoards')
           console.log(savedBoard._id)
