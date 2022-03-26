@@ -1,6 +1,9 @@
 <template>
   <section class="board-group">
-    <div class="table-head relative" style="cursor: default">
+    <div
+      class="table-head relative"
+      style="cursor: default"
+    >
       <div
         class="th-title title-picker-col"
         :style="{ color: group.style?.color }"
@@ -10,11 +13,29 @@
         <span @click="openContext = !openContext">
           <i class="fa-solid fa-circle-chevron-down"></i>
         </span>
-        <span v-if="isHover" class="drag-handle" style="cursor: grab">
+        <span
+          v-if="isHover"
+          class="drag-handle"
+          style="cursor: grab"
+        >
           <i class="fa-solid fa-grip-vertical"></i>
         </span>
-        <span>{{ group.title }}</span>
-        <label v-if="changeName">
+        <span
+          v-if="!changeName"
+          @click="toggleChangeNameMode"
+          class="group-title"
+          >{{ group.title }}</span
+        >
+        <span
+          v-else
+          contenteditable="true"
+          class="editable-cmp"
+          @keyup.enter="updateGroup"
+          @blur="updateGroup"
+          ref="editableSpan"
+          >{{ group.title }}</span
+        >
+        <!-- <label v-if="changeName">
           <input
             @keyup.enter="updateGroup"
             @blur="updateGroup"
@@ -22,10 +43,16 @@
             v-model="group.title"
             autofocus
           />
-        </label>
+        </label> -->
       </div>
       <section v-if="openContext" class="context-modal">
-        <button @click="changeName = true, openContext = false">Rename Group</button>
+        <button
+          @click="
+            ;(changeName = true), (openContext = false)
+          "
+        >
+          Rename Group
+        </button>
         <button @click="remove">Delete</button>
       </section>
       <Container
@@ -34,7 +61,6 @@
         drag-handle-selector=".cols-drag-handle"
         drag-class="drag-cols"
       >
-        <!-- class="title-head" -->
         <Draggable
           v-for="cmp in cmps"
           :class="
@@ -56,7 +82,10 @@
       drag-handle-selector=".task-drag-handle"
       drag-class="drag-task"
     >
-      <Draggable v-for="task in group?.tasks" :key="task.id">
+      <Draggable
+        v-for="task in group?.tasks"
+        :key="task.id"
+      >
         <task-preview :task="task" :groupId="group.id" />
       </Draggable>
     </Container>
@@ -100,6 +129,9 @@ export default {
     },
   },
   methods: {
+    toggleChangeNameMode() {
+      this.changeName = !this.changeName
+    },
     addTask(task) {
       this.$store.dispatch({
         type: 'saveTask',
@@ -127,13 +159,21 @@ export default {
       })
     },
     remove() {
-      this.$store.dispatch({ type: 'removeGroup', id: this.group.id })
+      this.$store.dispatch({
+        type: 'removeGroup',
+        id: this.group.id,
+      })
     },
     updateGroup() {
-      this.$store.dispatch({ type: 'saveGroup', group: this.group })
+      const group = JSON.parse(JSON.stringify(this.group))
+      group.title = this.$refs.editableSpan.innerText
+      console.log('group.title', group.title)
+      this.$store.dispatch({
+        type: 'saveGroup',
+        group,
+      })
       this.changeName = false
-    }
+    },
   },
 }
 </script>
-
