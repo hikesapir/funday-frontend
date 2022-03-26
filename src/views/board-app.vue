@@ -1,10 +1,7 @@
 <template>
   <div class="board-app-container">
     <div class="open-side-bar">
-      <board-nav
-        @selectBoard="setBoard"
-        :boards="boards"
-      ></board-nav>
+      <board-nav :boards="boards"></board-nav>
     </div>
     <section class="board-app">
       <div class="bord-header-wrapper">
@@ -38,6 +35,7 @@ export default {
     boardViewMode,
     filterBar,
   },
+  emits: [],
   computed: {},
   created() {
     const { id } = this.$route.params

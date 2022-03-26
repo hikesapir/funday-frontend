@@ -13,6 +13,7 @@ export default {
       txt: '',
     },
     boardMapByGroups: [],
+    isModalOpen: false,
   },
   getters: {
     boards({ boards }) {
@@ -150,6 +151,9 @@ export default {
         boardMapByGroups,
       }
     },
+    isModalOpen({ isModalOpen }) {
+      return isModalOpen
+    },
   },
   mutations: {
     loadBoards(state, { boards }) {
@@ -186,6 +190,10 @@ export default {
       state.boardForDisplay.groups = JSON.parse(
         JSON.stringify(filteredGroups)
       )
+    },
+    setOpenModal(state, { boolean }) {
+      state.isModalOpen = boolean
+      console.log(boolean);
     },
     toggleGroupDragMode(state) {
       state.isDraggingGroup = !state.isDraggingGroup
@@ -239,7 +247,7 @@ export default {
     setCmpsOrder(state, { newOrder }) {
       state.boardForDisplay.cmpsOrder = newOrder
     },
-    addGroup(state, { group }) {},
+    addGroup(state, { group }) { },
   },
   actions: {
     async loadBoards({ commit }) {
