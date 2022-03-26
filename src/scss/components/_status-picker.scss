@@ -11,7 +11,7 @@
     object-fit: cover;
   }
   &.status {
-    // position: relative;
+    position: relative;
     &:before {
       content: "";
       transition: border-width 0.5s ease-in-out;

@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="member-sum"></div>
+    <div class="members-sum"></div>
 
     <p v-for="member in groupMembers" :key="member._id">
       <img :src="member.imgUrl" />
@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: "member-sum",
+  name: "members-sum",
   props: {
     data: Array,
     groupId: String,
