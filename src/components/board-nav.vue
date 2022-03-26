@@ -9,11 +9,11 @@
     <h1 class="title">Create board</h1>
     <label class="input-wrapper">
       <span class="lable">Board name</span>
-      <input type="text" />
+      <input type="text" v-model="boardTitle" autofocus />
     </label>
     <div class="btn-container">
       <button @click="colseModal">Cancel</button>
-      <button class="save">Create Board</button>
+      <button class="save" @click="saveBoard">Create Board</button>
     </div>
   </div>
 
@@ -25,7 +25,7 @@
     </div>
     <ul>
       <li>
-        <button @click="openModal">
+        <button @click="cearteBoard">
           <i class="fa-solid fa-plus"></i>Add
         </button>
       </li>
@@ -59,6 +59,7 @@ export default {
   data() {
     return {
       isNavOpen: true,
+      boardTitle: 'New Board',
     }
   },
   components: {
@@ -68,13 +69,16 @@ export default {
     toggleNav() {
       this.isNavOpen = !this.isNavOpen
     },
-    openModal() {
-      console.log('openModal');
+    cearteBoard() {
       this.$store.commit({ type: 'setOpenModal', boolean: true })
     },
     colseModal() {
-      console.log('openModal');
       this.$store.commit({ type: 'setOpenModal', boolean: false })
+    },
+    saveBoard() {
+      console.log(this.boardTitle);
+      this.$store.commit({ type: 'setOpenModal', boolean: false })
+      this.boardTitle = 'New Board'
     }
   },
   computed: {

@@ -193,7 +193,6 @@ export default {
     },
     setOpenModal(state, { boolean }) {
       state.isModalOpen = boolean
-      console.log(boolean);
     },
     toggleGroupDragMode(state) {
       state.isDraggingGroup = !state.isDraggingGroup
