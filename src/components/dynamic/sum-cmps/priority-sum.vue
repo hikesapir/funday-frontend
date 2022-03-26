@@ -1,7 +1,7 @@
 <template>
   <section class="priority-sum">
     <div
-      v-for="priority in priorityMapBy"
+      v-for="priority in groupPrioritiesData"
       :key="priority"
       class="priority-sum-display"
     >
@@ -9,7 +9,8 @@
         class="priority-sum-display"
         :style="{
           'background-color': priority.style.color,
-          width: (priority.count / prioritiesSum) * 124 + 'px',
+          width:
+            (priority.count / prioritiesSum) * 124 + 'px',
         }"
       ></div>
     </div>
@@ -18,50 +19,44 @@
 
 <script>
 export default {
-  name: "priority-sum",
+  name: 'priority-sum',
   props: {
     data: Array,
     groupId: String,
   },
   data() {
     return {
-      priorityMapBy: null,
-      groupData: null,
       priorities: this.$store.getters.board.labels.priority,
-    };
-  },
-  created() {
-    const groupData = this.data.filter(
-      (groupData) => groupData._id === this.groupId
-    );
-    this.groupData = groupData[0];
-    this.createMap();
+    }
   },
   computed: {
     prioritiesMap() {
-      return this.groupData.priority;
+      const groupData = this.data.find(
+        (groupData) => groupData._id === this.groupId
+      )
+      return groupData.priority
+    },
+    groupPrioritiesData() {
+      let currGroup = {}
+      const groupData = this.prioritiesMap
+      for (const key in groupData) {
+        currGroup[key] = {
+          count: groupData[key],
+          style: this.priorities.find(
+            (pri) => pri.id === key
+          ),
+        }
+      }
+      return currGroup
     },
     prioritiesSum() {
-      let sum = 0;
-      for (const p in this.prioritiesMap) {
-        sum += this.prioritiesMap[p];
+      let sum = 0
+      const prioritiesMap = this.prioritiesMap
+      for (const p in prioritiesMap) {
+        sum += prioritiesMap[p]
       }
-      return sum;
+      return sum
     },
   },
-  methods: {
-    createMap() {
-      let currGroup = {};
-      for (const p in this.prioritiesMap) {
-        currGroup[p] = {
-          count: this.prioritiesMap[p],
-          style: this.priorities.find((pri) => pri.id === p),
-        };
-      }
-      // console.log(currGroup, "curr");
-      this.priorityMapBy = currGroup;
-      return currGroup;
-    },
-  },
-};
+}
 </script>

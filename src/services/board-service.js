@@ -159,18 +159,18 @@ function getEmptyBoard(boardTitle) {
     },
     groups: [
       getEmptyGroup('g101', 'Group Title', [
-        getEmptyTask('t101', 'Item 1', [{
+        getEmptyTask('Item 1', 't101', [{
           _id: 'u104',
           fullname: 'Someone',
           imgUrl:
             'https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
         }], 's002'),
-        getEmptyTask('t102', 'Item 2', [], 's001'),
-        getEmptyTask('t103', 'Item 3')
+        getEmptyTask('Item 2', 't102', [], 's001'),
+        getEmptyTask('Item 3', 't103',)
       ]),
-      getEmptyGroup('g102', 'Group Title',[
-      getEmptyTask('t104', 'Item 4'),
-      getEmptyTask('t105', 'Item 5')
+      getEmptyGroup('g102', 'Group Title', [
+        getEmptyTask('Item 4', 't104',),
+        getEmptyTask('Item 5', 't105',)
       ])
     ],
 
@@ -260,7 +260,7 @@ async function saveTasksOrder(board, idx, tasksOrder) {
 
 function removeTask(taskId) { }
 
-function getEmptyTask(taskId, taskTitle, taskMembers, taskStatus) {
+function getEmptyTask(taskTitle, taskId, taskMembers, taskStatus) {
   return {
     id: taskId || null,
     title: taskTitle || '',
