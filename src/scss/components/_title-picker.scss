@@ -1,6 +1,7 @@
 .title-picker {
   cursor: pointer;
   display: flex;
+  justify-content: left;
   width: 262px;
   position: relative;
   padding-right: 8px;
@@ -26,6 +27,16 @@
     }
   }
 
+  .task-title {
+    span {
+      padding: 2px;
+      // background-color: aquamarine;
+      // position: relative;
+      // display: inline-block;
+      // top: 0;
+    }
+  }
+
   .edit-title-btn {
     opacity: 0;
     pointer-events: none;
@@ -34,10 +45,13 @@
     background-color: none;
     border: none;
     height: 24px;
+    // position: absolute;
+    left: 0;
     margin-right: 24px;
     border-radius: 4px;
   }
   .start-conversation-container {
+    color: $icon-task-gray;
     svg {
       position: absolute;
       right: 0;
@@ -46,11 +60,11 @@
     }
   }
   &:hover {
-    color: $title-hover-blue;
+    color: $primary-blue;
     .start-conversation-container {
       color: $main-text-gray;
       &:hover {
-        color: $title-hover-blue;
+        color: $primary-blue;
       }
     }
     .edit-title-btn {

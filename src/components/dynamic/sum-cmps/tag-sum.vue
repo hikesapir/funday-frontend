@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: "tags-sum",
+  name: "tag-sum",
   props: {
     data: Array,
     groupId: String,
