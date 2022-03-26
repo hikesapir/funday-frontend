@@ -1,6 +1,6 @@
 <template>
   <header class="board-header">
-    <div class="up-haeder">
+    <div class="up-header">
       <div class="board-name">
         <div class="editable-header">
           <h1
@@ -105,8 +105,13 @@ export default {
     starred() {
       this.$emit('updateBoard', 'star')
     },
-    toggleRenameHeader() {
+    renameTitle() {
       this.renameBoard = !this.renameBoard
+      this.isEditDesc = false
+    },
+    renameDesc() {
+      this.isEditDesc = !this.isEditDesc
+      this.renameBoard = false
     },
     onUpdate() {
       const boardDetails = JSON.parse(

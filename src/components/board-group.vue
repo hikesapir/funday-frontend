@@ -35,15 +35,6 @@
           ref="editableSpan"
           >{{ group.title }}</span
         >
-        <!-- <label v-if="changeName">
-          <input
-            @keyup.enter="updateGroup"
-            @blur="updateGroup"
-            type="text"
-            v-model="group.title"
-            autofocus
-          />
-        </label> -->
       </div>
       <section v-if="openContext" class="context-modal">
         <button
@@ -68,8 +59,15 @@
           "
           :key="cmp.cmpName"
         >
-          <!-- <i class="fa-solid fa-grip-vertical"></i> -->
-          {{ cmp.preName }}
+          <div class="group-th">
+            <i
+              v-if="cmp.cmpName !== 'title-picker'"
+              class="fa-solid fa-grip-vertical"
+            ></i>
+            <span class="cmp-title">
+              {{ cmp.preName }}
+            </span>
+          </div>
         </Draggable>
       </Container>
     </div>

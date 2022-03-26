@@ -73,10 +73,35 @@
 .tag-picker-col,
 .file-picker-col,
 .priority-picker-col {
-  text-align: center;
   width: 130px;
+  text-align: center;
+}
+
+.group-th {
+  position: relative;
+  i {
+    position: absolute;
+    left: calc(10% - 4px);
+    top: 50%;
+    opacity: 0;
+    transition: opacity 0.1s ease;
+    transform: translateY(-50%);
+    cursor: grab;
+  }
   &:hover {
     background-color: $main-task-gray;
+    i {
+      opacity: 1;
+    }
+  }
+  text-align: center;
+
+  .cmp-title {
+    &:hover {
+      border: 1px dashed $group-header-gray;
+      cursor: text;
+      padding: 2px 2px;
+    }
   }
 }
 

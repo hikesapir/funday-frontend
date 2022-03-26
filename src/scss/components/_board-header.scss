@@ -21,7 +21,7 @@
       outline: 1px dashed #333;
     }
   }
-  .up-haeder {
+  .up-header {
     display: flex;
     justify-content: space-between;
     .board-name {
@@ -43,6 +43,13 @@
       .star,
       .info {
         @include btn(4px 8px);
+      }
+    }
+  }
+  .description-line {
+    .text-content {
+      &:hover {
+        border: 1px dashed #333;
       }
     }
   }
