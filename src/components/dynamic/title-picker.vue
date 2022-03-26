@@ -19,18 +19,15 @@
       <div v-show="!isEditing" class="task-title">
         <span
           :style="{
-            border: hoverEdit ? '1px solid #333' : 'none',
+            border: hoverEdit ? '1px solid #c4c4c4' : 'none',
+            padding: hoverEdit ? '3px' : 'none',
           }"
         >
           {{ task?.title }}
         </span>
       </div>
     </div>
-    <div
-      class="edit-icon"
-      tabindex="0"
-      @blur="toggleEditTask"
-    >
+    <div class="edit-icon" tabindex="0" @blur="toggleEditTask">
       <button
         class="edit-title-btn"
         @click="toggleEditTask"
@@ -68,37 +65,37 @@
 
 <script>
 export default {
-  name: 'title-picker',
+  name: "title-picker",
   props: {
     task: Object,
     groupId: String,
   },
   data() {
-    return { isEditing: false, title: '', hoverEdit: false }
+    return { isEditing: false, title: "", hoverEdit: false };
   },
   created() {
-    this.title = this.task.title
+    this.title = this.task.title;
   },
   computed: {
     labelColor() {
       return this.$store.getters.board?.groups.find(
         (group) => group.id === this.groupId
-      )
+      );
     },
   },
   methods: {
     toggleEditTask() {
-      this.isEditing = !this.isEditing
-      setTimeout(() => this.$refs.input.focus(), 0)
+      this.isEditing = !this.isEditing;
+      setTimeout(() => this.$refs.input.focus(), 0);
     },
     saveTitle() {
-      this.isEditing = false
-      this.$emit('update', {
-        cmpType: 'title-picker',
+      this.isEditing = false;
+      this.$emit("update", {
+        cmpType: "title-picker",
         title: this.title,
         task: this.task,
-      })
+      });
     },
   },
-}
+};
 </script>

@@ -6,25 +6,25 @@
     <router-link :to="'/boards/' + boardId + '/chart'">
       <i class="fa-solid fa-chart-pie"></i>Charts
     </router-link>
-    <router-link :to="'/boards/' + boardId">
+    <router-link :to="'/' + boardId">
       <span class="upsidedwon">
         <i class="fa-solid fa-chart-simple"></i>
       </span>
       Kanban
     </router-link>
-    <router-link :to="'/boards/' + boardId">
-      <span>more</span>
+    <router-link :to="'/' + boardId">
+      <span>More</span>
       <i class="fa-solid fa-chevron-down"></i>
     </router-link>
-    <div class="spacer"></div>
   </section>
+  <div class="spacer"></div>
 </template>
 
 <script>
 export default {
-  name: 'board-view-mode',
+  name: "board-view-mode",
   props: {
     boardId: String,
   },
-}
+};
 </script>

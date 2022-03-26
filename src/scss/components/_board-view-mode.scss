@@ -1,11 +1,22 @@
 .board-view-mode {
-  padding: 0 28px;
+  padding: 0 28px 2px;
+  // padding: 0 28px;
   color: $main-text-gray;
+  // height: 44px;
   a {
     @include btn(em(7px) em(16px));
     color: $main-task-text-gray;
+    height: 44px;
   }
   .upsidedwon {
     transform: rotate(180deg);
+  }
+
+  .router-link-exact-active {
+    background-color: $primary-hover-gray-button;
+    border-bottom: $primary-blue 2px solid;
+
+    // outline: 2px $primary-blue solid;
+    // outline-offset: 5px;
   }
 }
