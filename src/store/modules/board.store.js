@@ -162,7 +162,7 @@ export default {
       )
     },
     onSetFilter(state, { filterBy }) {
-      console.log(filterBy);
+      console.log(filterBy)
       state.filterBy = JSON.parse(JSON.stringify(filterBy))
       const board = JSON.parse(JSON.stringify(state.board))
       const regex = new RegExp(filterBy.txt, 'i')
@@ -401,10 +401,9 @@ export default {
         }
       }
       if (entityType === 'tasks') {
-        const idx =
-          context.state.boardForDisplay.groups.findIndex(
-            (group) => group.id === groupId
-          )
+        const idx = board.groups.findIndex(
+          (group) => group.id === groupId
+        )
         context.commit({
           type: 'setTasksOrder',
           result: entities,
