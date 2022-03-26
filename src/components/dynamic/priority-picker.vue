@@ -1,12 +1,12 @@
 <template>
-  <div
-    :style="getStyle"
-    class="priority-picker-col priority"
-    data-toggle="p-dropdown"
-    @click="toggleDropDown"
-    tabindex="-1"
-  >
-    {{ txt }}
+  <div class="wrapper">
+    <div
+      :style="getStyle"
+      class="priority-picker-col priority relative"
+      data-toggle="p-dropdown"
+      @click="toggleDropDown"
+      tabindex="-1"
+    >{{ txt }}</div>
     <div v-show="isDropOpen">
       <drop-down
         :labels="priorities"

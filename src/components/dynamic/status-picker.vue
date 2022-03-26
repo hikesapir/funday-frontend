@@ -1,16 +1,17 @@
 <template>
-  <div
-    class="status-picker-col status"
-    :style="style"
-    data-toggle="s-dropdown"
-    @click="isDropOpen = !isDropOpen"
-  >
-    <img
-      v-if="isAchieved"
-      class="confetti"
-      src="https://sunday-app-pro.herokuapp.com/img/done.900c9a2e.gif"
-    />
-    <p>{{ txt }}</p>
+  <div class="wrapper">
+    <div class="status-picker-col status relative"
+      :style="style"
+      data-toggle="s-dropdown"
+      @click="isDropOpen = !isDropOpen"
+    >
+      <img
+        v-if="isAchieved"
+        class="confetti"
+        src="https://sunday-app-pro.herokuapp.com/img/done.900c9a2e.gif"
+      />
+      <p>{{ txt }}</p>
+    </div>
     <div v-if="isDropOpen">
       <drop-down
         :labels="statuses"
