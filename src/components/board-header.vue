@@ -3,15 +3,18 @@
     <div class="up-haeder">
       <div class="board-name">
         <div class="editable-header">
-          <h1 v-if="renameBoard">
+          <h1
+            v-if="!renameBoard"
+            @click="renameBoard = true"
+          >
             {{ boardDetails.title }}
           </h1>
           <h1
-            v-else
+            v-show="renameBoard"
             contenteditable="true"
             ref="boardTitle"
-            @blur="onRename"
-            @keyup.enter="onRename"
+            @blur="onUpdate"
+            @keyup.enter="onUpdate"
           >
             {{ boardDetails.title }}
           </h1>
@@ -63,9 +66,20 @@
       </div>
     </div>
     <div class="description-line">
-      <span v-if="isDescriptionOpen" class="text-content">{{
-        boardDetails.description
-      }}</span>
+      <span
+        v-if="isDescriptionOpen && !isEditDesc"
+        @click="isEditDesc = true"
+        class="text-content"
+        >{{ boardDetails.description }}</span
+      >
+      <span
+        v-show="isEditDesc && isDescriptionOpen"
+        contenteditable="true"
+        ref="boardDescription"
+        @blur="onUpdate"
+        @keyup.enter="onUpdate"
+        >{{ boardDetails.description }}</span
+      >
     </div>
   </header>
 </template>
@@ -76,32 +90,35 @@ export default {
   props: {
     boardDetails: Object,
   },
-  emits: ['starred'],
+  emits: ['updateBoard'],
   components: {},
   data() {
     return {
       isDescriptionOpen: true,
       renameBoard: false,
+      isEditDesc: false,
     }
   },
   created() {},
   mounted() {},
   methods: {
     starred() {
-      this.$emit('starred', 'star')
+      this.$emit('updateBoard', 'star')
     },
     toggleRenameHeader() {
       this.renameBoard = !this.renameBoard
     },
     onUpdate() {
-      console.log('this.boardDetails', this.boardDetails)
       const boardDetails = JSON.parse(
         JSON.stringify(this.boardDetails)
       )
-      boardDetails.title = this.$refs.boardTitle
-      boardDetails.description = this.$refs.boardDescription
-      this.renameBoard = !this.renameBoard
-        this.$emit('headerUpdated')
+      boardDetails.title = this.$refs.boardTitle.innerText
+      boardDetails.description =
+        this.$refs.boardDescription.innerText
+      this.renameBoard = false
+      this.isEditDesc = false
+
+      this.$emit('updateBoard', boardDetails)
     },
   },
   computed: {
