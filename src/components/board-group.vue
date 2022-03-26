@@ -68,11 +68,19 @@
               class="cols-drag-handle fa-solid fa-grip-vertical"
             ></i>
             <span class="cmp-title">
-              <span v-if="!isEditCmpTitle">
+              <span
+                @click="editCmpTitle(cmp.preName)"
+                v-if="!isEditing(cmp.preName)"
+              >
                 {{ cmp.preName }}
               </span>
-              <span v-else>
-                <input type="text" />
+              <span v-show="isEditing(cmp.preName)">
+                <input
+                  type="text"
+                  @blur="saveCmpTitle"
+                  @keyup.enter="saveCmpTitle"
+                  v-model="newCmpTitle"
+                />
               </span>
             </span>
           </div>
@@ -127,7 +135,8 @@ export default {
       isHoverGroupMenu: false,
       openContext: false,
       changeName: false,
-      isEditCmpTitle: false,
+      prevCmpTitle: false,
+      newCmpTitle: '',
     }
   },
   computed: {
@@ -148,8 +157,21 @@ export default {
     // },
   },
   methods: {
-    toggleEditCmpTitle() {
-      this.isEditCmpTitle = !this.isEditCmpTitle
+    editCmpTitle(cmp) {
+      this.prevCmpTitle = cmp
+      if (cmp) {
+        this.newCmpTitle = cmp
+      }
+    },
+    saveCmpTitle() {
+      this.$store.dispatch({
+        type: 'saveCmpTitle',
+        prevCmpTitle: this.prevCmpTitle,
+        newCmpTitle: this.newCmpTitle,
+      })
+    },
+    isEditing(cmp) {
+      return this.prevCmpTitle === cmp
     },
     toggleChangeNameMode() {
       this.changeName = !this.changeName

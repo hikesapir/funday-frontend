@@ -38,6 +38,7 @@ export default {
   methods: {},
   computed: {
     cmpsOrder() {
+<<<<<<< HEAD
       console.log("example", this.$store.getters.board?.cmpsOrder);
       const cmps = JSON.parse(
         JSON.stringify(this.$store.getters.board?.cmpsOrder)
@@ -45,6 +46,15 @@ export default {
       cmps.shift();
       return cmps.map((cmp) => cmp.cmpName.replace("picker", "sum"));
       // console.log('cmps', cmps)
+=======
+      const cmps = JSON.parse(
+        JSON.stringify(this.$store.getters.board?.cmpsOrder)
+      )
+      cmps.shift()
+      return cmps.map((cmp) =>
+        cmp.cmpName.replace('picker', 'sum')
+      )
+>>>>>>> fd45729ade8a54e7587cc217519d8772eae15572
     },
     boardData() {
       const { boardMapByGroups } = this.$store.getters.boardData;
