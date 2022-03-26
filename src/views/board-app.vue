@@ -8,16 +8,16 @@
     </div>
     <section class="board-app">
       <div class="bord-header-wrapper">
-      <board-header
-        :boardDetails="{
-          title: board?.title,
-          description: board?.description,
-          isStarred: board?.isStarred,
-        }"
-        @starred="updateBoard"
-      />
-      <board-view-mode :boardId="board?._id" />
-      <filter-bar :board="board" />
+        <board-header
+          :boardDetails="{
+            title: board?.title,
+            description: board?.description,
+            isStarred: board?.isStarred,
+          }"
+          @updateBoard="updateBoard"
+        />
+        <board-view-mode :boardId="board?._id" />
+        <filter-bar :board="board" />
       </div>
       <router-view></router-view>
     </section>
@@ -51,13 +51,16 @@ export default {
       const board = JSON.parse(
         JSON.stringify(this.$store.getters.board)
       )
-
       if (type === 'star') {
         board.isStarred = !board.isStarred
+      } else {
+        if (type.title) board.title = type.title
+        if (type.description)
+          board.description = type.description
       }
       this.$store.dispatch({
         type: 'saveBoard',
-        board: board,
+        board,
       })
     },
   },

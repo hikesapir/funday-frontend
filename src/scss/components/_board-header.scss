@@ -15,6 +15,12 @@
     color: $main-task-text-gray;
     @include btn();
   }
+  .editable-header {
+    cursor: text;
+    &:hover {
+      outline: 1px dashed #333;
+    }
+  }
   .up-haeder {
     display: flex;
     justify-content: space-between;
@@ -34,7 +40,8 @@
       .info {
         color: #676879;
       }
-      .star, .info{
+      .star,
+      .info {
         @include btn(4px 8px);
       }
     }

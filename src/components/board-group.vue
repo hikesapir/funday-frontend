@@ -78,6 +78,7 @@
       v-if="group?.tasks"
       @drop="onDrop($event, 'tasks')"
       group-name="board-tasks"
+      orientation="vertical"
       :get-child-payload="getChildPayload"
       drag-handle-selector=".task-drag-handle"
       drag-class="drag-task"
