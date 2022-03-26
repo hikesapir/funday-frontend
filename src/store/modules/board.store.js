@@ -1,5 +1,6 @@
 // import authService from '../../services/auth.service.js'
 import boardService from '../../services/board-service.js'
+import router from '../../router'
 // import { socketService, SOCKET_EVENT_TASK_ADDED } from '../../services/socket.service.js'
 
 export default {
@@ -293,7 +294,7 @@ export default {
         } else {
           context.dispatch('loadBoards')
           console.log(savedBoard._id)
-          // this.$router.push(`/boards/${savedBoard._id}`)
+          router.push(`/boards/${savedBoard._id}`)
         }
       } catch (err) {
         console.log('saveBoard err', err)
