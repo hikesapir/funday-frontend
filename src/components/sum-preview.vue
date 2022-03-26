@@ -12,20 +12,20 @@
 </template>
 
 <script>
-import fileSum from "./dynamic/sum-cmps/file-sum.vue";
-import membersSum from "./dynamic/sum-cmps/member-sum.vue";
-import prioritySum from "./dynamic/sum-cmps/priority-sum.vue";
-import statusSum from "./dynamic/sum-cmps/status-sum.vue";
-import tagsSum from "./dynamic/sum-cmps/tags-sum.vue";
-import timelineSum from "./dynamic/sum-cmps/timeline-sum.vue";
+import fileSum from './dynamic/sum-cmps/file-sum.vue'
+import membersSum from './dynamic/sum-cmps/member-sum.vue'
+import prioritySum from './dynamic/sum-cmps/priority-sum.vue'
+import statusSum from './dynamic/sum-cmps/status-sum.vue'
+import tagsSum from './dynamic/sum-cmps/tags-sum.vue'
+import timelineSum from './dynamic/sum-cmps/timeline-sum.vue'
 
 export default {
-  name: "sum-preview",
+  name: 'sum-preview',
   props: {
     groupId: String,
   },
   data() {
-    return {};
+    return {}
   },
   components: {
     fileSum,
@@ -38,19 +38,24 @@ export default {
   methods: {},
   computed: {
     cmpsOrder() {
-      return [
-        "file-sum",
-        "priority-sum",
-        "members-sum",
-        "status-sum",
-        "tags-sum",
-        "timeline-sum",
-      ];
+      console.log(
+        'example',
+        this.$store.getters.board?.cmpsOrder
+      )
+      const cmps = JSON.parse(
+        JSON.stringify(this.$store.getters.board?.cmpsOrder)
+      )
+      cmps.shift()
+      return cmps.map((cmp) =>
+        cmp.cmpName.replace('picker', 'sum')
+      )
+      // console.log('cmps', cmps)
     },
     boardData() {
-      const { boardMapByGroups } = this.$store.getters.boardData;
-      return boardMapByGroups;
+      const { boardMapByGroups } =
+        this.$store.getters.boardData
+      return boardMapByGroups
     },
   },
-};
+}
 </script>
