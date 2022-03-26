@@ -162,6 +162,7 @@ export default {
       )
     },
     onSetFilter(state, { filterBy }) {
+      console.log(filterBy);
       state.filterBy = JSON.parse(JSON.stringify(filterBy))
       const board = JSON.parse(JSON.stringify(state.board))
       const regex = new RegExp(filterBy.txt, 'i')
@@ -171,11 +172,13 @@ export default {
         var tasks = group.tasks.filter((task) =>
           regex.test(task.title)
         )
-        tasks = tasks.filter((task) => {
-          return task.members.some(
-            (member) => member._id === filterBy.member
-          )
-        })
+        if (filterBy.task) {
+          tasks = tasks.filter((task) => {
+            return task.members.some(
+              (member) => member._id === filterBy.member
+            )
+          })
+        }
         group.tasks = tasks
         if (group.tasks.length > 0) return group
       })
