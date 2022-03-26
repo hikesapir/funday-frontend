@@ -195,7 +195,6 @@ function saveGroup(group, board) {
 }
 
 function removeGroup(groupId, board) {
-  console.log(groupId)
   const idx = board.groups.findIndex(
     (group) => group.id === groupId
   )

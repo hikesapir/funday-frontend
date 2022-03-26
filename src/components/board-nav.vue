@@ -81,7 +81,6 @@ export default {
       this.$store.commit({ type: "setOpenModal", boolean: false });
     },
     saveBoard() {
-      console.log(this.newBoard);
       this.$store.dispatch({ type: "saveBoard", board: this.newBoard });
       this.$store.commit({ type: "setOpenModal", boolean: false });
       this.boardTitle = "New Board";

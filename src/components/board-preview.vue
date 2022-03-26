@@ -75,7 +75,6 @@ export default {
       this.openModal = false
     },
     renameBoard() {
-      console.log('got it')
       this.newTitle = this.board.title
       this.changeName = true
       this.openModal = false

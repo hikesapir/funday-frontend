@@ -72,7 +72,6 @@ export default {
       return this.$route.params.id
     },
     isLoading() {
-      console.log();
       return this.$store.getters.isLoading
     }
   },

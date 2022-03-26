@@ -16,8 +16,8 @@
       <span>More</span>
       <i class="fa-solid fa-chevron-down"></i>
     </router-link>
-  </section>
   <div class="spacer"></div>
+  </section>
 </template>
 
 <script>

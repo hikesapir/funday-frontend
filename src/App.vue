@@ -34,7 +34,6 @@ export default {
       return this.$store.getters.isModalOpen
     },
     isLoading() {
-      console.log();
       return this.$store.getters.isLoading
     }
   }

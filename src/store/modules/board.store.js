@@ -174,7 +174,7 @@ export default {
       )
     },
     onSetFilter(state, { filterBy }) {
-      console.log(filterBy)
+      // console.log(filterBy)
       state.filterBy = JSON.parse(JSON.stringify(filterBy))
       const board = JSON.parse(JSON.stringify(state.board))
       const regex = new RegExp(filterBy.txt, 'i')
@@ -184,7 +184,7 @@ export default {
         var tasks = group.tasks.filter((task) =>
           regex.test(task.title)
         )
-        if (filterBy.task) {
+        if (filterBy.member) {
           tasks = tasks.filter((task) => {
             return task.members.some(
               (member) => member._id === filterBy.member
@@ -308,7 +308,6 @@ export default {
           })
         } else {
           context.dispatch('loadBoards')
-          console.log(savedBoard._id)
           router.push(`/boards/${savedBoard._id}`)
         }
       } catch (err) {
