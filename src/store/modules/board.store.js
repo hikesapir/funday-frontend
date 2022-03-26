@@ -471,5 +471,24 @@ export default {
         console.log('removeGroup err', err)
       }
     },
+    async saveCmpTitle(
+      { state, commit },
+      { prevCmpTitle, newCmpTitle }
+    ) {
+      const board = JSON.parse(
+        JSON.stringify(state.boardForDisplay)
+      )
+      const idx = board.cmpsOrder.findIndex(
+        (cmp) => cmp.preName === prevCmpTitle
+      )
+      board.cmpsOrder[idx].preName = newCmpTitle
+      try {
+        commit({
+          type: 'setCmpsOrder',
+          newOrder: board.cmpsOrder,
+        })
+        await boardService.saveBoard(board)
+      } catch (err) {}
+    },
   },
 }

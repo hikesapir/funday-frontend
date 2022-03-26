@@ -38,10 +38,6 @@ export default {
   methods: {},
   computed: {
     cmpsOrder() {
-      console.log(
-        'example',
-        this.$store.getters.board?.cmpsOrder
-      )
       const cmps = JSON.parse(
         JSON.stringify(this.$store.getters.board?.cmpsOrder)
       )
@@ -49,7 +45,6 @@ export default {
       return cmps.map((cmp) =>
         cmp.cmpName.replace('picker', 'sum')
       )
-      // console.log('cmps', cmps)
     },
     boardData() {
       const { boardMapByGroups } =
