@@ -103,10 +103,6 @@ export default {
       })
     },
     selectBoard() {
-      this.$store.dispatch({
-        type: 'loadBoard',
-        id: this.board._id,
-      })
       this.$router.push(`/boards/${this.board._id}`)
     },
   },
