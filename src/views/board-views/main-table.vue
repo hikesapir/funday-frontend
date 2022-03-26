@@ -1,5 +1,5 @@
 <template>
-  <div class="main-table">
+  <div v-if="board" class="main-table">
     <Container v-if="board?.groups" @drop="onDrop" drag-handle-selector=".drag-handle">
       <Draggable v-for="group in board?.groups" :key="group.id">
         <board-group
@@ -18,16 +18,15 @@ import boardGroup from '../../components/board-group.vue'
 
 export default {
   name: 'main-table',
-  props: {},
+  props: {
+    board: Object
+  },
   components: {
     Container,
     Draggable,
     boardGroup,
   },
   computed: {
-    board() {
-      return this.$store.getters.board
-    },
   },
   methods: {
     onDrop(dropResult) {

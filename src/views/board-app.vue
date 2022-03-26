@@ -16,8 +16,8 @@
         <board-view-mode :boardId="board?._id" />
         <filter-bar :board="board" />
       </div>
-      <!-- {{board}} -->
-      <router-view></router-view>
+      <!-- {{ board }} -->
+      <router-view :board="board"></router-view>
     </section>
   </div>
 </template>
@@ -39,9 +39,6 @@ export default {
   emits: [],
   computed: {},
   created() {
-    const { id } = this.$route.params
-    console.log(id);
-    this.$store.dispatch({ type: 'loadBoard', id })
   },
   methods: {
     setBoard(boardId) {
@@ -71,6 +68,20 @@ export default {
     boards() {
       return this.$store.getters.boards
     },
+    id() {
+      console.log(this.$route.params.id);
+      return this.$route.params.id
+    },
   },
+  watch: {
+    id: {
+      handler() {
+        console.log('i watch');
+        this.$store.dispatch({ type: 'loadBoard', id: this.id })
+      },
+      immediate: true
+    }
+  },
+
 }
 </script>
