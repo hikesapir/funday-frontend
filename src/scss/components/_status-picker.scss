@@ -1,6 +1,6 @@
 .status-picker-col {
   border-right: 1px white solid;
-  position: relative;
+  // position: relative;
   width: 140px;
   text-align: center;
   height: 34px;
@@ -11,7 +11,7 @@
     object-fit: cover;
   }
   &.status {
-    position: relative;
+    // position: relative;
     &:before {
       content: "";
       transition: border-width 0.5s ease-in-out;
