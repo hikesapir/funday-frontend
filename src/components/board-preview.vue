@@ -1,5 +1,10 @@
 <template>
-  <li v-if="board" class="board-preview" @mouseover="isHover = true" @mouseleave="isHover = false">
+  <li
+    v-if="board"
+    class="board-preview"
+    @mouseover="isHover = true"
+    @mouseleave="isHover = false"
+  >
     <label v-if="changeName">
       <input
         @keyup.enter="updateBoard"
@@ -11,7 +16,10 @@
     </label>
     <div v-else class="bord-title" @click="selectBoard">
       <span>{{ board.title }}</span>
-      <button @click.stop="openModal = !openModal" v-if="isHover || openModal">
+      <button
+        @click.stop="openModal = !openModal"
+        v-if="isHover || openModal"
+      >
         <i class="fa-solid fa-ellipsis"></i>
       </button>
     </div>
@@ -49,8 +57,8 @@ export default {
       newTitle: '',
     }
   },
-  created() { },
-  mounted() { },
+  created() {},
+  mounted() {},
   methods: {
     remove() {
       this.$store.dispatch({
@@ -62,12 +70,12 @@ export default {
     openNewTab() {
       window.open(
         window.location.origin +
-        `/#/boards/${this.board._id}`
+          `/#/boards/${this.board._id}`
       )
       this.openModal = false
     },
     renameBoard() {
-      console.log('got it');
+      console.log('got it')
       this.newTitle = this.board.title
       this.changeName = true
       this.openModal = false
@@ -81,7 +89,6 @@ export default {
       })
       this.changeName = false
       this.openModal = false
-
     },
     starred() {
       const board = JSON.parse(JSON.stringify(this.board))
@@ -91,7 +98,6 @@ export default {
         board,
       })
       this.openModal = false
-
     },
     duplicate() {
       const newBoard = JSON.parse(
@@ -104,13 +110,12 @@ export default {
         board: newBoard,
       })
       this.openModal = false
-
     },
     selectBoard() {
       this.$router.push(`/boards/${this.board._id}`)
     },
   },
   computed: {},
-  unmounted() { },
+  unmounted() {},
 }
 </script>

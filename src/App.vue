@@ -4,7 +4,10 @@
   </div>
   <section class="app-container">
     <main-nav></main-nav>
-    <router-view></router-view>
+    <router-view ></router-view>
+    <div v-if="isLoading" class="loadig">
+      <img src="./img/loading.svg" alt />
+    </div>
   </section>
 </template>
 <script>
@@ -29,6 +32,10 @@ export default {
   computed: {
     isModalOpen() {
       return this.$store.getters.isModalOpen
+    },
+    isLoading() {
+      console.log();
+      return this.$store.getters.isLoading
     }
   }
 }
