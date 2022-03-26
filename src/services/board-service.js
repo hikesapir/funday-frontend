@@ -168,10 +168,10 @@ function getEmptyBoard(boardTitle) {
         getEmptyTask('t102', 'Item 2', [], 's001'),
         getEmptyTask('t103', 'Item 3')
       ]),
-      getEmptyGroup('g102', 'Group Title')[
+      getEmptyGroup('g102', 'Group Title',[
       getEmptyTask('t104', 'Item 4'),
       getEmptyTask('t105', 'Item 5')
-      ]
+      ])
     ],
 
   }

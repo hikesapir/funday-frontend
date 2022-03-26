@@ -1,15 +1,7 @@
 <template>
-  <div class="main-table">
-    <Container
-      v-if="board?.groups"
-      @drop="onDrop"
-      orientation="vertical"
-      drag-handle-selector=".drag-handle"
-    >
-      <Draggable
-        v-for="group in board?.groups"
-        :key="group.id"
-      >
+  <div v-if="board" class="main-table">
+    <Container v-if="board?.groups" @drop="onDrop" orientation="vertical" drag-handle-selector=".drag-handle">
+      <Draggable v-for="group in board?.groups" :key="group.id">
         <board-group
           :group="JSON.parse(JSON.stringify(group))"
           :cmpsOrder="board?.cmpsOrder"
@@ -26,16 +18,15 @@ import boardGroup from '../../components/board-group.vue'
 
 export default {
   name: 'main-table',
-  props: {},
+  props: {
+    board: Object
+  },
   components: {
     Container,
     Draggable,
     boardGroup,
   },
   computed: {
-    board() {
-      return this.$store.getters.board
-    },
   },
   methods: {
     onDrop(dropResult) {
