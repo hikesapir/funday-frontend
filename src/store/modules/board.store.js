@@ -12,7 +12,7 @@ export default {
     filterBy: {
       txt: '',
     },
-    boardMapByGroups: []
+    boardMapByGroups: [],
   },
   getters: {
     boards({ boards }) {
@@ -236,9 +236,7 @@ export default {
     setCmpsOrder(state, { newOrder }) {
       state.boardForDisplay.cmpsOrder = newOrder
     },
-    addGroup(state, { group }) {
-
-    }
+    addGroup(state, { group }) {},
   },
   actions: {
     async loadBoards({ commit }) {
@@ -255,7 +253,7 @@ export default {
       }
     },
     async loadBoard(context, { id }) {
-      console.log('get it');
+      console.log('get it')
       context.commit({
         type: 'setIsLoading',
         isLoading: true,
@@ -275,7 +273,10 @@ export default {
     async saveBoard(context, { board }) {
       try {
         await boardService.saveBoard(board)
-        context.dispatch({ type: 'loadBoard', id: board._id })
+        context.dispatch({
+          type: 'loadBoard',
+          id: board._id,
+        })
       } catch (err) {
         console.log('saveBoard err', err)
       }
@@ -362,7 +363,7 @@ export default {
         savedTask,
       })
     },
-    changeOrder(
+    async changeOrder(
       context,
       { dropResult, entities, entityType }
     ) {
@@ -396,12 +397,6 @@ export default {
           )
         }
       }
-      console.log(
-        'dropResult',
-        dropResult,
-        entityType,
-        groupId
-      )
       if (entityType === 'tasks') {
         const idx =
           context.state.boardForDisplay.groups.findIndex(
@@ -412,7 +407,11 @@ export default {
           result: entities,
           idx,
         })
-        context.dispatch({ type: 'saveBoard', board })
+        await boardService.saveTasksOrder(
+          board,
+          idx,
+          entities
+        )
       } else {
         board[entityType] = entities
         if (entityType === 'cmpsOrder') {
@@ -431,8 +430,12 @@ export default {
     },
     async saveGroup({ state, dispatch }, { group }) {
       try {
-        const groupToSave = group || boardService.getEmptyGroup()
-        const board = await boardService.saveGroup(groupToSave, JSON.parse(JSON.stringify(state.board)))
+        const groupToSave =
+          group || boardService.getEmptyGroup()
+        const board = await boardService.saveGroup(
+          groupToSave,
+          JSON.parse(JSON.stringify(state.board))
+        )
         dispatch({ type: 'loadBoard', id: board._id })
       } catch (err) {
         console.log('saveGroup err', err)
@@ -440,7 +443,10 @@ export default {
     },
     async removeGroup({ state, dispatch }, { id }) {
       try {
-        await boardService.removeGroup(id, JSON.parse(JSON.stringify(state.board)))
+        await boardService.removeGroup(
+          id,
+          JSON.parse(JSON.stringify(state.board))
+        )
         // context.commit({ type: 'removeBoard', boardId })
         dispatch({ type: 'loadBoard', id: state.board._id })
       } catch (err) {
