@@ -69,14 +69,12 @@ export default {
       return this.$store.getters.boards
     },
     id() {
-      console.log(this.$route.params.id);
       return this.$route.params.id
     },
   },
   watch: {
     id: {
       handler() {
-        console.log('i watch');
         this.$store.dispatch({ type: 'loadBoard', id: this.id })
       },
       immediate: true

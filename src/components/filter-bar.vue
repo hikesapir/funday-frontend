@@ -1,7 +1,7 @@
 <template>
   <section class="filter-bar">
     <div class="new-item-btn-container">
-      <button class="new-item-btn new-item">New Item</button>
+      <button class="new-item-btn new-item" @click="addNewItem">New Item</button>
       <div class="relative">
         <button class="new-item-btn chevron" @click="openItemModal = !openItemModal">
           <i class="fa-solid fa-chevron-down"></i>
@@ -9,7 +9,6 @@
         <section v-if="openItemModal" class="context-modal item-modal">
           <button @click="addGroup">New group of Items</button>
         </section>
-        <!-- <pre>{{filterBy}}</pre> -->
       </div>
     </div>
     <div class="search">
@@ -56,7 +55,6 @@
           </label>
         </div>
       </section>
-      <!-- <pre>{{filterBy}}</pre> -->
     </div>
 
     <button>
@@ -96,6 +94,9 @@ export default {
     addGroup() {
       this.$store.dispatch({ type: 'saveGroup' })
       this.openItemModal = false
+    },
+    addNewItem() {
+      this.$store.dispatch('addItem')
     }
   },
   computed: {

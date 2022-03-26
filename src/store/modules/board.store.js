@@ -1,6 +1,7 @@
 // import authService from '../../services/auth.service.js'
 import boardService from '../../services/board-service.js'
 import router from '../../router'
+import { utilService } from '../../services/util-service.js'
 // import { socketService, SOCKET_EVENT_TASK_ADDED } from '../../services/socket.service.js'
 
 export default {
@@ -247,7 +248,7 @@ export default {
     setCmpsOrder(state, { newOrder }) {
       state.boardForDisplay.cmpsOrder = newOrder
     },
-    addGroup(state, { group }) {},
+    addGroup(state, { group }) { },
   },
   actions: {
     async loadBoards({ commit }) {
@@ -264,7 +265,6 @@ export default {
       }
     },
     async loadBoard(context, { id }) {
-      console.log('get it')
       context.commit({
         type: 'setIsLoading',
         isLoading: true,
@@ -471,5 +471,16 @@ export default {
         console.log('removeGroup err', err)
       }
     },
+    async addItem({ state, dispatch }) {
+      try {
+        const task = boardService.getEmptyTask('New Item', utilService.makeId())
+        const board = JSON.parse(JSON.stringify(state.board))
+        board.groups[0].tasks.unshift(task)
+        const savedBoard = await boardService.saveBoard(board)
+        dispatch({ type: 'loadBoard', id: savedBoard._id })
+      } catch (err) {
+        console.log('addItem err', err)
+      }
+    }
   },
 }
