@@ -16,6 +16,7 @@
         <board-view-mode :boardId="board?._id" />
         <filter-bar :board="board" />
       </div>
+      <!-- {{board}} -->
       <router-view></router-view>
     </section>
   </div>
@@ -39,6 +40,7 @@ export default {
   computed: {},
   created() {
     const { id } = this.$route.params
+    console.log(id);
     this.$store.dispatch({ type: 'loadBoard', id })
   },
   methods: {

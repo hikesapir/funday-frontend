@@ -105,7 +105,12 @@ function getEmptyBoard(boardTitle) {
       },
     ],
     style: { view: "table" },
-    members: [this.createdBy],
+    members: [{
+      _id: 'u104',
+      fullname: 'Someone',
+      imgUrl:
+        'https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+    }],
     labels: {
       status: [
         {
@@ -154,7 +159,12 @@ function getEmptyBoard(boardTitle) {
     },
     groups: [
       getEmptyGroup('g101', 'Group Title', [
-        getEmptyTask('t101', 'Item 1', [this.createdBy], 's002'),
+        getEmptyTask('t101', 'Item 1', [{
+          _id: 'u104',
+          fullname: 'Someone',
+          imgUrl:
+            'https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+        }], 's002'),
         getEmptyTask('t102', 'Item 2', [], 's001'),
         getEmptyTask('t103', 'Item 3')
       ]),

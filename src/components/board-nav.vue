@@ -9,7 +9,7 @@
     <h1 class="title">Create board</h1>
     <label class="input-wrapper">
       <span class="lable">Board name</span>
-      <input type="text" v-model="boardTitle" autofocus />
+      <input type="text" v-model="newBoard.title" autofocus />
     </label>
     <div class="btn-container">
       <button @click="colseModal">Cancel</button>
@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import boardService from '../services/board-service.js'
 import boardPreview from './board-preview.vue'
 export default {
   name: 'board-nav',
@@ -59,7 +60,7 @@ export default {
   data() {
     return {
       isNavOpen: true,
-      boardTitle: 'New Board',
+      newBoard: null,
     }
   },
   components: {
@@ -70,15 +71,17 @@ export default {
       this.isNavOpen = !this.isNavOpen
     },
     cearteBoard() {
+      this.newBoard = boardService.getEmptyBoard()
       this.$store.commit({ type: 'setOpenModal', boolean: true })
     },
     colseModal() {
       this.$store.commit({ type: 'setOpenModal', boolean: false })
     },
     saveBoard() {
-      console.log(this.boardTitle);
-      this.$store.commit({ type: 'setOpenModal', boolean: false })
-      this.boardTitle = 'New Board'
+      console.log(this.newBoard);
+      this.$store.dispatch({ type: 'saveBoard', board: this.newBoard })
+        this.$store.commit({ type: 'setOpenModal', boolean: false })
+        this.boardTitle = 'New Board'
     }
   },
   computed: {
