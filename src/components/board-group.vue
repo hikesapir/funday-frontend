@@ -10,7 +10,12 @@
         @mouseover="isHover = true"
         @mouseleave="isHover = false"
       >
-        <span @click="openContext = !openContext">
+        <span
+          class="group-menu-open"
+          @click="openContext = !openContext"
+          @mouseover="isHoverGroupMenu = true"
+          @mouseleave="isHoverGroupMenu = false"
+        >
           <i class="fa-solid fa-circle-chevron-down"></i>
         </span>
         <span
@@ -54,15 +59,13 @@
       >
         <Draggable
           v-for="cmp in cmps"
-          :class="
-            cmp.cmpName + '-col' + ' cols-drag-handle'
-          "
+          :class="cmp.cmpName + '-col'"
           :key="cmp.cmpName"
         >
           <div class="group-th">
             <i
               v-if="cmp.cmpName !== 'title-picker'"
-              class="fa-solid fa-grip-vertical"
+              class="cols-drag-handle fa-solid fa-grip-vertical"
             ></i>
             <span class="cmp-title">
               {{ cmp.preName }}
@@ -116,6 +119,7 @@ export default {
   data() {
     return {
       isHover: false,
+      isHoverGroupMenu: false,
       openContext: false,
       changeName: false,
     }
@@ -126,6 +130,16 @@ export default {
       cmps.unshift()
       return cmps
     },
+    // groupMenuStyle() {
+    //   return {
+    //     color: this.isHoverGroupMenu
+    //       ? this.group.style?.color
+    //       : '#f6f7fb',
+    //     outline: this.isHoverGroupMenu
+    //       ? `2px solid ${this.group.style?.color}`
+    //       : 'none',
+    //   }
+    // },
   },
   methods: {
     toggleChangeNameMode() {

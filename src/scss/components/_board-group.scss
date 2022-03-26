@@ -14,6 +14,18 @@
       left: 0;
       top: 35px;
     }
+    .group-menu-open {
+      position: absolute;
+      left: -30px;
+      height: 18px;
+      border-radius: 50%;
+      i {
+        border-radius: 50%;
+      }
+      &:hover {
+        background-color: $grey-background-color;
+      }
+    }
   }
 
   .group-title {
