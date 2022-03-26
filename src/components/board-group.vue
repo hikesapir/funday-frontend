@@ -13,6 +13,7 @@
         <span
           class="group-menu-open"
           @click="openContext = !openContext"
+          track-by="$index"
           @mouseover="isHoverGroupMenu = true"
           @mouseleave="isHoverGroupMenu = false"
         >
@@ -21,7 +22,8 @@
         <span
           v-if="isHover"
           class="drag-handle"
-          style="cursor: grab"
+          @mousedown="startDragGroupsMode()"
+          style="cursor: move"
         >
           <i class="fa-solid fa-grip-vertical"></i>
         </span>
@@ -51,62 +53,68 @@
         </button>
         <button @click="remove">Delete</button>
       </section>
+      <div
+        v-show="!isDraggingGroups"
+        class="group-cmp-columns"
+      >
+        <Container
+          orientation="horizontal"
+          @drop="onDrop($event, 'cmpsOrder')"
+          drag-handle-selector=".cols-drag-handle"
+          drag-class="drag-cols"
+        >
+          <Draggable
+            v-for="cmp in cmps"
+            :class="cmp.cmpName + '-col'"
+            :key="cmp.cmpName"
+          >
+            <div class="group-th">
+              <i
+                v-if="cmp.cmpName !== 'title-picker'"
+                class="cols-drag-handle fa-solid fa-grip-vertical"
+              ></i>
+              <span class="cmp-title">
+                <span
+                  @click="editCmpTitle(cmp.preName)"
+                  v-if="!isEditing(cmp.preName)"
+                >
+                  {{ cmp.preName }}
+                </span>
+                <span v-show="isEditing(cmp.preName)">
+                  <input
+                    type="text"
+                    @blur="saveCmpTitle"
+                    @keyup.enter="saveCmpTitle"
+                    v-model="newCmpTitle"
+                  />
+                </span>
+              </span>
+            </div>
+          </Draggable>
+        </Container>
+      </div>
+    </div>
+    <div v-show="!isDraggingGroups" class="group-tasks">
       <Container
-        orientation="horizontal"
-        @drop="onDrop($event, 'cmpsOrder')"
-        drag-handle-selector=".cols-drag-handle"
-        drag-class="drag-cols"
+        v-if="group?.tasks"
+        @drop="onDrop($event, 'tasks')"
+        group-name="board-tasks"
+        orientation="vertical"
+        :get-child-payload="getChildPayload"
+        drag-handle-selector=".task-drag-handle"
+        drag-class="drag-task"
       >
         <Draggable
-          v-for="cmp in cmps"
-          :class="cmp.cmpName + '-col'"
-          :key="cmp.cmpName"
+          v-for="task in group?.tasks"
+          :key="task.id"
         >
-          <div class="group-th">
-            <i
-              v-if="cmp.cmpName !== 'title-picker'"
-              class="cols-drag-handle fa-solid fa-grip-vertical"
-            ></i>
-            <span class="cmp-title">
-              <span
-                @click="editCmpTitle(cmp.preName)"
-                v-if="!isEditing(cmp.preName)"
-              >
-                {{ cmp.preName }}
-              </span>
-              <span v-show="isEditing(cmp.preName)">
-                <input
-                  type="text"
-                  @blur="saveCmpTitle"
-                  @keyup.enter="saveCmpTitle"
-                  v-model="newCmpTitle"
-                />
-              </span>
-            </span>
-          </div>
+          <task-preview :task="task" :groupId="group.id" />
         </Draggable>
       </Container>
+
+      <add-task :groupId="group.id" @taskAdded="addTask" />
+      <sum-preview :groupId="group.id" />
     </div>
-
-    <Container
-      v-if="group?.tasks"
-      @drop="onDrop($event, 'tasks')"
-      group-name="board-tasks"
-      orientation="vertical"
-      :get-child-payload="getChildPayload"
-      drag-handle-selector=".task-drag-handle"
-      drag-class="drag-task"
-    >
-      <Draggable
-        v-for="task in group?.tasks"
-        :key="task.id"
-      >
-        <task-preview :task="task" :groupId="group.id" />
-      </Draggable>
-    </Container>
-
-    <add-task :groupId="group.id" @taskAdded="addTask" />
-    <sum-preview :groupId="group.id" />
   </section>
 </template>
 
@@ -145,6 +153,9 @@ export default {
       cmps.unshift()
       return cmps
     },
+    isDraggingGroups() {
+      return this.$store.getters.groupDragMode
+    },
     // groupMenuStyle() {
     //   return {
     //     color: this.isHoverGroupMenu
@@ -157,6 +168,14 @@ export default {
     // },
   },
   methods: {
+    mouseUp() {
+      this.$store.commit('toggleGroupDragMode', false)
+      window.removeEventListener('mouseup', this.mouseUp)
+    },
+    startDragGroupsMode() {
+      this.$store.commit('toggleGroupDragMode', true)
+      window.addEventListener('mouseup', this.mouseUp)
+    },
     editCmpTitle(cmp) {
       this.prevCmpTitle = cmp
       if (cmp) {

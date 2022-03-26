@@ -91,6 +91,7 @@
 
 .group-th {
   position: relative;
+  cursor: grab;
   i {
     position: absolute;
     left: calc(10% - 4px);
@@ -98,7 +99,7 @@
     opacity: 0;
     transition: opacity 0.1s ease;
     transform: translateY(-50%);
-    cursor: grab;
+    cursor: move;
   }
   &:hover {
     background-color: $main-task-gray;
@@ -126,5 +127,17 @@
     &:hover {
       background-color: rgba(255, 255, 255, 0);
     }
+  }
+}
+
+.task-and-side-indicator {
+  display: flex;
+  height: 35px;
+  .right-indicator-inner {
+    width: 38px;
+    border-right: 8px $main-task-end-line solid;
+    background-color: $main-task-gray;
+    border-left: 1px $main-white solid;
+    border-bottom: 1px $main-white solid;
   }
 }

@@ -8,6 +8,9 @@
 
   .main-table {
     padding: 0 16px;
+    .drag-group {
+      border: 1px dashed $main-gray;
+    }
   }
 
   .board-nav {

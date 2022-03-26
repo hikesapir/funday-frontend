@@ -21,6 +21,9 @@ export default {
     boards({ boards }) {
       return boards
     },
+    groupDragMode({ isDraggingGroup }) {
+      return isDraggingGroup
+    },
     board({ boardForDisplay }) {
       return boardForDisplay
     },
@@ -158,7 +161,7 @@ export default {
     },
     isLoading({ isLoading }) {
       return isLoading
-    }
+    },
   },
   mutations: {
     loadBoards(state, { boards }) {
@@ -199,8 +202,8 @@ export default {
     setOpenModal(state, { boolean }) {
       state.isModalOpen = boolean
     },
-    toggleGroupDragMode(state) {
-      state.isDraggingGroup = !state.isDraggingGroup
+    toggleGroupDragMode(state, isDraggingGroup) {
+      state.isDraggingGroup = isDraggingGroup
     },
     addTask(state, { groupIdx, savedTask }) {
       state.boardForDisplay.groups[groupIdx].tasks.push(
@@ -251,11 +254,14 @@ export default {
     setCmpsOrder(state, { newOrder }) {
       state.boardForDisplay.cmpsOrder = newOrder
     },
+<<<<<<< HEAD
     saveBoard(state, { board }) {
       const idx = state.boards.findIndex(currBoard => currBoard._id === board._id)
       state.boards.splice(idx, 1, board)
       console.log(state.boards);
     }
+=======
+>>>>>>> d093e127a6bc4f998156a594a4d36f8ba8d75b40
   },
   actions: {
     async loadBoards({ commit }) {
@@ -486,10 +492,17 @@ export default {
     },
     async addItem({ state, commit }) {
       try {
-        const task = boardService.getEmptyTask('New Item', utilService.makeId())
-        const board = JSON.parse(JSON.stringify(state.board))
+        const task = boardService.getEmptyTask(
+          'New Item',
+          utilService.makeId()
+        )
+        const board = JSON.parse(
+          JSON.stringify(state.board)
+        )
         board.groups[0].tasks.unshift(task)
-        const savedBoard = await boardService.saveBoard(board)
+        const savedBoard = await boardService.saveBoard(
+          board
+        )
         commit({ type: 'loadBoard', board: savedBoard })
       } catch (err) {
         console.log('addItem err', err)
@@ -512,7 +525,7 @@ export default {
           newOrder: board.cmpsOrder,
         })
         await boardService.saveBoard(board)
-      } catch (err) { }
+      } catch (err) {}
     },
   },
 }

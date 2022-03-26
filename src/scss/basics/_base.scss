@@ -20,7 +20,7 @@ body {
   margin: 0;
   // overflow-x: hidden;
 }
-p{
+p {
   margin: 0;
 }
 
@@ -34,7 +34,6 @@ h6 {
   font-weight: 500;
   margin: 0 0 1rem;
   line-height: lh(40px, 29px);
-  
 }
 
 h1 {
@@ -62,26 +61,23 @@ ul {
   padding: 0;
 }
 
-.spacer{
+.spacer {
   border-bottom: 1px solid;
   border-color: rgb(208, 212, 228);
 }
 
 ::-webkit-scrollbar {
   width: 10px;
-  
 }
 
 ::-webkit-scrollbar-track {
   background: #f1f1f1;
-
 }
 ::-webkit-scrollbar-thumb {
-  background:  #b2b2b2;
+  background: #b2b2b2;
   // border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #b2b2b2
+  background: #b2b2b2;
 }
-
