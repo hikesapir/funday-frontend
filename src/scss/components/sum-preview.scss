@@ -1,13 +1,20 @@
 .sum-preview {
   display: flex;
-  justify-content: space-between;
   height: 35px;
+  background-color: $main-task-gray;
+  align-self: center;
+  align-items: center;
+  margin-bottom: 20px;
+  transform: translate(262px);
 
   .members-sum-sum {
     display: flex;
-    // background-color:;
+    width: 98px;
+    justify-content: center;
 
     img {
+      vertical-align: middle;
+      line-height: 24px;
       height: 30px;
       width: 30px;
       border: 2px solid white;
@@ -15,5 +22,57 @@
       object-fit: contain;
       margin: 0 -4px;
     }
+  }
+  .tags-sum-preview {
+    text-align: center;
+    display: inline-block;
+    width: 140px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    line-height: 24px;
+
+    .tags-display {
+      display: inline-block;
+      margin: 2px;
+    }
+  }
+
+  .priority-sum,
+  .status-sum {
+    width: 140px;
+    text-align: center;
+    .priority-sum-display,
+    .status-sum-display {
+      display: inline-block;
+      height: 24px;
+      vertical-align: middle;
+      line-height: 24px;
+
+      &:hover {
+        height: 30px;
+      }
+    }
+  }
+
+  .timeline-sum {
+    width: 178px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    label.timeline {
+      height: 22px;
+      line-height: 22px;
+      width: 155px;
+      border-radius: 1rem;
+      color: white;
+      text-align: center;
+    }
+  }
+
+  .file-sum {
+    width: 140px;
+    text-align: center;
   }
 }

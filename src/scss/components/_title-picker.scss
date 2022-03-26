@@ -3,21 +3,27 @@
   display: flex;
   width: 262px;
   position: relative;
-
+  padding-right: 8px;
   .left-indicator-inner {
     width: 10px;
-    background-color: aqua;
     display: inline-block;
   }
   .th-title {
     font-size: 18px;
     text-align: left;
   }
-
-  .task-title {
-    padding: 0 0 0 10px;
-    width: auto;
-    display: inline-block;
+  .editable-component {
+    width: 160px;
+    .task-title {
+      padding-right: 2px;
+      padding-left: 8px;
+      width: 100%;
+      display: inline-block;
+      overflow-x: hidden;
+      overflow-y: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
 
   .edit-title-btn {
@@ -28,15 +34,16 @@
     background-color: none;
     border: none;
     height: 24px;
+    margin-right: 24px;
     border-radius: 4px;
-    padding: 2px 8px;
-    &:hover {
-      background-color: #fefefe;
-    }
   }
   .start-conversation-container {
-    position: absolute;
-    right: 0;
+    svg {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
   }
   &:hover {
     color: $title-hover-blue;
@@ -50,7 +57,7 @@
       opacity: 1;
       pointer-events: all;
       &:hover {
-        background-color: #dcdfec00;
+        background-color: #fefefe;
       }
     }
   }
