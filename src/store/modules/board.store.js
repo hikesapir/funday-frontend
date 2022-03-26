@@ -251,8 +251,11 @@ export default {
     setCmpsOrder(state, { newOrder }) {
       state.boardForDisplay.cmpsOrder = newOrder
     },
-
-
+    saveBoard(state, { board }) {
+      const idx = state.boards.findIndex(currBoard => currBoard._id === board._id)
+      state.boards.splice(idx, 1, board)
+      console.log(state.boards);
+    }
   },
   actions: {
     async loadBoards({ commit }) {
@@ -286,16 +289,16 @@ export default {
       }
     },
     async saveBoard(context, { board }) {
-      commit({ type: 'setIsLoading', isLoading: true })
       try {
         const savedBoard = await boardService.saveBoard(
           JSON.parse(JSON.stringify(board))
         )
         if (board._id) {
-          context.dispatch({
+          context.commit({
             type: 'loadBoard',
-            id: board._id,
+            board: savedBoard,
           })
+          context.commit({ type: 'saveBoard', board: savedBoard })
         } else {
           context.dispatch('loadBoards')
           console.log(savedBoard._id)
@@ -303,8 +306,6 @@ export default {
         }
       } catch (err) {
         console.log('saveBoard err', err)
-      } finally {
-        commit({ type: 'setIsLoading', isLoading: false })
       }
     },
     async removeBoard(context, { boardId }) {
@@ -484,7 +485,6 @@ export default {
       }
     },
     async addItem({ state, commit }) {
-      commit({ type: 'setIsLoading', isLoading: true })
       try {
         const task = boardService.getEmptyTask('New Item', utilService.makeId())
         const board = JSON.parse(JSON.stringify(state.board))
@@ -493,8 +493,6 @@ export default {
         commit({ type: 'loadBoard', board: savedBoard })
       } catch (err) {
         console.log('addItem err', err)
-      } finally {
-        commit({ type: 'setIsLoading', isLoading: false })
       }
     },
     async saveCmpTitle(
