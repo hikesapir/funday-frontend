@@ -1,7 +1,7 @@
 .status-picker-col {
   border-right: 1px white solid;
   position: relative;
-  width: 130px;
+  width: 140px;
   text-align: center;
   height: 34px;
   border-left: 1px solid white;
@@ -13,7 +13,7 @@
   &.status {
     position: relative;
     &:before {
-      content: '';
+      content: "";
       transition: border-width 0.5s ease-in-out;
       border-style: solid;
       border-color: #d9d9d9 white;

@@ -40,8 +40,8 @@ export default {
     cmpsOrder() {
       return [
         "file-sum",
-        "members-sum",
         "priority-sum",
+        "members-sum",
         "status-sum",
         "tags-sum",
         "timeline-sum",

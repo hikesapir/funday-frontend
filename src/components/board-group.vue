@@ -1,9 +1,6 @@
 <template>
   <section class="board-group">
-    <div
-      class="table-head relative"
-      style="cursor: default"
-    >
+    <div class="table-head relative" style="cursor: default">
       <div
         class="th-title title-picker-col"
         :style="{ color: group.style?.color }"
@@ -13,11 +10,7 @@
         <span @click="openContext = !openContext">
           <i class="fa-solid fa-circle-chevron-down"></i>
         </span>
-        <span
-          v-if="isHover"
-          class="drag-handle"
-          style="cursor: grab"
-        >
+        <span v-if="isHover" class="drag-handle" style="cursor: grab">
           <i class="fa-solid fa-grip-vertical"></i>
         </span>
         <span
@@ -35,22 +28,9 @@
           ref="editableSpan"
           >{{ group.title }}</span
         >
-        <!-- <label v-if="changeName">
-          <input
-            @keyup.enter="updateGroup"
-            @blur="updateGroup"
-            type="text"
-            v-model="group.title"
-            autofocus
-          />
-        </label> -->
       </div>
       <section v-if="openContext" class="context-modal">
-        <button
-          @click="
-            ;(changeName = true), (openContext = false)
-          "
-        >
+        <button @click="(changeName = true), (openContext = false);">
           Rename Group
         </button>
         <button @click="remove">Delete</button>
@@ -63,9 +43,7 @@
       >
         <Draggable
           v-for="cmp in cmps"
-          :class="
-            cmp.cmpName + '-col' + ' cols-drag-handle'
-          "
+          :class="cmp.cmpName + '-col' + ' cols-drag-handle'"
           :key="cmp.cmpName"
         >
           <!-- <i class="fa-solid fa-grip-vertical"></i> -->
@@ -82,10 +60,7 @@
       drag-handle-selector=".task-drag-handle"
       drag-class="drag-task"
     >
-      <Draggable
-        v-for="task in group?.tasks"
-        :key="task.id"
-      >
+      <Draggable v-for="task in group?.tasks" :key="task.id">
         <task-preview :task="task" :groupId="group.id" />
       </Draggable>
     </Container>
@@ -96,13 +71,13 @@
 </template>
 
 <script>
-import taskPreview from './task-preview.vue'
-import sumPreview from './sum-preview.vue'
-import { Container, Draggable } from 'vue3-smooth-dnd'
+import taskPreview from "./task-preview.vue";
+import sumPreview from "./sum-preview.vue";
+import { Container, Draggable } from "vue3-smooth-dnd";
 
-import addTask from './add-task.vue'
+import addTask from "./add-task.vue";
 export default {
-  name: 'board-group',
+  name: "board-group",
   props: {
     group: Object,
     cmpsOrder: Array,
@@ -119,61 +94,61 @@ export default {
       isHover: false,
       openContext: false,
       changeName: false,
-    }
+    };
   },
   computed: {
     cmps() {
-      const cmps = this.$store.getters.board.cmpsOrder
-      cmps.unshift()
-      return cmps
+      const cmps = this.$store.getters.board.cmpsOrder;
+      cmps.unshift();
+      return cmps;
     },
   },
   methods: {
     toggleChangeNameMode() {
-      this.changeName = !this.changeName
+      this.changeName = !this.changeName;
     },
     addTask(task) {
       this.$store.dispatch({
-        type: 'saveTask',
+        type: "saveTask",
         task,
         groupId: this.group.id,
-      })
+      });
     },
     getChildPayload(idx) {
-      return this.group.tasks[idx]
+      return this.group.tasks[idx];
     },
     onDrop(dropResult, entityType) {
-      var entities = null
-      if (entityType === 'cmpsOrder')
-        entities = this.$store.getters.board.cmpsOrder
-      else if (entityType === 'tasks')
+      var entities = null;
+      if (entityType === "cmpsOrder")
+        entities = this.$store.getters.board.cmpsOrder;
+      else if (entityType === "tasks")
         entities = {
           groupId: this.group.id,
           tasks: this.group.tasks,
-        }
+        };
       this.$store.dispatch({
-        type: 'changeOrder',
+        type: "changeOrder",
         dropResult,
         entities,
         entityType,
-      })
+      });
     },
     remove() {
       this.$store.dispatch({
-        type: 'removeGroup',
+        type: "removeGroup",
         id: this.group.id,
-      })
+      });
     },
     updateGroup() {
-      const group = JSON.parse(JSON.stringify(this.group))
-      group.title = this.$refs.editableSpan.innerText
-      console.log('group.title', group.title)
+      const group = JSON.parse(JSON.stringify(this.group));
+      group.title = this.$refs.editableSpan.innerText;
+      console.log("group.title", group.title);
       this.$store.dispatch({
-        type: 'saveGroup',
+        type: "saveGroup",
         group,
-      })
-      this.changeName = false
+      });
+      this.changeName = false;
     },
   },
-}
+};
 </script>

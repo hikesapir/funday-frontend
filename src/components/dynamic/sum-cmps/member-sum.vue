@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="member-sum">member-sum:</div>
+    <div class="member-sum"></div>
 
     <p v-for="member in groupMembers" :key="member._id">
       <img :src="member.imgUrl" />
@@ -28,14 +28,9 @@ export default {
   },
   computed: {
     groupMembers() {
-      console.log(this.groupData?.member);
-
       return this.groupData.member;
     },
   },
-  methods: {
-    // currGroupData() {
-    // },
-  },
+  methods: {},
 };
 </script>
