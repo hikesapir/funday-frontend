@@ -17,7 +17,7 @@
         <filter-bar :board="board" />
       </div>
       <!-- {{ board }} -->
-      <router-view :board="board"></router-view>
+      <router-view :board="board" v-if="!isLoading"></router-view>
     </section>
   </div>
 </template>
@@ -71,6 +71,10 @@ export default {
     id() {
       return this.$route.params.id
     },
+    isLoading() {
+      console.log();
+      return this.$store.getters.isLoading
+    }
   },
   watch: {
     id: {
