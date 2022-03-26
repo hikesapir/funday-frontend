@@ -18,24 +18,27 @@
   </div>
 
   <section v-if="isNavOpen" class="board-nav">
-    <span>Workspace</span>
+    <span class="title">Workspace</span>
     <div class="workspace-dropdwon">
-      <h2>Main workspace</h2>
+      <div class="workspace-title">
+        <div class="connected-user">M</div>
+        <div class="main-workspace-title">Main workspace</div>
+      </div>
       <i class="fa-solid fa-chevron-down"></i>
     </div>
     <ul>
       <li>
-        <button @click="cearteBoard">
+        <button @click="cearteBoard" class="main-nav-btn">
           <i class="fa-solid fa-plus"></i>Add
         </button>
       </li>
       <li>
-        <button>
+        <button class="main-nav-btn">
           <i class="fa-solid fa-filter"></i>Filters
         </button>
       </li>
       <li>
-        <button>
+        <button class="main-nav-btn">
           <i class="fa-solid fa-magnifying-glass"></i>Search
         </button>
       </li>
@@ -49,10 +52,10 @@
 </template>
 
 <script>
-import boardService from '../services/board-service.js'
-import boardPreview from './board-preview.vue'
+import boardService from "../services/board-service.js";
+import boardPreview from "./board-preview.vue";
 export default {
-  name: 'board-nav',
+  name: "board-nav",
   props: {
     boards: Object,
   },
@@ -61,33 +64,33 @@ export default {
     return {
       isNavOpen: true,
       newBoard: null,
-    }
+    };
   },
   components: {
     boardPreview,
   },
   methods: {
     toggleNav() {
-      this.isNavOpen = !this.isNavOpen
+      this.isNavOpen = !this.isNavOpen;
     },
     cearteBoard() {
-      this.newBoard = boardService.getEmptyBoard()
-      this.$store.commit({ type: 'setOpenModal', boolean: true })
+      this.newBoard = boardService.getEmptyBoard();
+      this.$store.commit({ type: "setOpenModal", boolean: true });
     },
     colseModal() {
-      this.$store.commit({ type: 'setOpenModal', boolean: false })
+      this.$store.commit({ type: "setOpenModal", boolean: false });
     },
     saveBoard() {
       console.log(this.newBoard);
-      this.$store.dispatch({ type: 'saveBoard', board: this.newBoard })
-        this.$store.commit({ type: 'setOpenModal', boolean: false })
-        this.boardTitle = 'New Board'
-    }
+      this.$store.dispatch({ type: "saveBoard", board: this.newBoard });
+      this.$store.commit({ type: "setOpenModal", boolean: false });
+      this.boardTitle = "New Board";
+    },
   },
   computed: {
     isModalOpen() {
-      return this.$store.getters.isModalOpen
-    }
-  }
-}
+      return this.$store.getters.isModalOpen;
+    },
+  },
+};
 </script>

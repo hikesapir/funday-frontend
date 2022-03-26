@@ -4,12 +4,38 @@
 //   height: 100vh;
 // }
 .board-nav {
+  span.title {
+    margin-top: 12px;
+  }
   .workspace-title {
     display: flex;
-    justify-content: space-between;
+
+    .main-workspace-title {
+      font-weight: 700;
+      font-size: 16px;
+      color: $main-text-gray;
+    }
+
+    .connected-user {
+      background-color: $primary-pink;
+      color: $main-white;
+      height: 24px;
+      width: 24px;
+      font-weight: 600;
+      font-size: 16px;
+      text-align: center;
+      border-radius: 5px;
+      line-height: 24px;
+      vertical-align: middle;
+      margin-right: 2px;
+    }
   }
   .fa-ellipsis {
     font-size: 20px;
+    color: $main-text-gray;
+  }
+
+  .fa-solid {
     color: $main-text-gray;
   }
 
@@ -43,7 +69,7 @@
     }
   }
   .workspace-dropdwon {
-    margin-top: 4px;
+    margin-top: 8px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -63,15 +89,17 @@
     }
   }
 
-  button {
+  .main-nav-btn {
     @include btn();
+    color: $main-text-gray;
+    width: 100%;
   }
   .context-modal {
     width: 220px;
   }
 }
 
-.modal-background{
+.modal-background {
   position: fixed;
   width: 100vw;
   height: 100vh;
@@ -79,36 +107,35 @@
   z-index: 1;
 }
 
-
-.cearte-board-modal{
+.cearte-board-modal {
   padding: 32px;
   position: fixed;
   background-color: #ffffff;
   z-index: 2;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   width: 500px;
-  .close{
+  .close {
     position: absolute;
     right: 7px;
     top: 7px;
     padding: 4px 8px;
   }
-  .title{
+  .title {
     margin-bottom: 16px;
   }
-  .input-wrapper{
+  .input-wrapper {
     display: flex;
     flex-direction: column;
   }
-  .lable{
+  .lable {
     margin-bottom: 8px;
   }
-  input{
+  input {
     padding: 8px 16px;
   }
-  .save{
+  .save {
     background-color: $primary-blue;
     color: $main-white;
     padding: 8px 16px;
@@ -121,7 +148,7 @@
       background-color: $primary-blue-hover;
     }
   }
-  .btn-container{
+  .btn-container {
     display: flex;
     justify-content: flex-end;
     gap: 8px;
