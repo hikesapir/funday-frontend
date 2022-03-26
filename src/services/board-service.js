@@ -13,6 +13,7 @@ export default {
   getEmptyGroup,
   saveGroup,
   removeGroup,
+  getEmptyBoard,
 }
 
 const KEY = 'board_db'
@@ -22,8 +23,8 @@ localStorage[KEY] ? '' : _createDemoData()
 //board
 
 async function query(filterBy = null) {
-  if (filterBy) {
-    try {
+  try {
+    if (filterBy) {
       const boards = await storageService.query(KEY)
       const board = boards.find(
         (board) => board._id === filterBy.boardId
@@ -38,21 +39,18 @@ async function query(filterBy = null) {
           filteredGroups.push(...filterGroup)
         })
       }
-
       return filteredGroups
-    } catch (err) {
-      console.log(
-        'boardService: could not load boards with filter- ' +
-        filterBy
-      )
-    }
+    } else return storageService.query(KEY)
+  } catch (err) {
+    console.log(
+      'boardService: could not load boards with filter- ' +
+      filterBy
+    )
   }
-  return storageService.query(KEY)
 }
 
 function getById(id) {
   return storageService.getById(KEY, id)
-
 }
 
 function saveBoard(board) {
@@ -64,6 +62,121 @@ function removeBoard(boardId) {
   return storageService.remove(KEY, boardId)
 }
 
+function getEmptyBoard(boardTitle) {
+  return {
+    title: boardTitle || 'New Board',
+    description: '',
+    createdAt: '',
+    isStarred: false,
+    createdBy: {
+      _id: 'u104',
+      fullname: 'Someone',
+      imgUrl:
+        'https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+    },
+    cmpsOrder: [
+      {
+        cmpName: 'title-picker',
+        preName: '',
+      },
+      {
+        cmpName: 'member-picker',
+        preName: 'People',
+      },
+      {
+        cmpName: 'priority-picker',
+        preName: 'Priority',
+      },
+      {
+        cmpName: 'status-picker',
+        preName: 'Status',
+      },
+      {
+        cmpName: 'timeline-picker',
+        preName: 'Timeline',
+      },
+      {
+        cmpName: 'tag-picker',
+        preName: 'Tags',
+      },
+      {
+        cmpName: 'file-picker',
+        preName: 'Files',
+      },
+    ],
+    style: { view: "table" },
+    members: [{
+      _id: 'u104',
+      fullname: 'Someone',
+      imgUrl:
+        'https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+    }],
+    labels: {
+      status: [
+        {
+          id: 's001',
+          txt: 'Done',
+          color: '#00c875',
+        },
+        {
+          id: 's002',
+          txt: 'Working on it',
+          color: '#fdab3d',
+        },
+        {
+          id: 's003',
+          txt: 'Stuck',
+          color: '#e2445c',
+        },
+        {
+          id: 's000',
+          txt: '',
+          color: '#c4c4c4',
+        },
+      ],
+      priority: [
+        {
+          id: 'p001',
+          txt: 'High',
+          color: '#e2445c',
+        },
+        {
+          id: 'p002',
+          txt: 'Medium',
+          color: '#f9a0f0',
+        },
+        {
+          id: 'p003',
+          txt: 'Low',
+          color: '#00c875',
+        },
+        {
+          id: 'p000',
+          txt: '',
+          color: '#c4c4c4',
+        },
+      ],
+    },
+    groups: [
+      getEmptyGroup('g101', 'Group Title', [
+        getEmptyTask('t101', 'Item 1', [{
+          _id: 'u104',
+          fullname: 'Someone',
+          imgUrl:
+            'https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+        }], 's002'),
+        getEmptyTask('t102', 'Item 2', [], 's001'),
+        getEmptyTask('t103', 'Item 3')
+      ]),
+      getEmptyGroup('g102', 'Group Title')[
+      getEmptyTask('t104', 'Item 4'),
+      getEmptyTask('t105', 'Item 5')
+      ]
+    ],
+
+  }
+}
+
 // group
 
 async function getGroupById(boardIdx, groupId) { }
@@ -73,25 +186,29 @@ function saveGroup(group, board) {
     group.id = utilService.makeId()
     board.groups.unshift(group)
   } else {
-    const idx = board.groups.findIndex(bGroup => bGroup.id === group.id)
+    const idx = board.groups.findIndex(
+      (bGroup) => bGroup.id === group.id
+    )
     board.groups.splice(idx, 1, group)
   }
   return saveBoard(board)
 }
 
 function removeGroup(groupId, board) {
-  console.log(groupId);
-  const idx = board.groups.findIndex(group => group.id === groupId)
+  console.log(groupId)
+  const idx = board.groups.findIndex(
+    (group) => group.id === groupId
+  )
   board.groups.splice(idx, 1)
   return saveBoard(board)
 }
 
-function getEmptyGroup() {
+function getEmptyGroup(groupId, groupTitle, groupTasks) {
   return {
-    // id: utilService.makeId(),
-    title: 'New Group',
+    id: groupId || null,
+    title: groupTitle || 'New Group',
     style: { color: utilService.getRandomColor() },
-    tasks: [],
+    tasks: groupTasks || [],
   }
 }
 
@@ -127,13 +244,14 @@ async function saveTask(boardId, groupId, taskToSave) {
   }
 }
 
-async function saveTasksOrder(boardId, idx, tasksOrder) {
-  const boards = await query()
-  const board = boards.find(
-    (board) => board._id === boardId
-  )
+async function saveTasksOrder(board, idx, tasksOrder) {
   try {
+    // const boards = await query()
+    // const board = boards.find(
+    //   (board) => board._id === boardId
+    // )
     board.groups[idx].tasks = tasksOrder
+    console.log('currGroup, groups', idx, board.groups)
     await storageService.put(KEY, board)
   } catch (err) {
     console.log('Boardservice: could not save tasksOrder')
@@ -142,12 +260,13 @@ async function saveTasksOrder(boardId, idx, tasksOrder) {
 
 function removeTask(taskId) { }
 
-function getEmptyTask() {
+function getEmptyTask(taskId, taskTitle, taskMembers, taskStatus) {
   return {
-    title: '',
+    id: taskId || null,
+    title: taskTitle || '',
     createdAt: '',
     byMember: {},
-    status: 's000',
+    status: taskStatus || 's000',
     priority: 'p000',
     dueDate: '',
     timeline: {
@@ -157,7 +276,7 @@ function getEmptyTask() {
     tags: [],
     files: [],
     updates: [],
-    members: [],
+    members: taskMembers || [],
   }
 }
 
