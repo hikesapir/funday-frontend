@@ -225,8 +225,7 @@
   .dots.active .list li {
     cursor: pointer;
     opacity: 1;
-    transition: opacity 200ms 100ms
-      cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 200ms 100ms cubic-bezier(0.4, 0, 0.2, 1);
   }
   .dots.active .list li:nth-child(2) {
     transition-delay: 130ms;
@@ -242,8 +241,7 @@
   }
   .dots.active .shadow {
     opacity: 1;
-    transition: opacity 150ms 150ms
-      cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 150ms 150ms cubic-bezier(0.4, 0, 0.2, 1);
   }
   .cursor {
     -webkit-tap-highlight-color: transparent;
