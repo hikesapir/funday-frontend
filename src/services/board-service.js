@@ -251,7 +251,7 @@ async function saveTasksOrder(board, idx, tasksOrder) {
     //   (board) => board._id === boardId
     // )
     board.groups[idx].tasks = tasksOrder
-    console.log('currGroup, groups', idx, board.groups)
+    // console.log('currGroup, groups', idx, board.groups)
     await storageService.put(KEY, board)
   } catch (err) {
     console.log('Boardservice: could not save tasksOrder')

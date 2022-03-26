@@ -2,19 +2,16 @@
   cursor: pointer;
   display: flex;
   justify-content: left;
-  width: 262px;
+  width: 334px;
   position: relative;
   padding-right: 8px;
   .left-indicator-inner {
     width: 8px;
     display: inline-block;
   }
-  .th-title {
-    font-size: 18px;
-    text-align: left;
-  }
+
   .editable-component {
-    width: 160px;
+    width: 260px;
     .task-title {
       padding-right: 2px;
       padding-left: 8px;

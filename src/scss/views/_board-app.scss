@@ -9,7 +9,10 @@
   .main-table {
     padding: 0 16px;
     .drag-group {
+      background-color: $main-hover-gray;
       border: 1px dashed $main-gray;
+      transition: transform 0.1s ease;
+      transform: rotate(2deg);
     }
   }
 

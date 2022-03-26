@@ -53,4 +53,15 @@
       }
     }
   }
+
+  .board-header-right {
+    line-height: 44px;
+    vertical-align: middle;
+    .fa-ellipsis {
+      font-size: 22px;
+    }
+    .btn {
+      margin: 4px 8px;
+    }
+  }
 }

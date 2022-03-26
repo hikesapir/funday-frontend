@@ -2,9 +2,9 @@
   <section>
     <div class="tags-sum-preview">
       <span v-for="tag in groupData.tags" :key="tag" class="">
-        <div class="tags-display" :style="{ color: tag.color }">
+        <span class="tags-display" :style="{ color: tag.color }">
           {{ tag.txt }}
-        </div>
+        </span>
       </span>
     </div>
   </section>
