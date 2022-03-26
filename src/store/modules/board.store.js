@@ -159,6 +159,9 @@ export default {
     isModalOpen({ isModalOpen }) {
       return isModalOpen
     },
+    isLoading({ isLoading }) {
+      return isLoading
+    },
   },
   mutations: {
     loadBoards(state, { boards }) {
@@ -251,7 +254,6 @@ export default {
     setCmpsOrder(state, { newOrder }) {
       state.boardForDisplay.cmpsOrder = newOrder
     },
-    addGroup(state, { group }) {},
   },
   actions: {
     async loadBoards({ commit }) {
@@ -285,6 +287,7 @@ export default {
       }
     },
     async saveBoard(context, { board }) {
+      commit({ type: 'setIsLoading', isLoading: true })
       try {
         const savedBoard = await boardService.saveBoard(
           JSON.parse(JSON.stringify(board))
@@ -301,6 +304,8 @@ export default {
         }
       } catch (err) {
         console.log('saveBoard err', err)
+      } finally {
+        commit({ type: 'setIsLoading', isLoading: false })
       }
     },
     async removeBoard(context, { boardId }) {
@@ -449,7 +454,8 @@ export default {
         await boardService.saveBoard(board)
       }
     },
-    async saveGroup({ state, dispatch }, { group }) {
+    async saveGroup({ state, commit }, { group }) {
+      commit({ type: 'setIsLoading', isLoading: true })
       try {
         const groupToSave =
           group || boardService.getEmptyGroup()
@@ -457,24 +463,29 @@ export default {
           groupToSave,
           JSON.parse(JSON.stringify(state.board))
         )
-        dispatch({ type: 'loadBoard', id: board._id })
+        commit({ type: 'loadBoard', board })
       } catch (err) {
         console.log('saveGroup err', err)
+      } finally {
+        commit({ type: 'setIsLoading', isLoading: false })
       }
     },
-    async removeGroup({ state, dispatch }, { id }) {
+    async removeGroup({ state, commit }, { id }) {
+      commit({ type: 'setIsLoading', isLoading: true })
       try {
-        await boardService.removeGroup(
+        const board = await boardService.removeGroup(
           id,
           JSON.parse(JSON.stringify(state.board))
         )
-        // context.commit({ type: 'removeBoard', boardId })
-        dispatch({ type: 'loadBoard', id: state.board._id })
+        commit({ type: 'loadBoard', board })
       } catch (err) {
         console.log('removeGroup err', err)
+      } finally {
+        commit({ type: 'setIsLoading', isLoading: false })
       }
     },
-    async addItem({ state, dispatch }) {
+    async addItem({ state, commit }) {
+      commit({ type: 'setIsLoading', isLoading: true })
       try {
         const task = boardService.getEmptyTask(
           'New Item',
@@ -487,9 +498,11 @@ export default {
         const savedBoard = await boardService.saveBoard(
           board
         )
-        dispatch({ type: 'loadBoard', id: savedBoard._id })
+        commit({ type: 'loadBoard', board: savedBoard })
       } catch (err) {
         console.log('addItem err', err)
+      } finally {
+        commit({ type: 'setIsLoading', isLoading: false })
       }
     },
     async saveCmpTitle(

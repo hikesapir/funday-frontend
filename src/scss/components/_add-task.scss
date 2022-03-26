@@ -3,7 +3,7 @@
   width: 100%;
   position: sticky;
   .left-indicator-inner {
-    width: 10px;
+    width: 8px;
     display: inline-block;
     transition: opacity 0.1s ease;
   }
@@ -28,6 +28,7 @@
       pointer-events: all;
     }
     input {
+      margin-left: 1px;
       flex-basis: 100%;
       height: 35px;
       padding-left: 20px;
