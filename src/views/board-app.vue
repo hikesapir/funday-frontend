@@ -1,8 +1,17 @@
 <template>
-  <div class="board-app-container">
-    <div class="open-side-bar">
-      <board-nav :boards="boards"></board-nav>
+  <div class="open-side-bar">
+    <div
+      @click="changeModalStatus"
+      class="open-nav-btn"
+      :class="{ open: isOpen, close: !isOpen }"
+    >
+      <i class="fa-solid fa-angle-left"></i>
     </div>
+    <div class="board-navi" :class="{ open: isOpen, close: !isOpen }">
+      <board-nav v-if="isOpen" :boards="boards"></board-nav>
+    </div>
+  </div>
+  <div class="board-app-container">
     <section class="board-app">
       <div class="bord-header-wrapper">
         <board-header
@@ -38,7 +47,15 @@ export default {
   emits: [],
   computed: {},
   created() {},
+  data() {
+    return {
+      isOpen: false,
+    };
+  },
   methods: {
+    changeModalStatus() {
+      this.isOpen = !this.isOpen;
+    },
     setBoard(boardId) {
       this.$store.commit({ type: "loadBoard", id: boardId });
     },
