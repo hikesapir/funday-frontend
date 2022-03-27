@@ -14,6 +14,10 @@ export default {
     filterBy: {
       txt: '',
     },
+    sortBy: {
+      type: '',
+      dir: 1,
+    },
     boardMapByGroups: [],
     isModalOpen: false,
   },
@@ -162,8 +166,47 @@ export default {
     isLoading({ isLoading }) {
       return isLoading
     },
+    sortBy({ sortBy }) {
+      return sortBy
+    },
   },
   mutations: {
+    setSortBy(state, { sortBy }) {
+      // state.sortBy = JSON.parse(JSON.stringify(sortBy))
+      const board = JSON.parse(
+        JSON.stringify(state.boardForDisplay)
+      )
+      if (state.sortBy.type === sortBy) {
+        state.sortBy.dir = state.sortBy.dir === 1 ? -1 : 1
+      }
+      switch (sortBy) {
+        case 'status-picker':
+          board.groups.forEach(
+            (group, idx) =>
+              (board.groups[idx].tasks = group.tasks.sort(
+                (t1, t2) =>
+                  t1.status.localeCompare(t2.status) *
+                  state.sortBy.dir
+              ))
+          )
+          break
+        case 'priority-picker':
+          board.groups.forEach((group) =>
+            group.tasks.sort(
+              (t1, t2) =>
+                t1.priority.localeCompare(t2.priority) *
+                state.sortBy.dir
+            )
+          )
+          break
+
+        default:
+          return
+      }
+
+      state.sortBy.type = sortBy
+      state.boardForDisplay = board
+    },
     loadBoards(state, { boards }) {
       state.boards = JSON.parse(JSON.stringify(boards))
     },
@@ -229,9 +272,10 @@ export default {
       const idx = state.boards.findIndex(
         (board) => board._id === savedBoard._id
       )
-      if (idx !== -1)
+      if (idx !== -1) {
         state.boards.splice(idx, 1, savedBoard)
-      else state.boards.push(savedBoard)
+        state.boardForDisplay = savedBoard
+      } else state.boards.push(savedBoard)
     },
     removeBoard(state, { boardId }) {
       const idx = state.boards.findIndex(
@@ -567,7 +611,7 @@ export default {
           newOrder: board.cmpsOrder,
         })
         await boardService.saveBoard(board)
-      } catch (err) { }
+      } catch (err) {}
     },
   },
 }

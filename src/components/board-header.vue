@@ -3,12 +3,8 @@
     <div class="up-header">
       <div class="board-name">
         <div class="editable-header">
-          <h1 v-if="!renameBoard" @click="renameBoard = true">
-            {{ boardDetails.title }}
-          </h1>
           <h1
             class="main-board-title-input"
-            v-show="renameBoard"
             contenteditable="true"
             ref="boardTitle"
             @blur="onUpdate"
@@ -33,7 +29,10 @@
             class="star"
           >
             <span>
-              <i v-if="boardDetails.isStarred" class="fa-solid fa-star"></i>
+              <i
+                v-if="boardDetails.isStarred"
+                class="fa-solid fa-star"
+              ></i>
               <i v-else class="fa-regular fa-star"></i>
             </span>
           </button>
@@ -43,8 +42,12 @@
         <button>
           <p>Board member</p>
         </button>
-        <button><i class="fa-solid fa-user-plus"></i>Invite/3</button>
-        <button><i class="fa-solid fa-chart-line"></i>Activity</button>
+        <button>
+          <i class="fa-solid fa-user-plus"></i>Invite/3
+        </button>
+        <button>
+          <i class="fa-solid fa-chart-line"></i>Activity
+        </button>
         <button class="btn">
           <i class="fa-solid fa-plus"></i>
           <span>Add to board</span>
@@ -58,18 +61,12 @@
     </div>
     <div class="description-line">
       <span
-        v-if="isDescriptionOpen && !isEditDesc"
-        @click="isEditDesc = true"
-        class="text-content"
-        >{{ boardDetails.description }}</span
-      >
-      <span
-        v-show="isEditDesc && isDescriptionOpen"
+        v-show="isDescriptionOpen"
         contenteditable="true"
         ref="boardDescription"
         @blur="onUpdate"
         @keyup.enter="onUpdate"
-        class="group-description-header"
+        class="group-description-header text-content"
         >{{ boardDetails.description }}</span
       >
     </div>
@@ -78,51 +75,46 @@
 
 <script>
 export default {
-  name: "board-header",
+  name: 'board-header',
   props: {
     boardDetails: Object,
   },
-  emits: ["updateBoard"],
+  emits: ['updateBoard'],
   components: {},
   data() {
     return {
       isDescriptionOpen: true,
-      renameBoard: false,
-      isEditDesc: false,
-    };
+    }
   },
   created() {},
   mounted() {},
   methods: {
     starred() {
-      this.$emit("updateBoard", "star");
-    },
-    renameTitle() {
-      this.renameBoard = !this.renameBoard;
-      this.isEditDesc = false;
-    },
-    renameDesc() {
-      this.isEditDesc = !this.isEditDesc;
-      this.renameBoard = false;
+      this.$emit('updateBoard', 'star')
     },
     onUpdate() {
-      const boardDetails = JSON.parse(JSON.stringify(this.boardDetails));
-      boardDetails.title = this.$refs.boardTitle.innerText;
-      boardDetails.description = this.$refs.boardDescription.innerText;
-      this.renameBoard = false;
-      this.isEditDesc = false;
+      const boardDetails = JSON.parse(
+        JSON.stringify(this.boardDetails)
+      )
+      boardDetails.title = this.$refs.boardTitle.innerText
+      boardDetails.description =
+        this.$refs.boardDescription.innerText
+      this.renameBoard = false
+      this.isEditDesc = false
 
-      this.$emit("updateBoard", boardDetails);
+      this.$emit('updateBoard', boardDetails)
     },
   },
   computed: {
     descriptionTitle() {
-      return this.isDescriptionOpen ? "Hide" : "Show";
+      return this.isDescriptionOpen ? 'Hide' : 'Show'
     },
     starTitle() {
-      return this.boardDetails.isStarred ? "Remove from" : "Add to";
+      return this.boardDetails.isStarred
+        ? 'Remove from'
+        : 'Add to'
     },
   },
   unmounted() {},
-};
+}
 </script>
