@@ -1,10 +1,6 @@
 <template>
   <div class="open-side-bar">
-    <div
-      @click="changeModalStatus"
-      class="open-nav-btn"
-      :class="{ open: isOpen, close: !isOpen }"
-    >
+    <div @click="changeModalStatus" class="open-nav-btn" :class="{ open: isOpen, close: !isOpen }">
       <i class="fa-solid fa-angle-left"></i>
     </div>
     <div class="board-navi" :class="{ open: isOpen, close: !isOpen }">
@@ -25,10 +21,7 @@
         <board-view-mode :boardId="board?._id" />
         <filter-bar :board="board" />
       </div>
-      <router-view
-        :board="board"
-        v-if="!isLoading"
-      ></router-view>
+      <router-view :board="board" v-if="!isLoading"></router-view>
     </section>
   </div>
 </template>
@@ -49,22 +42,19 @@ export default {
   },
   emits: [],
   computed: {},
-  created() {},
+  created() { },
   data() {
     return {
       isOpen: false,
     };
   },
   methods: {
-<<<<<<< HEAD
     changeModalStatus() {
       this.isOpen = !this.isOpen;
     },
     setBoard(boardId) {
       this.$store.commit({ type: "loadBoard", id: boardId });
     },
-=======
->>>>>>> 3910a28f8c6ecc07905cec70d43d7a8bf5b335f8
     updateBoard(type) {
       const board = JSON.parse(
         JSON.stringify(this.$store.getters.board)
