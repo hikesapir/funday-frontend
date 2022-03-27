@@ -50,10 +50,9 @@ export default {
       data.groupId = this.groupId;
       this.$store.dispatch({ type: "updateTask", data });
     },
-    // deleteTask(groupId, taskId) {
-    //   console.log(groupId, taskId);
-    //   this.$store.dispatch({ type: "removeTask", groupId, taskId });
-    // },
+    deleteTask(groupId, taskId) {
+      this.$store.dispatch({ type: "removeTask", groupId, taskId });
+    },
   },
   computed: {
     cmpsOrder() {
