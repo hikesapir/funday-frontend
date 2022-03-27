@@ -64,9 +64,21 @@ export default {
     computed: {
         boardId() {
             return this.$route.params.id
+        },
+        params(){
+            return this.$route.params
         }
     },
     unmounted() {
     },
+      watch: {
+    params: {
+      async handler() {
+          const { id, groupId, taskId } = this.$route.params
+        this.task = await boardService.getTaskById(id, groupId, taskId)
+      },
+      immediate: true,
+    },
+  },
 }
 </script>
