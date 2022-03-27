@@ -6,9 +6,10 @@
       data-toggle="p-dropdown"
       @click="toggleDropDown"
       tabindex="-1"
-    >{{ txt }}</div>
-
-         <div v-show="isDropOpen">
+    >
+      {{ txt }}
+    </div>
+    <div v-show="isDropOpen">
       <drop-down
         :labels="priorities"
         @update="updateTask"
@@ -37,11 +38,6 @@ export default {
       priorities: this.$store.getters.board.labels.priority,
     }
   },
-  created() {
-    this.selectedPriority = this.priorities.find(
-      (priority) => priority.id === this.task.priority
-    )
-  },
   methods: {
     updateTask(val) {
       this.isDropOpen = false
@@ -66,13 +62,14 @@ export default {
     },
     getStyle() {
       const { priority } = this.$store.getters.board?.labels
-      const currPriority = priority?.find(
-        (s) => s.id === this.task.priority
-      )
-      return {
+      const currPriority = priority?.find((s) => {
+        return s.id === this.task.priority
+      })
+      const style = {
         backgroundColor: currPriority?.color,
         color: 'white',
       }
+      return style
     },
   },
 }
