@@ -7,8 +7,8 @@
   // for making the title picker column sticky
   // and overlay when scrolling to the right
   // position: sticky;
-  // left:153px;
-  // z-index:10;
+  // left: 0;
+  // z-index: 10;
   padding-right: 8px;
   .left-indicator-inner {
     width: 8px;
@@ -99,18 +99,17 @@
     background-color: rgba(255, 255, 255, 0);
     align-items: center;
 
-    .open-context-btn{
-    background-color: $main-gray;
-    width: 18px;
-    height: 18px;
-    border-radius: 5px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: $main-text-gray;
-    
-  }
+    .open-context-btn {
+      background-color: $main-gray;
+      width: 18px;
+      height: 18px;
+      border-radius: 5px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $main-text-gray;
+    }
     // button {
     //   display: flex;
     //   justify-content: space-between;
@@ -123,5 +122,4 @@
       font-size: 14px;
     }
   }
- 
 }

@@ -1,101 +1,106 @@
 <template>
   <section class="board-group">
-    <div
-      class="table-head relative"
-      style="cursor: default"
-    >
+    <div class="table-head-wrapper">
       <div
-        class="th-title title-picker-col"
-        :style="{ color: group.style?.color }"
-        @mouseover="isHover = true"
-        @mouseleave="isHover = false"
+        class="table-head relative"
+        style="cursor: default"
       >
         <div
-          class="group-menu-open"
-          @click="openContext = !openContext"
-          track-by="$index"
-          @mouseover="isHoverGroupMenu = true"
-          @mouseleave="isHoverGroupMenu = false"
+          class="th-title title-picker-col"
+          :style="{ color: group.style?.color }"
+          @mouseover="isHover = true"
+          @mouseleave="isHover = false"
         >
-          <span>
-            <i class="fa-solid fa-circle-chevron-down"></i>
-          </span>
-        </div>
-        <span
-          v-if="isHover"
-          class="drag-handle"
-          @mousedown="startDragGroupsMode()"
-          style="cursor: move"
-        >
-          <i class="fa-solid fa-grip-vertical"></i>
-        </span>
-        <span
-          contenteditable="true"
-          class="editable-cmp group-title"
-          @keyup.enter="updateGroup"
-          @blur="updateGroup"
-          ref="editableSpan"
-          >{{ group.title }}</span
-        >
-      </div>
-      <section v-if="openContext" class="context-modal">
-        <button
-          @click="
-            ;(changeName = true), (openContext = false)
-          "
-        >
-          Rename Group
-        </button>
-        <button @click="remove">Delete</button>
-      </section>
-      <div
-        v-show="!isDraggingGroups"
-        class="group-cmp-columns"
-      >
-        <Container
-          orientation="horizontal"
-          @drop="onDrop($event, 'cmpsOrder')"
-          drag-handle-selector=".cols-drag-handle"
-          drag-class="drag-cols"
-        >
-          <Draggable
-            v-for="cmp in cmps"
-            :class="cmp.cmpName + '-col'"
-            :key="cmp.cmpName"
+          <div
+            class="group-menu-open"
+            @click="openContext = !openContext"
+            track-by="$index"
+            @mouseover="isHoverGroupMenu = true"
+            @mouseleave="isHoverGroupMenu = false"
           >
-            <div class="group-th">
+            <span>
               <i
-                v-if="cmp.cmpName !== 'title-picker'"
-                class="cols-drag-handle fa-solid fa-grip-vertical"
+                class="fa-solid fa-circle-chevron-down"
               ></i>
-              <span
-                v-if="cmp.cmpName !== 'title-picker'"
-                @click="setSortBy(cmp.cmpName)"
-                class="sort-col-btn"
-              >
-                <i class="fa fa-sort-desc desc-icon"></i>
-                <i class="fa fa-sort-asc asc-icon"></i>
-              </span>
-              <span class="cmp-title">
+            </span>
+          </div>
+          <span
+            v-if="isHover"
+            class="drag-handle"
+            @mousedown="startDragGroupsMode()"
+            style="cursor: move"
+          >
+            <i class="fa-solid fa-grip-vertical"></i>
+          </span>
+          <span
+            contenteditable="true"
+            class="editable-cmp group-title"
+            @keyup.enter="updateGroup"
+            @blur="updateGroup"
+            ref="editableSpan"
+            >{{ group.title }}</span
+          >
+        </div>
+        <section v-if="openContext" class="context-modal">
+          <button
+            @click="
+              ;(changeName = true), (openContext = false)
+            "
+          >
+            Rename Group
+          </button>
+          <button @click="remove">Delete</button>
+        </section>
+        <div
+          v-show="!isDraggingGroups"
+          class="group-cmp-columns"
+        >
+          <Container
+            orientation="horizontal"
+            @drop="onDrop($event, 'cmpsOrder')"
+            drag-handle-selector=".cols-drag-handle"
+            drag-class="drag-cols"
+          >
+            <Draggable
+              v-for="cmp in cmps"
+              :class="cmp.cmpName + '-col'"
+              :key="cmp.cmpName"
+            >
+              <div class="group-th">
+                <i
+                  v-if="cmp.cmpName !== 'title-picker'"
+                  class="cols-drag-handle fa-solid fa-grip-vertical"
+                ></i>
                 <span
-                  @click="editCmpTitle(cmp.preName)"
-                  v-if="!isEditing(cmp.preName)"
-                  >{{ cmp.preName }}</span
+                  v-if="cmp.cmpName !== 'title-picker'"
+                  @click="setSortBy(cmp.cmpName)"
+                  class="sort-col-btn"
                 >
-                <span v-show="isEditing(cmp.preName)">
-                  <input
-                    type="text"
-                    @blur="saveCmpTitle"
-                    @keyup.enter="saveCmpTitle"
-                    v-model="newCmpTitle"
-                  />
+                  <i class="fa fa-sort-desc desc-icon"></i>
+                  <i class="fa fa-sort-asc asc-icon"></i>
                 </span>
-              </span>
-            </div>
-          </Draggable>
-        </Container>
+                <span class="cmp-title">
+                  <span
+                    @click="editCmpTitle(cmp.preName)"
+                    v-if="!isEditing(cmp.preName)"
+                    >{{ cmp.preName }}</span
+                  >
+                  <span v-show="isEditing(cmp.preName)">
+                    <input
+                      type="text"
+                      @blur="saveCmpTitle"
+                      @keyup.enter="saveCmpTitle"
+                      v-model="newCmpTitle"
+                    />
+                  </span>
+                </span>
+              </div>
+            </Draggable>
+          </Container>
+        </div>
       </div>
     </div>
+
     <div v-show="!isDraggingGroups" class="group-tasks">
       <Container
         v-if="group?.tasks"
