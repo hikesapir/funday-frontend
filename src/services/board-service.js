@@ -12,6 +12,7 @@ export default {
   saveTasksOrder,
   getEmptyGroup,
   saveGroup,
+  removeTask,
   removeGroup,
   getEmptyBoard,
 }
@@ -44,7 +45,7 @@ async function query(filterBy = null) {
   } catch (err) {
     console.log(
       'boardService: could not load boards with filter- ' +
-      filterBy
+        filterBy
     )
   }
 }
@@ -104,13 +105,15 @@ function getEmptyBoard(boardTitle) {
         preName: 'Files',
       },
     ],
-    style: { view: "table" },
-    members: [{
-      _id: 'u104',
-      fullname: 'Someone',
-      imgUrl:
-        'https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
-    }],
+    style: { view: 'table' },
+    members: [
+      {
+        _id: 'u104',
+        fullname: 'Someone',
+        imgUrl:
+          'https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+      },
+    ],
     labels: {
       status: [
         {
@@ -159,27 +162,33 @@ function getEmptyBoard(boardTitle) {
     },
     groups: [
       getEmptyGroup('g101', 'Group Title', [
-        getEmptyTask('Item 1', 't101', [{
-          _id: 'u104',
-          fullname: 'Someone',
-          imgUrl:
-            'https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
-        }], 's002'),
+        getEmptyTask(
+          'Item 1',
+          't101',
+          [
+            {
+              _id: 'u104',
+              fullname: 'Someone',
+              imgUrl:
+                'https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+            },
+          ],
+          's002'
+        ),
         getEmptyTask('Item 2', 't102', [], 's001'),
-        getEmptyTask('Item 3', 't103',)
+        getEmptyTask('Item 3', 't103'),
       ]),
       getEmptyGroup('g102', 'Group Title', [
-        getEmptyTask('Item 4', 't104',),
-        getEmptyTask('Item 5', 't105',)
-      ])
+        getEmptyTask('Item 4', 't104'),
+        getEmptyTask('Item 5', 't105'),
+      ]),
     ],
-
   }
 }
 
 // group
 
-async function getGroupById(boardIdx, groupId) { }
+async function getGroupById(boardIdx, groupId) {}
 
 function saveGroup(group, board) {
   if (!group.id) {
@@ -243,23 +252,35 @@ async function saveTask(boardId, groupId, taskToSave) {
   }
 }
 
-async function saveTasksOrder(board, idx, tasksOrder) {
+async function saveTasksOrder(board, groupIdx, tasksOrder) {
   try {
     // const boards = await query()
     // const board = boards.find(
     //   (board) => board._id === boardId
     // )
-    board.groups[idx].tasks = tasksOrder
-    // console.log('currGroup, groups', idx, board.groups)
+    board.groups[groupIdx].tasks = tasksOrder
+    // console.log('currGroup, groups', groupIdx, board.groups)
     await storageService.put(KEY, board)
   } catch (err) {
     console.log('Boardservice: could not save tasksOrder')
   }
 }
 
-function removeTask(taskId) { }
+async function removeTask(board, groupIdx, taskIdx) {
+  try {
+    board.groups[groupIdx].tasks.splice(taskIdx, 1)
+    await storageService.put(KEY, board)
+  } catch (err) {
+    console.log('Boardservice: could not save tasksOrder')
+  }
+}
 
-function getEmptyTask(taskTitle, taskId, taskMembers, taskStatus) {
+function getEmptyTask(
+  taskTitle,
+  taskId,
+  taskMembers,
+  taskStatus
+) {
   return {
     id: taskId || null,
     title: taskTitle || '',

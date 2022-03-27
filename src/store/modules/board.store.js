@@ -260,6 +260,12 @@ export default {
       )
       state.boards.splice(idx, 1, board)
     },
+    removeTask(state, { groupIdx, taskIdx }) {
+      state.boardForDisplay.groups[groupIdx].tasks.splice(
+        taskIdx,
+        1
+      )
+    },
   },
   actions: {
     async loadBoards({ commit }) {
@@ -395,6 +401,42 @@ export default {
         groupIdx: idx,
         savedTask,
       })
+    },
+    async removeTask(
+      { commit, state },
+      { groupId, taskId }
+    ) {
+      const board = JSON.parse(
+        JSON.stringify(state.boardForDisplay)
+      )
+      const groupIdx = board.groups.findIndex(
+        (group) => group.id === groupId
+      )
+      if (groupIdx === -1)
+        return console.error(
+          'boardStore: could not find group id -' + groupId
+        )
+      const taskIdx = board.groups[
+        groupIdx
+      ].tasks.findIndex((task) => task.id === taskId)
+      if (taskIdx === -1)
+        return console.error(
+          'boardStore: could not find task id-' + taskId
+        )
+      try {
+        await boardService.removeTask(
+          board,
+          groupIdx,
+          taskIdx
+        )
+        commit({
+          type: 'removeTask',
+          groupIdx,
+          taskIdx,
+        })
+      } catch (err) {
+        console.log("Could'nt remove task")
+      }
     },
     async changeOrder(
       context,
