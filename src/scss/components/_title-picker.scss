@@ -89,4 +89,39 @@
       }
     }
   }
+
+  .task-menu-arrow {
+    position: absolute;
+    width: 30px;
+    left: -30px;
+    height: 100%;
+    display: flex;
+    background-color: rgba(255, 255, 255, 0);
+    align-items: center;
+
+    .open-context-btn{
+    background-color: $main-gray;
+    width: 18px;
+    height: 18px;
+    border-radius: 5px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $main-text-gray;
+    
+  }
+    // button {
+    //   display: flex;
+    //   justify-content: space-between;
+    // }
+    .context-modal {
+      left: 0;
+      top: 30px;
+      width: 120px;
+      height: 50px;
+      font-size: 14px;
+    }
+  }
+ 
 }

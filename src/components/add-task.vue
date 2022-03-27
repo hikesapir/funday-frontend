@@ -1,5 +1,6 @@
 <template>
   <div class="add-task">
+    <!-- <div class="space"></div> -->
     <div class="left-indicator-inner" :style="leftBoxStyle"></div>
     <form @submit.prevent="onSubmit">
       <input
@@ -55,3 +56,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.space{
+  width: 30px;
+}
+</style>

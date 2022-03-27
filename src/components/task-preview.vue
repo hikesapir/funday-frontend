@@ -4,18 +4,6 @@
     @mouseover="isHover = true"
     @mouseleave="isHover = false"
   >
-    <div
-      v-if="isHover || openModal"
-      class="task-menu-arrow"
-      @click="openModal = !openModal"
-    >
-      <i class="fa-solid fa-caret-down"></i>
-      <div v-if="openModal" class="context-modal">
-        <button @click="deleteTask(groupId, task.id)">
-          <i class="fa-regular fa-trash-can"></i>Delete
-        </button>
-      </div>
-    </div>
     <section class="task-preview">
       <component
         v-for="cmp in cmpsOrder"
@@ -24,6 +12,7 @@
         :key="cmp"
         :task="task"
         :groupId="groupId"
+        :isHover="hover"
         @update="updateTask"
       ></component>
     </section>
@@ -49,7 +38,6 @@ export default {
   data() {
     return {
       isHover: false,
-      openModal: false,
     };
   },
   components: {
@@ -66,14 +54,15 @@ export default {
       data.groupId = this.groupId;
       this.$store.dispatch({ type: "updateTask", data });
     },
-    deleteTask(groupId, taskId) {
-      this.$store.dispatch({ type: "removeTask", groupId, taskId });
-    },
+
   },
   computed: {
     cmpsOrder() {
       return this.$store.getters.board.cmpsOrder;
     },
+    hover(){
+      return this.isHover
+    }
   },
 };
 </script>
