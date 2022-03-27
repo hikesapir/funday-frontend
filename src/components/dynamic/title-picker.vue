@@ -44,7 +44,10 @@
         @mouseout="hoverEdit = false"
       >Edit</button>
     </div>
-    <div class="start-conversation-container">
+    <div
+      class="start-conversation-container"
+      @click="this.$router.push(`/boards/b101/pulses/${groupId}/${task.id}`)"
+    >
       <svg
         viewBox="0 0 20 20"
         fill="currentColor"
