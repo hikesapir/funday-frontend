@@ -1,21 +1,24 @@
 <template>
-  <div v-if="board" class="main-table">
-    <Container
-      v-if="board?.groups"
-      @drop="onDrop"
-      orientation="vertical"
-      drag-class="drag-group"
-      drag-handle-selector=".drag-handle"
-    >
-      <Draggable v-for="group in board?.groups" :key="group.id">
-        <board-group
-          :group="JSON.parse(JSON.stringify(group))"
-          :cmpsOrder="board?.cmpsOrder"
-          :key="group.id"
-        ></board-group>
-      </Draggable>
-    </Container>
-  </div>
+  <section class="main-table">
+    <div v-if="board" class="main-table-container">
+      <Container
+        v-if="board?.groups"
+        @drop="onDrop"
+        orientation="vertical"
+        drag-class="drag-group"
+        drag-handle-selector=".drag-handle"
+      >
+        <Draggable v-for="group in board?.groups" :key="group.id">
+          <board-group
+            :group="JSON.parse(JSON.stringify(group))"
+            :cmpsOrder="board?.cmpsOrder"
+            :key="group.id"
+          ></board-group>
+        </Draggable>
+      </Container>
+    </div>
+    <router-view />
+  </section>
 </template>
 
 <script>

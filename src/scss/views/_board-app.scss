@@ -1,13 +1,17 @@
 .board-app-container {
   display: flex;
   width: 100%;
+  overflow-y: scroll;
 
   .bord-header-wrapper {
     width: 100%;
+    position: sticky;
+    left: 0;
   }
 
-  .main-table {
+  .main-table-container {
     padding: 0 20px;
+    width: 100%;
     .drag-group {
       background-color: $main-hover-gray;
       border: 1px dashed $main-gray;
