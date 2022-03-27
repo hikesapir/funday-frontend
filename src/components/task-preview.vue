@@ -1,5 +1,8 @@
 <template>
   <div class="task-and-side-indicator">
+    <div class="task-menu-arrow" @click="deleteTask(groupId, task.id)">
+      <i class="fa-solid fa-caret-down"></i>
+    </div>
     <section class="task-preview">
       <component
         v-for="cmp in cmpsOrder"
@@ -46,6 +49,9 @@ export default {
     updateTask(data) {
       data.groupId = this.groupId;
       this.$store.dispatch({ type: "updateTask", data });
+    },
+    deleteTask(groupId, taskId) {
+      this.$store.dispatch({ type: "removeTask", groupId, taskId });
     },
   },
   computed: {

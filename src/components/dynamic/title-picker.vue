@@ -14,6 +14,7 @@
           @blur="saveTitle"
           v-model="title"
           ref="input"
+          class="edit-title-input"
         />
       </div>
       <div v-show="!isEditing" class="task-title">
@@ -27,7 +28,12 @@
         </span>
       </div>
     </div>
-    <div class="edit-icon" tabindex="0" @blur="toggleEditTask">
+    <div
+      class="edit-icon"
+      tabindex="0"
+      @blur="toggleEditTask"
+      v-show="!isEditing"
+    >
       <button
         class="edit-title-btn"
         @click="toggleEditTask"
