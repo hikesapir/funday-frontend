@@ -520,6 +520,7 @@ export default {
         const idx = board.groups.findIndex(
           (group) => group.id === groupId
         )
+        console.log('entities', entities)
         context.commit({
           type: 'setTasksOrder',
           result: entities,

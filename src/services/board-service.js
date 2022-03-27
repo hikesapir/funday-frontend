@@ -15,6 +15,7 @@ export default {
   removeTask,
   removeGroup,
   getEmptyBoard,
+  getTaskById,
 }
 
 const KEY = 'board_db'
@@ -45,7 +46,7 @@ async function query(filterBy = null) {
   } catch (err) {
     console.log(
       'boardService: could not load boards with filter- ' +
-        filterBy
+      filterBy
     )
   }
 }
@@ -188,7 +189,7 @@ function getEmptyBoard(boardTitle) {
 
 // group
 
-async function getGroupById(boardIdx, groupId) {}
+async function getGroupById(boardIdx, groupId) { }
 
 function saveGroup(group, board) {
   if (!group.id) {
@@ -221,6 +222,15 @@ function getEmptyGroup(groupId, groupTitle, groupTasks) {
 }
 
 //task
+
+async function getTaskById(boardId, groupId, taskId) {
+  const boards = await query()
+  const board = boards.find((board) => board._id === boardId);
+  const group = board.groups.find(currGroup => currGroup.id === groupId)
+  const task = group.tasks.find(task => task.id === taskId)
+  // console.log(task);
+  return  task
+}
 
 async function saveTask(boardId, groupId, taskToSave) {
   const boards = await query()

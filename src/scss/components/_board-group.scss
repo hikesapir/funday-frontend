@@ -3,33 +3,42 @@
   line-height: 35px;
   color: $group-header-gray;
   margin-bottom: 30px;
+
   cursor: pointer;
   width: 100%;
-  position: relative;
   .fa-grip-vertical {
     color: $main-gray;
     margin-right: 10px;
   }
-  .table-head {
+  .table-head-wrapper {
+    // FOR STICKY GROUP HEADER - ASK ASI ABOUT STICK-RELATIVE-ABSOLUTE RELATIONSHIP
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     display: flex;
-    border-bottom: 1px $main-gray solid;
-    font-size: 14px;
-    text-align: center;
-    .context-modal {
-      left: -30px;
-      top: 35px;
-    }
-    .group-menu-open {
-      // width: 30px;
-      position: absolute;
-      left: -30px;
-      height: 18px;
-      i {
-        border-radius: 50%;
+    width: 100%;
+    .table-head {
+      display: flex;
+      background-color: #fff;
+      border-bottom: 1px $main-gray solid;
+      font-size: 14px;
+      text-align: center;
+      .context-modal {
+        left: -30px;
+        top: 35px;
       }
-      &:hover {
-        border-radius: 50%;
-        background-color: $grey-background-color;
+      .group-menu-open {
+        // width: 30px;
+        position: absolute;
+        left: -30px;
+        height: 18px;
+        i {
+          border-radius: 50%;
+        }
+        &:hover {
+          border-radius: 50%;
+          background-color: $grey-background-color;
+        }
       }
     }
   }
