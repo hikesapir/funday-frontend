@@ -7,6 +7,7 @@ import mainApp from '../views/board-app.vue'
 import mainTable from '../views/board-views/main-table.vue'
 import chart from '../views/board-views/chart.vue'
 import myWork from '../views/my-work.vue'
+import taskDetails from '../views/task-details.vue'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -22,7 +23,17 @@ const router = createRouter({
       name: 'board-app',
       component: mainApp,
       children: [
-        { path: '', component: mainTable },
+        {
+          path: '',
+          component: mainTable,
+          children: [
+            {
+              path: 'pulses/taskId',
+              name: 'task-details',
+              component: taskDetails,
+            },
+          ]
+        },
         { path: 'chart', component: chart },
       ],
     },
