@@ -30,15 +30,8 @@
           <i class="fa-solid fa-grip-vertical"></i>
         </span>
         <span
-          v-if="!changeName"
-          @click="toggleChangeNameMode"
-          class="group-title"
-          >{{ group.title }}</span
-        >
-        <span
-          v-else
           contenteditable="true"
-          class="editable-cmp"
+          class="editable-cmp group-title"
           @keyup.enter="updateGroup"
           @blur="updateGroup"
           ref="editableSpan"
@@ -206,9 +199,6 @@ export default {
     },
     isEditing(cmp) {
       return this.prevCmpTitle === cmp && cmp
-    },
-    toggleChangeNameMode() {
-      this.changeName = !this.changeName
     },
     addTask(task) {
       this.$store.dispatch({
