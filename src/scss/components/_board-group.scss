@@ -154,6 +154,8 @@
     border-bottom: 1px $main-white solid;
   }
   .task-menu-arrow {
+    // position: absolute;
+    // right: 300px;
     margin-top: 9px;
     display: flex;
     align-items: center;
@@ -170,5 +172,18 @@
     margin-right: 3px;
     line-height: 35px;
     vertical-align: middle;
+    display: none;
+
+    button {
+      display: flex;
+      justify-content: space-between;
+    }
+    .context-modal {
+      left: 0;
+      top: 20px;
+      width: 120px;
+      height: 50px;
+      font-size: 14px;
+    }
   }
 }

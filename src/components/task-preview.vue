@@ -1,7 +1,20 @@
 <template>
-  <div class="task-and-side-indicator">
-    <div class="task-menu-arrow" @click="deleteTask(groupId, task.id)">
+  <div
+    class="task-and-side-indicator"
+    @mouseover="isHover = true"
+    @mouseleave="isHover = false"
+  >
+    <div
+      v-if="isHover || openModal"
+      class="task-menu-arrow"
+      @click="openModal = !openModal"
+    >
       <i class="fa-solid fa-caret-down"></i>
+      <div v-if="openModal" class="context-modal">
+        <button @click="deleteTask(groupId, task.id)">
+          <i class="fa-regular fa-trash-can"></i>Delete
+        </button>
+      </div>
     </div>
     <section class="task-preview">
       <component
@@ -34,7 +47,10 @@ export default {
     task: Object,
   },
   data() {
-    return {};
+    return {
+      isHover: false,
+      openModal: false,
+    };
   },
   components: {
     filePicker,
