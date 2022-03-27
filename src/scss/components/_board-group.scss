@@ -2,8 +2,9 @@
   padding: 0 0 0 30px;
   line-height: 35px;
   color: $group-header-gray;
+  margin-bottom: 30px;
   cursor: pointer;
-
+  position: relative;
   .fa-grip-vertical {
     color: $main-gray;
     margin-right: 10px;
