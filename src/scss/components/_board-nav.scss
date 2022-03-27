@@ -54,6 +54,14 @@
       left: calc(100% - 14px);
     }
   }
+
+  .change-name-input {
+    padding: 8px;
+    border: $primary-blue 1px solid;
+    margin-top: 1px;
+    @include blue-focus;
+  }
+
   .bord-title {
     display: flex;
     justify-content: space-between;
@@ -134,6 +142,12 @@
   }
   input {
     padding: 8px 16px;
+    border: 1px $main-gray solid;
+    border-radius: 4px;
+
+    &:focus {
+      @include blue-focus;
+    }
   }
   .save {
     background-color: $primary-blue;

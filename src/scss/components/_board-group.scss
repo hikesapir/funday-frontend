@@ -15,7 +15,7 @@
     font-size: 14px;
     text-align: center;
     .context-modal {
-      left: 0;
+      left: -30px;
       top: 35px;
     }
     .group-menu-open {
@@ -154,5 +154,4 @@
     border-left: 1px $main-white solid;
     border-bottom: 1px $main-white solid;
   }
-
 }

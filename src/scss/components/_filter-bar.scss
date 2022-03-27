@@ -44,6 +44,10 @@
     &:hover {
       background-color: $primary-light-blue;
     }
+
+    &:focus {
+      @include blue-focus;
+    }
   }
   .search-input {
     padding: 8px;
