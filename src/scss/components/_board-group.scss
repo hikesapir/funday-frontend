@@ -19,14 +19,15 @@
       top: 35px;
     }
     .group-menu-open {
+      // width: 30px;
       position: absolute;
       left: -30px;
       height: 18px;
-      border-radius: 50%;
       i {
         border-radius: 50%;
       }
       &:hover {
+        border-radius: 50%;
         background-color: $grey-background-color;
       }
     }
@@ -153,37 +154,5 @@
     border-left: 1px $main-white solid;
     border-bottom: 1px $main-white solid;
   }
-  .task-menu-arrow {
-    // position: absolute;
-    // right: 300px;
-    margin-top: 9px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: $main-gray;
-    padding: 4px;
-    color: $main-text-gray;
-    border-radius: 5px;
-    width: 18px;
-    height: 18px;
-    text-align: center;
-    left: 10px;
-    font-size: 10px;
-    margin-right: 3px;
-    line-height: 35px;
-    vertical-align: middle;
-    display: none;
 
-    button {
-      display: flex;
-      justify-content: space-between;
-    }
-    .context-modal {
-      left: 0;
-      top: 20px;
-      width: 120px;
-      height: 50px;
-      font-size: 14px;
-    }
-  }
 }

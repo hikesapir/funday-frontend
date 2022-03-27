@@ -1,5 +1,15 @@
 <template>
-  <div class="title-picker task-drag-handle">
+  <div class="title-picker task-drag-handle" @mouseover="hover = true" @mouseleave="hover = false">
+    <div class="task-menu-arrow" @click="openModal = !openModal">
+      <span class="open-context-btn" v-if="isHover || hover || openModal">
+        <i class="fa-solid fa-caret-down"></i>
+      </span>
+      <div v-if="openModal" class="context-modal">
+        <button @click="deleteTask(groupId, task.id)">
+          <i class="fa-regular fa-trash-can"></i>Delete
+        </button>
+      </div>
+    </div>
     <div
       class="left-indicator-inner"
       :style="{
@@ -23,25 +33,16 @@
             border: hoverEdit ? '1px solid #c4c4c4' : 'none',
             padding: hoverEdit ? '3px' : 'none',
           }"
-        >
-          {{ task?.title }}
-        </span>
+        >{{ task?.title }}</span>
       </div>
     </div>
-    <div
-      class="edit-icon"
-      tabindex="0"
-      @blur="toggleEditTask"
-      v-show="!isEditing"
-    >
+    <div class="edit-icon" tabindex="0" @blur="toggleEditTask" v-show="!isEditing">
       <button
         class="edit-title-btn"
         @click="toggleEditTask"
         @mouseover="hoverEdit = true"
         @mouseout="hoverEdit = false"
-      >
-        Edit
-      </button>
+      >Edit</button>
     </div>
     <div class="start-conversation-container">
       <svg
@@ -57,13 +58,13 @@
           fill="currentColor"
           fill-rule="evenodd"
           clip-rule="evenodd"
-        ></path>
+        />
         <path
           d="M11.25 6.5C11.25 6.08579 10.9142 5.75 10.5 5.75C10.0858 5.75 9.75 6.08579 9.75 6.5V8.75H7.5C7.08579 8.75 6.75 9.08579 6.75 9.5C6.75 9.91421 7.08579 10.25 7.5 10.25H9.75V12.5C9.75 12.9142 10.0858 13.25 10.5 13.25C10.9142 13.25 11.25 12.9142 11.25 12.5V10.25H13.5C13.9142 10.25 14.25 9.91421 14.25 9.5C14.25 9.08579 13.9142 8.75 13.5 8.75H11.25V6.5Z"
           fill="currentColor"
           fill-rule="evenodd"
           clip-rule="evenodd"
-        ></path>
+        />
       </svg>
     </div>
   </div>
@@ -75,9 +76,16 @@ export default {
   props: {
     task: Object,
     groupId: String,
+    isHover: Boolean,
   },
   data() {
-    return { isEditing: false, title: "", hoverEdit: false };
+    return {
+      isEditing: false, title: "",
+      hoverEdit: false,
+      hover: false,
+      openModal: false,
+
+    };
   },
   created() {
     this.title = this.task.title;
@@ -101,6 +109,9 @@ export default {
         title: this.title,
         task: this.task,
       });
+    },
+    deleteTask(groupId, taskId) {
+      this.$store.dispatch({ type: "removeTask", groupId, taskId });
     },
   },
 };
