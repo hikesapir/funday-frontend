@@ -28,7 +28,7 @@ const router = createRouter({
           component: mainTable,
           children: [
             {
-              path: 'pulses/taskId',
+              path: 'pulses/:groupId/:taskId',
               name: 'task-details',
               component: taskDetails,
             },
