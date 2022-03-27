@@ -4,6 +4,11 @@
   justify-content: left;
   width: 334px;
   position: relative;
+  // for making the title picker column sticky
+  // and overlay when scrolling to the right
+  // position: sticky;
+  // left:153px;
+  // z-index:10;
   padding-right: 8px;
   .left-indicator-inner {
     width: 8px;

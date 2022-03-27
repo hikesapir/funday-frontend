@@ -7,7 +7,8 @@
       @click="toggleDropDown"
       tabindex="-1"
     >{{ txt }}</div>
-    <div v-show="isDropOpen">
+
+         <div v-show="isDropOpen">
       <drop-down
         :labels="priorities"
         @update="updateTask"
