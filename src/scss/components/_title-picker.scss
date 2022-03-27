@@ -34,6 +34,18 @@
     }
   }
 
+  .edit-title-input {
+    // border: 1px solid ;
+    &:focus {
+      border: solid 1px $main-gray;
+      outline: none;
+      padding: 3px;
+      margin-left: 4px;
+    }
+    // width: calc(100% - 34px);
+    width: 295px;
+  }
+
   .edit-title-btn {
     opacity: 0;
     pointer-events: none;
