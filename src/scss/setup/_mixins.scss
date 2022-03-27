@@ -38,7 +38,7 @@
   position: relative;
   overflow: hidden;
   &:before {
-    content: '';
+    content: "";
     display: block;
     width: 100%;
     padding-top: ($height / $width) * 100%;
@@ -87,12 +87,19 @@
   border: none;
   border-radius: 4px;
   transition: background-color 0.2s;
-  
+
   &:hover {
     background-color: #dcdfec;
   }
 
   // font-variation-settings: 'wght' 430;
+}
+
+// blue focus for input
+@mixin blue-focus {
+  outline: none;
+  border: 0.5px solid $primary-blue;
+  border-radius: 4px;
 }
 
 // Type
@@ -103,14 +110,14 @@
   // 2.boldCondensed
   // 3.condensed
   @if $type == bold {
-    font-variation-settings: 'wght' 430;
+    font-variation-settings: "wght" 430;
   } @else if $type == boldCondensed {
-    font-variation-settings: 'wght' 430, 'wdth' 80;
+    font-variation-settings: "wght" 430, "wdth" 80;
     letter-spacing: em(6.72px);
   } @else if $type == condensed {
-    font-variation-settings: 'wdth' 80;
+    font-variation-settings: "wdth" 80;
     letter-spacing: em(6.72px);
   } @else if $type == light {
-    font-variation-settings: 'wght' 200;
+    font-variation-settings: "wght" 200;
   }
 }

@@ -7,6 +7,7 @@
             {{ boardDetails.title }}
           </h1>
           <h1
+            class="main-board-title-input"
             v-show="renameBoard"
             contenteditable="true"
             ref="boardTitle"
@@ -68,6 +69,7 @@
         ref="boardDescription"
         @blur="onUpdate"
         @keyup.enter="onUpdate"
+        class="group-description-header"
         >{{ boardDetails.description }}</span
       >
     </div>

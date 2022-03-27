@@ -1,14 +1,16 @@
 <template>
   <section class="home-page">
-    <h1>Welcome to Funday, your project management tool</h1>
-    <button @click="$router.push('/boards/b101')">
-      Go to board
-    </button>
+    <div class="main-home-page">
+      <img class="home-page-logo" src="../assets/favicon.png" alt />
+      <h1>Welcome to Funday</h1>
+      <h2>Your project management tool</h2>
+      <button @click="$router.push('/boards/b101')">Go to board</button>
+    </div>
   </section>
 </template>
 
 <script>
 export default {
-  name: 'home-page',
-}
+  name: "home-page",
+};
 </script>

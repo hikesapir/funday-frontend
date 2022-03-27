@@ -4,6 +4,7 @@
     padding: 2px;
     margin-bottom: 5px;
   }
+
   .btn {
     border: 1px solid rgb(133, 133, 133);
     padding: 8px;
@@ -18,7 +19,8 @@
   .editable-header {
     cursor: text;
     &:hover {
-      outline: 1px dashed #333;
+      outline: 1px solid $main-task-end-line;
+      border-radius: 2px;
     }
   }
   .up-header {
@@ -47,10 +49,25 @@
     }
   }
   .description-line {
+    .group-description-header {
+      span {
+        width: 400px;
+      }
+    }
     .text-content {
       &:hover {
-        border: 1px dashed #333;
+        border: 1px dashed $main-gray;
       }
+
+      &:focus {
+        padding: 20px;
+      }
+    }
+  }
+  .main-board-title-input {
+    &:focus {
+      @include blue-focus;
+      width: 700px;
     }
   }
 
