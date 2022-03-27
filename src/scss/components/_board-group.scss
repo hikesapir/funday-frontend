@@ -153,4 +153,22 @@
     border-left: 1px $main-white solid;
     border-bottom: 1px $main-white solid;
   }
+  .task-menu-arrow {
+    margin-top: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $main-gray;
+    padding: 4px;
+    color: $main-text-gray;
+    border-radius: 5px;
+    width: 18px;
+    height: 18px;
+    text-align: center;
+    left: 10px;
+    font-size: 10px;
+    margin-right: 3px;
+    line-height: 35px;
+    vertical-align: middle;
+  }
 }

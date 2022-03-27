@@ -567,7 +567,7 @@ export default {
           newOrder: board.cmpsOrder,
         })
         await boardService.saveBoard(board)
-      } catch (err) {}
+      } catch (err) { }
     },
   },
 }
