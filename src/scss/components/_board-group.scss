@@ -99,7 +99,7 @@
 .group-th {
   position: relative;
   cursor: grab;
-  i {
+  .cols-drag-handle {
     position: absolute;
     left: calc(10% - 4px);
     top: 50%;
@@ -107,6 +107,18 @@
     transition: opacity 0.1s ease;
     transform: translateY(-50%);
     cursor: move;
+  }
+  .sort-col-btn {
+    cursor: pointer;
+    i {
+      // background-color: $primary-blue;
+      // color: white;
+      position: absolute;
+      top: 0;
+      opacity: 0;
+      left: 50%;
+      transform: translate(-50%, -10%);
+    }
   }
   &:hover {
     background-color: $main-task-gray;
@@ -154,5 +166,4 @@
     border-left: 1px $main-white solid;
     border-bottom: 1px $main-white solid;
   }
-
 }

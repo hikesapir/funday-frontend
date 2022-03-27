@@ -1,6 +1,9 @@
 <template>
   <section class="board-group">
-    <div class="table-head relative" style="cursor: default">
+    <div
+      class="table-head relative"
+      style="cursor: default"
+    >
       <div
         class="th-title title-picker-col"
         :style="{ color: group.style?.color }"
@@ -26,7 +29,12 @@
         >
           <i class="fa-solid fa-grip-vertical"></i>
         </span>
-        <span v-if="!changeName" @click="toggleChangeNameMode" class="group-title">{{ group.title }}</span>
+        <span
+          v-if="!changeName"
+          @click="toggleChangeNameMode"
+          class="group-title"
+          >{{ group.title }}</span
+        >
         <span
           v-else
           contenteditable="true"
@@ -34,34 +42,53 @@
           @keyup.enter="updateGroup"
           @blur="updateGroup"
           ref="editableSpan"
-        >{{ group.title }}</span>
+          >{{ group.title }}</span
+        >
       </div>
       <section v-if="openContext" class="context-modal">
         <button
           @click="
-            ; (changeName = true), (openContext = false)
+            ;(changeName = true), (openContext = false)
           "
-        >Rename Group</button>
+        >
+          Rename Group
+        </button>
         <button @click="remove">Delete</button>
       </section>
-      <div v-show="!isDraggingGroups" class="group-cmp-columns">
+      <div
+        v-show="!isDraggingGroups"
+        class="group-cmp-columns"
+      >
         <Container
           orientation="horizontal"
           @drop="onDrop($event, 'cmpsOrder')"
           drag-handle-selector=".cols-drag-handle"
           drag-class="drag-cols"
         >
-          <Draggable v-for="cmp in cmps" :class="cmp.cmpName + '-col'" :key="cmp.cmpName">
+          <Draggable
+            v-for="cmp in cmps"
+            :class="cmp.cmpName + '-col'"
+            :key="cmp.cmpName"
+          >
             <div class="group-th">
               <i
                 v-if="cmp.cmpName !== 'title-picker'"
                 class="cols-drag-handle fa-solid fa-grip-vertical"
               ></i>
+              <span
+                v-if="cmp.cmpName !== 'title-picker'"
+                @click="setSortBy(cmp.cmpName)"
+                class="sort-col-btn"
+              >
+                <i class="fa fa-sort-desc desc-icon"></i>
+                <i class="fa fa-sort-asc asc-icon"></i>
+              </span>
               <span class="cmp-title">
                 <span
                   @click="editCmpTitle(cmp.preName)"
                   v-if="!isEditing(cmp.preName)"
-                >{{ cmp.preName }}</span>
+                  >{{ cmp.preName }}</span
+                >
                 <span v-show="isEditing(cmp.preName)">
                   <input
                     type="text"
@@ -86,7 +113,10 @@
         drag-handle-selector=".task-drag-handle"
         drag-class="drag-task"
       >
-        <Draggable v-for="task in group?.tasks" :key="task.id">
+        <Draggable
+          v-for="task in group?.tasks"
+          :key="task.id"
+        >
           <task-preview :task="task" :groupId="group.id" />
         </Draggable>
       </Container>
@@ -127,6 +157,9 @@ export default {
     }
   },
   computed: {
+    sortBy() {
+      return this.$store.getters.sortBy
+    },
     cmps() {
       const cmps = this.$store.getters.board.cmpsOrder
       cmps.unshift()
@@ -147,6 +180,9 @@ export default {
     // },
   },
   methods: {
+    setSortBy(sortBy) {
+      this.$store.commit({ type: 'setSortBy', sortBy })
+    },
     mouseUp() {
       this.$store.commit('toggleGroupDragMode', false)
       window.removeEventListener('mouseup', this.mouseUp)
