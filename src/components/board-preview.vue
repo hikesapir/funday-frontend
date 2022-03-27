@@ -17,7 +17,10 @@
     </label>
     <div v-else class="bord-title" @click="selectBoard">
       <span>{{ board.title }}</span>
-      <button @click.stop="openModal = !openModal" v-if="isHover || openModal">
+      <button
+        @click.stop="openModal = !openModal"
+        v-if="isHover || openModal"
+      >
         <i class="fa-solid fa-ellipsis"></i>
       </button>
     </div>
@@ -37,9 +40,9 @@
 </template>
 
 <script>
-import contextModal from "./context-modal.vue";
+import contextModal from './context-modal.vue'
 export default {
-  name: "board-preview",
+  name: 'board-preview',
   props: {
     board: Object,
   },
@@ -52,62 +55,72 @@ export default {
       isHover: false,
       openModal: false,
       changeName: false,
-      newTitle: "",
-    };
+      newTitle: '',
+    }
   },
   created() {},
   mounted() {},
   methods: {
     remove() {
       this.$store.dispatch({
-        type: "removeBoard",
+        type: 'removeBoard',
         boardId: this.board._id,
-      });
-      this.openModal = false;
+      })
+      this.openModal = false
     },
     openNewTab() {
-      window.open(window.location.origin + `/#/boards/${this.board._id}`);
-      this.openModal = false;
+      window.open(
+        window.location.origin +
+          `/#/boards/${this.board._id}`
+      )
+      this.openModal = false
     },
     renameBoard() {
-      this.newTitle = this.board.title;
-      this.changeName = true;
-      this.openModal = false;
+      this.newTitle = this.board.title
+      this.changeName = true
+      this.openModal = false
     },
     updateBoard() {
-      const board = JSON.parse(JSON.stringify(this.board));
-      board.title = this.newTitle;
+      const board = JSON.parse(JSON.stringify(this.board))
+      board.title = this.newTitle
       this.$store.dispatch({
-        type: "saveBoard",
+        type: 'saveBoard',
         board,
-      });
-      this.changeName = false;
-      this.openModal = false;
+      })
+      this.changeName = false
+      this.openModal = false
     },
     starred() {
-      const board = JSON.parse(JSON.stringify(this.board));
-      board.isStarred = !board.isStarred;
+      const board = JSON.parse(JSON.stringify(this.board))
+      board.isStarred = !board.isStarred
       this.$store.dispatch({
-        type: "saveBoard",
+        type: 'saveBoard',
         board,
-      });
-      this.openModal = false;
+      })
+      this.openModal = false
     },
     duplicate() {
-      const newBoard = JSON.parse(JSON.stringify(this.board));
-      newBoard.title = newBoard.title + " -copy";
-      newBoard._id = null;
+      const newBoard = JSON.parse(
+        JSON.stringify(this.board)
+      )
+      newBoard.title = newBoard.title + ' -copy'
+      newBoard._id = null
       this.$store.dispatch({
-        type: "saveBoard",
+        type: 'saveBoard',
         board: newBoard,
-      });
-      this.openModal = false;
+      })
+      this.openModal = false
     },
     selectBoard() {
-      this.$router.push(`/boards/${this.board._id}`);
+      this.$router.push(`/boards/${this.board._id}`)
+      this.board._id
+      const idx = this.$store.getters.boards.findIndex(
+        (board) => board._id === this.board._id
+      )
+      document.title = this.$store.getters.boards[idx].title
     },
   },
   computed: {},
   unmounted() {},
-};
+}
 </script>
