@@ -16,7 +16,6 @@
         <board-view-mode :boardId="board?._id" />
         <filter-bar :board="board" />
       </div>
-      <!-- {{ board }} -->
       <router-view :board="board" v-if="!isLoading"></router-view>
     </section>
   </div>
