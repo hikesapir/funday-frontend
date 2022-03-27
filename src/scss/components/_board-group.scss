@@ -4,6 +4,7 @@
   color: $group-header-gray;
   margin-bottom: 30px;
   cursor: pointer;
+  width: 100%;
   position: relative;
   .fa-grip-vertical {
     color: $main-gray;
@@ -15,7 +16,7 @@
     font-size: 14px;
     text-align: center;
     .context-modal {
-      left: 0;
+      left: -30px;
       top: 35px;
     }
     .group-menu-open {

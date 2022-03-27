@@ -4,13 +4,25 @@
   flex-direction: column;
   width: 100%; // align-self: center;
   background-color: $primary-light-blue;
+  background: rgb(70, 52, 99);
+  background: linear-gradient(
+    90deg,
+    rgba(70, 52, 99, 1) 0%,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 184, 184, 1) 0%,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(140, 221, 226, 1) 100%,
+    rgba(197, 255, 191, 1) 100%,
+    rgba(255, 254, 176, 1) 100%
+  );
   .main-home-page {
     background-color: $main-nav-dark-blue;
     color: $main-white;
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin-top: 180px;
+    // margin-top: 180px;
+    transform: translate(-5%, 60%);
     width: 100%;
     padding: 50px;
     width: 600px;
