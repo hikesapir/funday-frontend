@@ -58,7 +58,7 @@ async function getById(id) {
     const res = await httpService.get(BASE_URL + id)
     return res
   } catch (err) {
-    console.log('getById err', err);
+    console.log('getById err', err)
     throw err
   }
 }
@@ -66,14 +66,17 @@ async function getById(id) {
 async function saveBoard(board) {
   try {
     if (board._id) {
-      const res = await httpService.put(BASE_URL + board._id, board)
+      const res = await httpService.put(
+        BASE_URL + board._id,
+        board
+      )
       return res
     } else {
       const res = await httpService.post(BASE_URL, board)
       return res
     }
   } catch (err) {
-    console.log('save err', err);
+    console.log('save err', err)
     throw err
   }
   // if (board._id) return storageService.put(KEY, board)
@@ -85,7 +88,7 @@ async function removeBoard(boardId) {
     const res = await httpService.delete(BASE_URL + boardId)
     return res
   } catch (err) {
-    console.log('remove err', err);
+    console.log('remove err', err)
     throw err
   }
 
@@ -266,12 +269,7 @@ async function getTaskById(boardId, groupId, taskId) {
   return task
 }
 
-async function saveTask(boardId, groupId, taskToSave) {
-  const boards = await query()
-  const board = boards.find(
-    (board) => board._id === boardId
-  )
-
+async function saveTask(board, groupId, taskToSave) {
   const idx = board.groups.findIndex(
     (group) => group.id === groupId
   )
@@ -281,30 +279,24 @@ async function saveTask(boardId, groupId, taskToSave) {
         (task) => task.id === taskToSave.id
       )
       board.groups[idx].tasks[taskIdx] = taskToSave
-      await storageService.put(KEY, board)
+      return saveBoard(board)
     } else {
       taskToSave.createdAt = Date.now()
       taskToSave.id = utilService.makeId(8)
       taskToSave.byMember = userService.getLoggedinUser()
       board.groups[idx].tasks.push(taskToSave)
-
-      await storageService.put(KEY, board)
+      await saveBoard(board)
       return taskToSave
     }
   } catch (err) {
-    console.log('Boardservice: could not save task')
+    console.log('Boardservice: could not save task', err)
   }
 }
 
 async function saveTasksOrder(board, groupIdx, tasksOrder) {
   try {
-    // const boards = await query()
-    // const board = boards.find(
-    //   (board) => board._id === boardId
-    // )
     board.groups[groupIdx].tasks = tasksOrder
-    // console.log('currGroup, groups', groupIdx, board.groups)
-    await storageService.put(KEY, board)
+    return saveBoard(board)
   } catch (err) {
     console.log('Boardservice: could not save tasksOrder')
   }
@@ -313,7 +305,7 @@ async function saveTasksOrder(board, groupIdx, tasksOrder) {
 async function removeTask(board, groupIdx, taskIdx) {
   try {
     board.groups[groupIdx].tasks.splice(taskIdx, 1)
-    await storageService.put(KEY, board)
+    return saveBoard(board)
   } catch (err) {
     console.log('Boardservice: could not save tasksOrder')
   }

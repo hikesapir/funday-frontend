@@ -409,17 +409,14 @@ export default {
 
           break
       }
+      const board = JSON.parse(JSON.stringify(state.board))
       try {
         commit({
           type: 'updateTask',
           groupId,
           updatedTask: task,
         })
-        await boardService.saveTask(
-          state.board._id,
-          groupId,
-          task
-        )
+        await boardService.saveTask(board, groupId, task)
       } catch (err) {
         console.log("Couldn't update task id- ", task.id)
         commit({
@@ -434,9 +431,10 @@ export default {
       const idx = state.boardForDisplay.groups.findIndex(
         (group) => group.id === groupId
       )
+      const board = JSON.parse(JSON.stringify(state.board))
       if (idx !== -1) {
         savedTask = await boardService.saveTask(
-          state.boardForDisplay._id,
+          board,
           groupId,
           task
         )
