@@ -58,14 +58,27 @@
         .input-warpper{
             margin: 20px 27.5px;
 
-            input{
-                width: 100%;
-                padding: 8px;
+            .input{
+                min-height: 70px;
+                max-height: 400px;
                 border: $primary-blue 1px solid;
                 border-radius: 5px;
-        
+                padding: 8px;
                 @include blue-focus;
             }
+            .btn-container{
+                display: flex;
+                justify-content: flex-end;
+                button{
+                    background-color: $primary-blue;
+                    color: $main-white;
+                    padding: 4px 8px;
+                    margin-top: 10px;
+                    height: 32px;
+                }
+                
+            }
+
         }
 
         .update-container{

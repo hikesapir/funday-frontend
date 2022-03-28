@@ -31,7 +31,7 @@
         </nav>
         <section>
             <!-- {{task.updates}} -->
-            <task-update v-if="task" :taskUpdate="task.updates" />
+            <task-update v-if="task" :taskUpdate="task.updates" @updateTask="updateTask" />
         </section>
     </section>
 </template>
@@ -54,13 +54,23 @@ export default {
         }
     },
     async created() {
-        console.log('cearte', this.$route.params);
         const { id, groupId, taskId } = this.$route.params
         this.task = await boardService.getTaskById(id, groupId, taskId)
     },
     mounted() {
     },
-    methods: {},
+    methods: {
+        updateTask(txt) {
+            console.log('get');
+            this.$store.dispatch({
+                type: 'addUpdate',
+                txt,
+                taskId: this.params.taskId,
+                boardId: this.params.id,
+                groupId: this.params.groupId
+            })
+        }
+    },
     computed: {
         boardId() {
             return this.$route.params.id
@@ -75,7 +85,10 @@ export default {
         params: {
             async handler() {
                 const { id, groupId, taskId } = this.$route.params
-                this.task = await boardService.getTaskById(id, groupId, taskId)
+                if (!taskId) return
+                this.$store.commit({ type: 'setTaskFordisplay', id, groupId, taskId })
+                this.task = this.$store.getters.taskFordisplay
+                // this.task = await boardService.getTaskById(id, groupId, taskId)
             },
             immediate: true,
         },
