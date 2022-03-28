@@ -1,6 +1,5 @@
 <template>
-    <section class="task-details">
-        <!-- {{ task }} -->
+    <section v-if="task" class="task-details">
         <header>
             <button @click="this.$router.push(`/boards/${boardId}`)">X</button>
             <div class="title-wrapper">
@@ -32,7 +31,7 @@
         </nav>
         <section>
             <!-- {{task.updates}} -->
-            <task-update :taskUpdate="task.updates" />
+            <task-update v-if="task" :taskUpdate="task.updates" />
         </section>
     </section>
 </template>
@@ -65,9 +64,21 @@ export default {
     computed: {
         boardId() {
             return this.$route.params.id
+        },
+        params() {
+            return this.$route.params
         }
     },
     unmounted() {
+    },
+    watch: {
+        params: {
+            async handler() {
+                const { id, groupId, taskId } = this.$route.params
+                this.task = await boardService.getTaskById(id, groupId, taskId)
+            },
+            immediate: true,
+        },
     },
 }
 </script>
