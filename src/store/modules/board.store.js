@@ -208,7 +208,7 @@ export default {
       state.boardForDisplay = board
     },
     loadBoards(state, { boards }) {
-      state.boards = JSON.parse(JSON.stringify(boards))
+      state.boards = boards
     },
     loadBoard(state, { board }) {
       state.board = board
@@ -343,6 +343,7 @@ export default {
     },
     async saveBoard(context, { board }) {
       try {
+        console.log('board', board)
         const savedBoard = await boardService.saveBoard(
           JSON.parse(JSON.stringify(board))
         )
@@ -351,10 +352,10 @@ export default {
             type: 'loadBoard',
             board: savedBoard,
           })
-          context.commit({
-            type: 'saveBoard',
-            board: savedBoard,
-          })
+          // context.commit({
+          //   type: 'saveBoard',
+          //   board: savedBoard,
+          // })
         } else {
           context.dispatch('loadBoards')
           router.push(`/boards/${savedBoard._id}`)
