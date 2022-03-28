@@ -46,7 +46,7 @@
     </div>
     <div
       class="start-conversation-container"
-      @click="this.$router.push(`/boards/b101/pulses/${groupId}/${task.id}`)"
+      @click="this.$router.push(`/boards/${boardId}/pulses/${groupId}/${task.id}`)"
     >
       <svg
         viewBox="0 0 20 20"
@@ -80,6 +80,7 @@ export default {
     task: Object,
     groupId: String,
     isHover: Boolean,
+    boardId: String
   },
   data() {
     return {
