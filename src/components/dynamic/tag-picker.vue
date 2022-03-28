@@ -1,6 +1,6 @@
 <template>
   <section class="tag-picker">
-    <div @click="toggleModal" class="add-tag">
+    <div @click="openModal" class="add-tag">
       <fa icon="circle-plus" />
     </div>
     <div
@@ -11,7 +11,13 @@
     >
       #{{ tag.txt }}
     </div>
-    <div v-if="isModalOpen" class="tag-modal">
+    <div
+      v-show="isModalOpen"
+      ref="tagModal"
+      tabindex="-1"
+      @blur="isModalOpen = false"
+      class="tag-modal"
+    >
       <div class="add-tags">
         <input
           type="text"
@@ -117,8 +123,9 @@ export default {
     toggleHoverTag(tag = null) {
       this.isHoverATag = tag
     },
-    toggleModal() {
-      this.isModalOpen = !this.isModalOpen
+    openModal() {
+      this.isModalOpen = true
+      setTimeout(() => this.$refs.tagModal.focus(), 0)
     },
   },
 }
