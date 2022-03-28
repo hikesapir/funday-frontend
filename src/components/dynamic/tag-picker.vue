@@ -1,9 +1,10 @@
 <template>
   <section class="tag-picker">
-    <div @click="openModal" class="add-tag">
+    <div @click.stop="openModal" class="add-tag">
       <fa icon="circle-plus" />
     </div>
     <div
+      @click.stop="openModal"
       v-for="tag in task.tags"
       :key="tag"
       class="tag-picker-val"
@@ -14,8 +15,6 @@
     <div
       v-show="isModalOpen"
       ref="tagModal"
-      tabindex="-1"
-      @blur="isModalOpen = false"
       class="tag-modal"
     >
       <div class="add-tags">
@@ -125,7 +124,32 @@ export default {
     },
     openModal() {
       this.isModalOpen = true
-      setTimeout(() => this.$refs.tagModal.focus(), 0)
+      console.log('this.isModalOpen', this.isModalOpen)
+      document.body.addEventListener(
+        'click',
+        this.isClosingModal
+      )
+    },
+    closeModal() {
+      this.isModalOpen = false
+      document.body.removeEventListener(
+        'click',
+        this.isClosingModal
+      )
+    },
+    isClosingModal(e) {
+      e.stopPropagation()
+      console.log(
+        'e, this.$refs.tagModal',
+        e,
+        this.$refs.tagModal
+      )
+      console.log(
+        '!this.$refs.tagModal.contains(e.target)',
+        !this.$refs.tagModal.contains(e.target)
+      )
+      if (!this.$refs.tagModal.contains(e.target))
+        this.closeModal()
     },
   },
 }
