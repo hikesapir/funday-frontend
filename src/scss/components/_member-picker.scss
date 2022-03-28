@@ -4,17 +4,14 @@
   position: relative;
   border: 1px white solid;
 
-  .add-tag {
-    opacity: 0;
-    display: inline-block;
-    flex-basis: 1;
-  }
-  &:hover {
-    .add-tag {
-      color: $primary-blue;
-      cursor: pointer;
-      opacity: 1;
-    }
+  .add-member-btn {
+    font-size: 14px;
+    position: absolute;
+    left: 6px;
+    top: 11px;
+    color: $primary-blue;
+    cursor: pointer;
+    opacity: 1;
   }
   input {
     line-height: 24px;
@@ -27,9 +24,25 @@
     border: 2px solid white;
     border-radius: 20px;
     object-fit: contain;
-    margin: 0 -4px;
+    margin: 0 -7px;
   }
 
+  .small-number {
+    display: inline-block;
+    position: relative;
+    background-color: black;
+    color: $main-white;
+    font-size: 12px;
+    top: -10px;
+    height: 25px;
+    width: 25px;
+    vertical-align: middle;
+    line-height: 25px;
+    // border: 2px solid white;
+    border-radius: 20px;
+    object-fit: contain;
+    margin: 0 -4px;
+  }
   .context-modal {
     width: 248px;
     position: absolute;
@@ -51,7 +64,7 @@
       background-color: white;
     }
     &::before {
-      content: '';
+      content: "";
       height: 1px;
       background-color: #c5c7d0;
       position: absolute;
