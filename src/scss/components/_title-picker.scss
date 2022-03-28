@@ -13,6 +13,10 @@
   .left-indicator-inner {
     width: 8px;
     display: inline-block;
+    transition: all 0.1s ease;
+    &:hover {
+      width: 24px;
+    }
   }
 
   .editable-component {

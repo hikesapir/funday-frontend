@@ -1,5 +1,10 @@
 <template>
-  <div class="drop-down">
+  <div
+    class="drop-down"
+    ref="dropDown"
+    tabindex="-1"
+    @blur="$emit('closeModal')"
+  >
     <div class="dots active">
       <div class="container cut">
         <div class="drop cut2"></div>
@@ -9,7 +14,6 @@
           <li
             v-for="label in labels"
             :key="label.id"
-            tabindex="-1"
             @click.stop="updateTask(label.id)"
             :style="{ 'background-color': label.color }"
           >
@@ -28,6 +32,9 @@ export default {
   props: {
     labels: Array,
     type: String,
+  },
+  mounted() {
+    this.$refs.dropDown.focus()
   },
   methods: {
     updateTask(val) {
