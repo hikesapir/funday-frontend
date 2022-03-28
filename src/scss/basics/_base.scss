@@ -91,3 +91,24 @@ ul {
   color: white;
   font-size: 20px;
 }
+
+.small-number {
+  display: inline-block;
+  position: relative;
+  background-color: black;
+  color: $main-white;
+  font-size: 12px;
+  top: -10px;
+  height: 25px;
+  width: 25px;
+  vertical-align: middle;
+  line-height: 25px;
+  border-radius: 20px;
+  object-fit: contain;
+  margin: 0 -4px;
+
+  &.sum {
+    top: 0;
+    text-align: center;
+  }
+}
