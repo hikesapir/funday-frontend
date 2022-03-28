@@ -265,7 +265,7 @@ async function getTaskById(boardId, groupId, taskId) {
   const task = group.tasks.find(
     (task) => task.id === taskId
   )
-  // console.log(task);
+  console.log(task);
   return task
 }
 

@@ -1,9 +1,5 @@
 <template>
-  <div
-    class="task-and-side-indicator"
-    @mouseover="isHover = true"
-    @mouseleave="isHover = false"
-  >
+  <div class="task-and-side-indicator" @mouseover="isHover = true" @mouseleave="isHover = false">
     <section class="task-preview">
       <component
         v-for="cmp in cmpsOrder"
@@ -13,6 +9,7 @@
         :task="task"
         :groupId="groupId"
         :isHover="hover"
+        :boardId="boardId"
         @update="updateTask"
       ></component>
     </section>
@@ -62,6 +59,9 @@ export default {
     hover() {
       return this.isHover
     },
+    boardId() {
+      return this.$store.getters.board._id
+    }
   },
 }
 </script>
