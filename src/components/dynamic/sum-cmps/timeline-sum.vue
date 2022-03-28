@@ -71,7 +71,6 @@ export default {
       var endTime = +this.groupData.timeline.end
       if (this.isHovering) {
         const time = endTime - startTime
-        console.log(time, 'time')
         if (!time) return 'Set Dates'
         const daysLeft = (
           time /

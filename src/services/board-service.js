@@ -284,6 +284,8 @@ async function saveTask(board, groupId, taskToSave) {
       taskToSave.createdAt = Date.now()
       taskToSave.id = utilService.makeId(8)
       taskToSave.byMember = userService.getLoggedinUser()
+      console.log('taskToSave', taskToSave)
+
       board.groups[idx].tasks.push(taskToSave)
       await saveBoard(board)
       return taskToSave
