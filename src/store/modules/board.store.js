@@ -375,58 +375,59 @@ export default {
     async updateTask({ commit, state }, { data }) {
       const { cmpType, groupId } = data
       var { task } = data
+      var backupTask = JSON.parse(JSON.stringify(task))
       task = JSON.parse(JSON.stringify(task))
       switch (cmpType) {
         case 'timeline-picker':
           task.timeline = data.timeline
-          await boardService.saveTask(
-            state.board._id,
-            groupId,
-            task
-          )
+
           break
         case 'file-picker':
           break
         case 'member-picker':
           task.members = data.members
-          await boardService.saveTask(
-            state.board._id,
-            groupId,
-            task
-          )
+
           break
         case 'priority-picker':
           task.priority = data.val
-          await boardService.saveTask(
-            state.board._id,
-            groupId,
-            task
-          )
+
           break
         case 'status-picker':
           task.status = data.val
-          await boardService.saveTask(
-            state.board._id,
-            groupId,
-            task
-          )
+
           break
         case 'tag-picker':
+          const tag = data.val
+          task.tags.push({
+            txt: tag,
+            color: utilService.getRandomColor(),
+          })
+
           break
         case 'title-picker':
           task.title = data.title
-          await boardService.saveTask(
-            state.board._id,
-            groupId,
-            task
-          )
+
           break
       }
-      commit({
-        type: 'updateTask',
-        groupId,
-        updatedTask: task,
-      })
+      try {
+        commit({
+          type: 'updateTask',
+          groupId,
+          updatedTask: task,
+        })
+        await boardService.saveTask(
+          state.board._id,
+          groupId,
+          task
+        )
+      } catch (err) {
+        console.log("Couldn't update task id- ", task.id)
+        commit({
+          type: 'updateTask',
+          groupId,
+          updatedTask: backupTask,
+        })
+      }
     },
     async saveTask({ commit, state }, { groupId, task }) {
       var savedTask = null

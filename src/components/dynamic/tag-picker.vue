@@ -23,6 +23,7 @@
         <li
           v-for="tag in groupTags"
           :key="tag.txt"
+          @click="addTag(tag.txt)"
           class="tag-search-item"
           @mouseover="toggleHoverTag(tag.txt)"
           @mouseleave="toggleHoverTag()"
@@ -31,7 +32,7 @@
               isHoverATag === tag.txt ? 'white' : tag.color,
           }"
         >
-          {{ tag.txt }}
+          #{{ tag.txt }}
         </li>
       </ul>
       <button class="btn">+ Create new tag</button>
@@ -51,6 +52,7 @@ export default {
       tags: this.$store.getters.board,
       isModalOpen: false,
       isHoverATag: false,
+      results: [],
       newTag: '',
     }
   },
@@ -62,15 +64,21 @@ export default {
         )
       )
       const groupTags = groups.reduce((acc, group) => {
-        if (group.id === this.groupId) {
-          acc.push(...group.tags)
-        }
+        acc.push(...group.tags)
         return acc
       }, [])
       return groupTags
     },
   },
   methods: {
+    addTag(tag) {
+      this.$emit('update', {
+        cmpType: `tag-picker`,
+        val: tag,
+        task: this.task,
+      })
+      this.isModalOpen = false
+    },
     toggleHoverTag(tag = null) {
       this.isHoverATag = tag
     },
