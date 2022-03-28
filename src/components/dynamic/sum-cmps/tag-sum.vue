@@ -1,8 +1,15 @@
 <template>
   <section>
     <div class="tags-sum-preview">
-      <span v-for="tag in groupData.tags" :key="tag" class="">
-        <span class="tags-display" :style="{ color: tag.color }">
+      <span
+        v-for="tag in groupData.tags"
+        :key="tag"
+        class=""
+      >
+        <span
+          class="tags-display"
+          :style="{ color: tag.color }"
+        >
           {{ tag.txt }}
         </span>
       </span>
@@ -12,22 +19,24 @@
 
 <script>
 export default {
-  name: "tag-sum",
+  name: 'tag-sum',
   props: {
     data: Array,
     groupId: String,
   },
   data() {
     return {
-      groupData: null,
-    };
+      // groupData: null,
+    }
   },
-  created() {
-    const groupData = this.data.filter(
-      (groupData) => groupData._id === this.groupId
-    );
-    this.groupData = groupData[0];
+
+  computed: {
+    groupData() {
+      const groupData = this.data.find(
+        (groupData) => groupData.id === this.groupId
+      )
+      return groupData
+    },
   },
-  computed: {},
-};
+}
 </script>
