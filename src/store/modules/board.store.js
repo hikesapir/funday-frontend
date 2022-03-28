@@ -262,7 +262,6 @@ export default {
       const taskIdx = group.tasks.findIndex(
         (task) => task.id === updatedTask.id
       )
-      console.log(`Try to update task index ${taskIdx}`)
       if (taskIdx === -1) return
       state.boardForDisplay.groups[groupIdx].tasks[
         taskIdx
@@ -432,18 +431,22 @@ export default {
         (group) => group.id === groupId
       )
       const board = JSON.parse(JSON.stringify(state.board))
-      if (idx !== -1) {
-        savedTask = await boardService.saveTask(
-          board,
-          groupId,
-          task
-        )
+      try {
+        if (idx !== -1) {
+          savedTask = await boardService.saveTask(
+            board,
+            groupId,
+            task
+          )
+          commit({
+            type: 'addTask',
+            groupIdx: idx,
+            savedTask,
+          })
+        }
+      } catch (err) {
+        console.log('Couldnt save task')
       }
-      commit({
-        type: 'addTask',
-        groupIdx: idx,
-        savedTask,
-      })
     },
     async removeTask(
       { commit, state },
@@ -519,7 +522,6 @@ export default {
         const idx = board.groups.findIndex(
           (group) => group.id === groupId
         )
-        console.log('entities', entities)
         context.commit({
           type: 'setTasksOrder',
           result: entities,
