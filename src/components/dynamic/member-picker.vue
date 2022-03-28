@@ -10,7 +10,7 @@
         :src="member.imgUrl"
         :key="member._id"
         :alt="member.fullname"
-        :title="member.fullname"
+        :data-title="member.fullname"
       />
     </div>
     <div v-else>

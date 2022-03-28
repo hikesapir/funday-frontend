@@ -15,7 +15,9 @@
         </div>
         <div>
           <button
-            :title="descriptionTitle + ' board description'"
+            :data-title="
+              descriptionTitle + ' board description'
+            "
             @click="isDescriptionOpen = !isDescriptionOpen"
             class="info"
           >
@@ -24,7 +26,7 @@
             </span>
           </button>
           <button
-            :title="starTitle + ' favorites'"
+            :data-title="starTitle + ' favorites'"
             @click="starred"
             class="star"
           >
