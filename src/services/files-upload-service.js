@@ -14,6 +14,7 @@ export const uploadFile = async (file) => {
   // Sending a post method request to Cloudniarys' API
   try {
     const res = await axios.post(UPLOAD_URL, FORM_DATA);
+    console.log(res.data.url);
     return res.data;
   } catch (err) {
     console.error('ERROR!', err);

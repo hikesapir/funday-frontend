@@ -1,10 +1,6 @@
 <template>
   <div class="open-side-bar">
-    <div
-      @click="changeModalStatus"
-      class="open-nav-btn"
-      :class="{ open: isOpen, close: !isOpen }"
-    >
+    <div @click="changeModalStatus" class="open-nav-btn" :class="{ open: isOpen, close: !isOpen }">
       <i class="fa-solid fa-angle-left"></i>
     </div>
     <div class="board-navi" :class="{ open: isOpen, close: !isOpen }">
@@ -46,7 +42,7 @@ export default {
   },
   emits: [],
   computed: {},
-  created() {},
+  created() { },
   data() {
     return {
       isOpen: false,
