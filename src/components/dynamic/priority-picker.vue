@@ -3,20 +3,15 @@
     <div
       :style="getStyle"
       class="priority-picker-col priority relative"
-      data-toggle="p-dropdown"
       @click="toggleDropDown"
-      tabindex="-1"
     >
       {{ txt }}
     </div>
-    <div v-show="isDropOpen">
+    <div v-if="isDropOpen" class="relative">
       <drop-down
         :labels="priorities"
         @update="updateTask"
-        role="menu"
-        :aria-labelledby="'menu-p' + task.id"
-        tabindex="-1"
-        @blur="isDropOpen = false"
+        @closeModal="isDropOpen = false"
         type="status"
       />
     </div>

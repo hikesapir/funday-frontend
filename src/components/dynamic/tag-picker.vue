@@ -1,9 +1,10 @@
 <template>
   <section class="tag-picker">
-    <div @click="toggleModal" class="add-tag">
+    <div @click.stop="openModal" class="add-tag">
       <fa icon="circle-plus" />
     </div>
     <div
+      @click.stop="openModal"
       v-for="tag in task.tags"
       :key="tag"
       class="tag-picker-val"
@@ -11,17 +12,22 @@
     >
       #{{ tag.txt }}
     </div>
-    <div v-if="isModalOpen" class="tag-modal">
+    <div
+      v-show="isModalOpen"
+      ref="tagModal"
+      class="tag-modal"
+    >
       <div class="add-tags">
         <input
           type="text"
           placeholder="Add tags"
+          @input="filterTags"
           v-model="newTag"
         />
       </div>
       <ul class="tag-search-list">
         <li
-          v-for="tag in groupTags"
+          v-for="tag in tags"
           :key="tag.txt"
           @click="addTag(tag.txt)"
           class="tag-search-item"
@@ -35,7 +41,9 @@
           #{{ tag.txt }}
         </li>
       </ul>
-      <button class="btn">+ Create new tag</button>
+      <button @click="addNewTag" class="btn">
+        + Create new tag
+      </button>
     </div>
   </section>
 </template>
@@ -49,28 +57,60 @@ export default {
   },
   data() {
     return {
-      tags: this.$store.getters.board,
       isModalOpen: false,
       isHoverATag: false,
-      results: [],
+      filterBy: {
+        txt: '',
+      },
       newTag: '',
     }
   },
   computed: {
-    groupTags() {
+    boardTags() {
       let groups = JSON.parse(
         JSON.stringify(
           this.$store.getters.boardData.boardMapByGroups
         )
       )
-      const groupTags = groups.reduce((acc, group) => {
-        acc.push(...group.tags)
+      const boardTags = groups.reduce((acc, group) => {
+        group.tags.forEach((tag) => {
+          if (!acc.some((tag) => tag.txt === tag))
+            acc.push(tag)
+        })
         return acc
       }, [])
-      return groupTags
+      return boardTags
+    },
+    tags() {
+      var boardTags = this.boardTags
+      if (!this.filterBy.txt)
+        return boardTags.length > 5
+          ? boardTags.slice(0, 5)
+          : boardTags
+      else {
+        const regex = new RegExp(this.filterBy.txt, 'i')
+        boardTags = boardTags.filter((tag) =>
+          regex.test(tag.txt)
+        )
+      }
+      return boardTags.length > 5
+        ? boardTags.slice(0, 5)
+        : boardTags
     },
   },
   methods: {
+    addNewTag() {
+      if (!this.newTag) return
+      this.$emit('update', {
+        cmpType: `tag-picker`,
+        val: this.newTag,
+        task: this.task,
+      })
+      this.isModalOpen = false
+    },
+    filterTags() {
+      this.filterBy.txt = this.newTag
+    },
     addTag(tag) {
       this.$emit('update', {
         cmpType: `tag-picker`,
@@ -82,8 +122,34 @@ export default {
     toggleHoverTag(tag = null) {
       this.isHoverATag = tag
     },
-    toggleModal() {
-      this.isModalOpen = !this.isModalOpen
+    openModal() {
+      this.isModalOpen = true
+      console.log('this.isModalOpen', this.isModalOpen)
+      document.body.addEventListener(
+        'click',
+        this.isClosingModal
+      )
+    },
+    closeModal() {
+      this.isModalOpen = false
+      document.body.removeEventListener(
+        'click',
+        this.isClosingModal
+      )
+    },
+    isClosingModal(e) {
+      e.stopPropagation()
+      console.log(
+        'e, this.$refs.tagModal',
+        e,
+        this.$refs.tagModal
+      )
+      console.log(
+        '!this.$refs.tagModal.contains(e.target)',
+        !this.$refs.tagModal.contains(e.target)
+      )
+      if (!this.$refs.tagModal.contains(e.target))
+        this.closeModal()
     },
   },
 }

@@ -1,8 +1,10 @@
 .drop-down {
   position: absolute;
-  transform: translate(45%, -10%);
+  top: 0;
+  left: 50%;
+  transform: translateY(-10%);
   z-index: 1000;
-
+  outline: none;
   body {
     background: #4aa6fb;
     display: flex;

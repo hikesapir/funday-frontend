@@ -1,22 +1,38 @@
 <template>
-  <div class="member-picker">
-    <div class="add-tag"></div>
-    <img
-      v-for="member in members"
-      :src="member.imgUrl"
-      :key="member._id"
-      :alt="member.fullname"
-      :title="member.fullname"
+  <div
+    class="member-picker"
+    @mouseover="isHover = true"
+    @mouseleave="isHover = false"
+  >
+    <div v-if="membersLength < 3">
+      <img
+        v-for="member in members"
+        :src="member.imgUrl"
+        :key="member._id"
+        :alt="member.fullname"
+        :title="member.fullname"
+      />
+    </div>
+    <div v-else>
+      <img :src="firstMemberPic" />
+      <div class="small-number">
+        +{{ membersLength - 1 }}
+      </div>
+    </div>
+    <fa
+      v-if="isHover"
+      icon="circle-plus"
+      class="add-member-btn"
+      @click.stop="openModal"
     />
-    <fa icon="circle-plus" @click.stop="addMembers" />
 
     <div
-      v-if="addMembersMode"
-      class="context-modal member-picker-modal-item"
+      v-show="addMembersMode"
+      ref="memberPickerModal"
+      class="context-modal"
     >
-      <label class="member-picker-modal-item">
+      <label>
         <input
-          class="member-picker-modal-item"
           type="text"
           placeholder="Enter name"
           v-model="filterBy"
@@ -51,13 +67,18 @@ export default {
     return {
       addMembersMode: false,
       filterBy: '',
+      isHover: false,
     }
   },
   computed: {
+    membersLength() {
+      return this.task.members.length
+    },
+    firstMemberPic() {
+      return this.task.members[0].imgUrl
+    },
     members() {
-      return this.task.members.length > 2
-        ? this.task.members.slice(0, 2)
-        : this.task.members
+      return this.task.members
     },
     membersList() {
       var membersList = this.$store.getters.board.members
@@ -69,17 +90,24 @@ export default {
     },
   },
   methods: {
-    addMembers() {
-      this.addMembersMode = !this.addMembersMode
-      document.body.addEventListener('click', (e) => {
-        e.stopPropagation()
-        if (
-          !e.target.classList.contains(
-            'member-picker-modal-item'
-          )
-        )
-          this.addMembersMode = false
-      })
+    openModal() {
+      this.addMembersMode = true
+      document.body.addEventListener(
+        'click',
+        this.isClosingModal
+      )
+    },
+    closeModal() {
+      this.addMembersMode = false
+      document.body.removeEventListener(
+        'click',
+        this.isClosingModal
+      )
+    },
+    isClosingModal(e) {
+      e.stopPropagation()
+      if (!this.$refs.memberPickerModal.contains(e.target))
+        this.closeModal()
     },
     addMember(member) {
       const members = JSON.parse(
@@ -91,6 +119,7 @@ export default {
         members,
         task: this.task,
       })
+      this.addMembersMode = !this.addMembersMode
     },
   },
 }

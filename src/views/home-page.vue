@@ -4,7 +4,9 @@
       <img class="home-page-logo" src="../assets/favicon.png" alt />
       <h1>Welcome to Funday</h1>
       <h2>Your project management tool</h2>
-      <button @click="$router.push('/boards/b101')">Go to board</button>
+      <button @click="$router.push(`/boards/${getFirstBoardId}`)">
+        Go to board
+      </button>
       <router-link class="white-link" to="/users/login">Login</router-link>
     </div>
   </section>
@@ -13,5 +15,10 @@
 <script>
 export default {
   name: "home-page",
+  computed: {
+    getFirstBoardId() {
+      return this.$store.getters.boards[0]._id;
+    },
+  },
 };
 </script>

@@ -1,9 +1,9 @@
 <template>
   <div class="wrapper">
-    <div class="status-picker-col status relative"
+    <div
+      class="status-picker-col status relative"
       :style="style"
-      data-toggle="s-dropdown"
-      @click="isDropOpen = !isDropOpen"
+      @click="toggleModal"
     >
       <img
         v-if="isAchieved"
@@ -12,15 +12,12 @@
       />
       <p>{{ txt }}</p>
     </div>
-    <div v-if="isDropOpen">
+    <div v-if="isDropOpen" class="relative">
       <drop-down
         :labels="statuses"
         @update="updateTask"
-        role="menu"
-        :aria-labelledby="'menu-s' + task.id"
-        tabindex="-1"
+        @closeModal="isDropOpen = false"
         type="status"
-        @blur="isDropOpen = false"
       />
     </div>
   </div>
@@ -54,6 +51,9 @@ export default {
         val,
         task: this.task,
       })
+    },
+    toggleModal() {
+      this.isDropOpen = !this.isDropOpen
     },
   },
   computed: {
