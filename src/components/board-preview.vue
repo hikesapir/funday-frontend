@@ -58,7 +58,9 @@ export default {
       newTitle: '',
     }
   },
-  created() {},
+  created() {
+    document.title = this.board.title
+  },
   mounted() {},
   methods: {
     remove() {
