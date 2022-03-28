@@ -5,6 +5,8 @@ const BASE_URL = process.env.NODE_ENV === 'production'
     ? '/api/'
     : '//localhost:3030/api/'
 
+// console.log(BASE_URL)
+
 
 var axios = Axios.create({
     withCredentials: true
@@ -12,6 +14,7 @@ var axios = Axios.create({
 
 export const httpService = {
     get(endpoint, data) {
+        console.log(endpoint, 'endpoint')
         return ajax(endpoint, 'GET', data)
     },
     post(endpoint, data) {

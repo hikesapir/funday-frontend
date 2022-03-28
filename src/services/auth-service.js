@@ -1,11 +1,5 @@
 import { utilService } from './util-service.js'
-// import { httpService } from './http.service'
-
-import axios from 'axios'
-// const instance = axios.create({
-//     withCredentials: true
-//   })
-axios.defaults.withCredentials = true
+import { httpService } from './http.service'
 
 
 export const authService = {
@@ -21,7 +15,7 @@ async function login(user) {
   console.log(user)
   const loggedInUser = await httpService.post(`${BASE_URL}/login`, user)
   console.log(loggedInUser)
-  utilService.saveToStorage('loggedinUser', loggedInUser
+  utilService.saveToSessionStorage('loggedinUser', loggedInUser
   )
   return loggedInUser
 }
@@ -30,7 +24,7 @@ async function logout() {
   console.log('logging out')
   await httpService.post(`${BASE_URL}/logout`)
   console.log('logged out')
-  utilService.saveToStorage('loggedinUser', '')
+  utilService.saveToSessionStorage('loggedinUser', '')
   return null
 }
 
@@ -42,5 +36,5 @@ async function signup(newuser) {
 }
 
 function getLoggedinUser() {
-  return utilService.loadFromStorage('loggedinUser')
+  return utilService.loadFromSessionStorage('loggedinUser')
 }

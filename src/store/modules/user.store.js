@@ -29,7 +29,7 @@ export default {
   actions: {
     async login({ commit }, { user }) {
       try {
-        console.log(user);
+        // console.log(user);
         const res = await authService.login(user);
         commit({ type: 'setUser', user: res })
         console.log("Success!");
@@ -39,7 +39,7 @@ export default {
     },
     async logout({ commit }, { user }) {
       try {
-        console.log(user);
+        // console.log(user);
         const res = await authService.logout();
         commit({ type: 'setUser', user: res })
         console.log("Success to logout!");
@@ -49,7 +49,7 @@ export default {
     },
     async signup({ dispatch }, { newuser }) {
       try {
-        console.log(newuser);
+        // console.log(newuser);
         const newUser = await authService.signup(newuser);
         console.log(newUser, 'signedup user')
         dispatch({ type: 'login', user: newUser })
