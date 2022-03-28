@@ -49,7 +49,7 @@ export default {
   created() {},
   data() {
     return {
-      isOpen: false,
+      isOpen: true,
     };
   },
   methods: {
