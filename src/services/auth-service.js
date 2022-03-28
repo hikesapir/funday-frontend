@@ -12,9 +12,7 @@ export const authService = {
 const BASE_URL = 'auth'
 
 async function login(user) {
-  console.log(user)
   const loggedInUser = await httpService.post(`${BASE_URL}/login`, user)
-  console.log(loggedInUser)
   utilService.saveToSessionStorage('loggedinUser', loggedInUser
   )
   return loggedInUser

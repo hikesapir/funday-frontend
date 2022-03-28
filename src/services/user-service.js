@@ -14,8 +14,6 @@ const demoUser={
 
 const loggedUser = getLoggedinUser() 
 
-console.log(getLoggedinUser());
-
 export const userService = {
   query,
   getById,

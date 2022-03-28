@@ -85,7 +85,10 @@ export default {
         params: {
             async handler() {
                 const { id, groupId, taskId } = this.$route.params
-                this.task = await boardService.getTaskById(id, groupId, taskId)
+                if (!taskId) return
+                this.$store.commit({ type: 'setTaskFordisplay', id, groupId, taskId })
+                this.task = this.$store.getters.taskFordisplay
+                // this.task = await boardService.getTaskById(id, groupId, taskId)
             },
             immediate: true,
         },
