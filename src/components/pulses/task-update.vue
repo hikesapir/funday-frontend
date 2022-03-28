@@ -1,7 +1,10 @@
 <template>
     <section class="task-update">
         <div class="input-warpper">
-            <input type="text" placeholder="Write an uptade..." />
+            <div class="input" contenteditable="true" data-ph="Write an uptade..." ref="contect"></div>
+            <div class="btn-container">
+                <button @click="postUpdate">Update</button>
+            </div>
         </div>
         <section class="update-container">
             <update-preview v-for="update in taskUpdate" :key="update.id" :update="update" />
@@ -17,22 +20,37 @@ export default {
     props: {
         taskUpdate: Array
     },
-    emits: [],
+    emits: ['updateTask'],
     components: {
         updatePreview,
     },
     data() {
-        return {}
+        return {
+
+        }
     },
     created() {
 
     },
     mounted() {
     },
-    methods: {},
+    methods: {
+        postUpdate() {
+            if (!this.$refs.contect.innerText) return
+            this.$emit('updateTask', this.$refs.contect.innerText)
+            console.log(this.$refs.contect.innerText);
+            this.$refs.contect.innerText = ''
+        }
+    },
     computed: {
     },
     unmounted() {
     },
 }
 </script>
+
+<style>
+[contentEditable="true"]:empty:not(:focus):before {
+    content: attr(data-ph);
+}
+</style>

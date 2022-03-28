@@ -17,6 +17,7 @@ export default {
   removeGroup,
   getEmptyBoard,
   getTaskById,
+  addUpdate,
 }
 
 const KEY = 'board_db'
@@ -265,7 +266,6 @@ async function getTaskById(boardId, groupId, taskId) {
   const task = group.tasks.find(
     (task) => task.id === taskId
   )
-  console.log(task);
   return task
 }
 
@@ -311,6 +311,26 @@ async function removeTask(board, groupIdx, taskIdx) {
   } catch (err) {
     console.log('Boardservice: could not save tasksOrder')
   }
+}
+
+async function addUpdate(txt, taskId, boardId, groupId) {
+  const { _id, fullname, imgUrl } = userService.getLoggedinUser()
+  const update = {
+    id: utilService.makeId(8),
+    txt,
+    createdAt: Date.now(),
+    byMember: { _id, fullname, imgUrl }
+  }
+  const board = await getById(boardId)
+  const group = board.groups.find(
+    (currGroup) => currGroup.id === groupId
+  )
+  const task = group.tasks.find(
+    (task) => task.id === taskId
+  )
+  task.updates.unshift(update)
+  await saveBoard(board)
+  return update
 }
 
 function getEmptyTask(

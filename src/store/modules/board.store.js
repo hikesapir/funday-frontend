@@ -183,11 +183,11 @@ export default {
         case 'status-picker':
           board.groups.forEach(
             (group, idx) =>
-              (board.groups[idx].tasks = group.tasks.sort(
-                (t1, t2) =>
-                  t1.status.localeCompare(t2.status) *
-                  state.sortBy.dir
-              ))
+            (board.groups[idx].tasks = group.tasks.sort(
+              (t1, t2) =>
+                t1.status.localeCompare(t2.status) *
+                state.sortBy.dir
+            ))
           )
           break
         case 'priority-picker':
@@ -614,7 +614,17 @@ export default {
           newOrder: board.cmpsOrder,
         })
         await boardService.saveBoard(board)
-      } catch (err) {}
+      } catch (err) { }
     },
+    async addUpdate({ state, commit }, { txt, taskId, boardId, groupId }) {
+      try {
+        // commit({ type: 'addUpdate', txt, taskId, boardId, groupId })
+        await boardService.addUpdate(txt, taskId, boardId, groupId)
+      } catch (err) {
+        console.log(
+          'addUpdate: Had problems'
+        )
+      }
+    }
   },
 }

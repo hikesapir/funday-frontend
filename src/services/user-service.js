@@ -1,4 +1,5 @@
 import { httpService } from './http.service'
+import { authService } from './auth-service'
 
 export default {
   getLoggedinUser,
@@ -6,9 +7,14 @@ export default {
 const USER_KEY = 'loggedInUser'
 const USER_URL = 'user/'
 
+const demoUser={
+  username:'shali',
+  password:'123'
+}
 
-// const KEY = 'users_db'
-// _createUsers()
+const loggedUser = getLoggedinUser() 
+
+console.log(getLoggedinUser());
 
 export const userService = {
   query,
@@ -66,11 +72,7 @@ async function remove(userId) {
 
 function getLoggedinUser() {
   return (
-    JSON.parse(sessionStorage.getItem(USER_KEY)) || {
-      fullname: 'Guest',
-      _id: 'u101',
-      imgUrl:
-        'https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
-    }
+    JSON.parse(sessionStorage.getItem(USER_KEY)) || authService.login(demoUser)
   )
 }
+
