@@ -1,6 +1,7 @@
 import { utilService } from './util-service.js'
 import { storageService } from './async-storage-service.js'
 import userService from './user-service.js'
+import { httpService } from './http.service'
 
 export default {
   query,
@@ -19,49 +20,76 @@ export default {
 }
 
 const KEY = 'board_db'
-
-localStorage[KEY] ? '' : _createDemoData()
+const BASE_URL = 'board/'
+// localStorage[KEY] ? '' : _createDemoData()
 
 //board
 
 async function query(filterBy = null) {
   try {
-    if (filterBy) {
-      const boards = await storageService.query(KEY)
-      const board = boards.find(
-        (board) => board._id === filterBy.boardId
-      )
-      const filteredGroups = []
-      if (filterBy.txt) {
-        const regex = new RegExp(filterBy.txt, 'i')
-        board.groups.forEach((group) => {
-          const filterGroup = group.tasks.filter((task) =>
-            regex.test(task.title)
-          )
-          filteredGroups.push(...filterGroup)
-        })
-      }
-      return filteredGroups
-    } else return storageService.query(KEY)
+    // if (filterBy) {
+    //   const boards = await httpService.get(BASE_URL,{params:filterBy})
+    //   const board = boards.find(
+    //     (board) => board._id === filterBy.boardId
+    //   )
+    //   const filteredGroups = []
+    //   if (filterBy.txt) {
+    //     const regex = new RegExp(filterBy.txt, 'i')
+    //     board.groups.forEach((group) => {
+    //       const filterGroup = group.tasks.filter((task) =>
+    //         regex.test(task.title)
+    //       )
+    //       filteredGroups.push(...filterGroup)
+    //     })
+    // }
+    // return filteredGroups
+    // } else return storageService.query(KEY)
+    const boards = await httpService.get(BASE_URL)
+    return boards
   } catch (err) {
-    console.log(
-      'boardService: could not load boards with filter- ' +
-        filterBy
-    )
+    console.log('boardService: could not load boards')
+    throw err
   }
 }
 
-function getById(id) {
-  return storageService.getById(KEY, id)
+async function getById(id) {
+  // return storageService.getById(KEY, id)
+  try {
+    const res = await httpService.get(BASE_URL + id)
+    return res
+  } catch (err) {
+    console.log('getById err', err);
+    throw err
+  }
 }
 
-function saveBoard(board) {
-  if (board._id) return storageService.put(KEY, board)
-  return storageService.post(KEY, board)
+async function saveBoard(board) {
+  try {
+    if (board._id) {
+      const res = await httpService.put(BASE_URL + board._id, board)
+      return res
+    } else {
+      const res = await httpService.post(BASE_URL, board)
+      return res
+    }
+  } catch (err) {
+    console.log('save err', err);
+    throw err
+  }
+  // if (board._id) return storageService.put(KEY, board)
+  // return storageService.post(KEY, board)
 }
 
-function removeBoard(boardId) {
-  return storageService.remove(KEY, boardId)
+async function removeBoard(boardId) {
+  try {
+    const res = await httpService.delete(BASE_URL + boardId)
+    return res
+  } catch (err) {
+    console.log('remove err', err);
+    throw err
+  }
+
+  // return storageService.remove(KEY, boardId)
 }
 
 function getEmptyBoard(boardTitle) {
@@ -189,7 +217,7 @@ function getEmptyBoard(boardTitle) {
 
 // group
 
-async function getGroupById(boardIdx, groupId) {}
+// async function getGroupById(boardIdx, groupId) { }
 
 function saveGroup(group, board) {
   if (!group.id) {
