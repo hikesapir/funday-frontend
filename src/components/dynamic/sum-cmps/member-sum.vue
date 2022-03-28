@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: "members-sum",
+  name: 'members-sum',
   props: {
     data: Array,
     groupId: String,
@@ -18,19 +18,19 @@ export default {
   data() {
     return {
       groupData: null,
-    };
+    }
   },
   created() {
     const groupData = this.data.filter(
-      (groupData) => groupData._id === this.groupId
-    );
-    this.groupData = groupData[0];
+      (groupData) => groupData.id === this.groupId
+    )
+    this.groupData = groupData[0]
   },
   computed: {
     groupMembers() {
-      return this.groupData.member;
+      return this.groupData.member
     },
   },
   methods: {},
-};
+}
 </script>

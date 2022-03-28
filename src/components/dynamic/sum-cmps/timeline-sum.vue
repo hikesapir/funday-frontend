@@ -22,7 +22,6 @@ export default {
   },
   data() {
     return {
-      groupData: null,
       isHovering: false,
       monthNames: [
         'Jan',
@@ -40,13 +39,14 @@ export default {
       ],
     }
   },
-  created() {
-    const groupData = this.data.filter(
-      (groupData) => groupData._id === this.groupId
-    )
-    this.groupData = groupData[0]
-  },
+
   computed: {
+    groupData() {
+      const groupData = this.data.find(
+        (groupData) => groupData.id === this.groupId
+      )
+      return groupData
+    },
     labelColor() {
       const group = this.$store.getters.board?.groups.find(
         (group) => group.id === this.groupId

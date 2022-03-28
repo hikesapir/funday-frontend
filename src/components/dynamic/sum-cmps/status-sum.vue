@@ -32,7 +32,7 @@ export default {
   computed: {
     groupData() {
       const groupData = this.data.find(
-        (groupData) => groupData._id === this.groupId
+        (groupData) => groupData.id === this.groupId
       )
       return groupData
     },

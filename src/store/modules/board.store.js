@@ -86,7 +86,7 @@ export default {
 
         const groupTimelineCalc = {
           start: Math.min(...timelineMap.start),
-          end: Math.min(...timelineMap.end),
+          end: Math.max(...timelineMap.end),
         }
 
         //Tags Summary:
@@ -122,7 +122,7 @@ export default {
         })
 
         const groupSumMap = {
-          _id: group.id,
+          id: group.id,
           member: groupMemberMap,
           tags: groupTagsMap,
           timeline: groupTimelineCalc,
