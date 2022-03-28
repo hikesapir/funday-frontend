@@ -1,41 +1,38 @@
 <template>
-  <div v-if="isModalOpen" @click="closeModal" class="modal-background">
-    <!-- f -->
-  </div>
+  <div v-if="isModalOpen" @click="closeModal" class="modal-background"></div>
   <section class="app-container">
     <main-nav></main-nav>
-    <router-view ></router-view>
+    <router-view></router-view>
     <div v-if="isLoading" class="loadig">
       <img src="./img/loading.svg" alt />
     </div>
   </section>
 </template>
 <script>
-import { faL } from '@fortawesome/free-solid-svg-icons'
-import mainNav from './components/main-nav.vue'
+import { faL } from "@fortawesome/free-solid-svg-icons";
+import mainNav from "./components/main-nav.vue";
 export default {
   components: {
     mainNav,
   },
   data() {
-    return {
-    }
+    return {};
   },
   created() {
-    this.$store.dispatch('loadApp')
+    this.$store.dispatch("loadApp");
   },
   methods: {
     closeModal() {
-      this.$store.commit({ type: 'setOpenModal', boolean: false })
-    }
+      this.$store.commit({ type: "setOpenModal", boolean: false });
+    },
   },
   computed: {
     isModalOpen() {
-      return this.$store.getters.isModalOpen
+      return this.$store.getters.isModalOpen;
     },
     isLoading() {
-      return this.$store.getters.isLoading
-    }
-  }
-}
+      return this.$store.getters.isLoading;
+    },
+  },
+};
 </script>

@@ -1,0 +1,46 @@
+.login,
+.sign-up {
+  background-color: $main-white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 784px;
+  height: 534px;
+  margin: auto;
+  border-radius: 30px;
+  border: 1px solid $main-gray;
+
+  .login-container {
+    display: flex;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      flex-basis: 522px;
+      align-items: center;
+      justify-content: center;
+
+      h3 {
+        margin-bottom: 30px;
+      }
+
+      input {
+        width: 300px;
+        margin-bottom: 25px;
+        padding: 1em;
+        // border-radius: 10px;
+        border: 1px solid $main-gray;
+        border: 1px solid $main-gray;
+      }
+    }
+    .pic {
+      width: 262px;
+      background-color: aquamarine;
+      height: 533px;
+      border: 1px solid $main-gray;
+      border-top-right-radius: 30px;
+      border-bottom-right-radius: 30px;
+    }
+  }
+}
