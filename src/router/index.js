@@ -8,6 +8,10 @@ import mainTable from '../views/board-views/main-table.vue'
 import chart from '../views/board-views/chart.vue'
 import myWork from '../views/my-work.vue'
 import taskDetails from '../views/task-details.vue'
+import users from '../views/users.vue'
+import login from '../components/users/login.vue'
+import signup from '../components/users/signup.vue'
+import { faLitecoinSign } from '@fortawesome/free-solid-svg-icons'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -36,6 +40,23 @@ const router = createRouter({
         },
         { path: 'chart', component: chart },
       ],
+    },
+    {
+      path: '/users',
+      name: 'users',
+      component: users,
+      children: [
+        {
+          path: 'login',
+          name: 'login',
+          component: login
+        },
+        {
+          path: 'signup',
+          name: 'sign-up',
+          component: signup
+        }
+      ]
     },
     {
       path: '/my-work',

@@ -8,7 +8,7 @@
     border: $main-gray 1px solid;
     position: absolute;
     top: 20px;
-    z-index: 20;
+    z-index: 1;
     width: 26px;
     height: 26px;
     display: flex;
@@ -161,60 +161,62 @@
   width: 100vw;
   height: 100vh;
   background-color: #292f4cb3;
-  z-index: 1;
+  z-index: 1001;
 }
 
-.cearte-board-modal {
-  padding: 32px;
-  position: fixed;
-  background-color: #ffffff;
-  z-index: 2;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 500px;
-  .close {
-    position: absolute;
-    right: 7px;
-    top: 7px;
-    padding: 4px 8px;
-  }
-  .title {
-    margin-bottom: 16px;
-  }
-  .input-wrapper {
-    display: flex;
-    flex-direction: column;
-  }
-  .lable {
-    margin-bottom: 8px;
-  }
-  input {
-    padding: 8px 16px;
-    border: 1px $main-gray solid;
-    border-radius: 4px;
+.add-board {
+  .cearte-board-modal {
+    padding: 32px;
+    position: fixed;
+    background-color: #ffffff;
+    z-index: 1002;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    .close {
+      position: absolute;
+      right: 7px;
+      top: 7px;
+      padding: 4px 8px;
+    }
+    .title {
+      margin-bottom: 16px;
+    }
+    .input-wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+    .lable {
+      margin-bottom: 8px;
+    }
+    input {
+      padding: 8px 16px;
+      border: 1px $main-gray solid;
+      border-radius: 4px;
 
-    &:focus {
-      @include blue-focus;
+      &:focus {
+        @include blue-focus;
+      }
     }
-  }
-  .save {
-    background-color: $primary-blue;
-    color: $main-white;
-    padding: 8px 16px;
-    margin: 0;
-    height: 32px;
-    width: 128px;
-    text-align: center;
-    font-size: rem(16px);
-    &:hover {
-      background-color: $primary-blue-hover;
+    .save {
+      background-color: $primary-blue;
+      color: $main-white;
+      padding: 8px 16px;
+      margin: 0;
+      height: 32px;
+      width: 128px;
+      text-align: center;
+      font-size: rem(16px);
+      &:hover {
+        background-color: $primary-blue-hover;
+      }
     }
-  }
-  .btn-container {
-    display: flex;
-    justify-content: flex-end;
-    gap: 8px;
-    margin-top: 16px;
+    .btn-container {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 16px;
+    }
   }
 }

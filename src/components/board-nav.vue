@@ -4,19 +4,20 @@
     :class="isNavOpen ? 'pinned' : ''"
     @click="toggleNav"
   ></i>-->
-  <div v-if="isModalOpen" class="cearte-board-modal context-modal">
-    <button class="close" @click="colseModal">X</button>
-    <h1 class="title">Create board</h1>
-    <label class="input-wrapper">
-      <span class="lable">Board name</span>
-      <input type="text" v-model="newBoard.title" autofocus />
-    </label>
-    <div class="btn-container">
-      <button @click="colseModal">Cancel</button>
-      <button class="save" @click="saveBoard">Create Board</button>
+  <section class="add-board">
+    <div v-if="isModalOpen" class="cearte-board-modal context-modal">
+      <button class="close" @click="colseModal">X</button>
+      <h1 class="title">Create board</h1>
+      <label class="input-wrapper">
+        <span class="lable">Board name</span>
+        <input type="text" v-model="newBoard.title" autofocus />
+      </label>
+      <div class="btn-container">
+        <button @click="colseModal">Cancel</button>
+        <button class="save" @click="saveBoard">Create Board</button>
+      </div>
     </div>
-  </div>
-
+  </section>
   <section v-if="isNavOpen" class="board-nav">
     <span class="title">Workspace</span>
     <div class="workspace-dropdwon">

@@ -1,4 +1,4 @@
-// import authService from '../../services/auth.service.js'
+import { authService } from '../../services/auth-service.js'
 // import userService from '../../services/user.service.js'
 
 export default {
@@ -26,5 +26,45 @@ export default {
       state.users = users
     },
   },
-  actions: {},
+  actions: {
+    async login({ commit }, { user }) {
+      try {
+        console.log(user);
+        const res = await authService.login(user);
+        commit({ type: 'setUser', user: res })
+        console.log("Success!");
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async logout({ commit }, { user }) {
+      try {
+        console.log(user);
+        const res = await authService.logout();
+        commit({ type: 'setUser', user: res })
+        console.log("Success to logout!");
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async signup({ dispatch }, { newuser }) {
+      try {
+        console.log(newuser);
+        const newUser = await authService.signup(newuser);
+        console.log(newUser, 'signedup user')
+        dispatch({ type: 'login', user: newUser })
+        console.log("Success to signup!!!");
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async loadUsers({ commit, state }) {
+      try {
+        const users = await userService.query()
+        commit({ type: 'setUsers', users })
+      } catch (err) {
+        console.log('loadUsers err', err);
+      }
+    },
+  },
 }
