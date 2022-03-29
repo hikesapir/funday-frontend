@@ -14,8 +14,16 @@ export const uploadFile = async (file) => {
   // Sending a post method request to Cloudniarys' API
   try {
     const res = await axios.post(UPLOAD_URL, FORM_DATA);
+    // console.log(res.data);
+    var url = res.data.url
     console.log(res.data.url);
-    return res.data;
+    const testUrl = res.data.url.slice(-3)
+    console.log(testUrl);
+    if (testUrl === 'pdf') {
+      url = res.data.url.slice(0, -3) + 'jpg'
+    }
+    // console.log(formt);
+    return url;
   } catch (err) {
     console.error('ERROR!', err);
   }
