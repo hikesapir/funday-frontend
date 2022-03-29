@@ -46,6 +46,7 @@ import {
   socketService,
   SOCKET_EMIT_BOARD_WATCH,
   SOCKET_EVENT_TASK_ADDED,
+  SOCKET_EVENT_TASK_REMOVED,
 } from '../services/socket-service.js'
 import boardHeader from '../components/board-header.vue'
 import boardViewMode from '../components/board-view-mode.vue'
@@ -77,6 +78,15 @@ export default {
           type: 'addTask',
           groupIdx,
           savedTask: task,
+        })
+    )
+    socketService.on(
+      SOCKET_EVENT_TASK_REMOVED,
+      ({ groupIdx, taskIdx }) =>
+        this.$store.commit({
+          type: 'removeTask',
+          groupIdx,
+          taskIdx,
         })
     )
   },

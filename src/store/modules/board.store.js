@@ -9,6 +9,7 @@ import {
   SOCKET_EMIT_BOARD_WATCH,
   SOCKET_EVENT_TASK_ADDED,
   SOCKET_EMIT_TASK_UPDATED,
+  SOCKET_EMIT_REMOVE_TASK,
   SOCKET_EMIT_TASK_ADD,
 } from '../../services/socket-service.js'
 
@@ -303,10 +304,7 @@ export default {
     toggleGroupDragMode(state, isDraggingGroup) {
       state.isDraggingGroup = isDraggingGroup
     },
-    addTask(
-      state,
-      { groupIdx , savedTask }
-    ) {
+    addTask(state, { groupIdx, savedTask }) {
       state.boardForDisplay.groups[groupIdx].tasks.push(
         savedTask
       )
@@ -569,6 +567,10 @@ export default {
           groupIdx,
           taskIdx
         )
+        socketService.emit(SOCKET_EMIT_REMOVE_TASK, {
+          groupIdx,
+          taskIdx,
+        })
         commit({
           type: 'removeTask',
           groupIdx,
