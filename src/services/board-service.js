@@ -67,6 +67,7 @@ async function getById(id) {
 async function saveBoard(board) {
   try {
     if (board._id) {
+
       const res = await httpService.put(
         BASE_URL + board._id,
         board
@@ -270,6 +271,7 @@ async function getTaskById(boardId, groupId, taskId) {
 }
 
 async function saveTask(board, groupId, taskToSave) {
+  console.log(board);
   const idx = board.groups.findIndex(
     (group) => group.id === groupId
   )
