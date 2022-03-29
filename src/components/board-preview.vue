@@ -1,10 +1,5 @@
 <template>
-  <li
-    v-if="board"
-    class="board-preview"
-    @mouseover="isHover = true"
-    @mouseleave="isHover = false"
-  >
+  <li v-if="board" class="board-preview" @mouseover="isHover = true" @mouseleave="isHover = false">
     <label v-if="changeName">
       <input
         @keyup.enter="updateBoard"
@@ -17,10 +12,7 @@
     </label>
     <div v-else class="bord-title" @click="selectBoard">
       <span>{{ board.title }}</span>
-      <button
-        @click.stop="openModal = !openModal"
-        v-if="isHover || openModal"
-      >
+      <button @click.stop="openModal = !openModal" v-if="isHover || openModal">
         <i class="fa-solid fa-ellipsis"></i>
       </button>
     </div>
@@ -28,6 +20,7 @@
   <div class="relative">
     <context-modal
       v-if="openModal"
+      :isStarred="board.isStarred"
       @remove="remove"
       @openNewTab="openNewTab"
       @renameBoard="renameBoard"
@@ -61,7 +54,7 @@ export default {
   created() {
     document.title = this.board.title
   },
-  mounted() {},
+  mounted() { },
   methods: {
     remove() {
       this.$store.dispatch({
@@ -73,7 +66,7 @@ export default {
     openNewTab() {
       window.open(
         window.location.origin +
-          `/#/boards/${this.board._id}`
+        `/#/boards/${this.board._id}`
       )
       this.openModal = false
     },
@@ -123,6 +116,6 @@ export default {
     },
   },
   computed: {},
-  unmounted() {},
+  unmounted() { },
 }
 </script>

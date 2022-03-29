@@ -1,8 +1,8 @@
 <template>
-    <section class="context-modal" >
+    <section class="context-modal">
         <button @click="openNewTab">Open Board in New Tab</button>
         <button @click="renameBoard">Rename Board</button>
-        <button @click="starred">Add to favorites</button>
+        <button @click="starred">{{starTitle}} favorites</button>
         <button @click="duplicate">Duplicate Board</button>
         <button @click="remove">Delete</button>
     </section>
@@ -14,6 +14,7 @@
 export default {
     name: 'context-modal',
     props: {
+        isStarred: Boolean
     },
     emits: ['openNewTab', 'remove', 'starred', 'renameBoard', 'duplicate'],
     components: {},
@@ -45,7 +46,11 @@ export default {
         }
     },
     computed: {
-
+        starTitle() {
+            return this.isStarred
+                ? 'Remove from'
+                : 'Add to'
+        },
     },
     unmounted() {
     },
