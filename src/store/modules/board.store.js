@@ -8,6 +8,7 @@ import {
   socketService,
   SOCKET_EMIT_BOARD_WATCH,
   SOCKET_EVENT_TASK_ADDED,
+  SOCKET_EMIT_EDIT_CMPS_ORDER,
   SOCKET_EMIT_TASK_UPDATED,
   SOCKET_EMIT_REMOVE_TASK,
   SOCKET_EMIT_TASK_ADD,
@@ -704,11 +705,15 @@ export default {
       )
       board.cmpsOrder[idx].preName = newCmpTitle
       try {
+        await boardService.saveBoard(board)
         commit({
           type: 'setCmpsOrder',
           newOrder: board.cmpsOrder,
         })
-        await boardService.saveBoard(board)
+        socketService.emit(
+          SOCKET_EMIT_EDIT_CMPS_ORDER,
+          board.cmpsOrder
+        )
       } catch (err) {}
     },
     async addUpdate(

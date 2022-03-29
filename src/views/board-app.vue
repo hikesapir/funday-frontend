@@ -47,6 +47,7 @@ import {
   SOCKET_EMIT_BOARD_WATCH,
   SOCKET_EVENT_TASK_ADDED,
   SOCKET_EVENT_TASK_REMOVED,
+  SOCKET_EVENT_CMPS_ORDER_EDITED,
 } from '../services/socket-service.js'
 import boardHeader from '../components/board-header.vue'
 import boardViewMode from '../components/board-view-mode.vue'
@@ -87,6 +88,14 @@ export default {
           type: 'removeTask',
           groupIdx,
           taskIdx,
+        })
+    )
+    socketService.on(
+      SOCKET_EVENT_CMPS_ORDER_EDITED,
+      (newOrder) =>
+        this.$store.commit({
+          type: 'setCmpsOrder',
+          newOrder,
         })
     )
   },
