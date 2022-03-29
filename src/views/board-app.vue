@@ -70,6 +70,15 @@ export default {
         updatedTask: task,
       })
     )
+    socketService.on(
+      SOCKET_EVENT_TASK_ADDED,
+      ({ groupIdx, task }) =>
+        this.$store.commit({
+          type: 'addTask',
+          groupIdx,
+          savedTask: task,
+        })
+    )
   },
   data() {
     return {

@@ -203,11 +203,11 @@ export default {
         case 'status-picker':
           board.groups.forEach(
             (group, idx) =>
-            (board.groups[idx].tasks = group.tasks.sort(
-              (t1, t2) =>
-                t1.status.localeCompare(t2.status) *
-                state.sortBy.dir
-            ))
+              (board.groups[idx].tasks = group.tasks.sort(
+                (t1, t2) =>
+                  t1.status.localeCompare(t2.status) *
+                  state.sortBy.dir
+              ))
           )
           break
         case 'priority-picker':
@@ -303,7 +303,10 @@ export default {
     toggleGroupDragMode(state, isDraggingGroup) {
       state.isDraggingGroup = isDraggingGroup
     },
-    addTask(state, { groupIdx, savedTask }) {
+    addTask(
+      state,
+      { groupIdx , savedTask }
+    ) {
       state.boardForDisplay.groups[groupIdx].tasks.push(
         savedTask
       )
@@ -319,9 +322,8 @@ export default {
       )
       if (taskIdx === -1) return
       // state.boardForDisplay.groups[groupIdx].tasks[
-      state.board.groups[groupIdx].tasks[
-        taskIdx
-      ] = updatedTask
+      state.board.groups[groupIdx].tasks[taskIdx] =
+        updatedTask
     },
     saveBoard(state, { savedBoard }) {
       const idx = state.boards.findIndex(
@@ -493,7 +495,10 @@ export default {
           groupId,
           updatedTask: task,
         })
-        commit({ type: 'onSetFilter', filterBy: state.filterBy })
+        commit({
+          type: 'onSetFilter',
+          filterBy: state.filterBy,
+        })
 
         socketService.emit(SOCKET_EMIT_TASK_UPDATED, {
           groupId,
@@ -522,18 +527,18 @@ export default {
             groupId,
             task
           )
-          
-          socketService.emit(SOCKET_EMIT_TASK_ADD,
-            { groupId,
-              task:savedTask})
-              console.log(SOCKET_EMIT_TASK_ADD)
-              commit({
-                type: 'addTask',
-                groupIdx: idx,
-                savedTask,
-              })
-            }
-            } catch (err) {
+
+          socketService.emit(SOCKET_EMIT_TASK_ADD, {
+            groupIdx: idx,
+            task: savedTask,
+          })
+          commit({
+            type: 'addTask',
+            groupIdx: idx,
+            savedTask,
+          })
+        }
+      } catch (err) {
         console.log('Couldnt save task')
       }
     },
@@ -702,7 +707,7 @@ export default {
           newOrder: board.cmpsOrder,
         })
         await boardService.saveBoard(board)
-      } catch (err) { }
+      } catch (err) {}
     },
     async addUpdate(
       { state, commit },
