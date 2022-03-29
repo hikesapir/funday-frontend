@@ -36,11 +36,6 @@
     left: 0;
     text-align: left;
 
-    .small-name-preview {
-      background-color: aqua;
-      display: inline-block;
-    }
-
     label {
       line-height: 44px;
       text-align: center;
@@ -60,7 +55,7 @@
       position: absolute;
       left: 50px;
       right: 50px;
-      top: 70px;
+      top: 18px;
     }
   }
 
@@ -77,4 +72,38 @@
       border-radius: 5px;
     }
   }
+
+
+  .small-name-preview{
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 2px 2px 0;
+    z-index: 1;
+    .member-name{
+      display: flex;
+      align-items: center;
+      margin: 4px;
+      background: #cbe4fe;
+      border: 1px solid #f7f7f7;
+      color: #333;
+      border-radius: 24px;
+      font-size: 12px;
+      height: 22px;
+      box-sizing: content-box;
+      padding: 0 5px;
+      gap: 8px;
+      span{
+        flex-shrink: 1;
+        min-width: 0;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+    }
+  }
+
+
 }
