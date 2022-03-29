@@ -12,6 +12,7 @@
   color: $main-task-text-gray;
   // border-top: 1px $main-gray solid;
   border-bottom: 1px solid white;
+  cursor: pointer;
 
   &:hover {
     background-color: $main-hover-gray;
