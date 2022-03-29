@@ -205,11 +205,11 @@ export default {
         case 'status-picker':
           board.groups.forEach(
             (group, idx) =>
-              (board.groups[idx].tasks = group.tasks.sort(
-                (t1, t2) =>
-                  t1.status.localeCompare(t2.status) *
-                  state.sortBy.dir
-              ))
+            (board.groups[idx].tasks = group.tasks.sort(
+              (t1, t2) =>
+                t1.status.localeCompare(t2.status) *
+                state.sortBy.dir
+            ))
           )
           break
         case 'priority-picker':
@@ -273,7 +273,7 @@ export default {
         JSON.stringify(board)
       )
     },
-    onSetFilter(state, { filterBy }) {
+    syncBoards(state, { filterBy }) {
       // console.log(filterBy)
       state.filterBy = JSON.parse(JSON.stringify(filterBy))
       const board = JSON.parse(JSON.stringify(state.board))
@@ -458,7 +458,6 @@ export default {
       switch (cmpType) {
         case 'timeline-picker':
           task.timeline = data.timeline
-
           break
         case 'file-picker':
           task.files = data.files
@@ -495,7 +494,7 @@ export default {
           updatedTask: task,
         })
         commit({
-          type: 'onSetFilter',
+          type: 'syncBoards',
           filterBy: state.filterBy,
         })
 
@@ -503,6 +502,7 @@ export default {
           groupId,
           task,
         })
+        
         await boardService.saveTask(board, groupId, task)
       } catch (err) {
         console.log("Couldn't update task id- ", task.id)
@@ -714,7 +714,7 @@ export default {
           SOCKET_EMIT_EDIT_CMPS_ORDER,
           board.cmpsOrder
         )
-      } catch (err) {}
+      } catch (err) { }
     },
     async addUpdate(
       { state, commit },
