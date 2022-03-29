@@ -3,8 +3,12 @@ import boardService from '../../services/board-service.js'
 import router from '../../router'
 import { utilService } from '../../services/util-service.js'
 import { storeKey } from 'vuex'
-import  {socketService} from '../../services/socket-service.js'
-// import { socketService, SOCKET_EVENT_TASK_ADDED } from '../../services/socket.service.js'
+import {
+  socketService,
+  SOCKET_EMIT_BOARD_WATCH,
+  SOCKET_EVENT_TASK_ADDED,
+  SOCKET_EMIT_TASK_UPDATED,
+} from '../../services/socket-service.js'
 
 export default {
   state: {
@@ -22,7 +26,7 @@ export default {
     },
     boardMapByGroups: [],
     isModalOpen: false,
-    TaskForDisplay: null
+    TaskForDisplay: null,
   },
   getters: {
     boards({ boards }) {
@@ -174,7 +178,7 @@ export default {
     },
     TaskFordisplay({ TaskForDisplay }) {
       return TaskForDisplay
-    }
+    },
   },
   mutations: {
     setSortBy(state, { sortBy }) {
@@ -190,11 +194,11 @@ export default {
         case 'status-picker':
           board.groups.forEach(
             (group, idx) =>
-            (board.groups[idx].tasks = group.tasks.sort(
-              (t1, t2) =>
-                t1.status.localeCompare(t2.status) *
-                state.sortBy.dir
-            ))
+              (board.groups[idx].tasks = group.tasks.sort(
+                (t1, t2) =>
+                  t1.status.localeCompare(t2.status) *
+                  state.sortBy.dir
+              ))
           )
           break
         case 'priority-picker':
@@ -208,26 +212,38 @@ export default {
           break
         case 'tag-picker':
           board.groups.forEach((group) =>
-            group.tasks.sort(
-              (t1, t2) => {
-                console.log(t1.tags[0].txt, 't1', t2.tags[0].txt, 't2')
-                if (!t1.tags[0].txt || !t2.tags[0].txt) return state.sortBy.dir
+            group.tasks.sort((t1, t2) => {
+              console.log(
+                t1.tags[0].txt,
+                't1',
+                t2.tags[0].txt,
+                't2'
+              )
+              if (!t1.tags[0].txt || !t2.tags[0].txt)
+                return state.sortBy.dir
 
-                return t1.tags[0]?.txt.localeCompare(t2.tags[0]?.txt) *
-                  state.sortBy.dir
-              }
-            )
+              return (
+                t1.tags[0]?.txt.localeCompare(
+                  t2.tags[0]?.txt
+                ) * state.sortBy.dir
+              )
+            })
           )
           break
         case 'member-picker':
           board.groups.forEach((group) =>
-            group.tasks.sort(
-              (t1, t2) => {
-                if (!t1.members[0].fullname || !t2.members[0].fullname) return state.sortBy.dir
-                return t1.members[0]?.fullname.localeCompare(t2.members[0]?.fullname) *
-                  state.sortBy.dir
-              }
-            )
+            group.tasks.sort((t1, t2) => {
+              if (
+                !t1.members[0].fullname ||
+                !t2.members[0].fullname
+              )
+                return state.sortBy.dir
+              return (
+                t1.members[0]?.fullname.localeCompare(
+                  t2.members[0]?.fullname
+                ) * state.sortBy.dir
+              )
+            })
           )
           break
 
@@ -340,8 +356,8 @@ export default {
       )
     },
     addUpdate(state, { txt, taskId, boardId, groupId }) {
-      console.log('hey');
-      console.log(this.$store.getters.user);
+      console.log('hey')
+      console.log(this.$store.getters.user)
       // const { _id, fullname, imgUrl } = state.user
       // const update = {
       //   id: utilService.makeId(8),
@@ -359,7 +375,6 @@ export default {
       // task.updates.unshift(update)
     },
     setTaskFordisplay(state, { id, groupId, taskId }) {
-
       const board = state.boards.find(
         (board) => board._id === id
       )
@@ -370,7 +385,7 @@ export default {
         (task) => task.id === taskId
       )
       state.TaskForDisplay = task
-    }
+    },
   },
   actions: {
     async loadBoards({ commit }) {
@@ -477,6 +492,10 @@ export default {
           type: 'updateTask',
           groupId,
           updatedTask: task,
+        })
+        socketService.emit(SOCKET_EMIT_TASK_UPDATED, {
+          groupId,
+          task,
         })
         await boardService.saveTask(board, groupId, task)
       } catch (err) {
@@ -676,17 +695,23 @@ export default {
           newOrder: board.cmpsOrder,
         })
         await boardService.saveBoard(board)
-      } catch (err) { }
+      } catch (err) {}
     },
-    async addUpdate({ state, commit }, { txt, taskId, boardId, groupId }) {
+    async addUpdate(
+      { state, commit },
+      { txt, taskId, boardId, groupId }
+    ) {
       try {
         // commit({ type: 'addUpdate', txt, taskId, boardId, groupId })
-        await boardService.addUpdate(txt, taskId, boardId, groupId)
-      } catch (err) {
-        console.log(
-          'addUpdate: Had problems'
+        await boardService.addUpdate(
+          txt,
+          taskId,
+          boardId,
+          groupId
         )
+      } catch (err) {
+        console.log('addUpdate: Had problems')
       }
-    }
+    },
   },
 }
