@@ -14,7 +14,12 @@
       <board-nav v-if="isOpen" :boards="boards"></board-nav>
     </div>
   </div>
-  <div class="board-app-container">
+  <div
+    :class="[
+      'board-app-container',
+      isUpdatesOpen ? 'margin' : '',
+    ]"
+  >
     <section class="board-app">
       <div class="bord-header-wrapper">
         <board-header
@@ -108,6 +113,13 @@ export default {
     },
     isLoading() {
       return this.$store.getters.isLoading
+    },
+    isUpdatesOpen() {
+      console.log(
+        'this.$store.getters.isTaskUpdatesOpen',
+        this.$store.getters.isTaskUpdatesOpen
+      )
+      return this.$store.getters.isTaskUpdatesOpen
     },
   },
   watch: {

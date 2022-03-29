@@ -3,6 +3,10 @@
   pointer-events: none;
 }
 
+.margin {
+  margin-inline-end: 693px;
+}
+
 /* use for any tag on your page */
 [data-title]:hover:after {
   opacity: 1;
@@ -32,7 +36,7 @@
 
 /* box for title text */
 [data-title]::before {
-  content: "";
+  content: '';
   opacity: 0;
   visibility: hidden;
   height: 12px;

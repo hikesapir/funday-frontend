@@ -14,6 +14,7 @@ import {
 export default {
   state: {
     isLoading: false,
+    isTaskUpdatesOpen: false,
     boards: null,
     board: null,
     boardForDisplay: null,
@@ -180,8 +181,14 @@ export default {
     taskForDisplay({ taskForDisplay }) {
       return taskForDisplay
     },
+    isTaskUpdatesOpen({ isTaskUpdatesOpen }) {
+      return isTaskUpdatesOpen
+    },
   },
   mutations: {
+    setTaskUpdates(state, {isOpen}) {
+      state.isTaskUpdatesOpen = isOpen 
+    },
     setSortBy(state, { sortBy }) {
       // console.log(sortBy)
       // state.sortBy = JSON.parse(JSON.stringify(sortBy))
