@@ -15,9 +15,7 @@
     </div>
     <div v-else>
       <img :src="firstMemberPic" />
-      <div class="small-number">
-        +{{ membersLength - 1 }}
-      </div>
+      <div class="small-number">+{{ membersLength - 1 }}</div>
     </div>
     <fa
       v-if="isHover"
@@ -26,17 +24,16 @@
       @click.stop="openModal"
     />
 
-    <div
-      v-show="addMembersMode"
-      ref="memberPickerModal"
-      class="context-modal"
-    >
+    <div v-show="addMembersMode" ref="memberPickerModal" class="context-modal">
+      <div
+        class="small-name-preview"
+        v-for="member in members"
+        :key="member.id"
+      >
+        <!-- <span>{{ member.fullname }}</span> -->
+      </div>
       <label>
-        <input
-          type="text"
-          placeholder="Enter name"
-          v-model="filterBy"
-        />
+        <input type="text" placeholder="Enter name" v-model="filterBy" />
       </label>
 
       <div class="test">
@@ -49,9 +46,7 @@
         :key="member"
       >
         <img :src="member.imgUrl" />
-        <span @click.stop="addMember(member)">{{
-          member.fullname
-        }}</span>
+        <span @click.stop="addMember(member)">{{ member.fullname }}</span>
       </span>
     </div>
   </div>
@@ -59,68 +54,57 @@
 
 <script>
 export default {
-  name: 'member-picker',
+  name: "member-picker",
   props: {
     task: Object,
   },
   data() {
     return {
       addMembersMode: false,
-      filterBy: '',
+      filterBy: "",
       isHover: false,
-    }
+    };
   },
   computed: {
     membersLength() {
-      return this.task.members.length
+      return this.task.members.length;
     },
     firstMemberPic() {
-      return this.task.members[0].imgUrl
+      return this.task.members[0].imgUrl;
     },
     members() {
-      return this.task.members
+      return this.task.members;
     },
     membersList() {
-      var membersList = this.$store.getters.board.members
-      const regex = new RegExp(this.filterBy, 'i')
-      membersList = membersList.filter((member) =>
-        regex.test(member.fullname)
-      )
-      return membersList
+      var membersList = this.$store.getters.board.members;
+      const regex = new RegExp(this.filterBy, "i");
+      membersList = membersList.filter((member) => regex.test(member.fullname));
+      return membersList;
     },
   },
   methods: {
     openModal() {
-      this.addMembersMode = true
-      document.body.addEventListener(
-        'click',
-        this.isClosingModal
-      )
+      this.addMembersMode = true;
+      document.body.addEventListener("click", this.isClosingModal);
     },
     closeModal() {
-      this.addMembersMode = false
-      document.body.removeEventListener(
-        'click',
-        this.isClosingModal
-      )
+      this.addMembersMode = false;
+      document.body.removeEventListener("click", this.isClosingModal);
     },
     isClosingModal(e) {
-      e.stopPropagation()
-      if (!this.$refs.memberPickerModal.contains(e.target))
-        this.closeModal()
+      e.stopPropagation();
+      if (!this.$refs.memberPickerModal.contains(e.target)) this.closeModal();
     },
     addMember(member) {
-      const members = JSON.parse(
-        JSON.stringify(this.task.members)
-      )
-      members.push(JSON.parse(JSON.stringify(member)))
-      this.$emit('update', {
+      const members = JSON.parse(JSON.stringify(this.task.members));
+      members.push(JSON.parse(JSON.stringify(member)));
+      this.$emit("update", {
         cmpType: `member-picker`,
         members,
         task: this.task,
-      })
-      this.addMembersMode = !this.addMembersMode
+      });
+      this.addMembersMode = !this.addMembersMode;
     },
   },
-}
+};
 </script>

@@ -1,9 +1,10 @@
 .tag-picker-col {
   text-align: center;
   // border: 1px white solid;
+  width: 150px;
   position: relative;
   .tag-picker-val {
-    width: 100px;
+    min-width: 100px;
     display: inline-block;
     justify-content: space-between;
   }

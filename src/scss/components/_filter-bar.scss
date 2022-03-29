@@ -8,6 +8,7 @@
   button {
     @include btn();
     color: $main-task-text-gray;
+    margin: 0 6px;
   }
   .new-item-btn {
     background-color: $primary-blue;
