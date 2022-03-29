@@ -4,14 +4,21 @@
       <fa icon="circle-plus" />
       <input type="file" @change="handleFile" hidden />
     </label>
+    <span v-for="file in task.files" :key="file" class="file-preview">
+      <img :src="file" alt />
+    </span>
   </div>
 </template>
 
 <script>
-  import {uploadFile} from '../../services/files-upload-service.js';
+import { uploadFile } from '../../services/files-upload-service.js';
 
 export default {
   name: 'file-picker',
+  props: {
+    task: Object,
+    groupId: String,
+  },
   data() {
     return {
       isHover: false,
@@ -37,7 +44,14 @@ export default {
     async onUploadFile(file) {
       console.log(file);
       const res = await uploadFile(file);
-      console.log(res);
+      const files = JSON.parse(JSON.stringify(this.task.files))
+      files.push(res.url)
+      // console.log(this.task);
+      this.$emit("update", {
+        cmpType: `file-picker`,
+        files,
+        task: this.task,
+      });
       // this.$emit('save', res.url);
       // this.isLoading = false;
     },

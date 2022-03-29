@@ -460,10 +460,10 @@ export default {
 
           break
         case 'file-picker':
+          task.files = data.files
           break
         case 'member-picker':
           task.members = data.members
-
           break
         case 'priority-picker':
           task.priority = data.val
