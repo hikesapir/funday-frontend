@@ -4,7 +4,7 @@
   color: $group-header-gray;
   margin-bottom: 30px;
 
-  cursor: pointer;
+  // cursor: pointer;
   width: 100%;
   .fa-grip-vertical {
     color: $main-gray;
@@ -189,8 +189,6 @@
     }
   }
 }
-
-
 
 .task-and-side-indicator {
   display: flex;

@@ -1,17 +1,35 @@
 .add-task {
+  cursor: pointer;
   display: flex;
-  width: 100%;
+  // justify-content: left;
+  background-color: white;
+  opacity: 0.8;
   position: sticky;
+  left: 46px;
+  z-index: 10;
+  overflow: unset;
+  padding-right: 8px;
+  // width: 100%;
+
   .left-indicator-inner {
-    width: 8px;
+    width: 7px;
     display: inline-block;
     transition: opacity 0.1s ease;
   }
   form {
     display: flex;
-    width: 100%;
+    // width: 100%;
     justify-content: space-between;
-
+    transform: translate(0);
+    position: sticky;
+    // border-left: 7px solid;
+    .right-indicator-inner {
+      // width: 38px;
+      border-right: 8px $main-task-end-line solid;
+      background-color: $main-task-gray;
+      border-left: 1px $main-white solid;
+      border-bottom: 1px $main-white solid;
+    }
     button {
       opacity: 0;
       pointer-events: none;
@@ -21,15 +39,15 @@
       transition: opacity 0.1s ease;
       padding: 0 12px;
       outline: none;
-      border: 0.5px solid $primary-blue;
     }
     button.focus {
       opacity: 1;
       pointer-events: all;
     }
     input {
-      margin-left: 1px;
+      // margin-left: 1px;
       flex-basis: 100%;
+      width: 1203px;
       height: 35px;
       padding-left: 20px;
       &:hover {
@@ -37,7 +55,17 @@
       }
       &:focus {
         @include blue-focus;
+        width: 1155px;
       }
     }
+  }
+
+  .task-menu-arrow {
+    // background-color: aqua;
+    position: absolute;
+    width: 46px;
+    left: -46px;
+    height: 100%;
+    display: flex;
   }
 }

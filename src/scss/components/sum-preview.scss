@@ -1,12 +1,16 @@
 .sum-preview {
+  > * {
+    border-right: 1px solid $main-white;
+  }
   display: flex;
   height: 35px;
   background-color: $main-task-gray;
   align-self: center;
   align-items: center;
   margin-bottom: 20px;
-  transform: translate(334px);
+  transform: translate(336px);
   width: 836px;
+  cursor: pointer;
 
   .member-sum-sum {
     display: flex;
@@ -31,7 +35,7 @@
   .tags-sum-preview {
     text-align: center;
     display: inline-block;
-    width: 140px;
+    width: 150px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -39,8 +43,9 @@
     line-height: 24px;
 
     .tags-display {
-      display: inline-block;
-      margin: 2px;
+      padding: 4px;
+      // display: inline-block;
+      // margin: 2px;
     }
   }
 

@@ -35,9 +35,16 @@
       class="context-modal"
     >
       <div class="small-name-preview">
-        <div class="member-name" v-for="(member, idx) in members" :key="member.id">
+        <div
+          class="member-name"
+          v-for="(member, idx) in members"
+          :key="member.id"
+        >
           <span>{{ member.fullname }}</span>
-          <i @click="removeFormTask(idx)" class="fa-solid fa-circle-xmark"></i>
+          <i
+            @click="removeFormTask(idx)"
+            class="fa-solid fa-circle-xmark"
+          ></i>
         </div>
       </div>
 
@@ -93,7 +100,6 @@ export default {
       var list = this.task.members
       list.shift()
       list = list.reduce((acc, member) => {
-        console.log('member,acc', member, acc)
         acc.push(member.fullname)
         return acc
       }, [])
@@ -144,7 +150,13 @@ export default {
       this.addMembersMode = !this.addMembersMode
     },
     removeFormTask(idx) {
+<<<<<<< HEAD
       var members = JSON.parse(JSON.stringify(this.task.members));
+=======
+      var members = JSON.parse(
+        JSON.stringify(this.task.members)
+      )
+>>>>>>> 34bb7b0a1b49893824cd017809a57cd1d7edc00e
       // const idx = members.findIndex(member => member._id === id);
       members.splice(idx, 1)
       this.$emit('update', {
