@@ -100,7 +100,6 @@ export default {
       var list = this.task.members
       list.shift()
       list = list.reduce((acc, member) => {
-        console.log('member,acc', member, acc)
         acc.push(member.fullname)
         return acc
       }, [])
