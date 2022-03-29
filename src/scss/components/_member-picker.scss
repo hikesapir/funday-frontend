@@ -3,7 +3,7 @@
   text-align: center;
   justify-content: space-between;
   position: relative;
-  border: 1px white solid;
+  // border: 1px white solid;
 
   .add-member-btn {
     font-size: 14px;
@@ -73,8 +73,7 @@
     }
   }
 
-
-  .small-name-preview{
+  .small-name-preview {
     position: relative;
     width: 100%;
     display: flex;
@@ -82,7 +81,7 @@
     justify-content: flex-start;
     padding: 2px 2px 0;
     z-index: 1;
-    .member-name{
+    .member-name {
       display: flex;
       align-items: center;
       margin: 4px;
@@ -95,7 +94,7 @@
       box-sizing: content-box;
       padding: 0 5px;
       gap: 8px;
-      span{
+      span {
         flex-shrink: 1;
         min-width: 0;
         text-overflow: ellipsis;
@@ -104,6 +103,4 @@
       }
     }
   }
-
-
 }

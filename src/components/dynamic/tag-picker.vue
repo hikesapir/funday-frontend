@@ -12,18 +12,9 @@
       <span class="tag-text"> #{{ tag.txt }}</span>
     </div>
 
-    <!-- <div v-else class="tag-picker-val">
-      <div
-        v-for="tag in tagsForDisplay"
-        :key="tag.txt"
-        :style="{ color: tag.color }"
-      >
-        <span class="tag-text"> #{{ tag.txt }}</span>
-      </div> -->
     <div v-if="!isMoreThanThree" class="small-number">
       +{{ task.tags.length - 2 }}
     </div>
-    <!-- </div> -->
     <div v-show="isModalOpen" ref="tagModal" class="tag-modal">
       <div class="add-tags">
         <input
