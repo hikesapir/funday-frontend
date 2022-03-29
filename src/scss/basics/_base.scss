@@ -82,9 +82,14 @@ ul {
   background: #b2b2b2;
 }
 
-.smooth-dnd-container.vertical > .smooth-dnd-draggable-wrapper {
+div.smooth-dnd-container.vertical
+  > div.smooth-dnd-draggable-wrapper {
   overflow: unset;
   display: block;
+}
+.smooth-dnd-container.horizontal
+  > .smooth-dnd-draggable-wrapper {
+  overflow: unset;
 }
 
 .white-link {

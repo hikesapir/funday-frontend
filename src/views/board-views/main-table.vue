@@ -8,7 +8,15 @@
         drag-class="drag-group"
         drag-handle-selector=".drag-handle"
       >
-        <Draggable v-for="group in board?.groups" :key="group.id">
+        <Draggable
+          v-for="group in board?.groups"
+          :key="group.id"
+          style="
+             {
+              overflow: 'unset';
+            }
+          "
+        >
           <board-group
             :group="JSON.parse(JSON.stringify(group))"
             :cmpsOrder="board?.cmpsOrder"
@@ -22,11 +30,11 @@
 </template>
 
 <script>
-import { Container, Draggable } from "vue3-smooth-dnd";
-import boardGroup from "../../components/board-group.vue";
+import { Container, Draggable } from 'vue3-smooth-dnd'
+import boardGroup from '../../components/board-group.vue'
 
 export default {
-  name: "main-table",
+  name: 'main-table',
   props: {
     board: Object,
   },
@@ -37,18 +45,18 @@ export default {
   },
   computed: {
     isDraggingGroups() {
-      return this.$store.getters.groupDragMode;
+      return this.$store.getters.groupDragMode
     },
   },
   methods: {
     onDrop(dropResult) {
       this.$store.dispatch({
-        type: "changeOrder",
+        type: 'changeOrder',
         dropResult,
         entities: this.board.groups,
-        entityType: "groups",
-      });
+        entityType: 'groups',
+      })
     },
   },
-};
+}
 </script>
