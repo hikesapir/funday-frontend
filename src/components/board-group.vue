@@ -114,8 +114,13 @@
 import taskPreview from "./task-preview.vue";
 import sumPreview from "./sum-preview.vue";
 import { Container, Draggable } from "vue3-smooth-dnd";
-
 import addTask from "./add-task.vue";
+
+import {
+  socketService,
+  SOCKET_EMIT_TASK_ADD,
+} from "../services/socket-service.js";
+
 export default {
   name: "board-group",
   props: {
@@ -151,16 +156,6 @@ export default {
     isDraggingGroups() {
       return this.$store.getters.groupDragMode;
     },
-    // groupMenuStyle() {
-    //   return {
-    //     color: this.isHoverGroupMenu
-    //       ? this.group.style?.color
-    //       : '#f6f7fb',
-    //     outline: this.isHoverGroupMenu
-    //       ? `2px solid ${this.group.style?.color}`
-    //       : 'none',
-    //   }
-    // },
   },
   methods: {
     setSortBy(sortBy) {

@@ -1,12 +1,26 @@
 .tag-picker-col {
   text-align: center;
-  // border: 1px white solid;
   width: 150px;
   position: relative;
+  display: flex;
+  border-right: $main-white;
+  // justify-content: center;
+  // align-items: center;
+
+  justify-content: center;
   .tag-picker-val {
-    min-width: 100px;
-    // display: inline-block;
-    // justify-content: space-between;
+    // width: 100px;
+    // padding: 0 5px;
+    // // display: inline-block;
+    // margin-left: 2px;
+    text-align: center;
+    height: 100%;
+    padding: 0 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
   }
 
   .tag-modal {
@@ -71,10 +85,22 @@
     }
   }
 
-  .add-tag {
-    opacity: 0;
+  .tag-text {
     display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 40px;
+  }
+
+  .add-tag {
+    position: absolute;
+    left: 5px;
+    top: 10px;
+    opacity: 0;
+    display: flex;
     flex-basis: 1;
+    z-index: 5;
   }
   &:hover {
     .add-tag {

@@ -1,17 +1,29 @@
 <template>
-  <section class="tag-picker">
+  <section class="tag-picker-col">
     <div @click.stop="openModal" class="add-tag">
       <fa icon="circle-plus" />
     </div>
     <div
-      @click.stop="openModal"
-      v-for="tag in task.tags"
-      :key="tag"
+      v-for="tag in tagsForDisplay"
+      :key="tag.txt"
       class="tag-picker-val"
       :style="{ color: tag.color }"
     >
-      #{{ tag.txt }}
+      <span class="tag-text"> #{{ tag.txt }}</span>
     </div>
+
+    <!-- <div v-else class="tag-picker-val">
+      <div
+        v-for="tag in tagsForDisplay"
+        :key="tag.txt"
+        :style="{ color: tag.color }"
+      >
+        <span class="tag-text"> #{{ tag.txt }}</span>
+      </div> -->
+    <div v-if="!isMoreThanThree" class="small-number">
+      +{{ task.tags.length - 2 }}
+    </div>
+    <!-- </div> -->
     <div v-show="isModalOpen" ref="tagModal" class="tag-modal">
       <div class="add-tags">
         <input
@@ -59,6 +71,14 @@ export default {
     };
   },
   computed: {
+    isMoreThanThree() {
+      return this.task.tags.length < 3;
+    },
+    tagsForDisplay() {
+      if (this.task.tags.length >= 3) {
+        return this.task.tags.slice(0, 2);
+      } else return this.task.tags;
+    },
     boardTags() {
       let groups = JSON.parse(
         JSON.stringify(this.$store.getters.boardData.boardMapByGroups)

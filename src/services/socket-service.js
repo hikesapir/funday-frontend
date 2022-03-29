@@ -4,6 +4,7 @@ export const SOCKET_EMIT_BOARD_WATCH = 'board-watch'
 export const SOCKET_EVENT_TASK_ADDED = 'task-added'
 export const SOCKET_EMIT_TASK_WATCH = 'task-watch'
 export const SOCKET_EMIT_TASK_UPDATED = 'update-task'
+export const SOCKET_EMIT_TASK_ADD = 'add-task'
 export const SOCKET_EVENT_USER_UPDATED = 'user-updated'
 // export const SOCKET_EVENT_REVIEW_ADDED = 'review-added';
 // export const SOCKET_EVENT_REVIEW_ABOUT_YOU = 'review-about-you';

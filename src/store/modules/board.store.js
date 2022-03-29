@@ -9,6 +9,7 @@ import {
   SOCKET_EMIT_BOARD_WATCH,
   SOCKET_EVENT_TASK_ADDED,
   SOCKET_EMIT_TASK_UPDATED,
+  SOCKET_EMIT_TASK_ADD,
 } from '../../services/socket-service.js'
 
 export default {
@@ -518,13 +519,18 @@ export default {
             groupId,
             task
           )
-          commit({
-            type: 'addTask',
-            groupIdx: idx,
-            savedTask,
-          })
-        }
-      } catch (err) {
+          
+          socketService.emit(SOCKET_EMIT_TASK_ADD,
+            { groupId,
+              task:savedTask})
+              console.log(SOCKET_EMIT_TASK_ADD)
+              commit({
+                type: 'addTask',
+                groupIdx: idx,
+                savedTask,
+              })
+            }
+            } catch (err) {
         console.log('Couldnt save task')
       }
     },

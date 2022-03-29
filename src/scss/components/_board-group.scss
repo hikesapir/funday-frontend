@@ -111,6 +111,13 @@
 .priority-picker-col {
   width: 140px;
   text-align: center;
+
+  .small-number {
+    position: absolute;
+    right: 1px;
+    top: 5px;
+    z-index: 5;
+  }
 }
 
 .th-header {
