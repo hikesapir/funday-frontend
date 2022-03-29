@@ -187,8 +187,8 @@ export default {
     },
   },
   mutations: {
-    setTaskUpdates(state, {isOpen}) {
-      state.isTaskUpdatesOpen = isOpen 
+    setTaskUpdates(state, { isOpen }) {
+      state.isTaskUpdatesOpen = isOpen
     },
     setSortBy(state, { sortBy }) {
       // console.log(sortBy)
@@ -203,11 +203,11 @@ export default {
         case 'status-picker':
           board.groups.forEach(
             (group, idx) =>
-              (board.groups[idx].tasks = group.tasks.sort(
-                (t1, t2) =>
-                  t1.status.localeCompare(t2.status) *
-                  state.sortBy.dir
-              ))
+            (board.groups[idx].tasks = group.tasks.sort(
+              (t1, t2) =>
+                t1.status.localeCompare(t2.status) *
+                state.sortBy.dir
+            ))
           )
           break
         case 'priority-picker':
@@ -318,7 +318,8 @@ export default {
         (task) => task.id === updatedTask.id
       )
       if (taskIdx === -1) return
-      state.boardForDisplay.groups[groupIdx].tasks[
+      // state.boardForDisplay.groups[groupIdx].tasks[
+      state.board.groups[groupIdx].tasks[
         taskIdx
       ] = updatedTask
     },
@@ -492,6 +493,8 @@ export default {
           groupId,
           updatedTask: task,
         })
+        commit({ type: 'onSetFilter', filterBy: state.filterBy })
+
         socketService.emit(SOCKET_EMIT_TASK_UPDATED, {
           groupId,
           task,
@@ -699,7 +702,7 @@ export default {
           newOrder: board.cmpsOrder,
         })
         await boardService.saveBoard(board)
-      } catch (err) {}
+      } catch (err) { }
     },
     async addUpdate(
       { state, commit },
