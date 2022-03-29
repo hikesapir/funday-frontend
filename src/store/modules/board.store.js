@@ -2,8 +2,9 @@
 import boardService from '../../services/board-service.js'
 import router from '../../router'
 import { utilService } from '../../services/util-service.js'
+import userService from '../../services/user-service.js'
 import { storeKey } from 'vuex'
-import  {socketService} from '../../services/socket-service.js'
+import { socketService } from '../../services/socket-service.js'
 // import { socketService, SOCKET_EVENT_TASK_ADDED } from '../../services/socket.service.js'
 
 export default {
@@ -22,7 +23,7 @@ export default {
     },
     boardMapByGroups: [],
     isModalOpen: false,
-    TaskForDisplay: null
+    taskForDisplay: null
   },
   getters: {
     boards({ boards }) {
@@ -172,8 +173,8 @@ export default {
     sortBy({ sortBy }) {
       return sortBy
     },
-    TaskFordisplay({ TaskForDisplay }) {
-      return TaskForDisplay
+    taskForDisplay({ taskForDisplay }) {
+      return taskForDisplay
     }
   },
   mutations: {
@@ -341,35 +342,23 @@ export default {
     },
     addUpdate(state, { txt, taskId, boardId, groupId }) {
       console.log('hey');
-      console.log(this.$store.getters.user);
-      // const { _id, fullname, imgUrl } = state.user
-      // const update = {
-      //   id: utilService.makeId(8),
-      //   txt,
-      //   createdAt: Date.now(),
-      //   byMember: { _id, fullname, imgUrl }
-      // }
-      // const board = await getById(boardId)
-      // const group = board.groups.find(
-      //   (currGroup) => currGroup.id === groupId
-      // )
-      // const task = group.tasks.find(
-      //   (task) => task.id === taskId
-      // )
-      // task.updates.unshift(update)
+      const { _id, fullname, imgUrl } = userService.getLoggedinUser()
+      const update = {
+        id: utilService.makeId(8),
+        txt,
+        createdAt: Date.now(),
+        byMember: { _id, fullname, imgUrl }
+      }
+      state.taskForDisplay.updates.unshift(update)
     },
     setTaskFordisplay(state, { id, groupId, taskId }) {
-
-      const board = state.boards.find(
-        (board) => board._id === id
-      )
-      const group = board.groups.find(
+      const group = state.board.groups.find(
         (currGroup) => currGroup.id === groupId
       )
       const task = group.tasks.find(
         (task) => task.id === taskId
       )
-      state.TaskForDisplay = task
+      state.taskForDisplay = task
     }
   },
   actions: {
@@ -680,7 +669,7 @@ export default {
     },
     async addUpdate({ state, commit }, { txt, taskId, boardId, groupId }) {
       try {
-        // commit({ type: 'addUpdate', txt, taskId, boardId, groupId })
+        commit({ type: 'addUpdate', txt, taskId, boardId, groupId })
         await boardService.addUpdate(txt, taskId, boardId, groupId)
       } catch (err) {
         console.log(

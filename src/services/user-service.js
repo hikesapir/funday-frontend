@@ -4,15 +4,15 @@ import { authService } from './auth-service'
 export default {
   getLoggedinUser,
 }
-const USER_KEY = 'loggedInUser'
+const USER_KEY = 'loggedinUser'
 const USER_URL = 'user/'
 
-const demoUser={
-  username:'shali',
-  password:'123'
+const demoUser = {
+  username: 'shali',
+  password: '123'
 }
 
-const loggedUser = getLoggedinUser() 
+const loggedUser = getLoggedinUser()
 
 export const userService = {
   query,
@@ -69,8 +69,10 @@ async function remove(userId) {
 
 
 function getLoggedinUser() {
-  return (
-    JSON.parse(sessionStorage.getItem(USER_KEY)) || authService.login(demoUser)
-  )
+  var user = JSON.parse(sessionStorage.getItem(USER_KEY))
+  if (!user) {
+    authService.login(demoUser)
+  }
+  return JSON.parse(sessionStorage.getItem(USER_KEY))
 }
 
