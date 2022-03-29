@@ -19,11 +19,11 @@
     top: 0;
     z-index: 20;
     display: flex;
-    width: 100%;
+    // width: 100%;
     .table-head {
       display: flex;
       background-color: #fff;
-      border-bottom: 1px $main-gray solid;
+      // border-bottom: 1px $main-gray solid;
       font-size: 14px;
       text-align: center;
       .context-modal {
@@ -92,6 +92,10 @@
 }
 
 .th-title {
+  position: sticky;
+  left: 46px;
+  overflow: hidden;
+
   width: 334px;
   text-align: left;
   font-size: 18px;
@@ -109,7 +113,7 @@
   text-align: center;
 }
 
-.group-th {
+.th-header {
   position: relative;
   cursor: grab;
   .cols-drag-handle {
