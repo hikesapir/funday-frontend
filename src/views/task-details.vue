@@ -1,7 +1,7 @@
 <template>
   <section v-if="task" class="task-details">
     <header>
-      <button @click="this.$router.push(`/boards/${boardId}`)">X</button>
+      <button @click="closeTaskDetails">X</button>
       <div class="title-wrapper">
         <div class="title">
           <h2>{{ task.title }}</h2>
@@ -45,11 +45,11 @@
 </template>
 
 <script>
-import boardService from "../services/board-service.js";
-import taskUpdate from "../components/pulses/task-update.vue";
+import boardService from '../services/board-service.js'
+import taskUpdate from '../components/pulses/task-update.vue'
 
 export default {
-  name: "task-details",
+  name: 'task-details',
   props: [],
   emits: [],
   components: {
@@ -58,7 +58,7 @@ export default {
   data() {
     return {
       // task: null,
-    };
+    }
   },
   async created() {
     // const { id, groupId, taskId } = this.$route.params;
@@ -66,41 +66,53 @@ export default {
   },
   mounted() {},
   methods: {
+    closeTaskDetails() {
+      this.$store.commit({
+        type: 'setTaskUpdates',
+        isOpen: false,
+      })
+      this.$router.push(`/boards/${this.boardId}`)
+    },
     updateTask(txt) {
       // console.log("get");
       this.$store.dispatch({
-        type: "addUpdate",
+        type: 'addUpdate',
         txt,
         taskId: this.params.taskId,
         boardId: this.params.id,
         groupId: this.params.groupId,
-      });
+      })
     },
   },
   computed: {
     boardId() {
-      return this.$route.params.id;
+      return this.$route.params.id
     },
     params() {
-      return this.$route.params;
+      return this.$route.params
     },
-    task(){
+    task() {
       // console.log(this.$store.getters.taskForDisplay);
-      return this.$store.getters.taskForDisplay;
-    }
+      return this.$store.getters.taskForDisplay
+    },
   },
   unmounted() {},
   watch: {
     params: {
       async handler() {
-        const { id, groupId, taskId } = this.$route.params;
-        if (!taskId) return;
-        this.$store.commit({ type: "setTaskFordisplay", id, groupId, taskId });
+        const { id, groupId, taskId } = this.$route.params
+        if (!taskId) return
+        this.$store.commit({
+          type: 'setTaskFordisplay',
+          id,
+          groupId,
+          taskId,
+        })
         // this.task = this.$store.getters.taskFordisplay;
         // this.task = await boardService.getTaskById(id, groupId, taskId)
       },
       immediate: true,
     },
   },
-};
+}
 </script>
