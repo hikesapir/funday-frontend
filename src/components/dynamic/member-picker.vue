@@ -17,9 +17,9 @@
 
     <div v-show="addMembersMode" ref="memberPickerModal" class="context-modal">
       <div class="small-name-preview">
-        <div class="member-name" v-for="member in members" :key="member.id">
+        <div class="member-name" v-for="(member, idx) in members" :key="member.id">
           <span>{{ member.fullname }}</span>
-          <i @click="removeFormTask(member._id)" class="fa-solid fa-circle-xmark"></i>
+          <i @click="removeFormTask(idx)" class="fa-solid fa-circle-xmark"></i>
         </div>
       </div>
 
@@ -94,9 +94,9 @@ export default {
       });
       this.addMembersMode = !this.addMembersMode;
     },
-    removeFormTask(id) {
+    removeFormTask(idx) {
       var members = JSON.parse(JSON.stringify(this.task.members));
-      const idx = members.findIndex(member => member._id === id);
+      // const idx = members.findIndex(member => member._id === id);
       members.splice(idx, 1)
       this.$emit("update", {
         cmpType: `member-picker`,

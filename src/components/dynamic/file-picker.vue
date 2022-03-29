@@ -1,9 +1,21 @@
 <template>
-  <div @mouseover="mouseOver" @mouseleave="mouseLeave" class="filer-picker">
-    <label class="btn" v-if="isHover">
-      <fa icon="circle-plus" />
-      <input type="file" @change="handleFile" hidden />
-    </label>
+  <div class="filer-picker" @mouseover="mouseOver" @mouseleave="mouseLeave">
+    <span class="btn" v-if="isHover" :class="haveSome">
+      <fa icon="circle-plus" @click.stop="openModal" />
+    </span>
+    <div v-show="isModalOpen" ref="contextModal" class="context-modal">
+      <div class="show-files" v-for="(file, idx) in files" :key="file">
+        <span>
+          <img :src="file" />
+        </span>
+        <i @click="removeFormTask(idx)" class="fa-solid fa-circle-xmark"></i>
+      </div>
+      <div class="spacer"></div>
+      <label class="upload-select">
+        Upload File
+        <input type="file" @change="handleFile" hidden />
+      </label>
+    </div>
     <span v-for="file in task.files" :key="file" class="file-preview">
       <img :src="file" alt @click="openNewTab(file)" />
     </span>
@@ -21,12 +33,27 @@ export default {
   },
   data() {
     return {
+      isModalOpen: false,
       isHover: false,
       val: null
     }
   },
 
   methods: {
+    openModal() {
+      this.isModalOpen = true;
+      document.body.addEventListener("click", this.isClosingModal);
+    },
+    closeModal() {
+      this.isModalOpen = false;
+      document.body.removeEventListener("click", this.isClosingModal);
+    },
+    isClosingModal(e) {
+      console.log(e);
+
+      e.stopPropagation();
+      if (!this.$refs.contextModal.contains(e.target)) this.closeModal();
+    },
     openNewTab(file) {
       window.open(
         file
@@ -61,6 +88,25 @@ export default {
       });
       // this.$emit('save', res.url);
       // this.isLoading = false;
+    },
+    removeFormTask(idx) {
+      const files = JSON.parse(JSON.stringify(this.task.files))
+      files.splice(idx, 1)
+      this.$emit("update", {
+        cmpType: `file-picker`,
+        files,
+        task: this.task,
+      });
+    }
+
+  },
+  computed: {
+    files() {
+      return this.task.files;
+    },
+    haveSome() {
+      // console.log(this.task.files.length);
+      return (this.task.files.length) ? 'haveSome' : '';
     },
   }
 
