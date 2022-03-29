@@ -5,7 +5,7 @@
       <input type="file" @change="handleFile" hidden />
     </label>
     <span v-for="file in task.files" :key="file" class="file-preview">
-      <img :src="file" alt />
+      <img :src="file" alt @click="openNewTab(file)" />
     </span>
   </div>
 </template>
@@ -27,6 +27,12 @@ export default {
   },
 
   methods: {
+    openNewTab(file) {
+      window.open(
+        file
+      )
+      this.openModal = false
+    },
     mouseOver() {
       this.isHover = true
     },
@@ -45,8 +51,9 @@ export default {
       console.log(file);
       const res = await uploadFile(file);
       const files = JSON.parse(JSON.stringify(this.task.files))
-      files.push(res.url)
-      // console.log(this.task);
+      console.log(res);
+      files.push(res)
+      console.log(this.task);
       this.$emit("update", {
         cmpType: `file-picker`,
         files,
