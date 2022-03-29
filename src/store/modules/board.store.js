@@ -6,8 +6,8 @@ import userService from '../../services/user-service.js'
 import { storeKey } from 'vuex'
 import {
   socketService,
-  SOCKET_EMIT_BOARD_WATCH,
-  SOCKET_EVENT_TASK_ADDED,
+  SOCKET_EMIT_ADD_UPDATE,
+  SOCKET_EMIT_EDIT_CMPS_ORDER,
   SOCKET_EMIT_TASK_UPDATED,
   SOCKET_EMIT_REMOVE_TASK,
   SOCKET_EMIT_TASK_ADD,
@@ -704,15 +704,19 @@ export default {
       )
       board.cmpsOrder[idx].preName = newCmpTitle
       try {
+        await boardService.saveBoard(board)
         commit({
           type: 'setCmpsOrder',
           newOrder: board.cmpsOrder,
         })
-        await boardService.saveBoard(board)
+        socketService.emit(
+          SOCKET_EMIT_EDIT_CMPS_ORDER,
+          board.cmpsOrder
+        )
       } catch (err) {}
     },
     async addUpdate(
-      { state, commit },
+      { commit },
       { txt, taskId, boardId, groupId }
     ) {
       try {
@@ -729,6 +733,12 @@ export default {
           boardId,
           groupId
         )
+        socketService.emit(SOCKET_EMIT_ADD_UPDATE, {
+          taskId,
+          boardId,
+          groupId,
+          txt,
+        })
       } catch (err) {
         console.log('addUpdate: Had problems')
       }

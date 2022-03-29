@@ -190,27 +190,6 @@
   }
 }
 
-.file-picker-col {
-  text-align: center;
-  .btn {
-    @include btn();
-    font-size: 16px;
-    color: $primary-blue;
-    &:hover {
-      background-color: rgba(255, 255, 255, 0);
-    }
-  }
-  .file-preview {
-    height: 24px;
-    width: 17px;
-    img {
-      object-fit: cover;
-      height: 24px;
-      width: 17px;
-    }
-  }
-}
-
 .task-and-side-indicator {
   display: flex;
   height: 35px;

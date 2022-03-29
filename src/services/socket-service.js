@@ -1,15 +1,24 @@
 import io from 'socket.io-client'
 
+// WATCH
 export const SOCKET_EMIT_BOARD_WATCH = 'board-watch'
 export const SOCKET_EMIT_TASK_WATCH = 'task-watch'
+
+// TASK CRUD
 export const SOCKET_EMIT_TASK_UPDATED = 'update-task'
 export const SOCKET_EMIT_TASK_ADD = 'add-task'
 export const SOCKET_EMIT_REMOVE_TASK = 'remove-task'
 export const SOCKET_EVENT_TASK_ADDED = 'task-added'
 export const SOCKET_EVENT_TASK_REMOVED = 'task-removed'
 export const SOCKET_EVENT_USER_UPDATED = 'user-updated'
-// export const SOCKET_EVENT_REVIEW_ADDED = 'review-added';
-// export const SOCKET_EVENT_REVIEW_ABOUT_YOU = 'review-about-you';
+// CMPS ORDER AND RENAMING
+export const SOCKET_EMIT_EDIT_CMPS_ORDER = 'edit-cmps-order'
+export const SOCKET_EVENT_CMPS_ORDER_EDITED =
+  'cmps-order-edited'
+
+// Updates
+export const SOCKET_EMIT_ADD_UPDATE = 'add-update'
+export const SOCKET_EVENT_UPDATE_ADDED = 'update-added'
 
 const baseUrl =
   process.env.NODE_ENV === 'production'
