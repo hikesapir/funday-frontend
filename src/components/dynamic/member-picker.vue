@@ -1,5 +1,9 @@
 <template>
-  <div class="member-picker" @mouseover="isHover = true" @mouseleave="isHover = false">
+  <div
+    class="member-picker"
+    @mouseover="isHover = true"
+    @mouseleave="isHover = false"
+  >
     <div v-if="membersLength < 3">
       <img
         v-for="member in members"
@@ -11,20 +15,45 @@
     </div>
     <div v-else>
       <img :src="firstMemberPic" />
-      <div class="small-number">+{{ membersLength - 1 }}</div>
+      <div
+        class="small-number"
+        :data-title="restOfMemberList"
+      >
+        +{{ membersLength - 1 }}
+      </div>
     </div>
-    <fa v-if="isHover" icon="circle-plus" class="add-member-btn" @click.stop="openModal" />
+    <fa
+      v-if="isHover"
+      icon="circle-plus"
+      class="add-member-btn"
+      @click.stop="openModal"
+    />
 
-    <div v-show="addMembersMode" ref="memberPickerModal" class="context-modal">
+    <div
+      v-show="addMembersMode"
+      ref="memberPickerModal"
+      class="context-modal"
+    >
       <div class="small-name-preview">
-        <div class="member-name" v-for="member in members" :key="member.id">
+        <div
+          class="member-name"
+          v-for="member in members"
+          :key="member.id"
+        >
           <span>{{ member.fullname }}</span>
-          <i @click="removeFormTask(member._id)" class="fa-solid fa-circle-xmark"></i>
+          <i
+            @click="removeFormTask(member._id)"
+            class="fa-solid fa-circle-xmark"
+          ></i>
         </div>
       </div>
 
       <label>
-        <input type="text" placeholder="Enter name" v-model="filterBy" />
+        <input
+          type="text"
+          placeholder="Enter name"
+          v-model="filterBy"
+        />
       </label>
 
       <div class="relative">
@@ -33,9 +62,15 @@
         </div>
       </div>
 
-      <span class="member-preview flex" v-for="member in membersList" :key="member">
+      <span
+        class="member-preview flex"
+        v-for="member in membersList"
+        :key="member"
+      >
         <img :src="member.imgUrl" />
-        <span @click.stop="addMember(member)">{{ member.fullname }}</span>
+        <span @click.stop="addMember(member)">{{
+          member.fullname
+        }}</span>
       </span>
     </div>
   </div>
@@ -43,67 +78,92 @@
 
 <script>
 export default {
-  name: "member-picker",
+  name: 'member-picker',
   props: {
     task: Object,
   },
   data() {
     return {
       addMembersMode: false,
-      filterBy: "",
+      filterBy: '',
       isHover: false,
-    };
+    }
   },
   computed: {
     membersLength() {
-      return this.task.members.length;
+      return this.task.members.length
     },
     firstMemberPic() {
-      return this.task.members[0].imgUrl;
+      return this.task.members[0].imgUrl
+    },
+    restOfMemberList() {
+      var list = this.task.members
+      list.shift()
+      list = list.reduce((acc, member) => {
+        console.log('member,acc', member, acc)
+        acc.push(member.fullname)
+        return acc
+      }, [])
+      return list.join(' ')
     },
     members() {
-      return this.task.members;
+      return this.task.members
     },
     membersList() {
-      var membersList = this.$store.getters.board.members;
-      const regex = new RegExp(this.filterBy, "i");
-      membersList = membersList.filter((member) => regex.test(member.fullname));
-      return membersList;
+      var membersList = this.$store.getters.board.members
+      const regex = new RegExp(this.filterBy, 'i')
+      membersList = membersList.filter((member) =>
+        regex.test(member.fullname)
+      )
+      return membersList
     },
   },
   methods: {
     openModal() {
-      this.addMembersMode = true;
-      document.body.addEventListener("click", this.isClosingModal);
+      this.addMembersMode = true
+      document.body.addEventListener(
+        'click',
+        this.isClosingModal
+      )
     },
     closeModal() {
-      this.addMembersMode = false;
-      document.body.removeEventListener("click", this.isClosingModal);
+      this.addMembersMode = false
+      document.body.removeEventListener(
+        'click',
+        this.isClosingModal
+      )
     },
     isClosingModal(e) {
-      e.stopPropagation();
-      if (!this.$refs.memberPickerModal.contains(e.target)) this.closeModal();
+      e.stopPropagation()
+      if (!this.$refs.memberPickerModal.contains(e.target))
+        this.closeModal()
     },
     addMember(member) {
-      const members = JSON.parse(JSON.stringify(this.task.members));
-      members.push(JSON.parse(JSON.stringify(member)));
-      this.$emit("update", {
+      const members = JSON.parse(
+        JSON.stringify(this.task.members)
+      )
+      members.push(JSON.parse(JSON.stringify(member)))
+      this.$emit('update', {
         cmpType: `member-picker`,
         members,
         task: this.task,
-      });
-      this.addMembersMode = !this.addMembersMode;
+      })
+      this.addMembersMode = !this.addMembersMode
     },
     removeFormTask(id) {
-      var members = JSON.parse(JSON.stringify(this.task.members));
-      const idx = members.findIndex(member => member._id === id);
+      var members = JSON.parse(
+        JSON.stringify(this.task.members)
+      )
+      const idx = members.findIndex(
+        (member) => member._id === id
+      )
       members.splice(idx, 1)
-      this.$emit("update", {
+      this.$emit('update', {
         cmpType: `member-picker`,
         members,
         task: this.task,
-      });
+      })
     },
   },
-};
+}
 </script>
