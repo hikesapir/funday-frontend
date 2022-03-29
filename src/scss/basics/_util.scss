@@ -3,18 +3,71 @@
   pointer-events: none;
 }
 
-.flex{
-  display: flex;
+/* use for any tag on your page */
+[data-title]:hover:after {
+  opacity: 1;
+  transition: all 0.1s ease 0.1s;
+  visibility: visible;
+}
+/* box for title text */
+[data-title]::after {
+  content: attr(data-title);
+  /* position for title view box */
+  position: absolute;
+  top: 50%;
+  left: 160%;
+  z-index: 40;
+  transform: translateY(-50%);
+  visibility: hidden;
+  white-space: nowrap;
+  /* stilization */
+  background-color: $main-text-gray;
+  color: white;
+  font-size: 14px;
+  padding: 8px 16px;
+  box-shadow: 1px 1px 3px #222222;
+  opacity: 0;
+  border-radius: 4px;
 }
 
-.relative{
+/* box for title text */
+[data-title]::before {
+  content: '';
+  opacity: 0;
+  visibility: hidden;
+  height: 12px;
+  width: 12px;
+  position: absolute;
+  background-color: $main-text-gray;
+  top: 35%;
+  left: 145%;
+  z-index: 40;
+  transform: translateY(-50%);
+  transform: rotate(45deg);
+}
+[data-title]:hover::before {
+  opacity: 1;
+  transition: all 0.1s ease 0.1s;
+  visibility: visible;
+  // transform: rotate3d(0, 0, 45deg);
+}
+
+[data-title] {
   position: relative;
 }
 
-.context-modal{
+.flex {
+  display: flex;
+}
+
+.relative {
+  position: relative;
+}
+
+.context-modal {
   padding: 8px;
   background-color: white;
-  box-shadow: 0px 0px 19px -4px rgba(0,0,0,0.48);
+  box-shadow: 0px 0px 19px -4px rgba(0, 0, 0, 0.48);
   position: absolute;
   left: 190px;
   top: -10px;
