@@ -35,22 +35,9 @@
       class="context-modal"
     >
       <div class="small-name-preview">
-<<<<<<< HEAD
         <div class="member-name" v-for="(member, idx) in members" :key="member.id">
           <span>{{ member.fullname }}</span>
           <i @click="removeFormTask(idx)" class="fa-solid fa-circle-xmark"></i>
-=======
-        <div
-          class="member-name"
-          v-for="member in members"
-          :key="member.id"
-        >
-          <span>{{ member.fullname }}</span>
-          <i
-            @click="removeFormTask(member._id)"
-            class="fa-solid fa-circle-xmark"
-          ></i>
->>>>>>> 8a570eaa9813f5595c8068c5661a75ffac529b91
         </div>
       </div>
 
