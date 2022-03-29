@@ -3,6 +3,7 @@ import boardService from '../../services/board-service.js'
 import router from '../../router'
 import { utilService } from '../../services/util-service.js'
 import { storeKey } from 'vuex'
+import  {socketService} from '../../services/socket-service.js'
 // import { socketService, SOCKET_EVENT_TASK_ADDED } from '../../services/socket.service.js'
 
 export default {
