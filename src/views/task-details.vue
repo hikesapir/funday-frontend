@@ -57,17 +57,17 @@ export default {
   },
   data() {
     return {
-      task: null,
+      // task: null,
     };
   },
   async created() {
-    const { id, groupId, taskId } = this.$route.params;
-    this.task = await boardService.getTaskById(id, groupId, taskId);
+    // const { id, groupId, taskId } = this.$route.params;
+    // this.task = await boardService.getTaskById(id, groupId, taskId);
   },
   mounted() {},
   methods: {
     updateTask(txt) {
-      console.log("get");
+      // console.log("get");
       this.$store.dispatch({
         type: "addUpdate",
         txt,
@@ -84,6 +84,10 @@ export default {
     params() {
       return this.$route.params;
     },
+    task(){
+      // console.log(this.$store.getters.taskForDisplay);
+      return this.$store.getters.taskForDisplay;
+    }
   },
   unmounted() {},
   watch: {
@@ -92,7 +96,7 @@ export default {
         const { id, groupId, taskId } = this.$route.params;
         if (!taskId) return;
         this.$store.commit({ type: "setTaskFordisplay", id, groupId, taskId });
-        this.task = this.$store.getters.taskFordisplay;
+        // this.task = this.$store.getters.taskFordisplay;
         // this.task = await boardService.getTaskById(id, groupId, taskId)
       },
       immediate: true,
