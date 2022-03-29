@@ -3,6 +3,7 @@ import boardService from '../../services/board-service.js'
 import router from '../../router'
 import { utilService } from '../../services/util-service.js'
 import { storeKey } from 'vuex'
+import  {socketService} from '../../services/socket-service.js'
 // import { socketService, SOCKET_EVENT_TASK_ADDED } from '../../services/socket.service.js'
 
 export default {
@@ -177,6 +178,7 @@ export default {
   },
   mutations: {
     setSortBy(state, { sortBy }) {
+      // console.log(sortBy)
       // state.sortBy = JSON.parse(JSON.stringify(sortBy))
       const board = JSON.parse(
         JSON.stringify(state.boardForDisplay)
@@ -204,11 +206,34 @@ export default {
             )
           )
           break
+        case 'tag-picker':
+          board.groups.forEach((group) =>
+            group.tasks.sort(
+              (t1, t2) => {
+                console.log(t1.tags[0].txt, 't1', t2.tags[0].txt, 't2')
+                if (!t1.tags[0].txt || !t2.tags[0].txt) return state.sortBy.dir
+
+                return t1.tags[0]?.txt.localeCompare(t2.tags[0]?.txt) *
+                  state.sortBy.dir
+              }
+            )
+          )
+          break
+        case 'member-picker':
+          board.groups.forEach((group) =>
+            group.tasks.sort(
+              (t1, t2) => {
+                if (!t1.members[0].fullname || !t2.members[0].fullname) return state.sortBy.dir
+                return t1.members[0]?.fullname.localeCompare(t2.members[0]?.fullname) *
+                  state.sortBy.dir
+              }
+            )
+          )
+          break
 
         default:
           return
       }
-
       state.sortBy.type = sortBy
       state.boardForDisplay = board
     },

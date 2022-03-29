@@ -11,7 +11,7 @@
   }
   &.status {
     &:before {
-      content: '';
+      content: "";
       transition: border-width 0.5s ease-in-out;
       border-style: solid;
       border-color: #d9d9d9 white;

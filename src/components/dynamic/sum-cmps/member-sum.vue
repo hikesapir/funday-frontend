@@ -1,9 +1,13 @@
 <template>
   <section class="members-sum">
     <div v-if="groupMembersLength < 3">
-      <p v-for="member in groupMembers" :key="member._id">
+      <div
+        v-for="member in groupMembers"
+        :key="member._id"
+        class="sum-members-display"
+      >
         <img :src="member.imgUrl" :alt="member.fullname" />
-      </p>
+      </div>
     </div>
     <div v-else>
       <img :src="firstMemberPic" />

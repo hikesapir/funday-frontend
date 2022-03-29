@@ -11,8 +11,11 @@
     margin-right: 10px;
   }
   .table-head-wrapper {
-    // FOR STICKY GROUP HEADER - ASK ASI ABOUT STICK-RELATIVE-ABSOLUTE RELATIONSHIP
-    // position: sticky;
+    // FOR STICKY GROUP HEADER - ASK ASI ABOUT STICK-RELATIVE-ABSOLUTE RELATIONSHIP ////
+    position: sticky;
+    left: 0;
+    overflow: unset;
+
     top: 0;
     z-index: 20;
     display: flex;
