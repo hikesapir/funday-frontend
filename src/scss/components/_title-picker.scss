@@ -9,7 +9,9 @@
   // for making the title picker column sticky
   // and overlay when scrolling to the right
   position: sticky;
-  left: 0;
+
+  left: 46px;
+
   z-index: 10;
   overflow: unset;
   padding-right: 8px;
@@ -99,11 +101,14 @@
 
   .task-menu-arrow {
     position: absolute;
-    width: 30px;
-    left: -30px;
+    width: 46px;
+    left: -46px;
     height: 100%;
     display: flex;
-    background-color: rgba(255, 255, 255, 0);
+
+    background-color: $main-white;
+    // background-color: rgba(255, 255, 255, 0);
+
     align-items: center;
 
     .open-context-btn {
@@ -115,6 +120,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      margin: auto;
       color: $main-text-gray;
     }
     // button {
