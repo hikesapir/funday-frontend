@@ -147,7 +147,7 @@
       </div>
       <div class="img-container">
         <img
-          src="https://ca.slack-edge.com/T02L3AYJGN4-U02RCRLV266-9da9dc85a37f-512"
+          src="https://res.cloudinary.com/mistertoysss/image/upload/v1648463489/funday%20must/vote_1_bkio4y.png"
         />
       </div>
     </nav>

@@ -8,10 +8,6 @@ const USER_KEY = 'loggedinUser'
 const USER_URL = 'user/'
 
 const demoUser = {
-  _id: 'u101',
-  imgUrl:
-    'https://ca.slack-edge.com/T02L3AYJGN4-U02RCRLV266-9da9dc85a37f-512',
-  fullname: 'Sharon',
   username: 'shali',
   password: '123',
 }
