@@ -1,6 +1,5 @@
 <template>
   <Chart :options="chartOptions" />
-  <!-- {{data}} -->
 </template>
 
 <script>
@@ -15,7 +14,9 @@ export default {
   data() {
     return {
       chartOptions: {
-        title: '',
+        title: {
+          text: 'Project progress'
+        },
         series: [
           {
             type: 'pie',

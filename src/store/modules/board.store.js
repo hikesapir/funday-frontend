@@ -56,6 +56,8 @@ export default {
 
       //Status calculation:
       const boardMapByGroups = []
+      const members = board.members
+      const tasksForMemberMap = {}
 
       groups.forEach((group) => {
         const groupStatusCount = group.tasks.reduce(
@@ -134,11 +136,15 @@ export default {
         })
 
         //tasksForMember
-        const tasksForMember = group.tasks.forEach(
-          (task) => {
-            let taskMembers = task.members
-          }
-        )
+        group.tasks.forEach((task) => {
+          let taskMembers = task.members
+          taskMembers.forEach((taskMember) => {
+            if (!tasksForMemberMap[taskMember.fullname]) {
+              tasksForMemberMap[taskMember.fullname] = 0
+            }
+            tasksForMemberMap[taskMember.fullname]++
+          })
+        })
 
         const groupSumMap = {
           id: group.id,
@@ -173,10 +179,18 @@ export default {
         },
         {}
       )
+
+      members.forEach((member) => {
+        if (!tasksForMemberMap[member.fullname]) {
+          tasksForMemberMap[member.fullname] = 0
+        }
+      })
+
       return {
         statusMapCount,
         priorityMapCount,
         boardMapByGroups,
+        tasksForMemberMap,
       }
     },
     isModalOpen({ isModalOpen }) {
@@ -689,7 +703,7 @@ export default {
         commit({ type: 'setIsLoading', isLoading: false })
       }
     },
-    async addItem({ state, commit }) {
+    async addTaskToTheStart({ state, commit }) {
       try {
         const task = boardService.getEmptyTask(
           'New Item',
@@ -704,7 +718,7 @@ export default {
         )
         commit({ type: 'loadBoard', board: savedBoard })
       } catch (err) {
-        console.log('addItem err', err)
+        console.log('addTaskToTheStart err', err)
       }
     },
     async saveCmpTitle(

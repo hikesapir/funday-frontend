@@ -7,14 +7,16 @@ import { Chart } from 'highcharts-vue'
 
 export default {
   name: 'bar-chart',
-  props: { data: Object, categories: Object },
+  props: { data: Object },
   components: {
     Chart,
   },
   data() {
     return {
       chartOptions: {
-        title: '',
+        title: {
+          text: 'Tasks per member'
+        },
         series: [
           {
             type: 'column',
@@ -22,7 +24,7 @@ export default {
           },
         ],
         xAxis: {
-          categories: this.categories,
+          categories: this.members(),
         },
         yAxis: {
           min: 0,
@@ -33,6 +35,18 @@ export default {
       },
     }
   },
-  created() {},
+  created() { },
+  methods: {
+    members() {
+      const members = []
+      this.data.forEach(memberData => {
+        members.push(memberData.name)
+      });
+      return members
+    }
+  },
+  computed: {
+
+  },
 }
 </script>
