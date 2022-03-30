@@ -119,7 +119,7 @@ export default {
       const filterBy = JSON.parse(
         JSON.stringify(this.filterBy)
       )
-      this.$store.commit({ type: 'onSetFilter', filterBy })
+      this.$store.commit({ type: 'syncBoards', filterBy })
     },
     clearSearchMember() {
       this.filterBy.member = ''

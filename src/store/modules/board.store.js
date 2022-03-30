@@ -204,11 +204,11 @@ export default {
         case 'status-picker':
           board.groups.forEach(
             (group, idx) =>
-              (board.groups[idx].tasks = group.tasks.sort(
-                (t1, t2) =>
-                  t1.status.localeCompare(t2.status) *
-                  state.sortBy.dir
-              ))
+            (board.groups[idx].tasks = group.tasks.sort(
+              (t1, t2) =>
+                t1.status.localeCompare(t2.status) *
+                state.sortBy.dir
+            ))
           )
           break
         case 'priority-picker':
@@ -272,7 +272,7 @@ export default {
         JSON.stringify(board)
       )
     },
-    onSetFilter(state, { filterBy }) {
+    syncBoards(state, { filterBy }) {
       // console.log(filterBy)
       state.filterBy = JSON.parse(JSON.stringify(filterBy))
       const board = JSON.parse(JSON.stringify(state.board))
@@ -310,6 +310,7 @@ export default {
       )
     },
     updateTask(state, { groupId, updatedTask }) {
+      console.log('get it?');
       const groupIdx =
         state.boardForDisplay.groups.findIndex(
           (group) => group.id === groupId
@@ -322,6 +323,7 @@ export default {
       // state.boardForDisplay.groups[groupIdx].tasks[
       state.board.groups[groupIdx].tasks[taskIdx] =
         updatedTask
+      this.commit('syncBoards', { filterBy: state.filterBy })
     },
     saveBoard(state, { savedBoard }) {
       const idx = state.boards.findIndex(
@@ -457,7 +459,6 @@ export default {
       switch (cmpType) {
         case 'timeline-picker':
           task.timeline = data.timeline
-
           break
         case 'file-picker':
           task.files = data.files
@@ -493,15 +494,12 @@ export default {
           groupId,
           updatedTask: task,
         })
-        commit({
-          type: 'onSetFilter',
-          filterBy: state.filterBy,
-        })
 
         socketService.emit(SOCKET_EMIT_TASK_UPDATED, {
           groupId,
           task,
         })
+
         await boardService.saveTask(board, groupId, task)
       } catch (err) {
         console.log("Couldn't update task id- ", task.id)
@@ -713,7 +711,7 @@ export default {
           SOCKET_EMIT_EDIT_CMPS_ORDER,
           board.cmpsOrder
         )
-      } catch (err) {}
+      } catch (err) { }
     },
     async addUpdate(
       { commit },
