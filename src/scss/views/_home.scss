@@ -17,7 +17,7 @@
     align-items: center;
 
     .logo-container {
-      margin-left: 120px;
+      margin-left: 100px;
       height: 42px;
       display: flex;
       padding: 0 25px;
@@ -41,26 +41,38 @@
       align-items: center;
       width: 100%;
       .left-nav {
-        margin-left: 40px;
+        cursor: pointer;
+        margin-left: 80px;
         display: flex;
-        flex-basis: 300px;
+        flex-basis: 270px;
         justify-content: space-between;
       }
       .right-nav {
+        cursor: pointer;
         flex-basis: 350px;
         display: flex;
         align-items: center;
         justify-content: space-between;
         margin-right: 220px;
 
-        button {
-          background-color: #6c6cff;
+        .start-btn {
+          font-size: 12px;
+          letter-spacing: 1px;
+          width: 100px;
+          height: 30px;
+          vertical-align: middle;
+          line-height: 30px;
           border-radius: 20px;
-          padding-left: 32px;
+          background: linear-gradient(90deg, #5034ff 25.69%, #030303 100%);
+          text-align: center;
           color: $main-white;
-          font-size: 14px;
+          cursor: pointer;
+          transition: all 1s;
 
-          align-self: center;
+          &:hover {
+            // width: 200px;
+            color: $main-orange;
+          }
         }
       }
     }
