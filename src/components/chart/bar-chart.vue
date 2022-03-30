@@ -14,7 +14,9 @@ export default {
   data() {
     return {
       chartOptions: {
-        title: '',
+        title: {
+          text: 'Tasks per member'
+        },
         series: [
           {
             type: 'column',

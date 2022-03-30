@@ -14,7 +14,9 @@ export default {
   data() {
     return {
       chartOptions: {
-        title: '',
+        title: {
+          text: 'Project progress'
+        },
         series: [
           {
             type: 'pie',

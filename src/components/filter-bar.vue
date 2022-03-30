@@ -5,7 +5,7 @@
         class="new-item-btn new-item"
         @click="addNewItem"
       >
-        New Item
+        New Task
       </button>
       <div class="relative">
         <button
@@ -19,7 +19,7 @@
           class="context-modal item-modal"
         >
           <button @click="addGroup">
-            New group of Items
+            New group of Tasks
           </button>
         </section>
       </div>
@@ -130,7 +130,7 @@ export default {
       this.openItemModal = false
     },
     addNewItem() {
-      this.$store.dispatch('addItem')
+      this.$store.dispatch('addTaskToTheStart')
     },
   },
   computed: {

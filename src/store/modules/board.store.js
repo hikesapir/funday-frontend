@@ -686,7 +686,7 @@ export default {
         commit({ type: 'setIsLoading', isLoading: false })
       }
     },
-    async addItem({ state, commit }) {
+    async addTaskToTheStart({ state, commit }) {
       try {
         const task = boardService.getEmptyTask(
           'New Item',
@@ -701,7 +701,7 @@ export default {
         )
         commit({ type: 'loadBoard', board: savedBoard })
       } catch (err) {
-        console.log('addItem err', err)
+        console.log('addTaskToTheStart err', err)
       }
     },
     async saveCmpTitle(
