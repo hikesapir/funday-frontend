@@ -1,6 +1,5 @@
 <template>
   <Chart :options="chartOptions" />
-  <!-- {{data}} -->
 </template>
 
 <script>
