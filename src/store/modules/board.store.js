@@ -192,8 +192,6 @@ export default {
       state.isTaskUpdatesOpen = isOpen
     },
     setSortBy(state, { sortBy }) {
-      // console.log(sortBy)
-      // state.sortBy = JSON.parse(JSON.stringify(sortBy))
       const board = JSON.parse(
         JSON.stringify(state.boardForDisplay)
       )
@@ -273,7 +271,6 @@ export default {
       )
     },
     syncBoards(state, { filterBy }) {
-      // console.log(filterBy)
       state.filterBy = JSON.parse(JSON.stringify(filterBy))
       const board = JSON.parse(JSON.stringify(state.board))
       const regex = new RegExp(filterBy.txt, 'i')
@@ -310,7 +307,6 @@ export default {
       )
     },
     updateTask(state, { groupId, updatedTask }) {
-      console.log('get it?');
       const groupIdx =
         state.boardForDisplay.groups.findIndex(
           (group) => group.id === groupId
@@ -368,7 +364,6 @@ export default {
       )
     },
     addUpdate(state, { txt, taskId, boardId, groupId }) {
-      console.log('hey')
       const { _id, fullname, imgUrl } =
         userService.getLoggedinUser()
       const update = {
@@ -488,19 +483,19 @@ export default {
           break
       }
       const board = JSON.parse(JSON.stringify(state.board))
+      commit({
+        type: 'updateTask',
+        groupId,
+        updatedTask: task,
+      })
       try {
-        commit({
-          type: 'updateTask',
-          groupId,
-          updatedTask: task,
-        })
+        await boardService.saveTask(board, groupId, task)
 
         socketService.emit(SOCKET_EMIT_TASK_UPDATED, {
           groupId,
           task,
         })
 
-        await boardService.saveTask(board, groupId, task)
       } catch (err) {
         console.log("Couldn't update task id- ", task.id)
         commit({

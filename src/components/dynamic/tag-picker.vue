@@ -119,7 +119,6 @@ export default {
     },
     openModal() {
       this.isModalOpen = true;
-      console.log("this.isModalOpen", this.isModalOpen);
       document.body.addEventListener("click", this.isClosingModal);
     },
     closeModal() {
@@ -128,11 +127,6 @@ export default {
     },
     isClosingModal(e) {
       e.stopPropagation();
-      console.log("e, this.$refs.tagModal", e, this.$refs.tagModal);
-      console.log(
-        "!this.$refs.tagModal.contains(e.target)",
-        !this.$refs.tagModal.contains(e.target)
-      );
       if (!this.$refs.tagModal.contains(e.target)) this.closeModal();
     },
   },
