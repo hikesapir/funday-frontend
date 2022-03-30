@@ -31,6 +31,7 @@ export default {
     boardMapByGroups: [],
     isModalOpen: false,
     taskForDisplay: null,
+    loggedInUser: null,
   },
   getters: {
     boards({ boards }) {
@@ -122,18 +123,22 @@ export default {
         group.tasks.forEach((task) => {
           let taskMembers = task.members
           taskMembers.forEach((taskMember) => {
-            if (!groupMemberMap.length || !groupMemberMap.some((member) => {return member._id === taskMember._id })
+            if (
+              !groupMemberMap.length ||
+              !groupMemberMap.some((member) => {
+                return member._id === taskMember._id
+              })
             )
               groupMemberMap.push(taskMember)
           })
         })
 
         //tasksForMember
-        const tasksForMember = group.tasks.forEach((task) => {
-          let taskMembers = task.members
-          
-
-        })
+        const tasksForMember = group.tasks.forEach(
+          (task) => {
+            let taskMembers = task.members
+          }
+        )
 
         const groupSumMap = {
           id: group.id,
@@ -205,11 +210,11 @@ export default {
         case 'status-picker':
           board.groups.forEach(
             (group, idx) =>
-            (board.groups[idx].tasks = group.tasks.sort(
-              (t1, t2) =>
-                t1.status.localeCompare(t2.status) *
-                state.sortBy.dir
-            ))
+              (board.groups[idx].tasks = group.tasks.sort(
+                (t1, t2) =>
+                  t1.status.localeCompare(t2.status) *
+                  state.sortBy.dir
+              ))
           )
           break
         case 'priority-picker':
@@ -322,7 +327,9 @@ export default {
       // state.boardForDisplay.groups[groupIdx].tasks[
       state.board.groups[groupIdx].tasks[taskIdx] =
         updatedTask
-      this.commit('syncBoards', { filterBy: state.filterBy })
+      this.commit('syncBoards', {
+        filterBy: state.filterBy,
+      })
     },
     saveBoard(state, { savedBoard }) {
       const idx = state.boards.findIndex(
@@ -386,6 +393,9 @@ export default {
       )
       state.taskForDisplay = task
     },
+    setUser(state, user) {
+      state.loggedInUser = user
+    },
   },
   actions: {
     async loadBoards({ commit }) {
@@ -429,10 +439,6 @@ export default {
             type: 'loadBoard',
             board: savedBoard,
           })
-          // context.commit({
-          //   type: 'saveBoard',
-          //   board: savedBoard,
-          // })
         } else {
           context.dispatch('loadBoards')
           router.push(`/boards/${savedBoard._id}`)
@@ -450,10 +456,17 @@ export default {
       }
     },
     async updateTask({ commit, state }, { data }) {
+      const board = JSON.parse(JSON.stringify(state.board))
       const { cmpType, groupId } = data
       var { task } = data
       var backupTask = JSON.parse(JSON.stringify(task))
       task = JSON.parse(JSON.stringify(task))
+      const type = cmpType.split('-')[0]
+      const description = {
+        type: 'task',
+        title: task.title,
+        action: `Added/Changed ${type}`,
+      }
       switch (cmpType) {
         case 'timeline-picker':
           task.timeline = data.timeline
@@ -466,11 +479,9 @@ export default {
           break
         case 'priority-picker':
           task.priority = data.val
-
           break
         case 'status-picker':
           task.status = data.val
-
           break
         case 'tag-picker':
           const tag = data.val
@@ -478,27 +489,35 @@ export default {
             txt: tag,
             color: utilService.getRandomColor(),
           })
-
           break
         case 'title-picker':
           task.title = data.title
-
           break
       }
-      const board = JSON.parse(JSON.stringify(state.board))
+
       commit({
         type: 'updateTask',
         groupId,
         updatedTask: task,
       })
       try {
-        await boardService.saveTask(board, groupId, task)
+        // saving the tasks inside the board object
+        const savedBoard = await boardService.saveTask(
+          board,
+          groupId,
+          task
+        )
 
+        // save the board in the database, and add activity
+        await boardService.recordChange(
+          savedBoard,
+          description,
+          task.id
+        )
         socketService.emit(SOCKET_EMIT_TASK_UPDATED, {
           groupId,
           task,
         })
-
       } catch (err) {
         console.log("Couldn't update task id- ", task.id)
         commit({
@@ -506,6 +525,7 @@ export default {
           groupId,
           updatedTask: backupTask,
         })
+        throw err
       }
     },
     async saveTask({ commit, state }, { groupId, task }) {
@@ -521,7 +541,6 @@ export default {
             groupId,
             task
           )
-
           socketService.emit(SOCKET_EMIT_TASK_ADD, {
             groupIdx: idx,
             task: savedTask,
@@ -709,7 +728,7 @@ export default {
           SOCKET_EMIT_EDIT_CMPS_ORDER,
           board.cmpsOrder
         )
-      } catch (err) { }
+      } catch (err) {}
     },
     async addUpdate(
       { commit },
@@ -737,6 +756,14 @@ export default {
         })
       } catch (err) {
         console.log('addUpdate: Had problems')
+      }
+    },
+    async setUser({ commit }) {
+      try {
+        const user = userService.getLoggedinUser()
+        commit({ type: 'setUser', user })
+      } catch (err) {
+        throw ('Cannot find logged in user', err)
       }
     },
   },

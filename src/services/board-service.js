@@ -18,6 +18,7 @@ export default {
   getEmptyBoard,
   getTaskById,
   addUpdate,
+  recordChange,
 }
 
 const KEY = 'board_db'
@@ -28,23 +29,6 @@ const BASE_URL = 'board/'
 
 async function query(filterBy = null) {
   try {
-    // if (filterBy) {
-    //   const boards = await httpService.get(BASE_URL,{params:filterBy})
-    //   const board = boards.find(
-    //     (board) => board._id === filterBy.boardId
-    //   )
-    //   const filteredGroups = []
-    //   if (filterBy.txt) {
-    //     const regex = new RegExp(filterBy.txt, 'i')
-    //     board.groups.forEach((group) => {
-    //       const filterGroup = group.tasks.filter((task) =>
-    //         regex.test(task.title)
-    //       )
-    //       filteredGroups.push(...filterGroup)
-    //     })
-    // }
-    // return filteredGroups
-    // } else return storageService.query(KEY)
     const boards = await httpService.get(BASE_URL)
     return boards
   } catch (err) {
@@ -67,7 +51,6 @@ async function getById(id) {
 async function saveBoard(board) {
   try {
     if (board._id) {
-
       const res = await httpService.put(
         BASE_URL + board._id,
         board
@@ -217,7 +200,24 @@ function getEmptyBoard(boardTitle) {
         getEmptyTask('Item 5', 't105'),
       ]),
     ],
+    activities: [],
   }
+}
+
+// Activities
+
+function recordChange(board, description, taskId) {
+  const byMember = userService.getLoggedinUser()
+  delete byMember.password
+  const activity = {
+    id: utilService.makeId(8),
+    createdAt: Date.now(),
+    taskId,
+    byMember,
+    description,
+  }
+  board.activities.push(activity)
+  return saveBoard(board)
 }
 
 // group
@@ -271,29 +271,28 @@ async function getTaskById(boardId, groupId, taskId) {
 }
 
 async function saveTask(board, groupId, taskToSave) {
-  console.log(board);
   const idx = board.groups.findIndex(
     (group) => group.id === groupId
   )
-  try {
-    if (taskToSave.id) {
-      const taskIdx = board.groups[idx].tasks.findIndex(
-        (task) => task.id === taskToSave.id
-      )
-      board.groups[idx].tasks[taskIdx] = taskToSave
-      return saveBoard(board)
-    } else {
+  if (taskToSave.id) {
+    const taskIdx = board.groups[idx].tasks.findIndex(
+      (task) => task.id === taskToSave.id
+    )
+    board.groups[idx].tasks[taskIdx] = taskToSave
+    // return  saveBoard(board)
+    return board
+  } else {
+    try {
       taskToSave.createdAt = Date.now()
       taskToSave.id = utilService.makeId(8)
       taskToSave.byMember = userService.getLoggedinUser()
-      console.log('taskToSave', taskToSave)
-
       board.groups[idx].tasks.push(taskToSave)
       await saveBoard(board)
       return taskToSave
+    } catch (err) {
+      console.log('Boardservice: could not save task', err)
+      throw err
     }
-  } catch (err) {
-    console.log('Boardservice: could not save task', err)
   }
 }
 
@@ -316,12 +315,13 @@ async function removeTask(board, groupIdx, taskIdx) {
 }
 
 async function addUpdate(txt, taskId, boardId, groupId) {
-  const { _id, fullname, imgUrl } = userService.getLoggedinUser()
+  const { _id, fullname, imgUrl } =
+    userService.getLoggedinUser()
   const update = {
     id: utilService.makeId(8),
     txt,
     createdAt: Date.now(),
-    byMember: { _id, fullname, imgUrl }
+    byMember: { _id, fullname, imgUrl },
   }
   const board = await getById(boardId)
   const group = board.groups.find(
