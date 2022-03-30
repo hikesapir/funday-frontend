@@ -82,13 +82,11 @@ ul {
   background: #b2b2b2;
 }
 
-div.smooth-dnd-container.vertical
-  > div.smooth-dnd-draggable-wrapper {
+div.smooth-dnd-container.vertical > div.smooth-dnd-draggable-wrapper {
   overflow: unset;
   display: block;
 }
-.smooth-dnd-container.horizontal
-  > .smooth-dnd-draggable-wrapper {
+.smooth-dnd-container.horizontal > .smooth-dnd-draggable-wrapper {
   overflow: unset;
 }
 
