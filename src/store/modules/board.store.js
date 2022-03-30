@@ -310,6 +310,7 @@ export default {
       )
     },
     updateTask(state, { groupId, updatedTask }) {
+      console.log('get it?');
       const groupIdx =
         state.boardForDisplay.groups.findIndex(
           (group) => group.id === groupId
@@ -322,6 +323,7 @@ export default {
       // state.boardForDisplay.groups[groupIdx].tasks[
       state.board.groups[groupIdx].tasks[taskIdx] =
         updatedTask
+      this.commit('syncBoards', { filterBy: state.filterBy })
     },
     saveBoard(state, { savedBoard }) {
       const idx = state.boards.findIndex(
@@ -492,16 +494,12 @@ export default {
           groupId,
           updatedTask: task,
         })
-        commit({
-          type: 'syncBoards',
-          filterBy: state.filterBy,
-        })
 
         socketService.emit(SOCKET_EMIT_TASK_UPDATED, {
           groupId,
           task,
         })
-        
+
         await boardService.saveTask(board, groupId, task)
       } catch (err) {
         console.log("Couldn't update task id- ", task.id)

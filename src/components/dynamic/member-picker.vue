@@ -150,13 +150,7 @@ export default {
       this.addMembersMode = !this.addMembersMode
     },
     removeFormTask(idx) {
-<<<<<<< HEAD
       var members = JSON.parse(JSON.stringify(this.task.members));
-=======
-      var members = JSON.parse(
-        JSON.stringify(this.task.members)
-      )
->>>>>>> 34bb7b0a1b49893824cd017809a57cd1d7edc00e
       // const idx = members.findIndex(member => member._id === id);
       members.splice(idx, 1)
       this.$emit('update', {
