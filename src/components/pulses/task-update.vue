@@ -1,7 +1,7 @@
 <template>
     <section class="task-update">
         <div class="input-warpper">
-            <div class="input" contenteditable="true" data-ph="Write an uptade..." ref="contect"></div>
+            <div class="input" contenteditable="true" data-ph="Write an update..." ref="contect"></div>
             <div class="btn-container">
                 <button @click="postUpdate">Update</button>
             </div>

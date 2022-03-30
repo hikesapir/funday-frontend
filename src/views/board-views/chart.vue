@@ -2,17 +2,21 @@
   <div class="chart-view-container">
     <h1>Charts</h1>
     <div class="grid-layout">
-      <bar-chart
-        v-if="statusChart"
-        :data="statusChart"
-        :categories="statuses"
-      />
+      <div>
+        <bar-chart v-if="statusChart" :data="taskForMemberMap" />
+      </div>
+      <div>
+        <pie-chart v-if="statusChart" :data="statusChart" :categories="statuses" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import barChart from '../../components/chart/bar-chart.vue'
+import pieChart from '../../components/chart/pie-chart.vue'
+import { utilService } from '../../services/util-service'
+
 export default {
   name: 'chart-view',
   data() {
@@ -20,6 +24,7 @@ export default {
   },
   components: {
     barChart,
+    pieChart
   },
   computed: {
     charts() {
@@ -50,7 +55,6 @@ export default {
           data.push(statusData)
         }
       }
-      console.log('data', data)
       return data
     },
     statuses() {
@@ -64,6 +68,26 @@ export default {
         return s.txt
       })
     },
+    taskForMemberMap() {
+      const tasksForMemberMap = this.$store.getters.boardData?.tasksForMemberMap
+      const map = []
+      for (var key in tasksForMemberMap) {
+        map.push({ y: tasksForMemberMap[key], color: utilService.getRandomColor(), name: key })
+      }
+      // // console.log(this.$store.getters.board.members);
+      return map
+    },
   },
+
 }
 </script>
+
+<style>
+.chart-view-container {
+  padding: 20px;
+}
+.grid-layout {
+  display: flex;
+  width: calc(100vw - 590px);
+}
+</style>

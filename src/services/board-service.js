@@ -18,6 +18,7 @@ export default {
   getEmptyBoard,
   getTaskById,
   addUpdate,
+  recordChange,
 }
 
 const KEY = 'board_db'
@@ -28,23 +29,6 @@ const BASE_URL = 'board/'
 
 async function query(filterBy = null) {
   try {
-    // if (filterBy) {
-    //   const boards = await httpService.get(BASE_URL,{params:filterBy})
-    //   const board = boards.find(
-    //     (board) => board._id === filterBy.boardId
-    //   )
-    //   const filteredGroups = []
-    //   if (filterBy.txt) {
-    //     const regex = new RegExp(filterBy.txt, 'i')
-    //     board.groups.forEach((group) => {
-    //       const filterGroup = group.tasks.filter((task) =>
-    //         regex.test(task.title)
-    //       )
-    //       filteredGroups.push(...filterGroup)
-    //     })
-    // }
-    // return filteredGroups
-    // } else return storageService.query(KEY)
     const boards = await httpService.get(BASE_URL)
     return boards
   } catch (err) {
@@ -67,7 +51,6 @@ async function getById(id) {
 async function saveBoard(board) {
   try {
     if (board._id) {
-
       const res = await httpService.put(
         BASE_URL + board._id,
         board
@@ -140,14 +123,7 @@ function getEmptyBoard(boardTitle) {
       },
     ],
     style: { view: 'table' },
-    members: [
-      {
-        _id: 'u104',
-        fullname: 'Someone',
-        imgUrl:
-          'https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
-      },
-    ],
+    members: getUsers(),
     labels: {
       status: [
         {
@@ -217,7 +193,24 @@ function getEmptyBoard(boardTitle) {
         getEmptyTask('Item 5', 't105'),
       ]),
     ],
+    activities: [],
   }
+}
+
+// Activities
+
+function recordChange(board, description, taskId) {
+  const byMember = userService.getLoggedinUser()
+  delete byMember.password
+  const activity = {
+    id: utilService.makeId(8),
+    createdAt: Date.now(),
+    taskId,
+    byMember,
+    description,
+  }
+  board.activities.push(activity)
+  return saveBoard(board)
 }
 
 // group
@@ -271,29 +264,28 @@ async function getTaskById(boardId, groupId, taskId) {
 }
 
 async function saveTask(board, groupId, taskToSave) {
-  console.log(board);
   const idx = board.groups.findIndex(
     (group) => group.id === groupId
   )
-  try {
-    if (taskToSave.id) {
-      const taskIdx = board.groups[idx].tasks.findIndex(
-        (task) => task.id === taskToSave.id
-      )
-      board.groups[idx].tasks[taskIdx] = taskToSave
-      return saveBoard(board)
-    } else {
+  if (taskToSave.id) {
+    const taskIdx = board.groups[idx].tasks.findIndex(
+      (task) => task.id === taskToSave.id
+    )
+    board.groups[idx].tasks[taskIdx] = taskToSave
+    // return  saveBoard(board)
+    return board
+  } else {
+    try {
       taskToSave.createdAt = Date.now()
       taskToSave.id = utilService.makeId(8)
       taskToSave.byMember = userService.getLoggedinUser()
-      console.log('taskToSave', taskToSave)
-
       board.groups[idx].tasks.push(taskToSave)
       await saveBoard(board)
       return taskToSave
+    } catch (err) {
+      console.log('Boardservice: could not save task', err)
+      throw err
     }
-  } catch (err) {
-    console.log('Boardservice: could not save task', err)
   }
 }
 
@@ -316,12 +308,13 @@ async function removeTask(board, groupIdx, taskIdx) {
 }
 
 async function addUpdate(txt, taskId, boardId, groupId) {
-  const { _id, fullname, imgUrl } = userService.getLoggedinUser()
+  const { _id, fullname, imgUrl } =
+    userService.getLoggedinUser()
   const update = {
     id: utilService.makeId(8),
     txt,
     createdAt: Date.now(),
-    byMember: { _id, fullname, imgUrl }
+    byMember: { _id, fullname, imgUrl },
   }
   const board = await getById(boardId)
   const group = board.groups.find(
@@ -1380,4 +1373,75 @@ function _createDemoData() {
   ]
 
   utilService.saveToStorage(KEY, boards)
+}
+
+function getUsers() {
+  return [
+    {
+      "_id": "u101",
+      "fullname": "Israel Israeli ",
+      "imgUrl": "https://res.cloudinary.com/mistertoysss/image/upload/v1648414062/funday%20must/k9yzIPxC_400x400_qriu7j.jpg",
+
+    },
+    {
+      "_id": "u102",
+      "fullname": "Lior Amar",
+      "imgUrl": "https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070372/w1hcqybgmllnpl8ld2zh.jpg",
+
+    },
+    {
+      "_id": "u103",
+      "fullname": "Roee furman",
+      "imgUrl": "https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070370/qpolx3ucumsiscnf0ymk.jpg",
+
+    },
+    {
+      "_id": "u104",
+      "fullname": "Sapir Hiki",
+      "imgUrl": "https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070371/a1avc0ofryx5enjnbklv.jpg",
+
+    },
+    {
+      "_id": "u105",
+      "fullname": "Abi Abambi",
+      "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg",
+
+    },
+    {
+      "_id": "u106",
+      "fullname": "Poki Ben-David",
+      "imgUrl": "https://res.cloudinary.com/mistertoysss/image/upload/v1648414113/funday%20must/photo-1568602471122-7832951cc4c5_fbs2vc.jpg",
+
+    },
+    {
+      "_id": "u107",
+      "fullname": "Lulu Moppet",
+      "imgUrl": "https://res.cloudinary.com/mistertoysss/image/upload/v1648414159/funday%20must/photo-1573496359142-b8d87734a5a2_uftqho.jpg",
+
+    },
+    {
+      "_id": "u108",
+      "fullname": "Arthur Reed",
+      "imgUrl": "https://res.cloudinary.com/mistertoysss/image/upload/v1648414247/funday%20must/photo-1566492031773-4f4e44671857_pezzjc.jpg",
+
+    },
+    {
+      "_id": "u109",
+      "fullname": "Melissa Altro",
+      "imgUrl": "https://res.cloudinary.com/mistertoysss/image/upload/v1648414285/funday%20must/photo-1618085222100-93f0eecad0aa_fuisxo.jpg",
+
+    },
+    {
+      "_id": "u110",
+      "fullname": "Julie Lemieux",
+      "imgUrl": "https://res.cloudinary.com/mistertoysss/image/upload/v1648414292/funday%20must/photo-1551836022-deb4988cc6c0_t4if9h.jpg",
+
+    },
+    {
+      "_id": "u111",
+      "fullname": "Admin Admin",
+      "imgUrl": "https://res.cloudinary.com/mistertoysss/image/upload/v1648414297/funday%20must/photo-1472099645785-5658abf4ff4e_lhdb3o.jpg",
+
+    }
+  ]
 }

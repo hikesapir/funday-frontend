@@ -5,7 +5,7 @@
         <img src="../assets/favicon.png" alt />
       </div>
       <div class="svg-container">
-        <div class="svg-wrapper" data-title="Workspace">
+        <div class="svg-wrapper" data-title="Workspace" @click="$router.push(`/boards/${getFirstBoardId}`)">
           <svg
             viewBox="0 0 20 20"
             fill="currentColor"
@@ -159,6 +159,11 @@ export default {
   name: 'main-nav',
   props: {
     boards: Object,
+  },
+   computed: {
+    getFirstBoardId() {
+      return this.$store.getters.boards[0]._id;
+    },
   },
 }
 </script>

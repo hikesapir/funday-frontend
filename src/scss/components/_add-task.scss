@@ -1,37 +1,49 @@
 .add-task {
   cursor: pointer;
   display: flex;
-  // justify-content: left;
+  justify-content: space-between;
   background-color: white;
   opacity: 0.8;
-  position: sticky;
-  left: 46px;
+  position: relative;
   z-index: 10;
   overflow: unset;
-  padding-right: 8px;
-  // width: 100%;
+  padding-right: 11px;
+  width: 1200px;
 
-  .left-indicator-inner {
-    width: 7px;
-    display: inline-block;
-    transition: opacity 0.1s ease;
-  }
   form {
+    position: sticky;
+    left: 46px;
     display: flex;
-    // width: 100%;
     justify-content: space-between;
     transform: translate(0);
-    position: sticky;
-    // border-left: 7px solid;
-    .right-indicator-inner {
-      // width: 38px;
-      border-right: 8px $main-task-end-line solid;
-      background-color: $main-task-gray;
-      border-left: 1px $main-white solid;
-      border-bottom: 1px $main-white solid;
+    .left-indicator-inner {
+      width: 7px;
+      display: inline-block;
+      transition: opacity 0.1s ease;
     }
+
+    input {
+      flex: 0 1;
+      width: 800px;
+      height: 35px;
+      padding-left: 20px;
+      border-right: none;
+      border: 0.5px solid $main-gray;
+      &:hover {
+        border: 0.5px solid rgb(50, 51, 56);
+        border-right: none;
+      }
+      &:focus form {
+        @include blue-focus;
+      }
+    }
+
     button {
+      position: absolute;
       opacity: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
       pointer-events: none;
       background-color: #fff;
       background-color: $primary-blue-hover;
@@ -44,22 +56,14 @@
       opacity: 1;
       pointer-events: all;
     }
-    input {
-      // margin-left: 1px;
-      flex-basis: 100%;
-      width: 1203px;
-      height: 35px;
-      padding-left: 20px;
-      &:hover {
-        border: 0.5px solid rgb(50, 51, 56);
-      }
-      &:focus {
-        @include blue-focus;
-        width: 1155px;
-      }
-    }
   }
-
+  .right-indicator-inner {
+    // width: 38px;
+    border-right: 8px $main-task-end-line solid;
+    background-color: $main-task-gray;
+    border-left: 1px $main-white solid;
+    border-bottom: 1px $main-white solid;
+  }
   .task-menu-arrow {
     // background-color: aqua;
     position: absolute;
