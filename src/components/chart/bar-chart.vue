@@ -40,7 +40,6 @@ export default {
       this.data.forEach(memberData => {
         members.push(memberData.name)
       });
-      console.log(members);
       return members
     }
   },
