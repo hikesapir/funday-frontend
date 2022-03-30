@@ -92,10 +92,9 @@
 }
 
 .th-title {
-  // position: sticky;
-
+  position: sticky;
   left: 46px;
-  overflow: hidden;
+  // overflow: hidden;
 
   width: 334px;
   text-align: left;
@@ -112,6 +111,10 @@
 .priority-picker-col {
   width: 140px;
   text-align: center;
+  background-color: $main-white;
+  &:not(:first-child) {
+    background-color: $main-task-gray;
+  }
 
   .small-number {
     position: absolute;
