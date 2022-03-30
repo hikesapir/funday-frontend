@@ -1,18 +1,17 @@
 <template>
   <div class="chart-view-container">
     <h1>Charts</h1>
+      <!-- {{ taskForMemberMap }} -->
     <div class="grid-layout">
-      <bar-chart
-        v-if="statusChart"
-        :data="statusChart"
-        :categories="statuses"
-      />
+      <bar-chart v-if="statusChart" :data="statusChart" :categories="statuses" />
+      <pie-chart v-if="statusChart" :data="statusChart" :categories="statuses" />
     </div>
   </div>
 </template>
 
 <script>
 import barChart from '../../components/chart/bar-chart.vue'
+import pieChart from '../../components/chart/pie-chart.vue'
 export default {
   name: 'chart-view',
   data() {
@@ -20,6 +19,7 @@ export default {
   },
   components: {
     barChart,
+    pieChart
   },
   computed: {
     charts() {
@@ -32,6 +32,7 @@ export default {
     statusChart() {
       const statusMapCount =
         this.$store.getters.boardData?.statusMapCount
+        console.log(this.$store.getters.boardData);
       const statuses =
         this.$store.getters.board?.labels.status
 
@@ -64,6 +65,11 @@ export default {
         return s.txt
       })
     },
+      taskForMemberMap() {
+    console.log(this.$store.getters.board.members);
+    return this.$store.getters.board.members
+  }
   },
+
 }
 </script>

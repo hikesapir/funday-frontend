@@ -45,12 +45,12 @@ export default {
     cmpsOrder({ board }) {
       return board.cmpsOrder
     },
-    boardData({ boardForDisplay }) {
+    boardData({ board }) {
       var statusMapCount = []
       var priorityMapCount = []
-      if (!boardForDisplay?.groups) return
+      if (!board?.groups) return
       const groups = JSON.parse(
-        JSON.stringify(boardForDisplay.groups)
+        JSON.stringify(board.groups)
       )
 
       //Status calculation:
@@ -122,14 +122,17 @@ export default {
         group.tasks.forEach((task) => {
           let taskMembers = task.members
           taskMembers.forEach((taskMember) => {
-            if (
-              !groupMemberMap.length ||
-              !groupMemberMap.some((member) => {
-                return member._id === taskMember._id
-              })
+            if (!groupMemberMap.length || !groupMemberMap.some((member) => {return member._id === taskMember._id })
             )
               groupMemberMap.push(taskMember)
           })
+        })
+
+        //tasksForMember
+        const tasksForMember = group.tasks.forEach((task) => {
+          let taskMembers = task.members
+          
+
         })
 
         const groupSumMap = {
