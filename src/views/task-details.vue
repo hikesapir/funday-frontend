@@ -74,7 +74,6 @@ export default {
       this.$router.push(`/boards/${this.boardId}`)
     },
     updateTask(txt) {
-      // console.log("get");
       this.$store.dispatch({
         type: 'addUpdate',
         txt,
@@ -92,7 +91,6 @@ export default {
       return this.$route.params
     },
     task() {
-      // console.log(this.$store.getters.taskForDisplay);
       return this.$store.getters.taskForDisplay
     },
   },

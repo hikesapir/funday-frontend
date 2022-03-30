@@ -239,7 +239,6 @@ export default {
         this.$refs.editableSpan.innerText
       if (group.title === prevGroupTitle) return
       group.title = prevGroupTitle
-      console.log('group.title', group.title)
       this.$store.dispatch({
         type: 'saveGroup',
         group,

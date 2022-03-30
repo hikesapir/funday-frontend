@@ -16,9 +16,8 @@ export const uploadFile = async (file) => {
     const res = await axios.post(UPLOAD_URL, FORM_DATA);
     // console.log(res.data);
     var url = res.data.url
-    console.log(res.data.url);
+    // console.log(res.data.url);
     const testUrl = res.data.url.slice(-3)
-    console.log(testUrl);
     if (testUrl === 'pdf') {
       url = res.data.url.slice(0, -3) + 'jpg'
     }

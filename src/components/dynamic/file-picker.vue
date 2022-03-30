@@ -49,8 +49,6 @@ export default {
       document.body.removeEventListener("click", this.isClosingModal);
     },
     isClosingModal(e) {
-      console.log(e);
-
       e.stopPropagation();
       if (!this.$refs.contextModal.contains(e.target)) this.closeModal();
     },
@@ -71,16 +69,12 @@ export default {
       let file;
       if (ev.type === 'change') file = ev.target.files[0];
       else if (ev.type === 'drop') file = ev.dataTransfer.files[0];
-      console.log('ev', ev);
       this.onUploadFile(file); // send the file to upload it
     },
     async onUploadFile(file) {
-      console.log(file);
       const res = await uploadFile(file);
       const files = JSON.parse(JSON.stringify(this.task.files))
-      console.log(res);
       files.push(res)
-      console.log(this.task);
       this.$emit("update", {
         cmpType: `file-picker`,
         files,
@@ -105,7 +99,6 @@ export default {
       return this.task.files;
     },
     haveSome() {
-      // console.log(this.task.files.length);
       return (this.task.files.length) ? 'haveSome' : '';
     },
   }

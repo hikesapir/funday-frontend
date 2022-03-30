@@ -38,7 +38,6 @@ export default {
         postUpdate() {
             if (!this.$refs.contect.innerText) return
             this.$emit('updateTask', this.$refs.contect.innerText)
-            console.log(this.$refs.contect.innerText);
             this.$refs.contect.innerText = ''
         }
     },

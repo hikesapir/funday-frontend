@@ -41,7 +41,6 @@ export default {
       this.$emit('update', val)
     },
     addLabel() {
-      console.log(this.type)
       this.$emit('labelAdded', val)
     },
   },
