@@ -7,7 +7,6 @@
   height: 35px;
   line-height: 35px;
   vertical-align: middle;
-  background-color: $main-task-gray;
   font-weight: 500;
   color: $main-task-text-gray;
   // border-top: 1px $main-gray solid;
@@ -19,6 +18,8 @@
   }
 
   .timeline-picker {
+    background-color: $main-task-gray;
+
     display: flex;
     justify-content: center;
     align-items: center;

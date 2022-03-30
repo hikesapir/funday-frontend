@@ -3,6 +3,11 @@
   text-align: center;
   justify-content: space-between;
   position: relative;
+  background-color: $main-white;
+  &:not(:first-child) {
+    background-color: $main-task-gray;
+  }
+
   // border: 1px white solid;
 
   .add-member-btn {

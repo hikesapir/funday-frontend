@@ -36,12 +36,12 @@
           <div class="about" @click="$router.push(`/users/signup`)">
             Sign up
           </div>
-          <button
-            class="get-start"
+          <div
+            class="start-btn"
             @click="$router.push(`/boards/${getFirstBoardId}`)"
           >
             Get Started
-          </button>
+          </div>
         </div>
       </div>
     </header>
