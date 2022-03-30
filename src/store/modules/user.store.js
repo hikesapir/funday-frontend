@@ -1,4 +1,6 @@
 import { authService } from '../../services/auth-service.js'
+import router from '../../router'
+
 // import userService from '../../services/user.service.js'
 
 export default {
@@ -33,6 +35,8 @@ export default {
         const res = await authService.login(user);
         commit({ type: 'setUser', user: res })
         console.log("Success!");
+        router.push(`/boards/:id`)
+
       } catch (err) {
         console.log(err);
       }
@@ -54,6 +58,8 @@ export default {
         console.log(newUser, 'signedup user')
         dispatch({ type: 'login', user: newUser })
         console.log("Success to signup!!!");
+        router.push(`/boards/:id`)
+
       } catch (err) {
         console.log(err);
       }
