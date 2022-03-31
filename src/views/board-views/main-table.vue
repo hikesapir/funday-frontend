@@ -9,7 +9,7 @@
         drag-handle-selector=".drag-handle"
       >
         <Draggable
-          v-for="group in board?.groups"
+          v-for="(group, idx) in board?.groups"
           :key="group.id"
           style="
              {
@@ -20,6 +20,7 @@
           <board-group
             :group="JSON.parse(JSON.stringify(group))"
             :cmpsOrder="board?.cmpsOrder"
+            :groupIdx="idx"
             :key="group.id"
           ></board-group>
         </Draggable>
