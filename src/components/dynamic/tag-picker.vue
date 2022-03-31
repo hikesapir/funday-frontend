@@ -9,24 +9,13 @@
       class="tag-picker-val"
       :style="{ color: tag.color }"
     >
-      <span class="tag-text"> #{{ tag.txt }}</span>
+      <span class="tag-text">#{{ tag.txt }}</span>
     </div>
 
-    <div v-if="!isMoreThanThree" class="small-number">
-      +{{ task.tags.length - 2 }}
-    </div>
-    <div
-      v-show="isModalOpen"
-      ref="tagModal"
-      class="tag-modal"
-    >
+    <div v-if="!isMoreThanThree" class="small-number">+{{ task.tags.length - 2 }}</div>
+    <div v-show="isModalOpen" ref="tagModal" class="tag-modal">
       <div class="add-tags">
-        <input
-          type="text"
-          placeholder="Add tags"
-          @input="filterTags"
-          v-model="newTag"
-        />
+        <input type="text" placeholder="Add tags" @input="filterTags" v-model="newTag" />
       </div>
       <ul class="tag-search-list">
         <li
@@ -40,13 +29,9 @@
             color:
               isHoverATag === tag.txt ? 'white' : tag.color,
           }"
-        >
-          #{{ tag.txt }}
-        </li>
+        >#{{ tag.txt }}</li>
       </ul>
-      <button @click="addNewTag" class="btn">
-        + Create new tag
-      </button>
+      <button @click="addNewTag" class="btn">+ Create new tag</button>
     </div>
   </section>
 </template>
@@ -94,11 +79,12 @@ export default {
     },
     tags() {
       var boardTags = this.boardTags
-      if (!this.filterBy.txt)
+        boardTags = boardTags.filter(tag => { return !this.task.tags.some(taskTag => taskTag.txt === tag.txt) })
+      if (!this.filterBy.txt) {
         return boardTags.length > 5
           ? boardTags.slice(0, 5)
           : boardTags
-      else {
+      } else {
         const regex = new RegExp(this.filterBy.txt, 'i')
         boardTags = boardTags.filter((tag) =>
           regex.test(tag.txt)
@@ -111,7 +97,9 @@ export default {
   },
   methods: {
     addNewTag() {
+      console.log(this.newTag);
       if (!this.newTag) return
+      if (this.task.tags.some(taskTag => this.newTag === taskTag.txt)) return
       this.$emit('update', {
         cmpType: `tag-picker`,
         val: this.newTag,
