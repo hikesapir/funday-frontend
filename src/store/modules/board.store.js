@@ -224,11 +224,11 @@ export default {
         case 'status-picker':
           board.groups.forEach(
             (group, idx) =>
-            (board.groups[idx].tasks = group.tasks.sort(
-              (t1, t2) =>
-                t1.status.localeCompare(t2.status) *
-                state.sortBy.dir
-            ))
+              (board.groups[idx].tasks = group.tasks.sort(
+                (t1, t2) =>
+                  t1.status.localeCompare(t2.status) *
+                  state.sortBy.dir
+              ))
           )
           break
         case 'priority-picker':
@@ -318,9 +318,7 @@ export default {
       state.isDraggingGroup = isDraggingGroup
     },
     addTask(state, { groupIdx, savedTask }) {
-      state.board.groups[groupIdx].tasks.push(
-        savedTask
-      )
+      state.board.groups[groupIdx].tasks.push(savedTask)
       this.commit('syncBoards', {
         filterBy: state.filterBy,
       })
@@ -441,7 +439,6 @@ export default {
     },
     async saveBoard(context, { board }) {
       try {
-        console.log('board', board)
         const savedBoard = await boardService.saveBoard(
           JSON.parse(JSON.stringify(board))
         )
@@ -739,7 +736,7 @@ export default {
           SOCKET_EMIT_EDIT_CMPS_ORDER,
           board.cmpsOrder
         )
-      } catch (err) { }
+      } catch (err) {}
     },
     async addUpdate(
       { commit },
@@ -776,6 +773,17 @@ export default {
       } catch (err) {
         throw ('Cannot find logged in user', err)
       }
+    },
+    changeGroupColor(
+      { state, dispatch },
+      { groupId, color }
+    ) {
+      const board = JSON.parse(JSON.stringify(state.board))
+      const idx = board.groups.findIndex(
+        (group) => group.id === groupId
+      )
+      board.groups[idx].style.color = color
+      dispatch({ type: 'saveBoard', board })
     },
   },
 }
