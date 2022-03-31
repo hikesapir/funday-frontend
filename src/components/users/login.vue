@@ -18,6 +18,11 @@
             placeholder="Enter password"
           />
           <button @click="login">Login</button>
+
+          <h4 class="bottom-text">
+            Click to
+            <router-link to="/users/signup">Sign up</router-link>
+          </h4>
         </form>
         <div class="pic"></div>
       </div>
