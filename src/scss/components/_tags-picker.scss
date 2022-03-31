@@ -95,7 +95,7 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    width: 40px;
+    max-width: 60px;
   }
 
   .add-tag {
