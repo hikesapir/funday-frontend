@@ -195,6 +195,9 @@
     &:hover {
       border: 1px dashed $group-header-gray;
       cursor: text;
+      line-height: 30px;
+      margin-top: 4px;
+      // padding: 2px 2px;
     }
 
     input {

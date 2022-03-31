@@ -9,7 +9,8 @@
   height: 534px;
   margin: auto;
   border-radius: 30px;
-  border: 1px solid $main-gray;
+  -webkit-box-shadow: 0px 0px 25px 10px rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 0px 25px 10px rgba(255, 255, 255, 0.3);
 
   .login-container {
     display: flex;
@@ -35,12 +36,16 @@
       }
     }
     .pic {
-      width: 262px;
-      background-color: $main-nav-dark-blue;
-      height: 533px;
-      border: 1px solid $main-gray;
+      width: 267px;
+      background-color: $main-homepage-blue;
+      height: 534px;
+      // border: 1px solid $main-gray;
       border-top-right-radius: 30px;
       border-bottom-right-radius: 30px;
+    }
+
+    .bottom-text {
+      margin-top: 30px;
     }
   }
 }
