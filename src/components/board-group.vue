@@ -33,13 +33,10 @@
             @keyup.enter="updateGroup"
             @blur="updateGroup"
             ref="editableSpan"
-            >{{ group.title }}</span
-          >
+          >{{ group.title }}</span>
         </div>
         <section v-if="openContext" class="context-modal">
-          <button @click="(changeName = true), (openContext = false)">
-            Rename Group
-          </button>
+          <button @click="(changeName = true), (openContext = false)">Rename Group</button>
           <button @click="openPallete">Change color</button>
           <button @click="remove">Delete</button>
         </section>
@@ -60,11 +57,7 @@
             drag-class="drag-cols"
             :drop-placeholder="dropPlaceholderOptions"
           >
-            <Draggable
-              v-for="cmp in cmps"
-              :class="cmp.cmpName + '-col'"
-              :key="cmp.cmpName"
-            >
+            <Draggable v-for="cmp in cmps" :class="cmp.cmpName + '-col'" :key="cmp.cmpName">
               <div :class="['th-header', cmp.cmpName + '-col']">
                 <i
                   v-if="cmp.cmpName !== 'title-picker'"
@@ -82,13 +75,12 @@
                   <span
                     @click="editCmpTitle(cmp.preName)"
                     v-if="!isEditing(cmp.preName)"
-                    >{{ cmp.preName }}</span
-                  >
+                  >{{ cmp.preName }}</span>
                   <span v-show="isEditing(cmp.preName)">
                     <input
                       type="text"
-                      @blur="saveCmpTitle"
-                      @keyup.enter="saveCmpTitle"
+                      @blur="saveCmpTitle(cmp.preName)"
+                      @keyup.enter="saveCmpTitle(cmp.preName)"
                       v-model="newCmpTitle"
                     />
                   </span>
@@ -222,7 +214,8 @@ export default {
       this.prevCmpTitle = cmp;
       this.newCmpTitle = cmp;
     },
-    saveCmpTitle() {
+    saveCmpTitle(cmpName) {
+      if (cmpName === this.newCmpTitle) return
       this.$store.dispatch({
         type: "saveCmpTitle",
         prevCmpTitle: this.prevCmpTitle,

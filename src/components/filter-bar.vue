@@ -1,35 +1,24 @@
 <template>
   <section class="filter-bar">
     <div class="new-item-btn-container">
-      <button
-        class="new-item-btn new-item"
-        @click="addNewItem"
-      >
-        New Task
-      </button>
+      <button class="new-item-btn new-item" @click="addNewItem">New Task</button>
       <div class="relative">
-        <button
-          class="new-item-btn chevron"
-          @click="openItemModal = !openItemModal"
-        >
+        <button class="new-item-btn chevron" @click="openItemModal = !openItemModal">
           <i class="fa-solid fa-chevron-down"></i>
         </button>
-        <section
-          v-if="openItemModal"
-          class="context-modal item-modal"
-        >
-          <button @click="addGroup">
-            New group of Tasks
-          </button>
+        <section v-if="openItemModal" class="context-modal item-modal">
+          <button @click="addGroup">New group of Tasks</button>
         </section>
       </div>
     </div>
     <div class="search">
-      <button
-        v-if="!openSearching"
-        @click="openSearching = true"
-      >
-        <i class="fa-solid fa-magnifying-glass"></i>Search
+      <button v-if="!openSearching" @click="openSearching = true">
+        <div class="space-btn">
+          <span>
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </span>
+          <span>Search</span>
+        </div>
       </button>
       <div v-else>
         <input
@@ -43,19 +32,17 @@
       </div>
     </div>
     <div class="relative">
-      <button
-        v-if="filterBy.member"
-        class="search-btn"
-        @click="clearSearchMember"
-      >
+      <button v-if="filterBy.member" class="search-btn" @click="clearSearchMember">
         <img :src="currMember.imgUrl" /> Persons
         <i class="fa-solid fa-circle-xmark"></i>
       </button>
-      <button
-        v-else
-        @click="openPersonModal = !openPersonModal"
-      >
-        <i class="fa-solid fa-circle-user"></i>Person
+      <button v-else @click="openPersonModal = !openPersonModal">
+        <div class="space-btn">
+          <span>
+            <i class="fa-solid fa-circle-user"></i>
+          </span>
+          <span>Person</span>
+        </div>
       </button>
 
       <section
@@ -67,10 +54,7 @@
         <h2>Quick person filter</h2>
         <div class="spacer"></div>
         <div class="flex members">
-          <label
-            v-for="member in board?.members"
-            :key="member"
-          >
+          <label v-for="member in board?.members" :key="member">
             <input
               @change="search"
               type="radio"
@@ -90,7 +74,12 @@
     </div>
 
     <button>
-      <i class="fa-solid fa-filter"></i>Filter
+      <div class="space-btn">
+        <span>
+          <i class="fa-solid fa-filter"></i>
+        </span>
+        <span>Filter</span>
+      </div>
     </button>
     <button>Sort</button>
   </section>

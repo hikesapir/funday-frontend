@@ -364,6 +364,7 @@ export default {
       state.isLoading = isLoading
     },
     setCmpsOrder(state, { newOrder }) {
+      console.log(newOrder);
       state.board.cmpsOrder = newOrder
     },
     saveBoard(state, { board }) {
@@ -725,6 +726,7 @@ export default {
       board.cmpsOrder[idx].preName = newCmpTitle
       try {
         await boardService.saveBoard(board)
+        // console.log(board.cmpsOrder);
         commit({
           type: 'setCmpsOrder',
           newOrder: board.cmpsOrder,
@@ -733,7 +735,9 @@ export default {
           SOCKET_EMIT_EDIT_CMPS_ORDER,
           board.cmpsOrder
         )
-      } catch (err) { }
+      } catch (err) {
+        console.log('saveCmpTitle', err);
+      }
     },
     async addUpdate(
       { commit },
