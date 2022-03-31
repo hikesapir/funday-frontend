@@ -37,7 +37,7 @@
           >
         </div>
         <section v-if="openContext" class="context-modal">
-          <button @click="(changeName = true), (openContext = false);">
+          <button @click="(changeName = true), (openContext = false)">
             Rename Group
           </button>
           <button @click="openPallete">Change color</button>
@@ -58,6 +58,7 @@
             @drop="onDrop($event, 'cmpsOrder')"
             drag-handle-selector=".cols-drag-handle"
             drag-class="drag-cols"
+            :drop-placeholder="dropPlaceholderOptions"
           >
             <Draggable
               v-for="cmp in cmps"
@@ -108,6 +109,7 @@
         :get-child-payload="getChildPayload"
         drag-handle-selector=".task-drag-handle"
         drag-class="drag-task"
+        :drop-placeholder="dropPlaceholderOptions"
       >
         <Draggable v-for="task in group?.tasks" :key="task.id">
           <task-preview :task="task" :groupId="group.id" />
@@ -146,6 +148,11 @@ export default {
   },
   data() {
     return {
+      dropPlaceholderOptions: {
+        className: "drop-preview",
+        animationDuration: "150",
+        showOnTop: false,
+      },
       isHover: false,
       isHoverGroupMenu: false,
       openContext: false,
