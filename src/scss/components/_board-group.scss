@@ -127,9 +127,6 @@
   width: 140px;
   text-align: center;
   background-color: $main-white;
-  &:not(:first-child) {
-    background-color: $main-task-gray;
-  }
 
   .small-number {
     position: absolute;
@@ -137,6 +134,14 @@
     top: 5px;
     z-index: 5;
   }
+}
+
+.tag-picker-col,
+.file-picker-col{
+  &:not(:first-child) {
+    background-color: $main-task-gray;
+  }
+
 }
 
 .th-header {
@@ -151,6 +156,7 @@
     transform: translateY(-50%);
     cursor: move;
   }
+  
   .sort-col-btn {
     position: absolute;
     display: block;
