@@ -83,17 +83,18 @@ export default {
         newOrder,
       })
     );
-    socketService.on(
-      SOCKET_EVENT_UPDATE_ADDED,
-      ({ taskId, boardId, groupId, update }) =>
-        this.$store.commit({
-          type: "addUpdate",
-          taskId,
-          boardId,
-          groupId,
-          update,
-        })
-    );
+    // socketService.on(
+    //   SOCKET_EVENT_UPDATE_ADDED,
+    //   ({ taskId, boardId, groupId, update }) => {
+    //     this.$store.commit({
+    //       type: "addUpdate",
+    //       taskId,
+    //       boardId,
+    //       groupId,
+    //       update,
+    //     });
+    //   }
+    // );
   },
   data() {
     return {

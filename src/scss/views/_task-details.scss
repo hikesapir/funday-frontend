@@ -9,6 +9,7 @@
   right: 0px;
   z-index: 1000;
   box-shadow: 0px 0px 10px 0px #292f4c;
+  overflow-y: auto;
 
   header {
     text-align: left;
@@ -118,7 +119,7 @@
           .action {
             // margin-left: 8px;
             display: flex;
-            width: 70px;
+            width: 90px;
             justify-content: space-between;
           }
         }

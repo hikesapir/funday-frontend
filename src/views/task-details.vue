@@ -47,6 +47,10 @@
 <script>
 import boardService from "../services/board-service.js";
 import taskUpdate from "../components/pulses/task-update.vue";
+import {
+  socketService,
+  SOCKET_EVENT_UPDATE_ADDED,
+} from "../services/socket-service.js";
 
 export default {
   name: "task-details",
@@ -61,11 +65,21 @@ export default {
     };
   },
   async created() {
+    socketService.on(SOCKET_EVENT_UPDATE_ADDED, this.addUpdate);
     // const { id, groupId, taskId } = this.$route.params;
     // this.task = await boardService.getTaskById(id, groupId, taskId);
   },
   mounted() {},
   methods: {
+    addUpdate({ taskId, boardId, groupId, update }) {
+      this.$store.commit({
+        type: "addUpdate",
+        taskId,
+        boardId,
+        groupId,
+        update,
+      });
+    },
     closeTaskDetails() {
       this.$store.commit({
         type: "setTaskUpdates",
@@ -94,7 +108,9 @@ export default {
       return this.$store.getters.taskForDisplay;
     },
   },
-  unmounted() {},
+  unmounted() {
+    socketService.off(SOCKET_EVENT_UPDATE_ADDED, this.addUpdate);
+  },
   watch: {
     params: {
       async handler() {
