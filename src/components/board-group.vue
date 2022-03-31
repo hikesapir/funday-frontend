@@ -50,7 +50,20 @@
             Rename Group
           </button>
           <button @click="remove">Delete</button>
+          <button @click="openPallete">Change color</button>
         </section>
+        <div
+          v-if="isPalleteOpen"
+          class="group-color-pallete"
+        >
+          <a
+            v-for="color in colors"
+            :key="color"
+            @click="setColor(color)"
+            class="group-color-item"
+            :style="{ 'background-color': color }"
+          ></a>
+        </div>
         <div
           v-show="!isDraggingGroups"
           class="group-cmp-columns"
@@ -159,6 +172,27 @@ export default {
       changeName: false,
       prevCmpTitle: false,
       newCmpTitle: '',
+      isPalleteOpen: false,
+      colors: [
+        'rgb(3, 127, 76)',
+        'rgb(0, 200, 117)',
+        'rgb(156, 211, 38)',
+        'rgb(202, 182, 65)',
+        'rgb(255, 203, 0)',
+        'rgb(120, 75, 209)',
+        'rgb(162, 93, 220)',
+        'rgb(0, 134, 192)',
+        'rgb(87, 155, 252)',
+        'rgb(187, 51, 84)',
+        'rgb(226, 68, 92)',
+        'rgb(255, 21, 138)',
+        'rgb(255, 90, 196)',
+        'rgb(255, 100, 46)',
+        'rgb(253, 171, 61)',
+        'rgb(127, 83, 71)',
+        'rgb(196, 196, 196)',
+        'rgb(128, 128, 128)',
+      ],
     }
   },
   computed: {
@@ -174,6 +208,18 @@ export default {
     },
   },
   methods: {
+    setColor(color) {
+      this.isPalleteOpen = false
+      this.$store.dispatch({
+        type: 'changeGroupColor',
+        groupId: this.group.id,
+        color,
+      })
+    },
+    openPallete() {
+      this.isPalleteOpen = true
+      this.openContext = false
+    },
     setSortBy(sortBy) {
       this.$store.commit({ type: 'setSortBy', sortBy })
     },
