@@ -49,6 +49,7 @@ export default {
   methods: {
     updateTask(data) {
       data.groupId = this.groupId
+      console.log(data);
       this.$store.dispatch({ type: 'updateTask', data })
     },
   },
