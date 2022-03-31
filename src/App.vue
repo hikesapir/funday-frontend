@@ -20,6 +20,7 @@ export default {
   },
   created() {
     this.$store.dispatch("loadApp");
+
   },
   methods: {
     closeModal() {

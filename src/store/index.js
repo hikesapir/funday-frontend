@@ -15,6 +15,7 @@ const store = createStore({
   },
   actions: {
     async loadApp({ dispatch }) {
+      await dispatch('autoLogin')
       await dispatch('loadBoards')
       // dispatch('loadUser')
     },
