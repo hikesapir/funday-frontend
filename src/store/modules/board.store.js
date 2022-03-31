@@ -490,11 +490,17 @@ export default {
           task.status = data.val
           break
         case 'tag-picker':
-          const tag = data.val
-          task.tags.push({
-            txt: tag,
-            color: utilService.getRandomColor(),
-          })
+          // console.log(data.val);
+          if (data.val.tagList.some(t => t.txt === data.val.txt)) {
+              var tag = data.val.tagList.find(t => t.txt === data.val.txt)
+          } else {
+              var tag = {
+                txt: data.val.txt,
+                color: utilService.getRandomColor()
+              }
+          }
+          // console.log(tag);
+          task.tags.push(tag)
           break
         case 'title-picker':
           task.title = data.title

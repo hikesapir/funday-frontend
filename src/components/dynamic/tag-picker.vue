@@ -69,18 +69,22 @@ export default {
         )
       )
       const boardTags = groups.reduce((acc, group) => {
+        console.log(acc);
         group.tags.forEach((tag) => {
-          if (!acc.some((tag) => tag.txt === tag))
+          if (!acc.some((t) => t.txt === tag.txt)) {
             acc.push(tag)
+          console.log(tag);
+          }
         })
         return acc
       }, [])
       return boardTags
     },
     tags() {
-      var boardTags = this.boardTags
-        boardTags = boardTags.filter(tag => { return !this.task.tags.some(taskTag => taskTag.txt === tag.txt) })
+      var boardTags = JSON.parse(JSON.stringify(this.boardTags))
+      // console.log(boardTags);
       if (!this.filterBy.txt) {
+        // boardTags = boardTags.filter(tag => !this.task.tags.some(taskTag => taskTag.txt === tag.txt))
         return boardTags.length > 5
           ? boardTags.slice(0, 5)
           : boardTags
@@ -102,7 +106,7 @@ export default {
       if (this.task.tags.some(taskTag => this.newTag === taskTag.txt)) return
       this.$emit('update', {
         cmpType: `tag-picker`,
-        val: this.newTag,
+        val: { txt: this.newTag, tagList: this.boardTags },
         task: this.task,
       })
       this.isModalOpen = false
@@ -113,7 +117,7 @@ export default {
     addTag(tag) {
       this.$emit('update', {
         cmpType: `tag-picker`,
-        val: tag,
+        val: { txt: tag, tagList: this.boardTags },
         task: this.task,
       })
       this.isModalOpen = false
