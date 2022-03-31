@@ -42,7 +42,7 @@
         >
           <span>{{ member.fullname }}</span>
           <i
-            @click="removeFormTask(idx)"
+            @click="removeFromTask(idx)"
             class="fa-solid fa-circle-xmark"
           ></i>
         </div>
@@ -97,7 +97,9 @@ export default {
       return this.task.members[0].imgUrl
     },
     restOfMemberList() {
-      var list = this.task.members
+      var list = JSON.parse(
+        JSON.stringify(this.task.members)
+      )
       list.shift()
       list = list.reduce((acc, member) => {
         acc.push(member.fullname)
@@ -149,8 +151,10 @@ export default {
       })
       this.addMembersMode = !this.addMembersMode
     },
-    removeFormTask(idx) {
-      var members = JSON.parse(JSON.stringify(this.task.members));
+    removeFromTask(idx) {
+      var members = JSON.parse(
+        JSON.stringify(this.task.members)
+      )
       // const idx = members.findIndex(member => member._id === id);
       members.splice(idx, 1)
       this.$emit('update', {

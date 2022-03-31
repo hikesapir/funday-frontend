@@ -214,11 +214,9 @@ export default {
       state.isTaskUpdatesOpen = isOpen
     },
     setSortBy(state, { sortBy }) {
-     
       const board = JSON.parse(
         JSON.stringify(state.boardForDisplay)
       )
-      console.log(board);
       if (state.sortBy.type === sortBy) {
         state.sortBy.dir = state.sortBy.dir === 1 ? -1 : 1
       }
@@ -226,11 +224,11 @@ export default {
         case 'status-picker':
           board.groups.forEach(
             (group, idx) =>
-            (board.groups[idx].tasks = group.tasks.sort(
-              (t1, t2) =>
-                t1.status.localeCompare(t2.status) *
-                state.sortBy.dir
-            ))
+              (board.groups[idx].tasks = group.tasks.sort(
+                (t1, t2) =>
+                  t1.status.localeCompare(t2.status) *
+                  state.sortBy.dir
+              ))
           )
           break
         case 'priority-picker':
@@ -245,13 +243,7 @@ export default {
         case 'tag-picker':
           board.groups.forEach((group) =>
             group.tasks.sort((t1, t2) => {
-              console.log(
-                t1.tags[0].txt,
-                't1',
-                t2.tags[0].txt,
-                't2'
-              )
-              if (!t1.tags[0].txt || !t2.tags[0].txt)
+              if (!t1.tags[0]?.txt || !t2.tags[0]?.txt)
                 return state.sortBy.dir
 
               return (
@@ -266,8 +258,8 @@ export default {
           board.groups.forEach((group) =>
             group.tasks.sort((t1, t2) => {
               if (
-                !t1.members[0].fullname ||
-                !t2.members[0].fullname
+                !t1.members[0]?.fullname ||
+                !t2.members[0]?.fullname
               )
                 return state.sortBy.dir
               return (
@@ -326,23 +318,22 @@ export default {
       state.isDraggingGroup = isDraggingGroup
     },
     addTask(state, { groupIdx, savedTask }) {
-      state.board.groups[groupIdx].tasks.push(
-        savedTask
-      )
+      state.board.groups[groupIdx].tasks.push(savedTask)
       this.commit('syncBoards', {
         filterBy: state.filterBy,
       })
     },
     updateTask(state, { groupId, updatedTask }) {
       const groupIdx =
-        state.board.groups.findIndex(
+        state.boardForDisplay.groups.findIndex(
           (group) => group.id === groupId
         )
-      const group = state.board.groups[groupIdx]
+      const group = state.boardForDisplay.groups[groupIdx]
       const taskIdx = group.tasks.findIndex(
         (task) => task.id === updatedTask.id
       )
       if (taskIdx === -1) return
+      // state.boardForDisplay.groups[groupIdx].tasks[
       state.board.groups[groupIdx].tasks[taskIdx] =
         updatedTask
       this.commit('syncBoards', {
@@ -355,10 +346,7 @@ export default {
       )
       if (idx !== -1) {
         state.boards.splice(idx, 1, savedBoard)
-        state.board = savedBoard
-        this.commit('syncBoards', {
-          filterBy: state.filterBy,
-        })
+        state.boardForDisplay = savedBoard
       } else state.boards.push(savedBoard)
     },
     removeBoard(state, { boardId }) {
@@ -368,31 +356,19 @@ export default {
       state.boards.splice(idx, 1)
     },
     setTasksOrder(state, { result, idx }) {
-      state.board.groups[idx].tasks = result
-      this.commit('syncBoards', {
-        filterBy: state.filterBy,
-      })
+      state.boardForDisplay.groups[idx].tasks = result
     },
     saveGroups(state, groups) {
-      state.board.groups = groups
-      this.commit('syncBoards', {
-        filterBy: state.filterBy,
-      })
+      state.boardForDisplay.groups = groups
     },
     setGroupsOrder(state, { newOrder }) {
-      state.board.groups = newOrder
-      this.commit('syncBoards', {
-        filterBy: state.filterBy,
-      })
+      state.boardForDisplay.groups = newOrder
     },
     setIsLoading(state, { isLoading }) {
       state.isLoading = isLoading
     },
     setCmpsOrder(state, { newOrder }) {
-      state.board.cmpsOrder = newOrder
-      this.commit('syncBoards', {
-        filterBy: state.filterBy,
-      })
+      state.boardForDisplay.cmpsOrder = newOrder
     },
     saveBoard(state, { board }) {
       const idx = state.boards.findIndex(
@@ -401,13 +377,10 @@ export default {
       state.boards.splice(idx, 1, board)
     },
     removeTask(state, { groupIdx, taskIdx }) {
-      state.board.groups[groupIdx].tasks.splice(
+      state.boardForDisplay.groups[groupIdx].tasks.splice(
         taskIdx,
         1
       )
-      this.commit('syncBoards', {
-        filterBy: state.filterBy,
-      })
     },
     addUpdate(state, { txt, taskId, boardId, groupId }) {
       const { _id, fullname, imgUrl } =
@@ -466,7 +439,6 @@ export default {
     },
     async saveBoard(context, { board }) {
       try {
-        console.log('board', board)
         const savedBoard = await boardService.saveBoard(
           JSON.parse(JSON.stringify(board))
         )
@@ -566,7 +538,7 @@ export default {
     },
     async saveTask({ commit, state }, { groupId, task }) {
       var savedTask = null
-      const idx = state.board.groups.findIndex(
+      const idx = state.boardForDisplay.groups.findIndex(
         (group) => group.id === groupId
       )
       const board = JSON.parse(JSON.stringify(state.board))
@@ -596,7 +568,7 @@ export default {
       { groupId, taskId }
     ) {
       const board = JSON.parse(
-        JSON.stringify(state.board)
+        JSON.stringify(state.boardForDisplay)
       )
       const groupIdx = board.groups.findIndex(
         (group) => group.id === groupId
@@ -636,7 +608,7 @@ export default {
       { dropResult, entities, entityType }
     ) {
       var board = JSON.parse(
-        JSON.stringify(context.state.board)
+        JSON.stringify(context.state.boardForDisplay)
       )
       entities = JSON.parse(JSON.stringify(entities))
       var groupId = ''
@@ -748,7 +720,7 @@ export default {
       { prevCmpTitle, newCmpTitle }
     ) {
       const board = JSON.parse(
-        JSON.stringify(state.board)
+        JSON.stringify(state.boardForDisplay)
       )
       const idx = board.cmpsOrder.findIndex(
         (cmp) => cmp.preName === prevCmpTitle
@@ -764,7 +736,7 @@ export default {
           SOCKET_EMIT_EDIT_CMPS_ORDER,
           board.cmpsOrder
         )
-      } catch (err) { }
+      } catch (err) {}
     },
     async addUpdate(
       { commit },
