@@ -46,6 +46,28 @@
     }
   }
 
+  // GROUP COLOR
+
+  .group-color-pallete {
+    position: absolute;
+    top: 40px;
+    width: 142px;
+    line-height: 0px;
+    background-color: $main-white;
+    box-shadow: 2px 3px 8px -2px rgba(0, 0, 0, 0.36);
+
+    .group-color-item {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: inline-block;
+      margin: 3px;
+    }
+  }
+
+  // Group Header
+
   .group-title {
     padding: 0;
     width: 100%;
@@ -65,12 +87,6 @@
       cursor: text;
     }
   }
-
-  // .drag-cols {
-  //   color: aqua;
-  //   transition: transform 0.1s ease;
-  //   transform: rotate(2deg);
-  // }
 
   .drag-task {
     transition: transform 0.1s ease;
@@ -94,7 +110,6 @@
 .th-title {
   position: sticky;
   left: 46px;
-  // overflow: hidden;
 
   width: 334px;
   text-align: left;
@@ -148,12 +163,10 @@
     background-color: $main-white;
     border: 1px solid $main-gray;
     border-radius: 20px;
-    -webkit-box-shadow: 2px 3px 8px -2px rgba(0, 0, 0, 0.36);
     box-shadow: 2px 3px 8px -2px rgba(0, 0, 0, 0.36);
     opacity: 0;
 
     i {
-      // color: white;
       font-size: 14px;
       position: absolute;
       opacity: 0;
@@ -182,11 +195,9 @@
     &:hover {
       border: 1px dashed $group-header-gray;
       cursor: text;
-      // padding: 2px 2px;
     }
 
     input {
-      // max-width: 90px;
       width: 100%;
       text-align: center;
       border: 1px $main-gray solid;

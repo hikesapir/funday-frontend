@@ -802,5 +802,16 @@ export default {
         throw ('Cannot find logged in user', err)
       }
     },
+    changeGroupColor(
+      { state, dispatch },
+      { groupId, color }
+    ) {
+      const board = JSON.parse(JSON.stringify(state.board))
+      const idx = board.groups.findIndex(
+        (group) => group.id === groupId
+      )
+      board.groups[idx].style.color = color
+      dispatch({ type: 'saveBoard', board })
+    },
   },
 }
