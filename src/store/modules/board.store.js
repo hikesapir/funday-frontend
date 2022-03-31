@@ -243,13 +243,7 @@ export default {
         case 'tag-picker':
           board.groups.forEach((group) =>
             group.tasks.sort((t1, t2) => {
-              console.log(
-                t1.tags[0].txt,
-                't1',
-                t2.tags[0].txt,
-                't2'
-              )
-              if (!t1.tags[0].txt || !t2.tags[0].txt)
+              if (!t1.tags[0]?.txt || !t2.tags[0]?.txt)
                 return state.sortBy.dir
 
               return (
@@ -264,8 +258,8 @@ export default {
           board.groups.forEach((group) =>
             group.tasks.sort((t1, t2) => {
               if (
-                !t1.members[0].fullname ||
-                !t2.members[0].fullname
+                !t1.members[0]?.fullname ||
+                !t2.members[0]?.fullname
               )
                 return state.sortBy.dir
               return (

@@ -11,14 +11,20 @@
     </div>
     <div v-else>
       <img :src="firstMemberPic" />
-      <div class="small-number sum">+{{ groupMembersLength - 1 }}</div>
+
+      <div
+        :data-title="restOfMemberList"
+        class="small-number sum"
+      >
+        +{{ groupMembersLength - 1 }}
+      </div>
     </div>
   </section>
 </template>
 
 <script>
 export default {
-  name: "members-sum",
+  name: 'members-sum',
   props: {
     data: Array,
     groupId: String,
@@ -26,23 +32,33 @@ export default {
   data() {
     return {
       groupData: null,
-    };
+    }
   },
   created() {},
   computed: {
     groupMembers() {
       const groupData = this.data.find(
         (groupData) => groupData.id === this.groupId
-      );
-      return groupData.member;
+      )
+      return groupData.member
     },
+    restOfMemberList() {
+      var list = this.groupMembers
+      list.shift()
+      list = list.reduce((acc, member) => {
+        acc.push(member.fullname)
+        return acc
+      }, [])
+      return list.join(' ')
+    },
+
     groupMembersLength() {
-      return this.groupMembers.length;
+      return this.groupMembers.length
     },
     firstMemberPic() {
-      return this.groupMembers[0].imgUrl;
+      return this.groupMembers[0].imgUrl
     },
   },
   methods: {},
-};
+}
 </script>
