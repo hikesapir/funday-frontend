@@ -4,8 +4,10 @@
   justify-content: left;
   width: 334px;
   position: relative;
-  background-color: $main-white;
-  opacity: 0.8;
+  background-color: rgba(255, 255, 255, 0.658);
+  // border-bottom: 0.1px solid $main-task-end-line;
+
+  // opacity: 0.8;
   z-index: 2;
   // for making the title picker column sticky
   // and overlay when scrolling to the right
@@ -77,7 +79,7 @@
     color: $icon-task-gray;
     svg {
       position: absolute;
-      right: 0;
+      right: 10px;
       top: 50%;
       transform: translateY(-50%);
     }

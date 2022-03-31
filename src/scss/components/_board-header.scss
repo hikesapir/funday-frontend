@@ -2,7 +2,7 @@
   padding: 16px 30px 0;
   .description-line {
     padding: 2px;
-    margin-bottom: 5px;
+    // margin-bottom: 5px;
   }
 
   .btn {
@@ -45,6 +45,7 @@
       .star,
       .info {
         @include btn(4px 8px);
+        font-size: rem(15px);
       }
     }
   }
@@ -52,6 +53,7 @@
     .group-description-header {
       span {
         width: 400px;
+        background-color: blue;
       }
     }
     .text-content {
@@ -61,6 +63,7 @@
 
       &:focus {
         // padding: 20px;
+        border: 1px solid $main-border;
       }
     }
   }

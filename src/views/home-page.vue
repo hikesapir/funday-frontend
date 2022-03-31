@@ -40,7 +40,7 @@
             class="start-btn"
             @click="$router.push(`/boards/${getFirstBoardId}`)"
           >
-            Get Started
+            See Demo
           </div>
         </div>
       </div>
@@ -69,7 +69,7 @@
         class="start-btn"
         @click="$router.push(`/boards/${getFirstBoardId}`)"
       >
-        Get Started
+        See Demo
       </div>
 
       <div class="gradient-homepage-bcg"></div>

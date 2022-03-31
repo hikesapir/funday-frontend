@@ -9,9 +9,7 @@
             ref="boardTitle"
             @blur="onUpdate"
             @keyup.enter="onUpdate"
-          >
-            {{ boardDetails.title }}
-          </h1>
+          >{{ boardDetails.title }}</h1>
         </div>
         <div>
           <button
@@ -25,16 +23,9 @@
               <i class="fa-solid fa-circle-info"></i>
             </span>
           </button>
-          <button
-            :data-title="starTitle + ' favorites'"
-            @click="starred"
-            class="star"
-          >
+          <button :data-title="starTitle + ' favorites'" @click="starred" class="star">
             <span>
-              <i
-                v-if="boardDetails.isStarred"
-                class="fa-solid fa-star"
-              ></i>
+              <i v-if="boardDetails.isStarred" class="fa-solid fa-star"></i>
               <i v-else class="fa-regular fa-star"></i>
             </span>
           </button>
@@ -66,11 +57,11 @@
         v-show="isDescriptionOpen"
         contenteditable="true"
         ref="boardDescription"
+        data-ph="Add board description"
         @blur="onUpdate"
         @keyup.enter="onUpdate"
         class="group-description-header text-content"
-        >{{ boardDetails.description }}</span
-      >
+      >{{ boardDetails.description }}</span>
     </div>
   </header>
 </template>
@@ -88,8 +79,8 @@ export default {
       isDescriptionOpen: true,
     }
   },
-  created() {},
-  mounted() {},
+  created() { },
+  mounted() { },
   methods: {
     starred() {
       this.$emit('updateBoard', 'star')
@@ -117,6 +108,13 @@ export default {
         : 'Add to'
     },
   },
-  unmounted() {},
+  unmounted() { },
 }
 </script>
+
+
+<style>
+[contentEditable="true"]:empty:not(:focus):before {
+  content: attr(data-ph);
+}
+</style>

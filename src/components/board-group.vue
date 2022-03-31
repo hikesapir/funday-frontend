@@ -73,6 +73,7 @@
             @drop="onDrop($event, 'cmpsOrder')"
             drag-handle-selector=".cols-drag-handle"
             drag-class="drag-cols"
+            :drop-placeholder="dropPlaceholderOptions"
           >
             <Draggable
               v-for="cmp in cmps"
@@ -103,8 +104,10 @@
                   <span v-show="isEditing(cmp.preName)">
                     <input
                       type="text"
-                      @blur="saveCmpTitle"
-                      @keyup.enter="saveCmpTitle"
+                      @blur="saveCmpTitle(cmp.preName)"
+                      @keyup.enter="
+                        saveCmpTitle(cmp.preName)
+                      "
                       v-model="newCmpTitle"
                     />
                   </span>
@@ -125,6 +128,7 @@
         :get-child-payload="getChildPayload"
         drag-handle-selector=".task-drag-handle"
         drag-class="drag-task"
+        :drop-placeholder="dropPlaceholderOptions"
       >
         <Draggable
           v-for="task in group?.tasks"
@@ -167,6 +171,11 @@ export default {
   },
   data() {
     return {
+      dropPlaceholderOptions: {
+        className: 'drop-preview',
+        animationDuration: '150',
+        showOnTop: false,
+      },
       isHover: false,
       isHoverGroupMenu: false,
       openContext: false,
@@ -236,7 +245,8 @@ export default {
       this.prevCmpTitle = cmp
       this.newCmpTitle = cmp
     },
-    saveCmpTitle() {
+    saveCmpTitle(cmpName) {
+      if (cmpName === this.newCmpTitle) return
       this.$store.dispatch({
         type: 'saveCmpTitle',
         prevCmpTitle: this.prevCmpTitle,

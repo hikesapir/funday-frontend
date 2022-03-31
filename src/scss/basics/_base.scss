@@ -120,3 +120,8 @@ div.smooth-dnd-container.vertical > div.smooth-dnd-draggable-wrapper {
   --left: 100px;
   --top: 100px;
 }
+
+.drop-preview {
+  border: 1px dashed $main-gray;
+  height: 34px;
+}
