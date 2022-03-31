@@ -1,16 +1,13 @@
 .users {
-  text-align: center;
-  position: relative;
+  background: url("https://theproductmanager.com/wp-content/uploads/2021/12/monday.com-Main-Table-View-Screenshot-1024x477.png");
+  background-repeat: no-repeat;
   width: 100%;
-  background: rgb(70, 52, 99);
-  background: linear-gradient(
-    90deg,
-    rgba(70, 52, 99, 1) 0%,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 184, 184, 1) 0%,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(140, 221, 226, 1) 100%,
-    rgba(197, 255, 191, 1) 100%,
-    rgba(255, 254, 176, 1) 100%
-  );
+  background-size: contain;
+  background-position: -90px -20px;
+  background-size: cover;
+
+  .background-blur {
+    background-color: rgba(0, 0, 0, 0.74);
+    height: 100%;
+  }
 }
