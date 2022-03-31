@@ -307,12 +307,12 @@ async function removeTask(board, groupIdx, taskIdx) {
   }
 }
 
-async function addUpdate(txt, taskId, boardId, groupId) {
+async function addUpdate(update, taskId, boardId, groupId) {
   const { _id, fullname, imgUrl } =
-    userService.getLoggedinUser()
-  const update = {
+   update.from
+  const updateMsg = {
     id: utilService.makeId(8),
-    txt,
+    txt: update.txt,
     createdAt: Date.now(),
     byMember: { _id, fullname, imgUrl },
   }
@@ -323,9 +323,9 @@ async function addUpdate(txt, taskId, boardId, groupId) {
   const task = group.tasks.find(
     (task) => task.id === taskId
   )
-  task.updates.unshift(update)
+  task.updates.unshift(updateMsg)
   await saveBoard(board)
-  return update
+  return updateMsg
 }
 
 function getEmptyTask(

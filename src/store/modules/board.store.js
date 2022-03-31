@@ -382,16 +382,17 @@ export default {
         1
       )
     },
-    addUpdate(state, { txt, taskId, boardId, groupId }) {
+    addUpdate(state, { update, taskId, boardId, groupId }) {
       const { _id, fullname, imgUrl } =
-        userService.getLoggedinUser()
-      const update = {
+        update.from
+      const updateMsg = {
         id: utilService.makeId(8),
-        txt,
+        txt: update.txt,
         createdAt: Date.now(),
         byMember: { _id, fullname, imgUrl },
       }
-      state.taskForDisplay.updates.unshift(update)
+      console.log(updateMsg)
+      state.taskForDisplay.updates.unshift(updateMsg)
     },
     setTaskFordisplay(state, { id, groupId, taskId }) {
       const group = state.board.groups.find(
@@ -740,18 +741,18 @@ export default {
     },
     async addUpdate(
       { commit },
-      { txt, taskId, boardId, groupId }
+      { update, taskId, boardId, groupId }
     ) {
       try {
         commit({
           type: 'addUpdate',
-          txt,
+          update,
           taskId,
           boardId,
           groupId,
         })
         await boardService.addUpdate(
-          txt,
+          update,
           taskId,
           boardId,
           groupId
@@ -760,7 +761,7 @@ export default {
           taskId,
           boardId,
           groupId,
-          txt,
+          update,
         })
       } catch (err) {
         console.log('addUpdate: Had problems')

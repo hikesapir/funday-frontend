@@ -73,10 +73,10 @@ export default {
       });
       this.$router.push(`/boards/${this.boardId}`);
     },
-    updateTask(txt) {
+    updateTask(update) {
       this.$store.dispatch({
         type: "addUpdate",
-        txt,
+        update,
         taskId: this.params.taskId,
         boardId: this.params.id,
         groupId: this.params.groupId,
