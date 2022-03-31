@@ -68,8 +68,8 @@ export default {
       return this.task.tags.length < 2;
     },
     tagsForDisplay() {
-      if (this.task.tags.length >= 3) {
-        return this.task.tags.slice(0, 2);
+      if (this.task.tags.length >= 2) {
+        return this.task.tags.slice(0, 1);
       } else return this.task.tags;
     },
     boardTags() {
