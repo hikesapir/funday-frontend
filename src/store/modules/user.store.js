@@ -1,4 +1,5 @@
 import { authService } from '../../services/auth-service.js'
+import userService from '../../services/user-service.js'
 import router from '../../router'
 
 // import userService from '../../services/user.service.js'
@@ -18,7 +19,7 @@ export default {
     },
   },
   mutations: {
-    userLoggedIn(state, { user }) {
+    setUser(state, { user }) {
       state.user = user
     },
     userLoggedOut(state) {
@@ -29,13 +30,22 @@ export default {
     },
   },
   actions: {
-    async login({ commit }, { user }) {
+    async autoLogin({ commit }) {
       try {
-        // console.log(user);
+        const user = await userService.getLoggedinUser()
+        commit({ type: 'setUser', user })
+
+      } catch (err) {
+        console.log('autoLogin', err);
+      }
+    },
+    async login({ commit, getters }, { user }) {
+      try {
         const res = await authService.login(user);
         commit({ type: 'setUser', user: res })
         console.log("Success!");
-        router.push(`/boards/:id`)
+        const boardId = getters.boards[0]._id
+        router.push(`/boards/${boardId}`)
 
       } catch (err) {
         console.log(err);
@@ -43,7 +53,6 @@ export default {
     },
     async logout({ commit }, { user }) {
       try {
-        // console.log(user);
         const res = await authService.logout();
         commit({ type: 'setUser', user: res })
         console.log("Success to logout!");

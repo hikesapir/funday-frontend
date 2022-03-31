@@ -41,7 +41,6 @@ export default {
       return isDraggingGroup
     },
     board({ filterBy, board, sortBy }) {
-      console.log(filterBy, board, sortBy);
       if (!filterBy.txt && !filterBy.member && !sortBy.type) return board
       const boardForDisplay = JSON.parse(JSON.stringify(board))
       //filter
