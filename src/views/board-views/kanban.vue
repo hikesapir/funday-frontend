@@ -27,7 +27,7 @@ export default {
         group.tasks.forEach((task) => {
           task.groupId = group.id;
           boardMapByStatus[task.status].push(task);
-          console.log(task);
+          // console.log(task);
         });
       });
       return boardMapByStatus;

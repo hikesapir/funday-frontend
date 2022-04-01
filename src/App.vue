@@ -1,7 +1,6 @@
 <template>
   <div v-if="isModalOpen" @click="closeModal" class="modal-background"></div>
   <section class="app-container">
-    <main-nav></main-nav>
     <router-view></router-view>
     <div v-if="isLoading" class="loadig">
       <img src="./img/loading.svg" alt />
@@ -20,6 +19,7 @@ export default {
   },
   created() {
     this.$store.dispatch("loadApp");
+    console.log(this.$route.params);
 
   },
   methods: {
