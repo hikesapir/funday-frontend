@@ -13,6 +13,7 @@
   transition: all 0.1s ease 0.1s;
   visibility: visible;
 }
+
 /* box for title text */
 [data-title]::after {
   content: attr(data-title);
@@ -49,6 +50,7 @@
   transform: translateY(-50%);
   transform: rotate(45deg);
 }
+
 [data-title]:hover::before {
   opacity: 1;
   transition: all 0.1s ease 0.1s;
@@ -84,4 +86,16 @@
 .space-btn {
   display: flex;
   gap: 10px;
+  align-items: center;
+}
+
+.align-center {
+  display: flex;
+  align-items: center;
+}
+
+.ellipsis{
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
