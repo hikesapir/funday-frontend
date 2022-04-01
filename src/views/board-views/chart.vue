@@ -3,10 +3,17 @@
     <h1>Charts</h1>
     <div class="grid-layout">
       <div>
-        <bar-chart v-if="statusChart" :data="taskForMemberMap" />
+        <bar-chart
+          v-if="statusChart"
+          :data="taskForMemberMap"
+        />
       </div>
       <div>
-        <pie-chart v-if="statusChart" :data="statusChart" :categories="statuses" />
+        <pie-chart
+          v-if="statusChart"
+          :data="statusChart"
+          :categories="statuses"
+        />
       </div>
     </div>
   </div>
@@ -24,14 +31,10 @@ export default {
   },
   components: {
     barChart,
-    pieChart
+    pieChart,
   },
   computed: {
     charts() {
-      console.log(
-        'this.$store.getters.board?.charts',
-        this.$store.getters.board?.charts
-      )
       return this.$store.getters.board?.charts
     },
     statusChart() {
@@ -69,16 +72,20 @@ export default {
       })
     },
     taskForMemberMap() {
-      const tasksForMemberMap = this.$store.getters.boardData?.tasksForMemberMap
+      const tasksForMemberMap =
+        this.$store.getters.boardData?.tasksForMemberMap
       const map = []
       for (var key in tasksForMemberMap) {
-        map.push({ y: tasksForMemberMap[key], color: utilService.getRandomColor(), name: key })
+        map.push({
+          y: tasksForMemberMap[key],
+          color: utilService.getRandomColor(),
+          name: key,
+        })
       }
       // // console.log(this.$store.getters.board.members);
       return map
     },
   },
-
 }
 </script>
 

@@ -6,6 +6,8 @@ import homePage from '../views/home-page.vue'
 import mainApp from '../views/board-app.vue'
 import mainTable from '../views/board-views/main-table.vue'
 import chart from '../views/board-views/chart.vue'
+import kanban from '../views/board-views/kanban.vue'
+
 import myWork from '../views/my-work.vue'
 import taskDetails from '../views/task-details.vue'
 import users from '../views/users.vue'
@@ -36,9 +38,10 @@ const router = createRouter({
               name: 'task-details',
               component: taskDetails,
             },
-          ]
+          ],
         },
         { path: 'chart', component: chart },
+        { path: 'kanban', component: kanban },
       ],
     },
     {
@@ -49,14 +52,14 @@ const router = createRouter({
         {
           path: 'login',
           name: 'login',
-          component: login
+          component: login,
         },
         {
           path: 'signup',
           name: 'sign-up',
-          component: signup
-        }
-      ]
+          component: signup,
+        },
+      ],
     },
     {
       path: '/my-work',

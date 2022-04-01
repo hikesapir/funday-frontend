@@ -16,7 +16,7 @@
         <span>Charts</span>
       </div>
     </router-link>
-    <router-link :to="'/' + boardId">
+    <router-link :to="'/boards/' + boardId + '/kanban'">
       <div class="space-btn">
         <span class="upsidedwon">
           <i class="fa-solid fa-chart-simple"></i>
@@ -38,9 +38,9 @@
 
 <script>
 export default {
-  name: "board-view-mode",
+  name: 'board-view-mode',
   props: {
     boardId: String,
   },
-};
+}
 </script>
