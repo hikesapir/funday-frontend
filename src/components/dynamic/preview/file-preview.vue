@@ -1,5 +1,5 @@
 <template>
-    <span class="file-preview">
+    <span class="file-preview" @click="isModalOpen = true">
         <img
             @mouseover="isHover = true"
             @mouseleave="isHover = false"
@@ -11,6 +11,9 @@
             <img :src="file" alt />
         </div>
     </span>
+    <div class="modal-background" v-if="isModalOpen" @click="isModalOpen = false">
+        <img @click.stop :src="file" alt />
+    </div>
 </template>
 
 
@@ -23,6 +26,7 @@ export default {
     data() {
         return {
             isHover: false,
+            isModalOpen: false
 
         }
     },
