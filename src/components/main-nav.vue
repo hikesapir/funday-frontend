@@ -112,7 +112,7 @@
         </div>
       </div>
       <div class="img-container">
-        <img :src="user.imgUrl" />
+        <img :src="user.imgUrl" alt="https://res.cloudinary.com/mistertoysss/image/upload/v1648463489/funday%20must/vote_1_bkio4y.png">
       </div>
     </nav>
   </section>
