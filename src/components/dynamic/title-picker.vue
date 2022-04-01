@@ -1,15 +1,15 @@
 <template>
-  <div class="title-picker container">
-    <div class="task-menu-arrow" @click="openModal = !openModal">
-      <span class="open-context-btn" v-if="isHover || hover || openModal">
-        <i class="fa-solid fa-caret-down"></i>
-      </span>
-      <div v-if="openModal" class="context-modal">
-        <button @click="deleteTask(groupId, task.id)">
-          <i class="fa-regular fa-trash-can"></i>Delete
-        </button>
-      </div>
+  <div class="task-menu-arrow" @click="openModal = !openModal">
+    <span class="open-context-btn" v-if="isHover || hover || openModal">
+      <i class="fa-solid fa-caret-down"></i>
+    </span>
+    <div v-if="openModal" class="context-modal">
+      <button @click="deleteTask(groupId, task.id)">
+        <i class="fa-regular fa-trash-can"></i>Delete
+      </button>
     </div>
+  </div>
+  <div class="title-picker container">
     <div
       class="title-picker task-drag-handle"
       @mouseover="hover = true"
