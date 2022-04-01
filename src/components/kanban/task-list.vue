@@ -1,15 +1,15 @@
 <template>
   <div class="task-list-container">
-    <Container>
+    <span>{{ statusTxt }}</span>
+    <!-- <Container>
       <Draggable>
-        <!-- <span>{{ statusTxt }}</span> -->
-        <!-- <task
+        <task
           v-for="task in tasks"
           :key="task.id + +'k'"
           :task="task"
-        /> -->
+        />
       </Draggable>
-    </Container>
+    </Container> -->
   </div>
 </template>
 <script>
@@ -26,10 +26,6 @@ export default {
     Draggable,
   },
   created() {},
-  computed: {
-    tasks() {
-      // return this.group?.tasks
-    },
-  },
+  computed: {},
 }
 </script>
