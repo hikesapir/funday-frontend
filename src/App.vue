@@ -19,7 +19,6 @@ export default {
   },
   created() {
     this.$store.dispatch("loadApp");
-    console.log(this.$route.params);
 
   },
   methods: {

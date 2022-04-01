@@ -73,15 +73,44 @@
       </section>
     </div>
 
-    <button>
-      <div class="space-btn">
-        <span>
-          <i class="fa-solid fa-filter"></i>
-        </span>
-        <span>Filter</span>
-      </div>
-    </button>
-    <button>Sort</button>
+    <div class="relative">
+      <button @click="openFilterModal = !openFilterModal">
+        <div class="space-btn">
+          <span>
+            <i class="fa-solid fa-filter"></i>
+          </span>
+          <span>Filter</span>
+        </div>
+      </button>
+      <section
+        v-if="openFilterModal"
+        class="context-modal filterBy"
+        tabindex="0"
+        @blur="openFilterModal = false"
+      >
+        <h2>Filter</h2>
+        <div class="spacer"></div>
+        <div class="flex">
+          <div>
+            <div class="title ellipsis">{{ status }}</div>
+            <div v-for="s in board.labels.status" class="select">
+              <div class="small-circle" :style="'background-color:' + s.color"></div>
+              <div>{{ s.txt || 'Empty' }}</div>
+            </div>
+          </div>
+          <div>
+            <div class="title ellipsis">{{ priority }}</div>
+            <div
+              v-for="p in board.labels.priority"
+              class="select"
+            >
+              <div class="small-circle" :style="'background-color:' + p.color"></div>
+              <div>{{ p.txt || 'Empty' }}</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   </section>
 </template>
 
@@ -96,10 +125,13 @@ export default {
       filterBy: {
         txt: '',
         member: '',
+        priority: '',
+        status: '',
       },
       openSearching: false,
       openPersonModal: false,
       openItemModal: false,
+      openFilterModal: false,
     }
   },
   components: {},
@@ -133,6 +165,14 @@ export default {
         )
       }
     },
+    status() {
+      const status = this.board.cmpsOrder.find(cmp => cmp.cmpName === 'status-picker')
+      return status.preName
+    },
+    priority() {
+      const priority = this.board.cmpsOrder.find(cmp => cmp.cmpName === 'priority-picker')
+      return priority.preName
+    }
   },
 }
 </script>
