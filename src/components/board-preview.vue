@@ -143,7 +143,7 @@ export default {
   },
   computed: {
     active() {
-      return (this.$route.params.id === this.board._id) ? 'active' : ''
+      return (this.$route.params.id === this.board._id) ? 'act' : ''
     }
   },
   unmounted() { },
@@ -151,7 +151,7 @@ export default {
 </script>
 
 <style>
-.active {
+.act {
   background-color: #cce5ff;
   border-radius: 4px;
   border: 1px solid transparent;
