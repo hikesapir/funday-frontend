@@ -1,44 +1,40 @@
 <template>
   <div class="kanban-view-container">
-    Kanban
-    <div v-if="board" class="main-kanban-wrapper">
-      <!-- <Container
-        orientation="horizontal"
-        drag-class="drag-list"
-        drag-handle-selector=".drag-list-handle"
-      > -->
-      <div
-        class="kanban-list"
-        v-for="status in board?.labels.status"
-        :key="status.txt + 'k'"
-      >
-        <!-- <Draggable> -->
-        <pre>
-
-          {{ status.txt }}
-        </pre>
-        <task-list statusTxt="status" />
-        <!-- </Draggable> -->
+    <div v-for="status in statuses" :key="status">
+      <div class="k-list-header" :style="{ 'background-color': status.color }">
+        {{ status.txt || "Empty" }}
       </div>
-      <!-- </Container> -->
+      <k-task-List :list="tasksForDisplay[status.id]" />
     </div>
   </div>
 </template>
 
 <script>
-import { Container, Draggable } from 'vue3-smooth-dnd'
-import taskList from '../../components/kanban/task-list.vue'
+import kTaskList from "../../components/kanban/k-task-list.vue";
 export default {
-  name: 'main-table',
+  name: "kanban",
   components: {
-    taskList,
-    Container,
-    Draggable,
+    kTaskList,
   },
   computed: {
     board() {
-      return this.$store.getters.board
+      return this.$store.getters.board;
+    },
+    tasksForDisplay() {
+      const boardMapByStatus = { s000: [], s001: [], s002: [], s003: [] };
+      const board = JSON.parse(JSON.stringify(this.board));
+      board.groups.map((group) => {
+        group.tasks.forEach((task) => {
+          task.groupId = group.id;
+          boardMapByStatus[task.status].push(task);
+          console.log(task);
+        });
+      });
+      return boardMapByStatus;
+    },
+    statuses() {
+      return this.board.labels.status;
     },
   },
-}
+};
 </script>
