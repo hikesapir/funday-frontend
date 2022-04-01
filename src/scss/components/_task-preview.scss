@@ -16,20 +16,19 @@
   &:hover {
     background-color: $main-hover-gray;
   }
+}
+.timeline-picker {
+  background-color: $main-task-gray;
 
-  .timeline-picker {
-    background-color: $main-task-gray;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    label.timeline {
-      height: 22px;
-      line-height: 22px;
-      width: 155px;
-      border-radius: 1rem;
-      color: white;
-      text-align: center;
-    }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  label.timeline {
+    height: 22px;
+    line-height: 22px;
+    width: 155px;
+    border-radius: 1rem;
+    color: white;
+    text-align: center;
   }
 }
