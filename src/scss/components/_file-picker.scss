@@ -12,7 +12,7 @@
   }
   .btn.haveSome {
     position: absolute;
-    left: 5px;
+    left: -5px;
   }
   .context-modal {
     width: 130px;
@@ -31,6 +31,14 @@
   .file-preview {
     height: 24px;
     width: 17px;
+    .context-modal{
+      left: -50px;
+      width: 270px;
+      img{
+        height: 250px;
+        width: 250px;
+      }
+    }
   }
 
   img {
