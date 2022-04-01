@@ -124,11 +124,9 @@ export default {
         )
       )
 
-      console.log(activities)
       activities = activities.filter(
         (act) => act.taskId === id
       )
-      console.log(activities)
       return activities
     },
   },

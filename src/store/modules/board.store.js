@@ -130,7 +130,6 @@ export default {
             return
         }
       }
-
       return boardForDisplay
     },
     cmpsOrder({ board }) {
@@ -402,6 +401,9 @@ export default {
     setUser(state, user) {
       state.loggedInUser = user
     },
+    addActivity(state, { activity }) {
+      state.board.activities.push(activity)
+    },
   },
   actions: {
     async loadBoards({ commit }) {
@@ -510,18 +512,20 @@ export default {
       })
       try {
         // saving the tasks inside the board object
-        const savedBoard = await boardService.saveTask(
-          board,
-          groupId,
-          task
-        )
+        // const savedBoard = await boardService.saveTask(
+        //   board,
+        //   groupId,
+        //   task
+        // )
 
         // save the board in the database, and add activity
-        await boardService.recordChange(
-          savedBoard,
+        const activity = await boardService.recordChange(
+          board,
+          groupId,
           description,
-          task.id
+          task
         )
+        commit({ type: 'addActivity', activity })
         socketService.emit(SOCKET_EMIT_TASK_UPDATED, {
           groupId,
           task,

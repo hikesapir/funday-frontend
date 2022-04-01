@@ -199,18 +199,35 @@ function getEmptyBoard(boardTitle) {
 
 // Activities
 
-function recordChange(board, description, taskId) {
+async function recordChange(
+  board,
+  groupId,
+  description,
+  task
+) {
   const byMember = userService.getLoggedinUser()
-  delete byMember.password
   const activity = {
     id: utilService.makeId(8),
     createdAt: Date.now(),
-    taskId,
+    taskId: task.id,
     byMember,
     description,
   }
   board.activities.push(activity)
-  return saveBoard(board)
+  const idx = board.groups.findIndex(
+    (group) => group.id === groupId
+  )
+  const taskIdx = board.groups[idx].tasks.findIndex(
+    (t) => t.id === task.id
+  )
+  board.groups[idx].tasks[taskIdx] = task
+  try {
+    await saveBoard(board)
+    return activity
+  } catch (err) {
+    console.error(err)
+    throw err
+  }
 }
 
 // group
@@ -308,8 +325,7 @@ async function removeTask(board, groupIdx, taskIdx) {
 }
 
 async function addUpdate(update, taskId, boardId, groupId) {
-  const { _id, fullname, imgUrl } =
-   update.from
+  const { _id, fullname, imgUrl } = update.from
   const updateMsg = {
     id: utilService.makeId(8),
     txt: update.txt,
@@ -1378,70 +1394,70 @@ function _createDemoData() {
 function getUsers() {
   return [
     {
-      "_id": "u101",
-      "fullname": "Israel Israeli ",
-      "imgUrl": "https://res.cloudinary.com/mistertoysss/image/upload/v1648414062/funday%20must/k9yzIPxC_400x400_qriu7j.jpg",
-
+      _id: 'u101',
+      fullname: 'Israel Israeli ',
+      imgUrl:
+        'https://res.cloudinary.com/mistertoysss/image/upload/v1648414062/funday%20must/k9yzIPxC_400x400_qriu7j.jpg',
     },
     {
-      "_id": "u102",
-      "fullname": "Lior Amar",
-      "imgUrl": "https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070372/w1hcqybgmllnpl8ld2zh.jpg",
-
+      _id: 'u102',
+      fullname: 'Lior Amar',
+      imgUrl:
+        'https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070372/w1hcqybgmllnpl8ld2zh.jpg',
     },
     {
-      "_id": "u103",
-      "fullname": "Roee furman",
-      "imgUrl": "https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070370/qpolx3ucumsiscnf0ymk.jpg",
-
+      _id: 'u103',
+      fullname: 'Roee furman',
+      imgUrl:
+        'https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070370/qpolx3ucumsiscnf0ymk.jpg',
     },
     {
-      "_id": "u104",
-      "fullname": "Sapir Hiki",
-      "imgUrl": "https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070371/a1avc0ofryx5enjnbklv.jpg",
-
+      _id: 'u104',
+      fullname: 'Sapir Hiki',
+      imgUrl:
+        'https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070371/a1avc0ofryx5enjnbklv.jpg',
     },
     {
-      "_id": "u105",
-      "fullname": "Abi Abambi",
-      "imgUrl": "https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg",
-
+      _id: 'u105',
+      fullname: 'Abi Abambi',
+      imgUrl:
+        'https://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
     },
     {
-      "_id": "u106",
-      "fullname": "Poki Ben-David",
-      "imgUrl": "https://res.cloudinary.com/mistertoysss/image/upload/v1648414113/funday%20must/photo-1568602471122-7832951cc4c5_fbs2vc.jpg",
-
+      _id: 'u106',
+      fullname: 'Poki Ben-David',
+      imgUrl:
+        'https://res.cloudinary.com/mistertoysss/image/upload/v1648414113/funday%20must/photo-1568602471122-7832951cc4c5_fbs2vc.jpg',
     },
     {
-      "_id": "u107",
-      "fullname": "Lulu Moppet",
-      "imgUrl": "https://res.cloudinary.com/mistertoysss/image/upload/v1648414159/funday%20must/photo-1573496359142-b8d87734a5a2_uftqho.jpg",
-
+      _id: 'u107',
+      fullname: 'Lulu Moppet',
+      imgUrl:
+        'https://res.cloudinary.com/mistertoysss/image/upload/v1648414159/funday%20must/photo-1573496359142-b8d87734a5a2_uftqho.jpg',
     },
     {
-      "_id": "u108",
-      "fullname": "Arthur Reed",
-      "imgUrl": "https://res.cloudinary.com/mistertoysss/image/upload/v1648414247/funday%20must/photo-1566492031773-4f4e44671857_pezzjc.jpg",
-
+      _id: 'u108',
+      fullname: 'Arthur Reed',
+      imgUrl:
+        'https://res.cloudinary.com/mistertoysss/image/upload/v1648414247/funday%20must/photo-1566492031773-4f4e44671857_pezzjc.jpg',
     },
     {
-      "_id": "u109",
-      "fullname": "Melissa Altro",
-      "imgUrl": "https://res.cloudinary.com/mistertoysss/image/upload/v1648414285/funday%20must/photo-1618085222100-93f0eecad0aa_fuisxo.jpg",
-
+      _id: 'u109',
+      fullname: 'Melissa Altro',
+      imgUrl:
+        'https://res.cloudinary.com/mistertoysss/image/upload/v1648414285/funday%20must/photo-1618085222100-93f0eecad0aa_fuisxo.jpg',
     },
     {
-      "_id": "u110",
-      "fullname": "Julie Lemieux",
-      "imgUrl": "https://res.cloudinary.com/mistertoysss/image/upload/v1648414292/funday%20must/photo-1551836022-deb4988cc6c0_t4if9h.jpg",
-
+      _id: 'u110',
+      fullname: 'Julie Lemieux',
+      imgUrl:
+        'https://res.cloudinary.com/mistertoysss/image/upload/v1648414292/funday%20must/photo-1551836022-deb4988cc6c0_t4if9h.jpg',
     },
     {
-      "_id": "u111",
-      "fullname": "Admin Admin",
-      "imgUrl": "https://res.cloudinary.com/mistertoysss/image/upload/v1648414297/funday%20must/photo-1472099645785-5658abf4ff4e_lhdb3o.jpg",
-
-    }
+      _id: 'u111',
+      fullname: 'Admin Admin',
+      imgUrl:
+        'https://res.cloudinary.com/mistertoysss/image/upload/v1648414297/funday%20must/photo-1472099645785-5658abf4ff4e_lhdb3o.jpg',
+    },
   ]
 }
