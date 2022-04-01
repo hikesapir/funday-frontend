@@ -8,11 +8,11 @@
             @click="openNewTab(file)"
         />
         <div v-if="isHover" class="context-modal">
-            <img :src="file" alt />
+            <img :src="file" alt="http://res.cloudinary.com/mistertoysss/image/upload/v1648842217/noimg_djbu0w.png" />
         </div>
     </span>
     <div class="modal-background" v-if="isModalOpen" @click="isModalOpen = false">
-        <img @click.stop :src="file" alt />
+        <img @click.stop :src="file" alt="http://res.cloudinary.com/mistertoysss/image/upload/v1648842217/noimg_djbu0w.png" />
     </div>
 </template>
 
