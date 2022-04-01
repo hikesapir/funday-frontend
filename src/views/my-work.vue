@@ -1,4 +1,6 @@
 <template>
+    <main-nav></main-nav>
+
     <section class="my-work">
         <h1>My Work</h1>
 
@@ -13,11 +15,13 @@
 
         <div class="content">
             <div class="table-wrapper" v-for="title in titles" :key="title">
-                    <div class="haeder-wrapper flex">
-                <div class="title-col-my-work">
-                    <h2>{{ title }}</h2>
-                </div>
-                    <div v-for="title in headerTitle" :key="title" :class="title + '-col-my-work'"><span>{{title}}</span></div>
+                <div class="haeder-wrapper flex">
+                    <div class="title-col-my-work">
+                        <h2>{{ title }}</h2>
+                    </div>
+                    <div v-for="title in headerTitle" :key="title" :class="title + '-col-my-work'">
+                        <span>{{ title }}</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -26,15 +30,20 @@
 
 
 <script>
+import mainNav from "../components/main-nav.vue"
+
 export default {
     name: 'my-work',
     props: [],
     emits: [],
-    components: {},
+    components: {
+        mainNav,
+
+    },
     data() {
         return {
             titles: ['Overdue', 'Today', 'This week', 'Next week', 'Later', 'Without date'],
-            headerTitle: ['Board', 'Group', 'People', 'Date','Status']
+            headerTitle: ['Board', 'Group', 'People', 'Date', 'Status']
         }
     },
     created() {
