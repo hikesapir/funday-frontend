@@ -36,4 +36,13 @@
     display: flex;
     flex-wrap: wrap;
   }
+
+  img {
+    height: 30px;
+    width: 30px;
+    border: 2px solid white;
+    border-radius: 20px;
+    object-fit: contain;
+    margin: 0 -7px;
+  }
 }

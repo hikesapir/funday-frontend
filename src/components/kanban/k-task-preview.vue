@@ -1,19 +1,21 @@
 <template>
   <div class="k-tast-preview">
     <div class="task-body">
-      <pre>{{ task.title }}</pre>
+      <span
+        >{{ task.title }}
+        <priority-picker
+          class="k-priority-card"
+          :groupId="task.groupId"
+          :task="task"
+        />
+      </span>
       <div class="k-task-card">
         <div>
-          <tag-picker :task="task" :groupId="task.groupId" />
+          <!-- <tag-picker :task="task" :groupId="task.groupId" /> -->
           <timeline-picker :task="task" :groupId="task.groupId" />
         </div>
         <div>
           <member-picker :task="task" />
-          <priority-picker
-            class="k-priority-card"
-            :groupId="task.groupId"
-            :task="task"
-          />
         </div>
       </div>
     </div>
