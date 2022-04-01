@@ -1,22 +1,17 @@
 <template>
   <div class="k-tast-preview">
     <div class="task-body">
-      <span
-        >{{ task.title }}
+      <div class="k-task-title">
+        <div class="word-size ellipsis">{{ task.title }}</div>
         <priority-picker
           class="k-priority-card"
           :groupId="task.groupId"
           :task="task"
         />
-      </span>
+      </div>
       <div class="k-task-card">
-        <div>
-          <!-- <tag-picker :task="task" :groupId="task.groupId" /> -->
-          <timeline-picker :task="task" :groupId="task.groupId" />
-        </div>
-        <div>
-          <member-picker :task="task" />
-        </div>
+        <timeline-picker :task="task" :groupId="task.groupId" />
+        <member-picker :task="task" />
       </div>
     </div>
   </div>
