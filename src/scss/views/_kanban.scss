@@ -1,4 +1,5 @@
 .kanban-view-container {
+  margin-left: 20px;
   padding: 0 30px;
   display: grid;
   grid-template-columns: repeat(4, 260px);
@@ -9,13 +10,18 @@
     display: flex;
     align-items: center;
     font-size: rem(16px);
-    font-weight: 600;
+    font-weight: 650;
     justify-content: center;
     border-top-right-radius: 8px;
     border-top-left-radius: 8px;
+    color: $main-white;
+    border: 1px solid $main-gray;
+    border-bottom: none;
+    font-weight: 400;
   }
   .k-task-list {
     max-height: calc(65vh - 50px);
+    // border: 1px solid $main-text-gray;
     border: 1px solid $main-gray;
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
@@ -25,24 +31,30 @@
     overflow-x: hidden;
     align-items: center;
     justify-content: center;
+    -webkit-box-shadow: 0px 9px 18px -4px rgba(0, 0, 0, 0.36);
+    box-shadow: 0px 9px 18px -4px rgba(0, 0, 0, 0.36);
   }
   .task-body {
     border: 1px solid $main-gray;
-    background-color: $main-task-gray;
+    background-color: $main-white;
     border-radius: 8px;
     width: 240px;
+    height: 80px;
     margin: 10px auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-
+    -webkit-box-shadow: 0px 9px 18px -4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 9px 18px -4px rgba(0, 0, 0, 0.2);
     .k-task-title {
       display: flex;
       width: 230px;
       font-size: 13px;
       justify-content: space-between;
-      height: 25px;
+      align-items: center;
+      color: $main-text-gray;
+      color: $main-text-gray;
 
       > * {
         padding: 7px;
@@ -51,10 +63,10 @@
         width: 150px;
       }
       .priority-picker-col {
-        height: 20px;
+        height: 16px;
         width: 60px;
         border-radius: 8px;
-        line-height: 20px;
+        line-height: 16px;
         vertical-align: middle;
         font-size: 12px;
       }
@@ -64,14 +76,23 @@
   .k-task-card {
     padding: 5px;
     display: flex;
-    flex-wrap: wrap;
-    height: 45px;
     justify-content: space-between;
     align-items: center;
-    width: 225px;
+    width: 220px;
 
     .member-picker {
       display: flex;
+      width: 80px;
+      justify-content: center;
+      margin-left: 35px;
+    }
+
+    .timeline-picker label.timeline {
+      height: 16px;
+      width: 120px;
+      font-size: 12px;
+      vertical-align: middle;
+      line-height: 16px;
     }
   }
 
