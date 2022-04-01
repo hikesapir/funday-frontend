@@ -13,10 +13,34 @@
         <span class="tag-text">#{{ tag.txt }}</span>
       </div>
 
-      <div v-if="!isMoreThanTwo" class="small-number">+{{ task.tags.length - 1 }}</div>
-      <div v-show="isModalOpen" ref="tagModal" class="tag-modal">
+      <div v-if="!isMoreThanTwo" class="small-number">
+        +{{ task.tags.length - 1 }}
+      </div>
+      <div
+        v-show="isModalOpen"
+        ref="tagModal"
+        class="tag-modal"
+      >
+        <div class="tag-preview">
+          <div
+            class="tag-name"
+            v-for="(tag, idx) in this.task.tags"
+            :key="tag.txt"
+          >
+            <span>{{ tag.txt }}</span>
+            <i
+              @click="removeTag(idx)"
+              class="fa-solid fa-circle-xmark"
+            ></i>
+          </div>
+        </div>
         <div class="add-tags">
-          <input type="text" placeholder="Add tags" @input="filterTags" v-model="newTag" />
+          <input
+            type="text"
+            placeholder="Add tags"
+            @input="filterTags"
+            v-model="newTag"
+          />
         </div>
         <ul class="tag-search-list">
           <li
@@ -27,19 +51,26 @@
             @mouseover="toggleHoverTag(tag.txt)"
             @mouseleave="toggleHoverTag()"
             :style="{
-              color: isHoverATag === tag.txt ? 'white' : tag.color,
+              color:
+                isHoverATag === tag.txt
+                  ? 'white'
+                  : tag.color,
             }"
-          >#{{ tag.txt }}</li>
+          >
+            #{{ tag.txt }}
+          </li>
         </ul>
-        <button @click="addNewTag" class="btn">+ Create new tag</button>
+        <button @click="addNewTag" class="btn">
+          + Create new tag
+        </button>
       </div>
     </div>
   </section>
 </template>
 
- <script>
+<script>
 export default {
-  name: "tag-picker",
+  name: 'tag-picker',
   props: {
     task: Object,
     groupId: String,
@@ -49,19 +80,19 @@ export default {
       isModalOpen: false,
       isHoverATag: false,
       filterBy: {
-        txt: "",
+        txt: '',
       },
-      newTag: "",
-    };
+      newTag: '',
+    }
   },
   computed: {
     isMoreThanTwo() {
-      return this.task.tags.length < 2;
+      return this.task.tags.length < 2
     },
     tagsForDisplay() {
       if (this.task.tags.length >= 2) {
-        return this.task.tags.slice(0, 1);
-      } else return this.task.tags;
+        return this.task.tags.slice(0, 1)
+      } else return this.task.tags
     },
     boardTags() {
       let groups = JSON.parse(
@@ -70,11 +101,9 @@ export default {
         )
       )
       const boardTags = groups.reduce((acc, group) => {
-        console.log(acc);
         group.tags.forEach((tag) => {
           if (!acc.some((t) => t.txt === tag.txt)) {
             acc.push(tag)
-            console.log(tag);
           }
         })
         return acc
@@ -82,10 +111,10 @@ export default {
       return boardTags
     },
     tags() {
-      var boardTags = JSON.parse(JSON.stringify(this.boardTags))
-      // console.log(boardTags);
+      var boardTags = JSON.parse(
+        JSON.stringify(this.boardTags)
+      )
       if (!this.filterBy.txt) {
-        // boardTags = boardTags.filter(tag => !this.task.tags.some(taskTag => taskTag.txt === tag.txt))
         return boardTags.length > 5
           ? boardTags.slice(0, 5)
           : boardTags
@@ -101,15 +130,30 @@ export default {
     },
   },
   methods: {
+    removeTag(idx) {
+      console.log('idx', idx)
+      var tags = JSON.parse(JSON.stringify(this.task.tags))
+      tags.splice(idx, 1)
+      this.$emit('update', {
+        cmpType: `tag-picker`,
+        val: tags,
+        task: this.task,
+      })
+    },
     addNewTag() {
-      console.log(this.newTag);
       if (!this.newTag) return
-      if (this.task.tags.some(taskTag => this.newTag === taskTag.txt)) return
+      if (
+        this.task.tags.some(
+          (taskTag) => this.newTag === taskTag.txt
+        )
+      )
+        return
       this.$emit('update', {
         cmpType: `tag-picker`,
         val: { txt: this.newTag, tagList: this.boardTags },
         task: this.task,
       })
+      this.newTag = ''
       this.isModalOpen = false
     },
     filterTags() {

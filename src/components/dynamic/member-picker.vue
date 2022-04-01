@@ -1,5 +1,9 @@
 <template>
-  <div class="member-picker" @mouseover="isHover = true" @mouseleave="isHover = false">
+  <div
+    class="member-picker"
+    @mouseover="isHover = true"
+    @mouseleave="isHover = false"
+  >
     <div v-if="membersLength < 3">
       <img
         v-for="member in members"
@@ -11,20 +15,45 @@
     </div>
     <div v-else>
       <img :src="firstMemberPic" />
-      <div class="small-number" :data-title="restOfMemberList">+{{ membersLength - 1 }}</div>
+      <div
+        class="small-number"
+        :data-title="restOfMemberList"
+      >
+        +{{ membersLength - 1 }}
+      </div>
     </div>
-    <fa v-if="isHover" icon="circle-plus" class="add-member-btn" @click.stop="openModal" />
+    <fa
+      v-if="isHover"
+      icon="circle-plus"
+      class="add-member-btn"
+      @click.stop="openModal"
+    />
 
-    <div v-show="addMembersMode" ref="memberPickerModal" class="context-modal">
+    <div
+      v-show="addMembersMode"
+      ref="memberPickerModal"
+      class="context-modal"
+    >
       <div class="small-name-preview">
-        <div class="member-name" v-for="(member, idx) in this.task.members" :key="member.id">
+        <div
+          class="member-name"
+          v-for="(member, idx) in this.task.members"
+          :key="member.id"
+        >
           <span>{{ member.fullname }}</span>
-          <i @click="removeFromTask(idx)" class="fa-solid fa-circle-xmark"></i>
+          <i
+            @click="removeFromTask(idx)"
+            class="fa-solid fa-circle-xmark"
+          ></i>
         </div>
       </div>
 
       <label>
-        <input type="text" placeholder="Enter name" v-model="filterBy" />
+        <input
+          type="text"
+          placeholder="Enter name"
+          v-model="filterBy"
+        />
       </label>
 
       <div class="relative">
@@ -33,12 +62,14 @@
         </div>
       </div>
 
-      <span class="member-preview flex" v-for="member in membersList" :key="member">
+      <span
+        class="member-preview flex"
+        v-for="member in membersList"
+        :key="member"
+      >
         <img :src="member.imgUrl" />
         <span @click.stop="addMember(member)">
-          {{
-            member.fullname
-          }}
+          {{ member.fullname }}
         </span>
       </span>
     </div>
@@ -81,8 +112,10 @@ export default {
     },
     membersList() {
       var membersList = this.$store.getters.board.members
-      membersList = membersList.filter(boardMember => {
-        return !this.task.members.some(taskMember => taskMember._id === boardMember._id)
+      membersList = membersList.filter((boardMember) => {
+        return !this.task.members.some(
+          (taskMember) => taskMember._id === boardMember._id
+        )
       })
       const regex = new RegExp(this.filterBy, 'i')
       membersList = membersList.filter((member) =>
@@ -127,7 +160,6 @@ export default {
       var members = JSON.parse(
         JSON.stringify(this.task.members)
       )
-      // const idx = members.findIndex(member => member._id === id);
       members.splice(idx, 1)
       this.$emit('update', {
         cmpType: `member-picker`,

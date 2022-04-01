@@ -1,5 +1,9 @@
 <template>
-  <div class="task-and-side-indicator" @mouseover="isHover = true" @mouseleave="isHover = false">
+  <div
+    class="task-and-side-indicator"
+    @mouseover="isHover = true"
+    @mouseleave="isHover = false"
+  >
     <section class="task-preview">
       <component
         v-for="cmp in cmpsOrder"
@@ -49,7 +53,6 @@ export default {
   methods: {
     updateTask(data) {
       data.groupId = this.groupId
-      console.log(data);
       this.$store.dispatch({ type: 'updateTask', data })
     },
   },
@@ -62,7 +65,7 @@ export default {
     },
     boardId() {
       return this.$store.getters.board._id
-    }
+    },
   },
 }
 </script>

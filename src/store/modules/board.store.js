@@ -41,27 +41,32 @@ export default {
       return isDraggingGroup
     },
     board({ filterBy, board, sortBy }) {
-      if (!filterBy.txt && !filterBy.member && !sortBy.type) return board
-      const boardForDisplay = JSON.parse(JSON.stringify(board))
+      if (!filterBy.txt && !filterBy.member && !sortBy.type)
+        return board
+      const boardForDisplay = JSON.parse(
+        JSON.stringify(board)
+      )
       //filter
       if (filterBy.txt || filterBy.member) {
         const regex = new RegExp(filterBy.txt, 'i')
-        var filteredGroups = boardForDisplay.groups.filter((group) => {
-          if (regex.test(group.title) && !filterBy.member)
-            return group
-          var tasks = group.tasks.filter((task) =>
-            regex.test(task.title)
-          )
-          if (filterBy.member) {
-            tasks = tasks.filter((task) => {
-              return task.members.some(
-                (member) => member._id === filterBy.member
-              )
-            })
+        var filteredGroups = boardForDisplay.groups.filter(
+          (group) => {
+            if (regex.test(group.title) && !filterBy.member)
+              return group
+            var tasks = group.tasks.filter((task) =>
+              regex.test(task.title)
+            )
+            if (filterBy.member) {
+              tasks = tasks.filter((task) => {
+                return task.members.some(
+                  (member) => member._id === filterBy.member
+                )
+              })
+            }
+            group.tasks = tasks
+            if (group.tasks.length > 0) return group
           }
-          group.tasks = tasks
-          if (group.tasks.length > 0) return group
-        })
+        )
 
         boardForDisplay.groups = JSON.parse(
           JSON.stringify(filteredGroups)
@@ -73,11 +78,12 @@ export default {
           case 'status-picker':
             boardForDisplay.groups.forEach(
               (group, idx) =>
-              (boardForDisplay.groups[idx].tasks = group.tasks.sort(
-                (t1, t2) =>
-                  t1.status.localeCompare(t2.status) *
-                  sortBy.dir
-              ))
+                (boardForDisplay.groups[idx].tasks =
+                  group.tasks.sort(
+                    (t1, t2) =>
+                      t1.status.localeCompare(t2.status) *
+                      sortBy.dir
+                  ))
             )
             break
           case 'priority-picker':
@@ -311,7 +317,6 @@ export default {
     },
     loadBoard(state, { board }) {
       state.board = board
-
     },
     setOpenModal(state, { boolean }) {
       state.isModalOpen = boolean
@@ -321,13 +326,11 @@ export default {
     },
     addTask(state, { groupIdx, savedTask }) {
       state.board.groups[groupIdx].tasks.push(savedTask)
-
     },
     updateTask(state, { groupId, updatedTask }) {
-      const groupIdx =
-        state.board.groups.findIndex(
-          (group) => group.id === groupId
-        )
+      const groupIdx = state.board.groups.findIndex(
+        (group) => group.id === groupId
+      )
       const group = state.board.groups[groupIdx]
       const taskIdx = group.tasks.findIndex(
         (task) => task.id === updatedTask.id
@@ -364,7 +367,7 @@ export default {
       state.isLoading = isLoading
     },
     setCmpsOrder(state, { newOrder }) {
-      console.log(newOrder);
+      console.log(newOrder)
       state.board.cmpsOrder = newOrder
     },
     saveBoard(state, { board }) {
@@ -374,14 +377,10 @@ export default {
       state.boards.splice(idx, 1, board)
     },
     removeTask(state, { groupIdx, taskIdx }) {
-      state.board.groups[groupIdx].tasks.splice(
-        taskIdx,
-        1
-      )
+      state.board.groups[groupIdx].tasks.splice(taskIdx, 1)
     },
     addUpdate(state, { update, taskId, boardId, groupId }) {
-      const { _id, fullname, imgUrl } =
-        update.from
+      const { _id, fullname, imgUrl } = update.from
       const updateMsg = {
         id: utilService.makeId(8),
         txt: update.txt,
@@ -490,17 +489,14 @@ export default {
           task.status = data.val
           break
         case 'tag-picker':
-          // console.log(data.val);
-          if (data.val.tagList.some(t => t.txt === data.val.txt)) {
-              var tag = data.val.tagList.find(t => t.txt === data.val.txt)
+          if (data.val.txt) {
+            task.tags.push({
+              txt: data.val.txt,
+              color: utilService.getRandomColor(),
+            })
           } else {
-              var tag = {
-                txt: data.val.txt,
-                color: utilService.getRandomColor()
-              }
+            task.tags = data.val
           }
-          // console.log(tag);
-          task.tags.push(tag)
           break
         case 'title-picker':
           task.title = data.title
@@ -571,9 +567,7 @@ export default {
       { commit, state },
       { groupId, taskId }
     ) {
-      const board = JSON.parse(
-        JSON.stringify(state.board)
-      )
+      const board = JSON.parse(JSON.stringify(state.board))
       const groupIdx = board.groups.findIndex(
         (group) => group.id === groupId
       )
@@ -723,9 +717,7 @@ export default {
       { state, commit },
       { prevCmpTitle, newCmpTitle }
     ) {
-      const board = JSON.parse(
-        JSON.stringify(state.board)
-      )
+      const board = JSON.parse(JSON.stringify(state.board))
       const idx = board.cmpsOrder.findIndex(
         (cmp) => cmp.preName === prevCmpTitle
       )
@@ -742,7 +734,7 @@ export default {
           board.cmpsOrder
         )
       } catch (err) {
-        console.log('saveCmpTitle', err);
+        console.log('saveCmpTitle', err)
       }
     },
     async addUpdate(
