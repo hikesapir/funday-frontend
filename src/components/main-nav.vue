@@ -152,7 +152,11 @@
         </div>
       </div>
       <div class="img-container">
+<<<<<<< HEAD
+        <img :src="user.imgUrl" alt="https://res.cloudinary.com/mistertoysss/image/upload/v1648463489/funday%20must/vote_1_bkio4y.png">
+=======
         <img :src="user?.imgUrl" />
+>>>>>>> 55fdbc1685deb37acb14f579981af091128a8e66
       </div>
     </nav>
   </section>

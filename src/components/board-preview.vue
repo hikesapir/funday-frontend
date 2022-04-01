@@ -151,7 +151,7 @@ export default {
 </script>
 
 <style>
-.act {
+.board-preview.act {
   background-color: #cce5ff;
   border-radius: 4px;
   border: 1px solid transparent;
