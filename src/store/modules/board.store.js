@@ -366,7 +366,7 @@ export default {
       state.isLoading = isLoading
     },
     setCmpsOrder(state, { newOrder }) {
-      console.log(newOrder)
+      // console.log(newOrder)
       state.board.cmpsOrder = newOrder
     },
     saveBoard(state, { board }) {

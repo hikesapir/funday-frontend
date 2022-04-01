@@ -10,12 +10,14 @@
     color: $main-task-text-gray;
     margin: 0 6px;
   }
+
   .new-item-btn {
     background-color: $primary-blue;
     color: $main-white;
     padding: 4px 8px;
     margin: 0;
     height: 32px;
+
     &:hover {
       background-color: $primary-blue-hover;
     }
@@ -29,6 +31,7 @@
     border-radius: 50%;
     object-fit: contain;
     margin: 0 4px;
+
     &.active {
       border-color: orange;
     }
@@ -40,6 +43,7 @@
       width: 18px;
       border: none;
     }
+
     background-color: $primary-light-blue;
 
     &:hover {
@@ -50,6 +54,7 @@
       @include blue-focus;
     }
   }
+
   .search-input {
     padding: 8px;
     margin-left: 8px;
@@ -65,6 +70,7 @@
   .new-item {
     border-radius: 4px 0 0 4px;
   }
+
   .chevron {
     border-radius: 0 4px 4px 0;
     border-left: 1px solid $primary-blue-hover;
@@ -84,7 +90,47 @@
   .members {
     margin: 10px 0;
   }
+
   .item-modal {
     white-space: nowrap;
+  }
+
+  .filterBy {
+    width: 260px;
+    left: -68px;
+
+    // display: flex;
+    .flex {
+      justify-content: center;
+      gap: 15px;
+      background-color: #fff;
+
+      .title {
+        margin-top: 5px;
+        width: 110px;
+      }
+
+      .select {
+        font-size: rem(13px);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 5px 8px;
+        width: 110px;
+        margin-top: 5px;
+        background-color: $main-task-gray;
+        .small-circle{
+          display: inline-block;
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+        }
+      }
+
+      .select.active {
+        border: 3px solid orange;
+      }
+    }
   }
 }
