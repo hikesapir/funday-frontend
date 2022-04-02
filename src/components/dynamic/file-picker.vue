@@ -41,6 +41,7 @@ export default {
 
     }
   },
+  
   methods: {
     openModal() {
       this.isModalOpen = true;

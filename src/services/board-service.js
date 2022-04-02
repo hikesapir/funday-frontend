@@ -121,6 +121,10 @@ function getEmptyBoard(boardTitle) {
         cmpName: 'file-picker',
         preName: 'Files',
       },
+      {
+        cmpName: 'number-picker',
+        preName: 'Numbers',
+      }
     ],
     style: { view: 'table' },
     members: getUsers(),

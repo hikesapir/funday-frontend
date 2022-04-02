@@ -11,6 +11,8 @@ import {
   SOCKET_EMIT_TASK_UPDATED,
   SOCKET_EMIT_REMOVE_TASK,
   SOCKET_EMIT_TASK_ADD,
+  SOCKET_EMIT_EDIT_GROUPS_ORDER,
+  SOCKET_EMIT_SAVE_BOARD,
 } from '../../services/socket-service.js'
 
 export default {
@@ -295,6 +297,16 @@ export default {
           })
         })
 
+        //Numbers Summary:
+
+        const groupNumbersMap = []
+        group.tasks.forEach((task) => {
+          if (!task.number) return groupNumbersMap
+          return groupNumbersMap.push(task.number)
+        })
+
+        // })
+
         //Members Summary:
 
         const groupMemberMap = []
@@ -329,6 +341,7 @@ export default {
           timeline: groupTimelineCalc,
           priority: groupPriCount,
           groupStatusCount: groupStatusCount,
+          numbers: groupNumbersMap
         }
 
         boardMapByGroups.push(groupSumMap)
@@ -557,6 +570,8 @@ export default {
             type: 'loadBoard',
             board: savedBoard,
           })
+          socketService.emit(SOCKET_EMIT_SAVE_BOARD, savedBoard)
+
         } else {
           context.dispatch('loadBoards')
           router.push(`/boards/${savedBoard._id}`)
@@ -614,6 +629,9 @@ export default {
           break
         case 'title-picker':
           task.title = data.title
+          break
+        case 'number-picker':
+          task.number = data.number
           break
       }
 
@@ -797,11 +815,13 @@ export default {
             type: 'setCmpsOrder',
             newOrder: entities,
           })
+          socketService.emit(SOCKET_EMIT_EDIT_CMPS_ORDER, entities)
         } else if (entityType === 'groups') {
           context.commit({
             type: 'setGroupsOrder',
             newOrder: entities,
           })
+          socketService.emit(SOCKET_EMIT_EDIT_GROUPS_ORDER, entities)
         }
         await boardService.saveBoard(board)
       }
@@ -816,6 +836,8 @@ export default {
           JSON.parse(JSON.stringify(state.board))
         )
         commit({ type: 'loadBoard', board })
+        socketService.emit(SOCKET_EMIT_SAVE_BOARD, board)
+
       } catch (err) {
         console.log('saveGroup err', err)
       } finally {
@@ -830,6 +852,7 @@ export default {
           JSON.parse(JSON.stringify(state.board))
         )
         commit({ type: 'loadBoard', board })
+        socketService.emit(SOCKET_EMIT_SAVE_BOARD, board)
       } catch (err) {
         console.log('removeGroup err', err)
       } finally {
@@ -850,6 +873,8 @@ export default {
           board
         )
         commit({ type: 'loadBoard', board: savedBoard })
+        socketService.emit(SOCKET_EMIT_SAVE_BOARD, savedBoard)
+
       } catch (err) {
         console.log('addTaskToTheStart err', err)
       }

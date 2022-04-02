@@ -17,8 +17,10 @@
   // z-index: 10;
   overflow: unset;
   padding-right: 8px;
+
   .left-indicator-inner {
     width: 8px;
+    height: 34px;
     display: inline-block;
     transition: all 0.1s ease;
     &:hover {
@@ -77,11 +79,28 @@
   }
   .start-conversation-container {
     color: $icon-task-gray;
+    position: relative;
+    .small-circle {
+      position: absolute;
+      top: 17px;
+      left: -11px;
+      font-size: 10px;
+      color: $main-white;
+      text-align: center;
+      background: $primary-blue;
+      border-radius: 50%;
+      line-height: 9px;
+      font-weight: 400;
+      padding: 2px 4px;
+    }
     svg {
       position: absolute;
-      right: 10px;
+      right: 2px;
       top: 50%;
       transform: translateY(-50%);
+      &.active {
+        color: $primary-blue;
+      }
     }
   }
   &:hover {

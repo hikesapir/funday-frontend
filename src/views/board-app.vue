@@ -1,7 +1,6 @@
 <template>
-    <main-nav></main-nav>
+  <main-nav></main-nav>
   <div class="open-side-bar">
-
     <div @click="changeModalStatus" class="open-nav-btn" :class="{ open: isOpen, close: !isOpen }">
       <i class="fa-solid fa-angle-right"></i>
     </div>
@@ -39,6 +38,8 @@ import {
   SOCKET_EVENT_TASK_REMOVED,
   SOCKET_EVENT_CMPS_ORDER_EDITED,
   SOCKET_EVENT_UPDATE_ADDED,
+  SOCKET_EVENT_GROUPS_ORDER_EDITED,
+  SOCKET_EVENT_BOARD_SEVED,
 } from '../services/socket-service.js'
 import boardHeader from '../components/board-header.vue'
 import boardViewMode from '../components/board-view-mode.vue'
@@ -94,6 +95,16 @@ export default {
           newOrder,
         })
     )
+    socketService.on(SOCKET_EVENT_GROUPS_ORDER_EDITED, (newOrder) => {
+      this.$store.commit({
+        type: 'setGroupsOrder',
+        newOrder
+      })
+    }
+    )
+    socketService.on(SOCKET_EVENT_BOARD_SEVED, (board) => {
+      this.$store.commit({ type: 'loadBoard', board })
+    })
   },
   data() {
     return {
