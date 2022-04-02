@@ -54,9 +54,10 @@
     <div class="curr-workspace"></div>
     <ul>
       <board-preview
-        v-for="board in boards"
+        v-for="(board, idx) in boards"
         :key="board._id"
         :board="board"
+        :idx="idx"
       />
     </ul>
   </section>

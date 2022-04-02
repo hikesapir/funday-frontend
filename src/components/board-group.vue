@@ -13,7 +13,7 @@
         >
           <div
             class="group-menu-open"
-            @click="openContext = !openContext"
+            @click="toggleGroupContext"
             track-by="$index"
             @mouseover="isHoverGroupMenu = true"
             @mouseleave="isHoverGroupMenu = false"
@@ -41,7 +41,7 @@
             >{{ group.title }}</span
           >
         </div>
-        <section v-if="openContext" class="context-modal">
+        <section v-show="openContext" class="context-modal">
           <button
             @click="
               ;(changeName = true), (openContext = false)
@@ -107,6 +107,7 @@
                       @keyup.enter="
                         saveCmpTitle(cmp.preName)
                       "
+                      @blur="saveCmpTitle(cmp.preName)"
                       v-model="newCmpTitle"
                     />
                   </span>
@@ -217,6 +218,11 @@ export default {
     },
   },
   methods: {
+    toggleGroupContext() {
+      this.openContext = !this.openContext
+
+      // setTimeout(() => this.$refs.groupContext.focus(), 0)
+    },
     setColor(color) {
       this.isPalleteOpen = false
       this.$store.dispatch({
@@ -245,14 +251,18 @@ export default {
       this.newCmpTitle = cmp
     },
     saveCmpTitle(cmpName) {
-      if (cmpName === this.newCmpTitle) return
+      if (cmpName === this.newCmpTitle) {
+        this.newCmpTitle = ''
+        this.prevCmpTitle = ''
+        return
+      }
       this.$store.dispatch({
         type: 'saveCmpTitle',
         prevCmpTitle: this.prevCmpTitle,
         newCmpTitle: this.newCmpTitle,
       })
-      this.prevCmpTitle = ''
       this.newCmpTitle = ''
+      this.prevCmpTitle = ''
     },
     isEditing(cmp) {
       return this.prevCmpTitle === cmp && cmp
