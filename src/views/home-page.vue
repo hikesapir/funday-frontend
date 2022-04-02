@@ -40,7 +40,7 @@
             class="start-btn"
             @click="$router.push(`/boards/${getFirstBoardId}`)"
           >
-            See Demo
+            Try Demo
           </div>
         </div>
       </div>
@@ -61,7 +61,7 @@
       <div class="big-txt">A platform built for a</div>
       <div class="big-txt">new way of working</div>
       <div class="medium-txt">
-        What would you like to manage with Funday.com Work OS?
+        We would like to invite you to start managing with Funday.com
       </div>
 
       <div class="falling-star"></div>
@@ -69,7 +69,7 @@
         class="start-btn"
         @click="$router.push(`/boards/${getFirstBoardId}`)"
       >
-        See Demo
+        Try Demo
       </div>
 
       <div class="gradient-homepage-bcg"></div>
