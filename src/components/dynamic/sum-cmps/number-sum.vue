@@ -1,19 +1,19 @@
 <template>
-  <section class="number-sum">
+  <section class="number-sum relative">
     <div class="number-sum-display" @click.stop="openModal">
-      {{ groupData.numbers.length }}
+      {{ displayMode.charAt(0).toUpperCase() + displayMode.slice(1) }}:
+      {{ displayNumbersBy }}
+    </div>
+    <div v-show="isModalOpen" class="context-modal">
+      <div class="title">Display:</div>
+      <button @click="changeDisplay('sum')">Sum</button>
+      <button @click="changeDisplay('average')">Average</button>
+      <button @click="changeDisplay('median')">Median</button>
+      <button @click="changeDisplay('min')">Min</button>
+      <button @click="changeDisplay('max')">Max</button>
+      <button @click="changeDisplay('count')">Count</button>
     </div>
   </section>
-  <div v-show="isModalOpen" class="context-modal">
-    <div>Function:</div>
-    <button>None</button>
-    <button>Sum</button>
-    <button>Average</button>
-    <button>Median</button>
-    <button>Min</button>
-    <button>Max</button>
-    <button>Count</button>
-  </div>
 </template>
 
 <script>
@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       isModalOpen: false,
-      displayMode: null,
+      displayMode: "count",
     };
   },
   computed: {
@@ -35,10 +35,35 @@ export default {
       );
       return groupData;
     },
+    displayNumbersBy() {
+      let count = this.groupData.numbers.length;
+      let sum = this.groupData.numbers.reduce((pre, curr) => pre + curr, 0);
+      const median = (arr) => {
+        const mid = Math.floor(arr.length / 2),
+          nums = [...arr].sort((a, b) => a - b);
+        return arr.length % 2 !== 0
+          ? nums[mid]
+          : (nums[mid - 1] + nums[mid]) / 2;
+      };
+
+      if (this.displayMode === "count") return count;
+      else if (this.displayMode === "sum") {
+        return sum;
+      } else if (this.displayMode === "average") return sum / count;
+      else if (this.displayMode === "min")
+        return Math.min(...this.groupData.numbers);
+      else if (this.displayMode === "max")
+        return Math.max(...this.groupData.numbers);
+      else if (this.displayMode === "median")
+        return median(this.groupData.numbers);
+    },
   },
   methods: {
     openModal() {
       this.isModalOpen = !this.isModalOpen;
+    },
+    changeDisplay(val = "count") {
+      this.displayMode = val;
     },
   },
 };
