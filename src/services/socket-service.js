@@ -17,6 +17,12 @@ export const SOCKET_EVENT_CMPS_ORDER_EDITED = 'cmps-order-edited'
 
 //groups
 export const SOCKET_EMIT_EDIT_GROUPS_ORDER = 'edit-groups-order'
+export const SOCKET_EVENT_GROUPS_ORDER_EDITED = 'cmps-groups-edited'
+
+//board
+export const SOCKET_EMIT_SAVE_BOARD = 'save-board'
+export const SOCKET_EVENT_BOARD_SEVED = 'board-saved'
+
 
 // Updates
 export const SOCKET_EMIT_ADD_UPDATE = 'add-update'
