@@ -1,40 +1,72 @@
 <template>
-  <div class="kanban-view-container">
-    <div v-for="status in statuses" :key="status">
-      <div class="k-list-header" :style="{ 'background-color': status.color }">
-        {{ status.txt || "Empty" }}
-      </div>
-      <k-task-List :list="tasksForDisplay[status.id]" />
-    </div>
+  <div>
+    <Container
+      :drop-placeholder="dropPlaceholderOptions"
+      @drop="onDrop"
+      class="kanban-view-container"
+      orientation="horizontal"
+      drag-class="drag-group"
+      drag-handle-selector=".k-list-header"
+    >
+      <Draggable
+        v-for="list in boardByStatus"
+        :key="list.status"
+      >
+        <div
+          class="k-list-header"
+          :style="{ 'background-color': list.status.color }"
+        >
+          {{ list.status.txt || 'Empty' }}
+        </div>
+        <k-task-List :list="list.tasks" />
+      </Draggable>
+    </Container>
   </div>
 </template>
 
 <script>
-import kTaskList from "../../components/kanban/k-task-list.vue";
+import { Container, Draggable } from 'vue3-smooth-dnd'
+import kTaskList from '../../components/kanban/k-task-list.vue'
 export default {
-  name: "kanban",
+  name: 'kanban',
   components: {
     kTaskList,
+    Container,
+    Draggable,
+  },
+
+  data() {
+    return {
+      dropPlaceholderOptions: {
+        className: 'drop-preview',
+        animationDuration: '150',
+        showOnTop: false,
+      },
+    }
+  },
+  methods: {
+    onDrop(dropResult) {
+      this.$store.dispatch({
+        type: 'changeOrder',
+        dropResult,
+        entities: this.kStatusOrder,
+        entityType: 'k-status',
+      })
+    },
   },
   computed: {
     board() {
-      return this.$store.getters.board;
+      return this.$store.getters.board
     },
-    tasksForDisplay() {
-      const boardMapByStatus = { s000: [], s001: [], s002: [], s003: [] };
-      const board = JSON.parse(JSON.stringify(this.board));
-      board.groups.map((group) => {
-        group.tasks.forEach((task) => {
-          task.groupId = group.id;
-          boardMapByStatus[task.status].push(task);
-          // console.log(task);
-        });
-      });
-      return boardMapByStatus;
+    kStatusOrder() {
+      return this.$store.getters.kStatusOrder
+    },
+    boardByStatus() {
+      return this.$store.getters.boardByStatus
     },
     statuses() {
-      return this.board.labels.status;
+      return this.board.labels.status
     },
   },
-};
+}
 </script>
