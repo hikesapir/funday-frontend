@@ -9,13 +9,13 @@
             ref="boardTitle"
             @blur="onUpdate"
             @keyup.enter="onUpdate"
-          >{{ boardDetails.title }}</h1>
+          >
+            {{ boardDetails.title }}
+          </h1>
         </div>
         <div>
           <button
-            :data-title="
-              descriptionTitle + ' board description'
-            "
+            :data-title="descriptionTitle + ' board description'"
             @click="isDescriptionOpen = !isDescriptionOpen"
             class="info"
           >
@@ -23,7 +23,11 @@
               <i class="fa-solid fa-circle-info"></i>
             </span>
           </button>
-          <button :data-title="starTitle + ' favorites'" @click="starred" class="star">
+          <button
+            :data-title="starTitle + ' favorites'"
+            @click="starred"
+            class="star"
+          >
             <span>
               <i v-if="boardDetails.isStarred" class="fa-solid fa-star"></i>
               <i v-else class="fa-regular fa-star"></i>
@@ -35,12 +39,8 @@
         <button>
           <p>Board member</p>
         </button>
-        <button>
-          <i class="fa-solid fa-user-plus"></i>Invite/3
-        </button>
-        <button>
-          <i class="fa-solid fa-chart-line"></i>Activity
-        </button>
+        <button><i class="fa-solid fa-user-plus"></i> Invite / 3</button>
+        <button><i class="fa-solid fa-chart-line"></i> Activity</button>
         <button class="btn">
           <i class="fa-solid fa-plus"></i>
           <span>Add to board</span>
@@ -61,57 +61,55 @@
         @blur="onUpdate"
         @keyup.enter="onUpdate"
         class="group-description-header text-content"
-      >{{ boardDetails.description }}</span>
+        >{{ boardDetails.description }}</span
+      >
     </div>
   </header>
 </template>
 
 <script>
 export default {
-  name: 'board-header',
+  name: "board-header",
   props: {
     boardDetails: Object,
   },
-  emits: ['updateBoard'],
+  emits: ["updateBoard"],
   components: {},
   data() {
     return {
       isDescriptionOpen: true,
-    }
+    };
   },
-  created() { },
-  mounted() { },
+  created() {},
+  mounted() {},
   methods: {
     starred() {
-      this.$emit('updateBoard', 'star')
+      this.$emit("updateBoard", "star");
     },
     onUpdate() {
-      const boardDetails = JSON.parse(
-        JSON.stringify(this.boardDetails)
-      )
-      boardDetails.title = this.$refs.boardTitle.innerText
-      boardDetails.description =
-        this.$refs.boardDescription.innerText
-      this.renameBoard = false
-      this.isEditDesc = false
+      const boardDetails = JSON.parse(JSON.stringify(this.boardDetails));
+      boardDetails.title = this.$refs.boardTitle.innerText;
+      boardDetails.description = this.$refs.boardDescription.innerText;
+      this.renameBoard = false;
+      this.isEditDesc = false;
 
-      this.$emit('updateBoard', boardDetails)
+      this.$emit("updateBoard", boardDetails);
     },
   },
   computed: {
+    isUpdateBarOpen() {
+      return this.$route.path.includes("pulses") ? true : false;
+    },
     descriptionTitle() {
-      return this.isDescriptionOpen ? 'Hide' : 'Show'
+      return this.isDescriptionOpen ? "Hide" : "Show";
     },
     starTitle() {
-      return this.boardDetails.isStarred
-        ? 'Remove from'
-        : 'Add to'
+      return this.boardDetails.isStarred ? "Remove from" : "Add to";
     },
   },
-  unmounted() { },
-}
+  unmounted() {},
+};
 </script>
-
 
 <style>
 [contentEditable="true"]:empty:not(:focus):before {

@@ -8,14 +8,6 @@
         <span>Main Table</span>
       </div>
     </router-link>
-    <router-link :to="'/boards/' + boardId + '/chart'">
-      <div class="space-btn">
-        <span>
-          <i class="fa-solid fa-chart-pie"></i>
-        </span>
-        <span>Charts</span>
-      </div>
-    </router-link>
     <router-link :to="'/boards/' + boardId + '/kanban'">
       <div class="space-btn">
         <span class="upsidedwon">
@@ -24,7 +16,16 @@
         <span>Kanban</span>
       </div>
     </router-link>
-    <router-link :to="'/' + boardId">
+    <router-link :to="'/boards/' + boardId + '/chart'">
+      <div class="space-btn">
+        <span>
+          <i class="fa-solid fa-chart-pie"></i>
+        </span>
+        <span>Charts</span>
+      </div>
+    </router-link>
+
+    <router-link :to="'/'">
       <div class="space-btn">
         <span>More</span>
         <span>
@@ -38,9 +39,9 @@
 
 <script>
 export default {
-  name: 'board-view-mode',
+  name: "board-view-mode",
   props: {
     boardId: String,
   },
-}
+};
 </script>

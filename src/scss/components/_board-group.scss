@@ -115,6 +115,15 @@
   text-align: left;
   font-size: 18px;
   padding: 0 2px;
+  // background-color: aqua;
+  span {
+    &:focus {
+      @include blue-focus;
+      border: 1px $main-gray dashed;
+      width: 700px;
+      padding: 1px;
+    }
+  }
 }
 
 .timeline-picker-col {
