@@ -104,7 +104,6 @@
                   <span v-show="isEditing(cmp.preName)">
                     <input
                       type="text"
-                      @blur="saveCmpTitle(cmp.preName)"
                       @keyup.enter="
                         saveCmpTitle(cmp.preName)
                       "
