@@ -768,14 +768,16 @@ export default {
         )
       }
       if (
-        dropResult.removedIndex !== null &&
-        dropResult.addedIndex !== null
+        dropResult.removedIndex === null &&
+        dropResult.addedIndex === null
       ) {
         entities = entities
       } else {
         let itemToAdd = dropResult.payload
-        if (entityType === 'k-tasks')
+
+        if (entityType === 'k-tasks') {
           itemToAdd.status = entityId
+        }
         if (dropResult.removedIndex !== null) {
           itemToAdd = entities.splice(
             dropResult.removedIndex,
@@ -799,11 +801,25 @@ export default {
           result: entities,
           idx,
         })
-        await boardService.saveTasksOrder(
-          board,
-          idx,
-          entities
-        )
+        try {
+          await boardService.saveTasksOrder(
+            board,
+            idx,
+            entities
+          )
+        } catch (err) {
+          console.log(
+            'could not save tasks order to backend',
+            err
+          )
+          // Optimistic mutation
+
+          context.commit({
+            type: 'setTasksOrder',
+            result: board.cmpsOrder,
+            idx,
+          })
+        }
       } else if (entityType === 'k-status') {
         context.commit({
           type: 'setStatusOrder',
@@ -825,21 +841,42 @@ export default {
             type: 'setCmpsOrder',
             newOrder: entities,
           })
-          socketService.emit(
-            SOCKET_EMIT_EDIT_CMPS_ORDER,
-            entities
-          )
         } else if (entityType === 'groups') {
           context.commit({
             type: 'setGroupsOrder',
             newOrder: entities,
           })
-          socketService.emit(
-            SOCKET_EMIT_EDIT_GROUPS_ORDER,
-            entities
-          )
         }
-        await boardService.saveBoard(board)
+        try {
+          await boardService.saveBoard(board)
+          if (entityType === 'cmpsOrder') {
+            socketService.emit(
+              SOCKET_EMIT_EDIT_CMPS_ORDER,
+              entities
+            )
+          } else if (entityType === 'groups') {
+            socketService.emit(
+              SOCKET_EMIT_EDIT_GROUPS_ORDER,
+              entities
+            )
+          }
+        } catch (err) {
+          console.log(
+            `could not update ${entityType} and save to backend`
+          )
+          // Optimistic mutations
+          if (entityType === 'cmpsOrder') {
+            context.commit({
+              type: 'setCmpsOrder',
+              newOrder: board.cmpsOrder,
+            })
+          } else if (entityType === 'groups') {
+            context.commit({
+              type: 'setGroupsOrder',
+              newOrder: board.groups,
+            })
+          }
+        }
       }
     },
     async saveGroup({ state, commit }, { group }) {
