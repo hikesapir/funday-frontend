@@ -45,15 +45,11 @@
         <i class="fa-solid fa-ellipsis"></i>
       </button>
     </div>
-    <div
-      class="relative"
-      tabindex="-1"
-      @blur="openModal = false"
-      :ref="'ctxModal' + idx"
-      v-show="openModal"
-    >
+    <div class="relative">
       <context-modal
+        v-if="openModal"
         :isStarred="board.isStarred"
+        @closeModal="openModal = false"
         @remove="remove"
         @openNewTab="openNewTab"
         @renameBoard="renameBoard"
@@ -90,9 +86,11 @@ export default {
   mounted() {},
   methods: {
     toggleModal() {
-      this.openModal = true
-      const modal = 'ctxModal' + this.idx
-      setTimeout(() => this.$refs[modal].focus(), 0)
+      // this.openModal = true
+      this.openModal = !this.openModal
+
+      // const modal = 'ctxModal' + this.idx
+      // setTimeout(() => this.$refs[modal].focus(), 0)
     },
     remove() {
       this.$store.dispatch({

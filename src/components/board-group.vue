@@ -13,7 +13,7 @@
         >
           <div
             class="group-menu-open"
-            @click="openContext = !openContext"
+            @click="toggleGroupContext"
             track-by="$index"
             @mouseover="isHoverGroupMenu = true"
             @mouseleave="isHoverGroupMenu = false"
@@ -41,7 +41,7 @@
             >{{ group.title }}</span
           >
         </div>
-        <section v-if="openContext" class="context-modal">
+        <section v-show="openContext" class="context-modal">
           <button
             @click="
               ;(changeName = true), (openContext = false)
@@ -217,6 +217,11 @@ export default {
     },
   },
   methods: {
+    toggleGroupContext() {
+      this.openContext = !this.openContext
+
+      // setTimeout(() => this.$refs.groupContext.focus(), 0)
+    },
     setColor(color) {
       this.isPalleteOpen = false
       this.$store.dispatch({
