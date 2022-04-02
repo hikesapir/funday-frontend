@@ -23,6 +23,8 @@ export default {
     filterBy: {
       txt: '',
       member: '',
+      priority: [],
+      status: [],
     },
     sortBy: {
       type: '',
@@ -67,21 +69,25 @@ export default {
       return isDraggingGroup
     },
     board({ filterBy, board, sortBy }) {
-      if (!filterBy.txt && !filterBy.member && !sortBy.type)
+      if (!filterBy.txt && !filterBy.member && !filterBy.priority.length && !filterBy.status.length && !sortBy.type)
         return board
       const boardForDisplay = JSON.parse(
         JSON.stringify(board)
       )
       //filter
-      if (filterBy.txt || filterBy.member) {
+      if (filterBy.txt || filterBy.member || filterBy.priority.length || filterBy.status.length) {
+
         const regex = new RegExp(filterBy.txt, 'i')
         var filteredGroups = boardForDisplay.groups.filter(
           (group) => {
-            if (regex.test(group.title) && !filterBy.member)
+            var tasks = group.tasks
+            if (regex.test(group.title) && !filterBy.member && !filterBy.priority.length && !filterBy.status.length)
               return group
-            var tasks = group.tasks.filter((task) =>
+            tasks = group.tasks.filter((task) =>
               regex.test(task.title)
             )
+
+
             if (filterBy.member) {
               tasks = tasks.filter((task) => {
                 return task.members.some(
@@ -89,6 +95,15 @@ export default {
                 )
               })
             }
+
+            if (filterBy.status.length > 0) {
+              tasks = tasks.filter(task => filterBy.status.some(id => id === task.status))
+            }
+
+            if (filterBy.priority.length > 0) {
+              tasks = tasks.filter(task => filterBy.priority.some(id => id === task.priority))
+            }
+            
             group.tasks = tasks
             if (group.tasks.length > 0) return group
           }
@@ -97,6 +112,7 @@ export default {
         boardForDisplay.groups = JSON.parse(
           JSON.stringify(filteredGroups)
         )
+
       }
       //sort
       if (sortBy.type) {
@@ -104,12 +120,12 @@ export default {
           case 'status-picker':
             boardForDisplay.groups.forEach(
               (group, idx) =>
-                (boardForDisplay.groups[idx].tasks =
-                  group.tasks.sort(
-                    (t1, t2) =>
-                      t1.status.localeCompare(t2.status) *
-                      sortBy.dir
-                  ))
+              (boardForDisplay.groups[idx].tasks =
+                group.tasks.sort(
+                  (t1, t2) =>
+                    t1.status.localeCompare(t2.status) *
+                    sortBy.dir
+                ))
             )
             break
           case 'priority-picker':

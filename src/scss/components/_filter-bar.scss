@@ -96,7 +96,7 @@
   }
 
   .filterBy {
-    width: 260px;
+    width: 300px;
     left: -68px;
 
     // display: flex;
@@ -110,26 +110,37 @@
         width: 110px;
       }
 
-      .select {
+      .select-container {
         font-size: rem(13px);
         cursor: pointer;
         display: flex;
         align-items: center;
         gap: 5px;
         padding: 5px 8px;
-        width: 110px;
+        width: 130px;
         margin-top: 5px;
         background-color: $main-task-gray;
-        .small-circle{
-          display: inline-block;
-          width: 10px;
-          height: 10px;
-          border-radius: 50%;
+        border-radius: 4px;
+        justify-content: space-between;
+
+        &:hover {
+          background: #dcdfec;
+        }
+        .select-content{
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          .small-circle {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+          }
         }
       }
 
-      .select.active {
-        border: 3px solid orange;
+      .select-container.active {
+        background-color: #cce5ff;
       }
     }
   }

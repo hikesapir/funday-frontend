@@ -93,19 +93,50 @@
         <div class="flex">
           <div>
             <div class="title ellipsis">{{ status }}</div>
-            <div v-for="s in board.labels.status" class="select">
-              <div class="small-circle" :style="'background-color:' + s.color"></div>
-              <div>{{ s.txt || 'Empty' }}</div>
+            <div v-for="s in board.labels.status">
+              <label
+                class="select-container"
+                :class="{ active: filterBy.status.some(sta => s.id === sta) }"
+              >
+                <input
+                  @change="search"
+                  type="checkbox"
+                  :value="s.id"
+                  v-model="filterBy.status"
+                  hidden
+                />
+                <div class="select-content">
+                  <div class="small-circle" :style="'background-color:' + s.color"></div>
+                  <div>{{ s.txt || 'Empty' }}</div>
+                </div>
+                <div v-if="filterBy.status.some(sta => s.id === sta)">
+                  <i class="fa-solid fa-circle-xmark"></i>
+                </div>
+              </label>
             </div>
           </div>
           <div>
             <div class="title ellipsis">{{ priority }}</div>
-            <div
-              v-for="p in board.labels.priority"
-              class="select"
-            >
-              <div class="small-circle" :style="'background-color:' + p.color"></div>
-              <div>{{ p.txt || 'Empty' }}</div>
+            <div v-for="p in board.labels.priority">
+              <label
+                class="select-container"
+                :class="{ active: filterBy.priority.some(pri => p.id === pri) }"
+              >
+                <div class="select-content">
+                  <input
+                    @change="search"
+                  type="checkbox"
+                    :value="p.id"
+                    v-model="filterBy.priority"
+                    hidden
+                  />
+                  <div class="small-circle" :style="'background-color:' + p.color"></div>
+                  <div>{{ p.txt || 'Empty' }}</div>
+                </div>
+                <div v-if="filterBy.priority.some(pri => p.id === pri)">
+                  <i class="fa-solid fa-circle-xmark"></i>
+                </div>
+              </label>
             </div>
           </div>
         </div>
@@ -125,8 +156,8 @@ export default {
       filterBy: {
         txt: '',
         member: '',
-        priority: '',
-        status: '',
+        priority: [],
+        status: [],
       },
       openSearching: false,
       openPersonModal: false,
@@ -137,6 +168,7 @@ export default {
   components: {},
   methods: {
     search() {
+      console.log('get it');
       const filterBy = JSON.parse(
         JSON.stringify(this.filterBy)
       )
@@ -172,7 +204,7 @@ export default {
     priority() {
       const priority = this.board.cmpsOrder.find(cmp => cmp.cmpName === 'priority-picker')
       return priority.preName
-    }
+    },
   },
 }
 </script>
