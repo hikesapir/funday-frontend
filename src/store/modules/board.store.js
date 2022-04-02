@@ -39,6 +39,7 @@ export default {
     kStatusOrder: [
       {
         status: { id: 's000', txt: '', color: '#c4c4c4' },
+        tasks: [],
       },
       {
         status: {
@@ -62,6 +63,7 @@ export default {
         },
       },
     ],
+    boardByStatus: null,
   },
   getters: {
     boards({ boards }) {
@@ -71,24 +73,38 @@ export default {
       return isDraggingGroup
     },
     board({ filterBy, board, sortBy }) {
-      if (!filterBy.txt && !filterBy.member && !filterBy.priority.length && !filterBy.status.length && !sortBy.type)
+      if (
+        !filterBy.txt &&
+        !filterBy.member &&
+        !filterBy.priority.length &&
+        !filterBy.status.length &&
+        !sortBy.type
+      )
         return board
       const boardForDisplay = JSON.parse(
         JSON.stringify(board)
       )
       //filter
-      if (filterBy.txt || filterBy.member || filterBy.priority.length || filterBy.status.length) {
-
+      if (
+        filterBy.txt ||
+        filterBy.member ||
+        filterBy.priority.length ||
+        filterBy.status.length
+      ) {
         const regex = new RegExp(filterBy.txt, 'i')
         var filteredGroups = boardForDisplay.groups.filter(
           (group) => {
             var tasks = group.tasks
-            if (regex.test(group.title) && !filterBy.member && !filterBy.priority.length && !filterBy.status.length)
+            if (
+              regex.test(group.title) &&
+              !filterBy.member &&
+              !filterBy.priority.length &&
+              !filterBy.status.length
+            )
               return group
             tasks = group.tasks.filter((task) =>
               regex.test(task.title)
             )
-
 
             if (filterBy.member) {
               tasks = tasks.filter((task) => {
@@ -99,11 +115,19 @@ export default {
             }
 
             if (filterBy.status.length > 0) {
-              tasks = tasks.filter(task => filterBy.status.some(id => id === task.status))
+              tasks = tasks.filter((task) =>
+                filterBy.status.some(
+                  (id) => id === task.status
+                )
+              )
             }
 
             if (filterBy.priority.length > 0) {
-              tasks = tasks.filter(task => filterBy.priority.some(id => id === task.priority))
+              tasks = tasks.filter((task) =>
+                filterBy.priority.some(
+                  (id) => id === task.priority
+                )
+              )
             }
 
             group.tasks = tasks
@@ -114,7 +138,6 @@ export default {
         boardForDisplay.groups = JSON.parse(
           JSON.stringify(filteredGroups)
         )
-
       }
       //sort
       if (sortBy.type) {
@@ -122,12 +145,12 @@ export default {
           case 'status-picker':
             boardForDisplay.groups.forEach(
               (group, idx) =>
-              (boardForDisplay.groups[idx].tasks =
-                group.tasks.sort(
-                  (t1, t2) =>
-                    t1.status.localeCompare(t2.status) *
-                    sortBy.dir
-                ))
+                (boardForDisplay.groups[idx].tasks =
+                  group.tasks.sort(
+                    (t1, t2) =>
+                      t1.status.localeCompare(t2.status) *
+                      sortBy.dir
+                  ))
             )
             break
           case 'priority-picker':
@@ -177,22 +200,23 @@ export default {
       return boardForDisplay
     },
     boardByStatus(state) {
+      if (state.boardByStatus) return state.boardByStatus
       const board = JSON.parse(JSON.stringify(state.board))
-      const boardByStatus = JSON.parse(
+      const initBoardByStatus = JSON.parse(
         JSON.stringify(state.kStatusOrder)
       )
       board.groups.forEach((group) => {
         group.tasks.forEach((task) => {
           task.groupId = group.id
-          const idx = boardByStatus.findIndex(
+          const idx = initBoardByStatus.findIndex(
             (s) => s.status.id === task.status
           )
-          if (!boardByStatus[idx].tasks)
-            boardByStatus[idx].tasks = []
-          boardByStatus[idx].tasks.push(task)
+          if (!initBoardByStatus[idx].tasks)
+            initBoardByStatus[idx].tasks = []
+          initBoardByStatus[idx].tasks.push(task)
         })
       })
-      return boardByStatus
+      return initBoardByStatus
     },
     kStatusOrder({ kStatusOrder }) {
       return kStatusOrder
@@ -317,7 +341,7 @@ export default {
           timeline: groupTimelineCalc,
           priority: groupPriCount,
           groupStatusCount: groupStatusCount,
-          numbers: groupNumbersMap
+          numbers: groupNumbersMap,
         }
 
         boardMapByGroups.push(groupSumMap)
@@ -375,6 +399,26 @@ export default {
     },
   },
   mutations: {
+    setKTasksOrder(state, { result, idx }) {
+      state.boardByStatus[idx].tasks = result
+    },
+    buildBoardByStatus(state) {
+      const boardByStatus = JSON.parse(
+        JSON.stringify(state.kStatusOrder)
+      )
+      state.board.groups.forEach((group) => {
+        group.tasks.forEach((task, index) => {
+          task.groupId = group.id
+          const idx = boardByStatus.findIndex(
+            (s) => s.status.id === task.status
+          )
+          if (!boardByStatus[idx].tasks)
+            boardByStatus[idx].tasks = []
+          boardByStatus[idx].tasks.push(task)
+        })
+      })
+      state.boardByStatus = boardByStatus
+    },
     setTaskUpdates(state, { isOpen }) {
       state.isTaskUpdatesOpen = isOpen
     },
@@ -413,6 +457,7 @@ export default {
       if (taskIdx === -1) return
       state.board.groups[groupIdx].tasks[taskIdx] =
         updatedTask
+      this.commit('buildBoardByStatus')
     },
     saveBoard(state, { savedBoard }) {
       const idx = state.boards.findIndex(
@@ -454,7 +499,7 @@ export default {
     removeTask(state, { groupIdx, taskIdx }) {
       state.board.groups[groupIdx].tasks.splice(taskIdx, 1)
     },
-    addUpdate(state, { update, taskId, boardId, groupId }) {
+    addUpdate(state, { update, taskId, groupId }) {
       const { _id, fullname, imgUrl } = update.from
       const updateMsg = {
         id: utilService.makeId(8),
@@ -463,7 +508,14 @@ export default {
         byMember: { _id, fullname, imgUrl },
       }
       console.log(updateMsg)
-      state.taskForDisplay.updates.unshift(updateMsg)
+      // state.taskForDisplay.updates.unshift(updateMsg)
+      const group = state.board.groups.find(
+        (currGroup) => currGroup.id === groupId
+      )
+      const task = group.tasks.find(
+        (task) => task.id === taskId
+      )
+      task.updates.unshift(updateMsg)
     },
     setTaskFordisplay(state, { id, groupId, taskId }) {
       const group = state.board.groups.find(
@@ -481,7 +533,7 @@ export default {
       state.board.activities.push(activity)
     },
     setStatusOrder(state, { newOrder }) {
-      state.kStatusOrder = newOrder
+      state.boardByStatus = newOrder
     },
   },
   actions: {
@@ -525,8 +577,10 @@ export default {
             type: 'loadBoard',
             board: savedBoard,
           })
-          socketService.emit(SOCKET_EMIT_SAVE_BOARD, savedBoard)
-
+          socketService.emit(
+            SOCKET_EMIT_SAVE_BOARD,
+            savedBoard
+          )
         } else {
           context.dispatch('loadBoards')
           router.push(`/boards/${savedBoard._id}`)
@@ -544,6 +598,7 @@ export default {
       }
     },
     async updateTask({ commit, state }, { data }) {
+      console.log('data', data)
       const board = JSON.parse(JSON.stringify(state.board))
       const { cmpType, groupId } = data
       var { task } = data
@@ -697,10 +752,20 @@ export default {
         JSON.stringify(context.state.board)
       )
       entities = JSON.parse(JSON.stringify(entities))
-      var groupId = ''
+      var entityId = ''
+      var boardByStatus = null
       if (entityType === 'tasks') {
-        groupId = entities.groupId
+        entityId = entities.groupId
         entities = entities.tasks
+      } else if (entityType === 'k-tasks') {
+        entityId = entities.status.id
+        entities = entities.tasks
+
+        if (!context.state.boardByStatus)
+          context.commit('buildBoardByStatus')
+        boardByStatus = JSON.parse(
+          JSON.stringify(context.state.boardByStatus)
+        )
       }
       if (
         !dropResult.removedIndex &&
@@ -709,6 +774,8 @@ export default {
         entities = entities
       } else {
         let itemToAdd = dropResult.payload
+        if (entityType === 'k-tasks')
+          itemToAdd.status = entityId
         if (dropResult.removedIndex !== null) {
           itemToAdd = entities.splice(
             dropResult.removedIndex,
@@ -725,7 +792,7 @@ export default {
       }
       if (entityType === 'tasks') {
         const idx = board.groups.findIndex(
-          (group) => group.id === groupId
+          (group) => group.id === entityId
         )
         context.commit({
           type: 'setTasksOrder',
@@ -742,6 +809,15 @@ export default {
           type: 'setStatusOrder',
           newOrder: entities,
         })
+      } else if (entityType === 'k-tasks') {
+        const idx = boardByStatus.findIndex(
+          (list) => list.status.id === entityId
+        )
+        context.commit({
+          type: 'setKTasksOrder',
+          result: entities,
+          idx,
+        })
       } else {
         board[entityType] = entities
         if (entityType === 'cmpsOrder') {
@@ -749,13 +825,19 @@ export default {
             type: 'setCmpsOrder',
             newOrder: entities,
           })
-          socketService.emit(SOCKET_EMIT_EDIT_CMPS_ORDER, entities)
+          socketService.emit(
+            SOCKET_EMIT_EDIT_CMPS_ORDER,
+            entities
+          )
         } else if (entityType === 'groups') {
           context.commit({
             type: 'setGroupsOrder',
             newOrder: entities,
           })
-          socketService.emit(SOCKET_EMIT_EDIT_GROUPS_ORDER, entities)
+          socketService.emit(
+            SOCKET_EMIT_EDIT_GROUPS_ORDER,
+            entities
+          )
         }
         await boardService.saveBoard(board)
       }
@@ -771,7 +853,6 @@ export default {
         )
         commit({ type: 'loadBoard', board })
         socketService.emit(SOCKET_EMIT_SAVE_BOARD, board)
-
       } catch (err) {
         console.log('saveGroup err', err)
       } finally {
@@ -807,8 +888,10 @@ export default {
           board
         )
         commit({ type: 'loadBoard', board: savedBoard })
-        socketService.emit(SOCKET_EMIT_SAVE_BOARD, savedBoard)
-
+        socketService.emit(
+          SOCKET_EMIT_SAVE_BOARD,
+          savedBoard
+        )
       } catch (err) {
         console.log('addTaskToTheStart err', err)
       }

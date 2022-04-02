@@ -105,11 +105,26 @@ export default {
     socketService.on(SOCKET_EVENT_BOARD_SEVED, (board) => {
       this.$store.commit({ type: 'loadBoard', board })
     })
+    socketService.on(SOCKET_EVENT_UPDATE_ADDED, ({ taskId, boardId, groupId, update }) => {
+      this.$store.commit({
+        type: 'addUpdate',
+        taskId,
+        boardId,
+        groupId,
+        update,
+      })
+    }
+    )
   },
   data() {
     return {
       isOpen: true,
     }
+  },
+  unmounted() {
+    socketService.off(
+      SOCKET_EVENT_UPDATE_ADDED
+    )
   },
   methods: {
     changeModalStatus() {

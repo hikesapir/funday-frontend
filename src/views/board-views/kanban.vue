@@ -18,7 +18,7 @@
         >
           {{ list.status.txt || 'Empty' }}
         </div>
-        <k-task-List :list="list.tasks" />
+        <k-task-List :list="list" />
       </Draggable>
     </Container>
   </div>
@@ -49,7 +49,7 @@ export default {
       this.$store.dispatch({
         type: 'changeOrder',
         dropResult,
-        entities: this.kStatusOrder,
+        entities: this.boardByStatus,
         entityType: 'k-status',
       })
     },
