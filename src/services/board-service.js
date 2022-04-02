@@ -370,6 +370,7 @@ function getEmptyTask(
     files: [],
     updates: [],
     members: taskMembers || [],
+    
   }
 }
 
