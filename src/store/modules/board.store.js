@@ -103,7 +103,7 @@ export default {
             if (filterBy.priority.length > 0) {
               tasks = tasks.filter(task => filterBy.priority.some(id => id === task.priority))
             }
-            
+
             group.tasks = tasks
             if (group.tasks.length > 0) return group
           }
@@ -731,11 +731,13 @@ export default {
             type: 'setCmpsOrder',
             newOrder: entities,
           })
+          socketService.emit(SOCKET_EMIT_EDIT_CMPS_ORDER, entities)
         } else if (entityType === 'groups') {
           context.commit({
             type: 'setGroupsOrder',
             newOrder: entities,
           })
+          socketService.emit(SOCKET_EMIT_EDIT_GROUPS_ORDER, entities)
         }
         await boardService.saveBoard(board)
       }
