@@ -35,7 +35,7 @@ export default {
   data() {
     return {
       dropPlaceholderOptions: {
-        className: "drop-preview",
+        className: "drop-preview kanban",
         animationDuration: "150",
         showOnTop: false,
       },
