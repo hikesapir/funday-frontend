@@ -107,6 +107,7 @@
                       @keyup.enter="
                         saveCmpTitle(cmp.preName)
                       "
+                      @blur="saveCmpTitle(cmp.preName)"
                       v-model="newCmpTitle"
                     />
                   </span>
@@ -250,14 +251,18 @@ export default {
       this.newCmpTitle = cmp
     },
     saveCmpTitle(cmpName) {
-      if (cmpName === this.newCmpTitle) return
+      if (cmpName === this.newCmpTitle) {
+        this.newCmpTitle = ''
+        this.prevCmpTitle = ''
+        return
+      }
       this.$store.dispatch({
         type: 'saveCmpTitle',
         prevCmpTitle: this.prevCmpTitle,
         newCmpTitle: this.newCmpTitle,
       })
-      this.prevCmpTitle = ''
       this.newCmpTitle = ''
+      this.prevCmpTitle = ''
     },
     isEditing(cmp) {
       return this.prevCmpTitle === cmp && cmp
