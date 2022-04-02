@@ -38,24 +38,30 @@
         </span>
         <div class="ellipsis">{{ board.title }}</div>
       </div>
-      <button @click.stop="openModal = !openModal" v-if="isHover || openModal">
+      <button
+        @click.stop="toggleModal"
+        v-if="isHover || openModal"
+      >
         <i class="fa-solid fa-ellipsis"></i>
       </button>
     </div>
+    <div
+      class="relative"
+      tabindex="-1"
+      @blur="openModal = false"
+      :ref="'ctxModal' + idx"
+      v-show="openModal"
+    >
+      <context-modal
+        :isStarred="board.isStarred"
+        @remove="remove"
+        @openNewTab="openNewTab"
+        @renameBoard="renameBoard"
+        @starred="starred"
+        @duplicate="duplicate"
+      />
+    </div>
   </li>
-  <div class="relative">
-    <context-modal
-      v-if="openModal"
-      :isStarred="board.isStarred"
-      @remove="remove"
-      @openNewTab="openNewTab"
-      @renameBoard="renameBoard"
-      @starred="starred"
-      @duplicate="duplicate"
-    />
-  </div>
-  <!-- tabindex="0"
-  @blur="openModal = false"-->
 </template>
 
 <script>
@@ -64,6 +70,7 @@ export default {
   name: 'board-preview',
   props: {
     board: Object,
+    idx: Number,
   },
   emits: [],
   components: {
@@ -80,8 +87,13 @@ export default {
   created() {
     document.title = this.board.title
   },
-  mounted() { },
+  mounted() {},
   methods: {
+    toggleModal() {
+      this.openModal = true
+      const modal = 'ctxModal' + this.idx
+      setTimeout(() => this.$refs[modal].focus(), 0)
+    },
     remove() {
       this.$store.dispatch({
         type: 'removeBoard',
@@ -92,7 +104,7 @@ export default {
     openNewTab() {
       window.open(
         window.location.origin +
-        `/#/boards/${this.board._id}`
+          `/#/boards/${this.board._id}`
       )
       this.openModal = false
     },
@@ -143,10 +155,12 @@ export default {
   },
   computed: {
     active() {
-      return (this.$route.params.id === this.board._id) ? 'act' : ''
-    }
+      return this.$route.params.id === this.board._id
+        ? 'act'
+        : ''
+    },
   },
-  unmounted() { },
+  unmounted() {},
 }
 </script>
 
