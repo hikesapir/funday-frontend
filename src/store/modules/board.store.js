@@ -11,6 +11,8 @@ import {
   SOCKET_EMIT_TASK_UPDATED,
   SOCKET_EMIT_REMOVE_TASK,
   SOCKET_EMIT_TASK_ADD,
+  SOCKET_EMIT_EDIT_GROUPS_ORDER,
+  SOCKET_EMIT_SAVE_BOARD,
 } from '../../services/socket-service.js'
 
 export default {
@@ -512,6 +514,8 @@ export default {
             type: 'loadBoard',
             board: savedBoard,
           })
+          socketService.emit(SOCKET_EMIT_SAVE_BOARD, savedBoard)
+
         } else {
           context.dispatch('loadBoards')
           router.push(`/boards/${savedBoard._id}`)
@@ -752,6 +756,8 @@ export default {
           JSON.parse(JSON.stringify(state.board))
         )
         commit({ type: 'loadBoard', board })
+        socketService.emit(SOCKET_EMIT_SAVE_BOARD, board)
+
       } catch (err) {
         console.log('saveGroup err', err)
       } finally {
@@ -766,6 +772,7 @@ export default {
           JSON.parse(JSON.stringify(state.board))
         )
         commit({ type: 'loadBoard', board })
+        socketService.emit(SOCKET_EMIT_SAVE_BOARD, board)
       } catch (err) {
         console.log('removeGroup err', err)
       } finally {
@@ -786,6 +793,8 @@ export default {
           board
         )
         commit({ type: 'loadBoard', board: savedBoard })
+        socketService.emit(SOCKET_EMIT_SAVE_BOARD, savedBoard)
+
       } catch (err) {
         console.log('addTaskToTheStart err', err)
       }
