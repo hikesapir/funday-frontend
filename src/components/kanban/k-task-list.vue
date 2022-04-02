@@ -47,23 +47,29 @@ export default {
       return this.list.tasks[idx]
     },
     async onDrop(dropResult, entityType) {
-      // if (
-      //   dropResult.addedIndex &&
-      //   !dropResult.removedIndex
-      // ) {
-      //   const data = {
-      //     groupId: dropResult.payload.groupId,
-      //     cmpType: 'status-picker',
-      //     task: dropResult.payload,
-      //     val: this.list.status.id,
-      //   }
-
-      //   await this.$store.dispatch({
-      //     type: 'updateTask',
-      //     data,
-      //   })
-      // }
-      var entities = {
+      var entities = {}
+      if (
+        dropResult.addedIndex !== null &&
+        dropResult.removedIndex === null
+      ) {
+        const data = {
+          groupId: dropResult.payload.groupId,
+          cmpType: 'status-picker',
+          task: dropResult.payload,
+          val: this.list.status.id,
+        }
+        try {
+          await this.$store.dispatch({
+            type: 'updateTask',
+            data,
+          })
+        } catch (err) {
+          console.error(
+            'could not alter tasks status at the moment'
+          )
+        }
+      }
+      entities = {
         status: this.list.status,
         tasks: this.list.tasks,
       }

@@ -1,18 +1,34 @@
 <template>
   <section class="filter-bar">
     <div class="new-item-btn-container">
-      <button class="new-item-btn new-item" @click="addNewItem">New Task</button>
+      <button
+        class="new-item-btn new-item"
+        @click="addNewItem"
+      >
+        New Task
+      </button>
       <div class="relative">
-        <button class="new-item-btn chevron" @click="openItemModal = !openItemModal">
+        <button
+          class="new-item-btn chevron"
+          @click="openItemModal = !openItemModal"
+        >
           <i class="fa-solid fa-chevron-down"></i>
         </button>
-        <section v-if="openItemModal" class="context-modal item-modal">
-          <button @click="addGroup">New group of Tasks</button>
+        <section
+          v-if="openItemModal"
+          class="context-modal item-modal"
+        >
+          <button @click="addGroup">
+            New group of Tasks
+          </button>
         </section>
       </div>
     </div>
     <div class="search">
-      <button v-if="!openSearching" @click="openSearching = true">
+      <button
+        v-if="!openSearching"
+        @click="openSearching = true"
+      >
         <div class="space-btn">
           <span>
             <i class="fa-solid fa-magnifying-glass"></i>
@@ -32,11 +48,18 @@
       </div>
     </div>
     <div class="relative">
-      <button v-if="filterBy.member" class="search-btn" @click="clearSearchMember">
+      <button
+        v-if="filterBy.member"
+        class="search-btn"
+        @click="clearSearchMember"
+      >
         <img :src="currMember.imgUrl" /> Persons
         <i class="fa-solid fa-circle-xmark"></i>
       </button>
-      <button v-else @click="openPersonModal = !openPersonModal">
+      <button
+        v-else
+        @click="openPersonModal = !openPersonModal"
+      >
         <div class="space-btn">
           <span>
             <i class="fa-solid fa-circle-user"></i>
@@ -54,7 +77,10 @@
         <h2>Quick person filter</h2>
         <div class="spacer"></div>
         <div class="flex members">
-          <label v-for="member in board?.members" :key="member">
+          <label
+            v-for="member in board?.members"
+            :key="member"
+          >
             <input
               @change="search"
               type="radio"
@@ -93,10 +119,17 @@
         <div class="flex">
           <div>
             <div class="title ellipsis">{{ status }}</div>
-            <div v-for="s in board.labels.status">
+            <div
+              v-for="s in board.labels.status"
+              :key="s.id"
+            >
               <label
                 class="select-container"
-                :class="{ active: filterBy.status.some(sta => s.id === sta) }"
+                :class="{
+                  active: filterBy.status.some(
+                    (sta) => s.id === sta
+                  ),
+                }"
               >
                 <input
                   @change="search"
@@ -106,10 +139,19 @@
                   hidden
                 />
                 <div class="select-content">
-                  <div class="small-circle" :style="'background-color:' + s.color"></div>
+                  <div
+                    class="small-circle"
+                    :style="'background-color:' + s.color"
+                  ></div>
                   <div>{{ s.txt || 'Empty' }}</div>
                 </div>
-                <div v-if="filterBy.status.some(sta => s.id === sta)">
+                <div
+                  v-if="
+                    filterBy.status.some(
+                      (sta) => s.id === sta
+                    )
+                  "
+                >
                   <i class="fa-solid fa-circle-xmark"></i>
                 </div>
               </label>
@@ -117,23 +159,39 @@
           </div>
           <div>
             <div class="title ellipsis">{{ priority }}</div>
-            <div v-for="p in board.labels.priority">
+            <div
+              v-for="p in board.labels.priority"
+              :key="p.id"
+            >
               <label
                 class="select-container"
-                :class="{ active: filterBy.priority.some(pri => p.id === pri) }"
+                :class="{
+                  active: filterBy.priority.some(
+                    (pri) => p.id === pri
+                  ),
+                }"
               >
                 <div class="select-content">
                   <input
                     @change="search"
-                  type="checkbox"
+                    type="checkbox"
                     :value="p.id"
                     v-model="filterBy.priority"
                     hidden
                   />
-                  <div class="small-circle" :style="'background-color:' + p.color"></div>
+                  <div
+                    class="small-circle"
+                    :style="'background-color:' + p.color"
+                  ></div>
                   <div>{{ p.txt || 'Empty' }}</div>
                 </div>
-                <div v-if="filterBy.priority.some(pri => p.id === pri)">
+                <div
+                  v-if="
+                    filterBy.priority.some(
+                      (pri) => p.id === pri
+                    )
+                  "
+                >
                   <i class="fa-solid fa-circle-xmark"></i>
                 </div>
               </label>
@@ -168,7 +226,6 @@ export default {
   components: {},
   methods: {
     search() {
-      console.log('get it');
       const filterBy = JSON.parse(
         JSON.stringify(this.filterBy)
       )
@@ -198,11 +255,15 @@ export default {
       }
     },
     status() {
-      const status = this.board.cmpsOrder.find(cmp => cmp.cmpName === 'status-picker')
+      const status = this.board.cmpsOrder.find(
+        (cmp) => cmp.cmpName === 'status-picker'
+      )
       return status.preName
     },
     priority() {
-      const priority = this.board.cmpsOrder.find(cmp => cmp.cmpName === 'priority-picker')
+      const priority = this.board.cmpsOrder.find(
+        (cmp) => cmp.cmpName === 'priority-picker'
+      )
       return priority.preName
     },
   },

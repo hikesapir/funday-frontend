@@ -341,7 +341,7 @@ export default {
           timeline: groupTimelineCalc,
           priority: groupPriCount,
           groupStatusCount: groupStatusCount,
-          numbers: groupNumbersMap
+          numbers: groupNumbersMap,
         }
 
         boardMapByGroups.push(groupSumMap)
@@ -457,7 +457,7 @@ export default {
       if (taskIdx === -1) return
       state.board.groups[groupIdx].tasks[taskIdx] =
         updatedTask
-      state.commit('buildBoardByStatus')
+      this.commit('buildBoardByStatus')
     },
     saveBoard(state, { savedBoard }) {
       const idx = state.boards.findIndex(
@@ -526,7 +526,7 @@ export default {
       state.board.activities.push(activity)
     },
     setStatusOrder(state, { newOrder }) {
-      state.kStatusOrder = newOrder
+      state.boardByStatus = newOrder
     },
   },
   actions: {
@@ -570,8 +570,10 @@ export default {
             type: 'loadBoard',
             board: savedBoard,
           })
-          socketService.emit(SOCKET_EMIT_SAVE_BOARD, savedBoard)
-
+          socketService.emit(
+            SOCKET_EMIT_SAVE_BOARD,
+            savedBoard
+          )
         } else {
           context.dispatch('loadBoards')
           router.push(`/boards/${savedBoard._id}`)
@@ -765,6 +767,8 @@ export default {
         entities = entities
       } else {
         let itemToAdd = dropResult.payload
+        if (entityType === 'k-tasks')
+          itemToAdd.status = entityId
         if (dropResult.removedIndex !== null) {
           itemToAdd = entities.splice(
             dropResult.removedIndex,
@@ -772,7 +776,6 @@ export default {
           )[0]
         }
         if (dropResult.addedIndex !== null) {
-          console.log(dropResult.addedIndex)
           entities.splice(
             dropResult.addedIndex,
             0,
@@ -815,13 +818,19 @@ export default {
             type: 'setCmpsOrder',
             newOrder: entities,
           })
-          socketService.emit(SOCKET_EMIT_EDIT_CMPS_ORDER, entities)
+          socketService.emit(
+            SOCKET_EMIT_EDIT_CMPS_ORDER,
+            entities
+          )
         } else if (entityType === 'groups') {
           context.commit({
             type: 'setGroupsOrder',
             newOrder: entities,
           })
-          socketService.emit(SOCKET_EMIT_EDIT_GROUPS_ORDER, entities)
+          socketService.emit(
+            SOCKET_EMIT_EDIT_GROUPS_ORDER,
+            entities
+          )
         }
         await boardService.saveBoard(board)
       }
@@ -837,7 +846,6 @@ export default {
         )
         commit({ type: 'loadBoard', board })
         socketService.emit(SOCKET_EMIT_SAVE_BOARD, board)
-
       } catch (err) {
         console.log('saveGroup err', err)
       } finally {
@@ -873,8 +881,10 @@ export default {
           board
         )
         commit({ type: 'loadBoard', board: savedBoard })
-        socketService.emit(SOCKET_EMIT_SAVE_BOARD, savedBoard)
-
+        socketService.emit(
+          SOCKET_EMIT_SAVE_BOARD,
+          savedBoard
+        )
       } catch (err) {
         console.log('addTaskToTheStart err', err)
       }
