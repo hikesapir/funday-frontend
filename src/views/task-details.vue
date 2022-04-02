@@ -73,10 +73,10 @@ export default {
     taskActivity,
   },
   async created() {
-    socketService.on(
-      SOCKET_EVENT_UPDATE_ADDED,
-      this.addUpdate
-    )
+    // socketService.on(
+    //   SOCKET_EVENT_UPDATE_ADDED,
+    //   this.addUpdate
+    // )
   },
   mounted() {},
   methods: {
@@ -130,12 +130,12 @@ export default {
       return activities
     },
   },
-  unmounted() {
-    socketService.off(
-      SOCKET_EVENT_UPDATE_ADDED,
-      this.addUpdate
-    )
-  },
+  // unmounted() {
+  //   socketService.off(
+  //     SOCKET_EVENT_UPDATE_ADDED,
+  //     this.addUpdate
+  //   )
+  // },
   watch: {
     params: {
       async handler() {

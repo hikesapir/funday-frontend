@@ -443,7 +443,7 @@ export default {
     removeTask(state, { groupIdx, taskIdx }) {
       state.board.groups[groupIdx].tasks.splice(taskIdx, 1)
     },
-    addUpdate(state, { update, taskId, boardId, groupId }) {
+    addUpdate(state, { update, taskId, groupId }) {
       const { _id, fullname, imgUrl } = update.from
       const updateMsg = {
         id: utilService.makeId(8),
@@ -452,7 +452,14 @@ export default {
         byMember: { _id, fullname, imgUrl },
       }
       console.log(updateMsg)
-      state.taskForDisplay.updates.unshift(updateMsg)
+      // state.taskForDisplay.updates.unshift(updateMsg)
+      const group = state.board.groups.find(
+        (currGroup) => currGroup.id === groupId
+      )
+      const task = group.tasks.find(
+        (task) => task.id === taskId
+      )
+      task.updates.unshift(updateMsg)
     },
     setTaskFordisplay(state, { id, groupId, taskId }) {
       const group = state.board.groups.find(
