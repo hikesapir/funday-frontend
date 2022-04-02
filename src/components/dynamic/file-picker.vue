@@ -16,14 +16,13 @@
         <input type="file" @change="handleFile" hidden />
       </label>
     </div>
-    <span v-for="file in task.files" :key="file" class="file-preview">
-      <img :src="file" alt @click="openNewTab(file)" />
-    </span>
+    <file-preview v-for="file in task.files" :key="file" :file="file" />
   </div>
 </template>
 
 <script>
 import { uploadFile } from '../../services/files-upload-service.js';
+import filePreview from '../dynamic/preview/file-preview.vue';
 
 export default {
   name: 'file-picker',
@@ -31,14 +30,17 @@ export default {
     task: Object,
     groupId: String,
   },
+  components: {
+    filePreview,
+  },
   data() {
     return {
       isModalOpen: false,
       isHover: false,
-      val: null
+      val: null,
+
     }
   },
-
   methods: {
     openModal() {
       this.isModalOpen = true;

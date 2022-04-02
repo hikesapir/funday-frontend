@@ -12,7 +12,7 @@
   }
   .btn.haveSome {
     position: absolute;
-    left: 5px;
+    left: -5px;
   }
   .context-modal {
     width: 130px;
@@ -31,8 +31,32 @@
   .file-preview {
     height: 24px;
     width: 17px;
-  }
+    .context-modal{
+      left: -50px;
+      width: 270px;
+      img{
+        height: 250px;
+        width: 250px;
+      }
+    }
 
+  }
+  .modal-background{
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img{
+      width: 60vw;
+      height: 75vh;
+      background-color: $main-task-gray;
+      padding: 10px;
+      border-radius: 25px;
+    }
+
+    
+  }
   img {
     object-fit: contain;
     height: 24px;
