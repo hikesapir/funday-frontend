@@ -34,6 +34,32 @@ export default {
     isModalOpen: false,
     taskForDisplay: null,
     loggedInUser: null,
+    kStatusOrder: [
+      {
+        status: { id: 's000', txt: '', color: '#c4c4c4' },
+      },
+      {
+        status: {
+          id: 's001',
+          txt: 'Done',
+          color: '#00c875',
+        },
+      },
+      {
+        status: {
+          id: 's002',
+          txt: 'Working on it',
+          color: '#fdab3d',
+        },
+      },
+      {
+        status: {
+          id: 's003',
+          txt: 'Stuck',
+          color: '#e2445c',
+        },
+      },
+    ],
   },
   getters: {
     boards({ boards }) {
@@ -147,6 +173,27 @@ export default {
         }
       }
       return boardForDisplay
+    },
+    boardByStatus(state) {
+      const board = JSON.parse(JSON.stringify(state.board))
+      const boardByStatus = JSON.parse(
+        JSON.stringify(state.kStatusOrder)
+      )
+      board.groups.forEach((group) => {
+        group.tasks.forEach((task) => {
+          task.groupId = group.id
+          const idx = boardByStatus.findIndex(
+            (s) => s.status.id === task.status
+          )
+          if (!boardByStatus[idx].tasks)
+            boardByStatus[idx].tasks = []
+          boardByStatus[idx].tasks.push(task)
+        })
+      })
+      return boardByStatus
+    },
+    kStatusOrder({ kStatusOrder }) {
+      return kStatusOrder
     },
     cmpsOrder({ board }) {
       return board.cmpsOrder
@@ -420,6 +467,9 @@ export default {
     addActivity(state, { activity }) {
       state.board.activities.push(activity)
     },
+    setStatusOrder(state, { newOrder }) {
+      state.kStatusOrder = newOrder
+    },
   },
   actions: {
     async loadBoards({ commit }) {
@@ -669,6 +719,11 @@ export default {
           idx,
           entities
         )
+      } else if (entityType === 'k-status') {
+        context.commit({
+          type: 'setStatusOrder',
+          newOrder: entities,
+        })
       } else {
         board[entityType] = entities
         if (entityType === 'cmpsOrder') {
