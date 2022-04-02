@@ -4,7 +4,6 @@
       class="number-picker task-drag-handle"
       @mouseover="hoverEdit = true"
       @mouseout="hoverEdit = false"
-      @click="toggleEditTask"
     >
       <div class="editable-component">
         <div v-show="isEditing" class="edit-number">
@@ -19,6 +18,7 @@
         </div>
         <div v-show="!isEditing" class="task-number">
           <span
+            @click.stop="toggleEditTask"
             :style="{
               border: hoverEdit ? '1px solid #c4c4c4' : 'none',
               padding: hoverEdit ? '3px' : 'none',
@@ -28,21 +28,6 @@
           >
         </div>
       </div>
-      <!-- <div
-        class="edit-icon"
-        tabindex="0"
-        @blur="toggleEditTask"
-        v-show="!isEditing"
-      >
-        <button
-          class="edit-number-btn"
-          @click="toggleEditTask"
-          @mouseover="hoverEdit = true"
-          @mouseout="hoverEdit = false"
-        >
-          Edit
-        </button> -->
-      <!-- </div> -->
     </div>
   </div>
 </template>
