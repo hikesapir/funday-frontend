@@ -768,8 +768,8 @@ export default {
         )
       }
       if (
-        !dropResult.removedIndex &&
-        !dropResult.addedIndex
+        dropResult.removedIndex !== null &&
+        dropResult.addedIndex !== null
       ) {
         entities = entities
       } else {

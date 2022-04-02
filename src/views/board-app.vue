@@ -1,17 +1,26 @@
 <template>
   <main-nav></main-nav>
   <div class="open-side-bar">
-    <div @click="changeModalStatus" class="open-nav-btn" :class="{ open: isOpen, close: !isOpen }">
+    <div
+      @click="changeModalStatus"
+      class="open-nav-btn"
+      :class="{ open: isOpen, close: !isOpen }"
+    >
       <i class="fa-solid fa-angle-right"></i>
     </div>
-    <div class="board-navi" :class="{ open: isOpen, close: !isOpen }">
+    <div
+      class="board-navi"
+      :class="{ open: isOpen, close: !isOpen }"
+    >
       <board-nav v-if="isOpen" :boards="boards"></board-nav>
     </div>
   </div>
-  <div :class="[
-    'board-app-container',
-    isUpdatesOpen ? 'margin' : '',
-  ]">
+  <div
+    :class="[
+      'board-app-container',
+      isUpdatesOpen ? 'margin' : '',
+    ]"
+  >
     <section class="board-app">
       <div class="bord-header-wrapper">
         <board-header
@@ -25,7 +34,10 @@
         <board-view-mode :boardId="board?._id" />
         <filter-bar :board="board" />
       </div>
-      <router-view :board="board" v-if="!isLoading"></router-view>
+      <router-view
+        :board="board"
+        v-if="!isLoading"
+      ></router-view>
     </section>
   </div>
 </template>
@@ -45,8 +57,7 @@ import boardHeader from '../components/board-header.vue'
 import boardViewMode from '../components/board-view-mode.vue'
 import filterBar from '../components/filter-bar.vue'
 import boardNav from '../components/board-nav.vue'
-import mainNav from "../components/main-nav.vue"
-
+import mainNav from '../components/main-nav.vue'
 
 export default {
   name: 'board-app',
@@ -56,10 +67,7 @@ export default {
     boardViewMode,
     filterBar,
     mainNav,
-
   },
-  emits: [],
-  computed: {},
   created() {
     this.$store.dispatch('setUser')
     socketService.on('task-updated', ({ groupId, task }) =>
@@ -95,25 +103,29 @@ export default {
           newOrder,
         })
     )
-    socketService.on(SOCKET_EVENT_GROUPS_ORDER_EDITED, (newOrder) => {
-      this.$store.commit({
-        type: 'setGroupsOrder',
-        newOrder
-      })
-    }
+    socketService.on(
+      SOCKET_EVENT_GROUPS_ORDER_EDITED,
+      (newOrder) => {
+        this.$store.commit({
+          type: 'setGroupsOrder',
+          newOrder,
+        })
+      }
     )
     socketService.on(SOCKET_EVENT_BOARD_SEVED, (board) => {
       this.$store.commit({ type: 'loadBoard', board })
     })
-    socketService.on(SOCKET_EVENT_UPDATE_ADDED, ({ taskId, boardId, groupId, update }) => {
-      this.$store.commit({
-        type: 'addUpdate',
-        taskId,
-        boardId,
-        groupId,
-        update,
-      })
-    }
+    socketService.on(
+      SOCKET_EVENT_UPDATE_ADDED,
+      ({ taskId, boardId, groupId, update }) => {
+        this.$store.commit({
+          type: 'addUpdate',
+          taskId,
+          boardId,
+          groupId,
+          update,
+        })
+      }
     )
   },
   data() {
@@ -122,9 +134,7 @@ export default {
     }
   },
   unmounted() {
-    socketService.off(
-      SOCKET_EVENT_UPDATE_ADDED
-    )
+    socketService.off(SOCKET_EVENT_UPDATE_ADDED)
   },
   methods: {
     changeModalStatus() {
