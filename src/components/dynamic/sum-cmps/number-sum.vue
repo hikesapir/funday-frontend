@@ -64,6 +64,7 @@ export default {
     },
     changeDisplay(val = "count") {
       this.displayMode = val;
+      this.isModalOpen = !this.isModalOpen;
     },
   },
 };
