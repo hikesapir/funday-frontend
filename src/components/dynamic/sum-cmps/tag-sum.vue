@@ -23,9 +23,7 @@ export default {
     groupId: String,
   },
   data() {
-    return {
-      // groupData: null,
-    };
+    return {};
   },
 
   computed: {

@@ -18,6 +18,7 @@ import prioritySum from "./dynamic/sum-cmps/priority-sum.vue";
 import statusSum from "./dynamic/sum-cmps/status-sum.vue";
 import tagSum from "./dynamic/sum-cmps/tag-sum.vue";
 import timelineSum from "./dynamic/sum-cmps/timeline-sum.vue";
+import numberSum from "./dynamic/sum-cmps/number-sum.vue";
 
 export default {
   name: "sum-preview",
@@ -34,6 +35,7 @@ export default {
     statusSum,
     tagSum,
     timelineSum,
+    numberSum,
   },
   methods: {},
   computed: {

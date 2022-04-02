@@ -271,6 +271,16 @@ export default {
           })
         })
 
+        //Numbers Summary:
+
+        const groupNumbersMap = []
+        group.tasks.forEach((task) => {
+          if (!task.number) return groupNumbersMap
+          return groupNumbersMap.push(task.number)
+        })
+
+        // })
+
         //Members Summary:
 
         const groupMemberMap = []
@@ -305,6 +315,7 @@ export default {
           timeline: groupTimelineCalc,
           priority: groupPriCount,
           groupStatusCount: groupStatusCount,
+          numbers: groupNumbersMap
         }
 
         boardMapByGroups.push(groupSumMap)
@@ -568,6 +579,9 @@ export default {
           break
         case 'title-picker':
           task.title = data.title
+          break
+        case 'number-picker':
+          task.number = data.number
           break
       }
 

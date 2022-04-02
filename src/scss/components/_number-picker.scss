@@ -1,0 +1,14 @@
+.number-picker {
+  display: flex;
+  text-align: center;
+  width: 140px;
+  background-color: $main-task-gray;
+  justify-content: center;
+  color: $main-task-text-gray;
+
+  .edit-number {
+    input {
+      width: 100px;
+    }
+  }
+}
