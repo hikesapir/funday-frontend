@@ -362,6 +362,7 @@ function getEmptyTask(
     status: taskStatus || 's000',
     priority: 'p000',
     dueDate: '',
+    number: null,
     timeline: {
       start: '',
       end: '',

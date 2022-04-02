@@ -1,107 +1,109 @@
-.kanban-view-container {
-  margin-left: 20px;
-  padding: 0 30px;
-  display: grid;
-  grid-template-columns: repeat(4, 260px);
-  gap: 30px;
+.kanban-main {
+  .kanban-view-container {
+    margin-left: 20px;
+    padding: 0 30px;
+    display: grid;
+    grid-template-columns: repeat(4, 260px);
+    gap: 30px;
 
-  .k-list-header {
-    height: 50px;
-    display: flex;
-    align-items: center;
-    font-size: rem(16px);
-    font-weight: 650;
-    justify-content: center;
-    border-top-right-radius: 8px;
-    border-top-left-radius: 8px;
-    color: $main-white;
-    border: 1px solid $main-gray;
-    border-bottom: none;
-    font-weight: 400;
-  }
-  .k-task-list {
-    max-height: calc(65vh - 50px);
-    // border: 1px solid $main-text-gray;
-    border: 1px solid $main-gray;
-    border-bottom-right-radius: 8px;
-    border-bottom-left-radius: 8px;
-    background-color: $main-task-gray;
-    min-height: 350px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    align-items: center;
-    justify-content: center;
-    -webkit-box-shadow: 0px 9px 18px -4px rgba(0, 0, 0, 0.36);
-    box-shadow: 0px 9px 18px -4px rgba(0, 0, 0, 0.36);
-  }
-  .task-body {
-    border: 1px solid $main-gray;
-    background-color: $main-white;
-    border-radius: 8px;
-    width: 240px;
-    height: 80px;
-    margin: 10px auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    -webkit-box-shadow: 0px 9px 18px -4px rgba(0, 0, 0, 0.2);
-    box-shadow: 0px 9px 18px -4px rgba(0, 0, 0, 0.2);
-    .k-task-title {
+    .k-list-header {
+      height: 50px;
       display: flex;
-      width: 230px;
-      font-size: 13px;
+      align-items: center;
+      font-size: rem(16px);
+      font-weight: 650;
+      justify-content: center;
+      border-top-right-radius: 8px;
+      border-top-left-radius: 8px;
+      color: $main-white;
+      border: 1px solid $main-gray;
+      border-bottom: none;
+      font-weight: 400;
+    }
+    .k-task-list {
+      max-height: calc(65vh - 50px);
+      // border: 1px solid $main-text-gray;
+      border: 1px solid $main-gray;
+      border-bottom-right-radius: 8px;
+      border-bottom-left-radius: 8px;
+      background-color: $main-task-gray;
+      min-height: 350px;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      align-items: center;
+      justify-content: center;
+      -webkit-box-shadow: 0px 9px 18px -4px rgba(0, 0, 0, 0.36);
+      box-shadow: 0px 9px 18px -4px rgba(0, 0, 0, 0.36);
+    }
+    .task-body {
+      border: 1px solid $main-gray;
+      background-color: $main-white;
+      border-radius: 8px;
+      width: 240px;
+      height: 80px;
+      margin: 10px auto;
+      display: flex;
+      flex-direction: column;
       justify-content: space-between;
       align-items: center;
-      color: $main-text-gray;
-      color: $main-text-gray;
+      -webkit-box-shadow: 0px 9px 18px -4px rgba(0, 0, 0, 0.2);
+      box-shadow: 0px 9px 18px -4px rgba(0, 0, 0, 0.2);
+      .k-task-title {
+        display: flex;
+        width: 230px;
+        font-size: 13px;
+        justify-content: space-between;
+        align-items: center;
+        color: $main-text-gray;
+        color: $main-text-gray;
 
-      > * {
-        padding: 7px;
-      }
-      .word-size {
-        width: 150px;
-      }
-      .priority-picker-col {
-        height: 16px;
-        width: 60px;
-        border-radius: 8px;
-        line-height: 16px;
-        vertical-align: middle;
-        font-size: 12px;
+        > * {
+          padding: 7px;
+        }
+        .word-size {
+          width: 150px;
+        }
+        .priority-picker-col {
+          height: 16px;
+          width: 60px;
+          border-radius: 8px;
+          line-height: 16px;
+          vertical-align: middle;
+          font-size: 12px;
+        }
       }
     }
-  }
 
-  .k-task-card {
-    padding: 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 220px;
-
-    .member-picker {
+    .k-task-card {
+      padding: 5px;
       display: flex;
-      width: 80px;
-      justify-content: center;
-      margin-left: 35px;
+      justify-content: space-between;
+      align-items: center;
+      width: 220px;
+
+      .member-picker {
+        display: flex;
+        width: 80px;
+        justify-content: center;
+        margin-left: 35px;
+      }
+
+      .timeline-picker label.timeline {
+        height: 16px;
+        width: 120px;
+        font-size: 12px;
+        vertical-align: middle;
+        line-height: 16px;
+      }
     }
 
-    .timeline-picker label.timeline {
-      height: 16px;
-      width: 120px;
-      font-size: 12px;
-      vertical-align: middle;
-      line-height: 16px;
+    img {
+      height: 30px;
+      width: 30px;
+      border: 2px solid white;
+      border-radius: 20px;
+      object-fit: contain;
+      margin: 0 -7px;
     }
-  }
-
-  img {
-    height: 30px;
-    width: 30px;
-    border: 2px solid white;
-    border-radius: 20px;
-    object-fit: contain;
-    margin: 0 -7px;
   }
 }

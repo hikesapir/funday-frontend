@@ -110,7 +110,7 @@
 .th-title {
   position: sticky;
   left: 46px;
-
+  height: 40px;
   width: 334px;
   text-align: left;
   font-size: 18px;
@@ -125,6 +125,9 @@
 .file-picker-col,
 .number-picker-col,
 .priority-picker-col {
+  &:not(:first-child) {
+    height: 34px;
+  }
   width: 140px;
   text-align: center;
   background-color: $main-white;
@@ -146,6 +149,7 @@
 
 .th-header {
   position: relative;
+  height: 100%;
   cursor: grab;
   .cols-drag-handle {
     position: absolute;

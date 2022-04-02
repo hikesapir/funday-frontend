@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="kanban-main">
     <Container
       :drop-placeholder="dropPlaceholderOptions"
       @drop="onDrop"
@@ -8,15 +8,12 @@
       drag-class="drag-group"
       drag-handle-selector=".k-list-header"
     >
-      <Draggable
-        v-for="list in boardByStatus"
-        :key="list.status"
-      >
+      <Draggable v-for="list in boardByStatus" :key="list.status">
         <div
           class="k-list-header"
           :style="{ 'background-color': list.status.color }"
         >
-          {{ list.status.txt || 'Empty' }}
+          {{ list.status.txt || "Empty" }}
         </div>
         <k-task-List :list="list" />
       </Draggable>
@@ -25,10 +22,10 @@
 </template>
 
 <script>
-import { Container, Draggable } from 'vue3-smooth-dnd'
-import kTaskList from '../../components/kanban/k-task-list.vue'
+import { Container, Draggable } from "vue3-smooth-dnd";
+import kTaskList from "../../components/kanban/k-task-list.vue";
 export default {
-  name: 'kanban',
+  name: "kanban",
   components: {
     kTaskList,
     Container,
@@ -38,35 +35,35 @@ export default {
   data() {
     return {
       dropPlaceholderOptions: {
-        className: 'drop-preview',
-        animationDuration: '150',
+        className: "drop-preview",
+        animationDuration: "150",
         showOnTop: false,
       },
-    }
+    };
   },
   methods: {
     onDrop(dropResult) {
       this.$store.dispatch({
-        type: 'changeOrder',
+        type: "changeOrder",
         dropResult,
         entities: this.boardByStatus,
-        entityType: 'k-status',
-      })
+        entityType: "k-status",
+      });
     },
   },
   computed: {
     board() {
-      return this.$store.getters.board
+      return this.$store.getters.board;
     },
     kStatusOrder() {
-      return this.$store.getters.kStatusOrder
+      return this.$store.getters.kStatusOrder;
     },
     boardByStatus() {
-      return this.$store.getters.boardByStatus
+      return this.$store.getters.boardByStatus;
     },
     statuses() {
-      return this.board.labels.status
+      return this.board.labels.status;
     },
   },
-}
+};
 </script>

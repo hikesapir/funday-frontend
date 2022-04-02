@@ -5,10 +5,20 @@
   background-color: $main-task-gray;
   justify-content: center;
   color: $main-task-text-gray;
+  font-size: 12px;
 
   .edit-number {
     input {
-      width: 100px;
+      width: 130px;
+      @include blue-focus;
+      border-radius: 0;
+      padding: 2px;
+      text-align: center;
+      font-size: 12px;
+      &:focus {
+        -webkit-box-shadow: 0px 0px 44px 4px rgba(204, 229, 255, 0.55);
+        box-shadow: 0px 0px 44px 4px rgba(204, 229, 255, 0.55);
+      }
     }
   }
 }

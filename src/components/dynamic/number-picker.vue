@@ -4,7 +4,12 @@
       class="number-picker task-drag-handle"
       @mouseover="hoverEdit = true"
       @mouseout="hoverEdit = false"
+      @click="isEditing = true"
     >
+      <span class="btn" v-if="hoverEdit && !task.number">
+        <fa icon="circle-plus" @click.stop="openModal" />
+        <i class="fa-solid fa-input-numeric"></i>
+      </span>
       <div class="editable-component">
         <div v-show="isEditing" class="edit-number">
           <input
@@ -13,7 +18,7 @@
             @blur="saveNumber"
             v-model="number"
             ref="input"
-            class="edit-number-input"
+            class="edit-number input"
           />
         </div>
         <div v-show="!isEditing" class="task-number">
@@ -53,23 +58,8 @@ export default {
   created() {
     this.number = this.task.number;
   },
-  computed: {
-    // labelColor() {
-    //   return this.$store.getters.board?.groups.find(
-    //     (group) => group.id === this.groupId
-    //   );
-    // },
-  },
+  computed: {},
   methods: {
-    // openTaskUpdates() {
-    //   this.$store.commit({
-    //     type: "setTaskUpdates",
-    //     isOpen: true,
-    //   });
-    //   this.$router.push(
-    //     `/boards/${this.boardId}/pulses/${this.groupId}/${this.task.id}`
-    //   );
-    // },
     toggleEditTask() {
       this.isEditing = !this.isEditing;
       setTimeout(() => this.$refs.input.focus(), 0);
@@ -82,13 +72,6 @@ export default {
         task: this.task,
       });
     },
-    // deleteTask(groupId, taskId) {
-    //   this.$store.dispatch({
-    //     type: "removeTask",
-    //     groupId,
-    //     taskId,
-    //   });
-    // },
   },
 };
 </script>
