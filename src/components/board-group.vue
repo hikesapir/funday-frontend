@@ -84,7 +84,10 @@
                 :class="['th-header', cmp.cmpName + '-col']"
               >
                 <i
-                  v-if="cmp.cmpName !== 'title-picker'"
+                  v-if="
+                    cmp.cmpName !== 'title-picker' &&
+                    !isEditing(cmp.preName)
+                  "
                   class="cols-drag-handle fa-solid fa-grip-vertical"
                 ></i>
                 <span
@@ -247,8 +250,8 @@ export default {
       window.addEventListener('mouseup', this.mouseUp)
     },
     editCmpTitle(cmp) {
-      this.prevCmpTitle = cmp
-      this.newCmpTitle = cmp
+      this.prevCmpTitle = cmp.preName
+      this.newCmpTitle = cmp.preName
     },
     saveCmpTitle(cmpName) {
       if (cmpName === this.newCmpTitle) {
