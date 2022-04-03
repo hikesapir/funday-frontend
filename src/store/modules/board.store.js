@@ -145,12 +145,12 @@ export default {
           case 'status-picker':
             boardForDisplay.groups.forEach(
               (group, idx) =>
-                (boardForDisplay.groups[idx].tasks =
-                  group.tasks.sort(
-                    (t1, t2) =>
-                      t1.status.localeCompare(t2.status) *
-                      sortBy.dir
-                  ))
+              (boardForDisplay.groups[idx].tasks =
+                group.tasks.sort(
+                  (t1, t2) =>
+                    t1.status.localeCompare(t2.status) *
+                    sortBy.dir
+                ))
             )
             break
           case 'priority-picker':
@@ -191,6 +191,16 @@ export default {
                 )
               })
             )
+            break
+          case 'number-picker':
+            boardForDisplay.groups.forEach((group) => {
+              group.tasks.sort((t1, t2) => {
+                if (t1.number && t2.number) {
+                  return (t1.number - t2.number) * sortBy.dir
+                }
+                else return sortBy.dir
+              })
+            })
             break
 
           default:
@@ -236,14 +246,14 @@ export default {
       const boardMapByGroups = []
       const members = board.members
       const tasksForMemberMap = {}
-      
+
       groups.forEach((group) => {
         const groupStatusCount = group.tasks.reduce(
           (acc, task) => {
             if (!task.status) return acc
             acc[task.status]
-            ? (acc[task.status] += 1)
-            : (acc[task.status] = 1)
+              ? (acc[task.status] += 1)
+              : (acc[task.status] = 1)
             return acc
           },
           {}
