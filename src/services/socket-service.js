@@ -13,16 +13,22 @@ export const SOCKET_EVENT_TASK_REMOVED = 'task-removed'
 export const SOCKET_EVENT_USER_UPDATED = 'user-updated'
 // CMPS ORDER AND RENAMING
 export const SOCKET_EMIT_EDIT_CMPS_ORDER = 'edit-cmps-order'
-export const SOCKET_EVENT_CMPS_ORDER_EDITED = 'cmps-order-edited'
+export const SOCKET_EVENT_CMPS_ORDER_EDITED =
+  'cmps-order-edited'
+export const SOCKET_EMIT_EDIT_TASKS_ORDER =
+  'edit-tasks-order'
+export const SOCKET_EVENT_TASKS_ORDER_EDITED =
+  'tasks-order-edited'
 
 //groups
-export const SOCKET_EMIT_EDIT_GROUPS_ORDER = 'edit-groups-order'
-export const SOCKET_EVENT_GROUPS_ORDER_EDITED = 'cmps-groups-edited'
+export const SOCKET_EMIT_EDIT_GROUPS_ORDER =
+  'edit-groups-order'
+export const SOCKET_EVENT_GROUPS_ORDER_EDITED =
+  'cmps-groups-edited'
 
 //board
 export const SOCKET_EMIT_SAVE_BOARD = 'save-board'
 export const SOCKET_EVENT_BOARD_SEVED = 'board-saved'
-
 
 // Updates
 export const SOCKET_EMIT_ADD_UPDATE = 'add-update'

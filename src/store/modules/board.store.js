@@ -13,6 +13,7 @@ import {
   SOCKET_EMIT_TASK_ADD,
   SOCKET_EMIT_EDIT_GROUPS_ORDER,
   SOCKET_EMIT_SAVE_BOARD,
+  SOCKET_EMIT_EDIT_TASKS_ORDER,
 } from '../../services/socket-service.js'
 
 export default {
@@ -826,6 +827,10 @@ export default {
             idx,
             entities
           )
+          socketService.emit(SOCKET_EMIT_EDIT_TASKS_ORDER, {
+            result: entities,
+            idx,
+          })
         } catch (err) {
           console.log(
             'could not save tasks order to backend',
