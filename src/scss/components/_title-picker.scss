@@ -11,12 +11,6 @@
 
     width: 334px;
     background-color: rgba(255, 255, 255, 0.658);
-    // border-bottom: 0.1px solid $main-task-end-line;
-
-    // for making the title picker column sticky
-    // and overlay when scrolling to the right
-
-    // z-index: 10;
     overflow: unset;
     padding-right: 8px;
 
@@ -31,7 +25,8 @@
     }
 
     .editable-component {
-      width: 260px;
+      // width: 260px;
+      width: 100%;
       .task-title {
         padding-right: 2px;
         padding-left: 8px;
