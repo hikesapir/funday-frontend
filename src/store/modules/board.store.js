@@ -145,12 +145,12 @@ export default {
           case 'status-picker':
             boardForDisplay.groups.forEach(
               (group, idx) =>
-              (boardForDisplay.groups[idx].tasks =
-                group.tasks.sort(
-                  (t1, t2) =>
-                    t1.status.localeCompare(t2.status) *
-                    sortBy.dir
-                ))
+                (boardForDisplay.groups[idx].tasks =
+                  group.tasks.sort(
+                    (t1, t2) =>
+                      t1.status.localeCompare(t2.status) *
+                      sortBy.dir
+                  ))
             )
             break
           case 'priority-picker':
@@ -196,9 +196,10 @@ export default {
             boardForDisplay.groups.forEach((group) => {
               group.tasks.sort((t1, t2) => {
                 if (t1.number && t2.number) {
-                  return (t1.number - t2.number) * sortBy.dir
-                }
-                else return sortBy.dir
+                  return (
+                    (t1.number - t2.number) * sortBy.dir
+                  )
+                } else return sortBy.dir
               })
             })
             break
@@ -608,13 +609,17 @@ export default {
       }
     },
     async updateTask({ commit, state }, { data }) {
-      console.log('data', data)
+      // Getting a deep copy of the current board
       const board = JSON.parse(JSON.stringify(state.board))
+
+      // Destructure data for update task
       const { cmpType, groupId } = data
       var { task } = data
       var backupTask = JSON.parse(JSON.stringify(task))
       task = JSON.parse(JSON.stringify(task))
       const type = cmpType.split('-')[0]
+
+      // Description for task update
       const description = {
         type: 'task',
         title: task.title,
