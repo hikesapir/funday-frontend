@@ -236,14 +236,14 @@ export default {
       const boardMapByGroups = []
       const members = board.members
       const tasksForMemberMap = {}
-
+      
       groups.forEach((group) => {
         const groupStatusCount = group.tasks.reduce(
           (acc, task) => {
             if (!task.status) return acc
             acc[task.status]
-              ? (acc[task.status] += 1)
-              : (acc[task.status] = 1)
+            ? (acc[task.status] += 1)
+            : (acc[task.status] = 1)
             return acc
           },
           {}
