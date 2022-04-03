@@ -615,11 +615,15 @@ export default {
       // Destructure data for update task
       const { cmpType, groupId } = data
       var { task } = data
+
+      // For optimistic mutation later if needed
       var backupTask = JSON.parse(JSON.stringify(task))
+
+      // Breaking the pointer from backupTask
       task = JSON.parse(JSON.stringify(task))
-      const type = cmpType.split('-')[0]
 
       // Description for task update
+      const type = cmpType.split('-')[0]
       const description = {
         type: 'task',
         title: task.title,
@@ -658,7 +662,7 @@ export default {
           task.number = data.number
           break
       }
-
+      // Update user's state
       commit({
         type: 'updateTask',
         groupId,
