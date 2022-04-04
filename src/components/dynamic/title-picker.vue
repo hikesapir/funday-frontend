@@ -11,7 +11,10 @@
           'background-color': labelColor.style.color,
         }"
       ></div>
-      <div class="editable-component">
+      <div
+        class="editable-component"
+        :style="{ width: titleWidth }"
+      >
         <div v-show="isEditing" class="edit-title">
           <input
             type="text"
@@ -22,11 +25,7 @@
             class="edit-title-input"
           />
         </div>
-        <div
-          v-show="!isEditing"
-          class="task-title"
-          :style="{ width: titleWidth }"
-        >
+        <div v-show="!isEditing" class="task-title">
           <span
             :style="{
               border: hoverEdit
@@ -42,7 +41,10 @@
         class="edit-icon"
         tabindex="0"
         @blur="toggleEditTask"
-        v-show="!isEditing"
+        :style="{
+          opacity: !isEditing ? 1 : 0,
+          'pointer-events': !isEditing ? 'all' : 'none',
+        }"
       >
         <button
           class="edit-title-btn"
