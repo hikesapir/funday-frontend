@@ -147,12 +147,12 @@ export default {
           case 'status-picker':
             boardForDisplay.groups.forEach(
               (group, idx) =>
-                (boardForDisplay.groups[idx].tasks =
-                  group.tasks.sort(
-                    (t1, t2) =>
-                      t1.status.localeCompare(t2.status) *
-                      sortBy.dir
-                  ))
+              (boardForDisplay.groups[idx].tasks =
+                group.tasks.sort(
+                  (t1, t2) =>
+                    t1.status.localeCompare(t2.status) *
+                    sortBy.dir
+                ))
             )
             break
           case 'priority-picker':
@@ -212,9 +212,9 @@ export default {
       }
       return boardForDisplay
     },
-    boardByStatus(state) {
+    boardByStatus(state, getters) {
       if (state.boardByStatus) return state.boardByStatus
-      const board = JSON.parse(JSON.stringify(state.board))
+      const board = JSON.parse(JSON.stringify(getters.board))
       const initBoardByStatus = JSON.parse(
         JSON.stringify(state.kStatusOrder)
       )
