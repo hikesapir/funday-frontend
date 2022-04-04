@@ -1,5 +1,5 @@
 <template>
-  <header class="board-header">
+  <header class="board-header" :style="addMargin">
     <div class="up-header">
       <div class="board-name">
         <div class="editable-header">
@@ -97,6 +97,12 @@ export default {
     },
   },
   computed: {
+    addMargin() {
+      if (this.isTaskUpdatesOpen) return { "margin-right": -700 + "px" };
+    },
+    isTaskUpdatesOpen() {
+      return this.$store.getters.isTaskUpdatesOpen;
+    },
     isUpdateBarOpen() {
       return this.$route.path.includes("pulses") ? true : false;
     },
