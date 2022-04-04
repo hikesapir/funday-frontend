@@ -84,5 +84,27 @@
     .btn {
       margin: 4px 8px;
     }
+    .last-seen-container{
+      justify-content: space-between;
+      display: flex;
+      align-items: center;
+      @include btn(4px 8px);
+      width: 138px;
+      height: 32px;
+      font-size: rem(14px);
+      .img-container{
+        display: flex;
+        align-items: center;
+
+        img{
+          height: 27px;
+          width: 27px;
+          border: 1px solid white;
+          border-radius: 20px;
+          object-fit: contain;
+          margin: 0 -5px;
+        }
+      }
+    }
   }
 }

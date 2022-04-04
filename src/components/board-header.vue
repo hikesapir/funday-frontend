@@ -36,9 +36,14 @@
         </div>
       </div>
       <div class="board-header-right">
-        <button>
-          <p>Board member</p>
-        </button>
+        <div class="last-seen-container">
+          <div>Last seen</div>
+          <div class="img-container">
+            <img title="Lior Amar" src="https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070372/w1hcqybgmllnpl8ld2zh.jpg" alt="">
+            <img title="Roee Furman" src="https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070370/qpolx3ucumsiscnf0ymk.jpg" alt="">
+            <img title="Sapir Hiki" src="https://res.cloudinary.com/mistertoyyyyyyyy/image/upload/v1648070371/a1avc0ofryx5enjnbklv.jpg" alt="">
+          </div>
+        </div>
         <button><i class="fa-solid fa-user-plus"></i> Invite / 3</button>
         <button><i class="fa-solid fa-chart-line"></i> Activity</button>
         <button class="btn">

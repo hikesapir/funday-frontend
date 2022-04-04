@@ -18,7 +18,7 @@ export const uploadFile = async (file) => {
     var url = res.data.url
     // console.log(res.data.url);
     const testUrl = res.data.url.slice(-3)
-    if (testUrl === 'pdf') {
+    if (testUrl !== 'jpg') {
       url = res.data.url.slice(0, -3) + 'jpg'
     }
     // console.log(formt);
