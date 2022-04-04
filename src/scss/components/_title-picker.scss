@@ -4,11 +4,15 @@
   left: 46px;
   opacity: 0.85;
   z-index: 2;
+
   .title-picker {
     cursor: pointer;
     display: flex;
     justify-content: left;
 
+    .edit-icon {
+      height: 34px;
+    }
     // width: 334px;
     background-color: rgba(255, 255, 255, 0.658);
     overflow: unset;
@@ -25,8 +29,7 @@
     }
 
     .editable-component {
-      // width: 260px;
-      // width: 100%;
+      height: 34px;
       .task-title {
         padding-right: 2px;
         padding-left: 8px;
