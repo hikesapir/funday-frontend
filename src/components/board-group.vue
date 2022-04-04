@@ -7,7 +7,10 @@
       >
         <div
           class="th-title title-picker-col"
-          :style="{ color: group.style?.color }"
+          :style="{
+            color: group.style?.color,
+            width: titleWidth,
+          }"
           @mouseover="isHover = true"
           @mouseleave="isHover = false"
         >
@@ -219,6 +222,13 @@ export default {
     isDraggingGroups() {
       return this.$store.getters.groupDragMode
     },
+    titleWidth() {
+      const isBoardNavOpen = this.$store.getters.boardNav
+      if (window.innerWidth > 1450 && !isBoardNavOpen) {
+        var width = window.innerWidth - 1260
+        return `${width}px`
+      } else return '430px'
+    },
   },
   methods: {
     toggleGroupContext() {
@@ -250,15 +260,15 @@ export default {
       window.addEventListener('mouseup', this.mouseUp)
     },
     editCmpTitle(cmp) {
-      this.prevCmpTitle = cmp.preName
-      this.newCmpTitle = cmp.preName
+      this.prevCmpTitle = cmp
+      this.newCmpTitle = cmp
     },
     saveCmpTitle(cmpName) {
-      if (cmpName === this.newCmpTitle) {
-        this.newCmpTitle = ''
-        this.prevCmpTitle = ''
-        return
-      }
+      // if (cmpName === this.newCmpTitle) {
+      //   this.newCmpTitle = ''
+      //   this.prevCmpTitle = ''
+      //   return
+      // }
       this.$store.dispatch({
         type: 'saveCmpTitle',
         prevCmpTitle: this.prevCmpTitle,

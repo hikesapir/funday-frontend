@@ -141,7 +141,7 @@ export default {
   },
   data() {
     return {
-      isOpen: true,
+      // isOpen: true,
     }
   },
   unmounted() {
@@ -149,7 +149,9 @@ export default {
   },
   methods: {
     changeModalStatus() {
-      this.isOpen = !this.isOpen
+      // this.isOpen = !this.isOpen
+      // this.$store.getters.boardNav
+      this.$store.commit('toggleBoardNav')
     },
     setBoard(boardId) {
       this.$store.commit({ type: 'loadBoard', id: boardId })
@@ -173,6 +175,9 @@ export default {
     },
   },
   computed: {
+    isOpen() {
+      return this.$store.getters.boardNav
+    },
     board() {
       return this.$store.getters.board
     },

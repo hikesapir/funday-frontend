@@ -23,6 +23,7 @@ export default {
     boards: null,
     board: null,
     isDraggingGroup: false,
+    isBoardNavOpen: false,
     filterBy: {
       txt: '',
       member: '',
@@ -409,8 +410,14 @@ export default {
     isTaskUpdatesOpen({ isTaskUpdatesOpen }) {
       return isTaskUpdatesOpen
     },
+    boardNav({ isBoardNavOpen }) {
+      return isBoardNavOpen
+    },
   },
   mutations: {
+    toggleBoardNav(state) {
+      state.isBoardNavOpen = !state.isBoardNavOpen
+    },
     setKTasksOrder(state, { result, idx }) {
       state.boardByStatus[idx].tasks = result
     },

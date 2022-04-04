@@ -22,7 +22,11 @@
             class="edit-title-input"
           />
         </div>
-        <div v-show="!isEditing" class="task-title">
+        <div
+          v-show="!isEditing"
+          class="task-title"
+          :style="{ width: titleWidth }"
+        >
           <span
             :style="{
               border: hoverEdit
@@ -107,7 +111,15 @@ export default {
   created() {
     this.title = this.task.title
   },
+
   computed: {
+    titleWidth() {
+      const isBoardNavOpen = this.$store.getters.boardNav
+      if (window.innerWidth > 1450 && !isBoardNavOpen) {
+        var width = window.innerWidth - 1350
+        return `${width}px`
+      } else return '340px'
+    },
     labelColor() {
       return this.$store.getters.board?.groups.find(
         (group) => group.id === this.groupId
