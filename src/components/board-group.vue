@@ -224,16 +224,10 @@ export default {
     },
     titleWidth() {
       const isBoardNavOpen = this.$store.getters.boardNav
-      if (window.innerWidth > 1450) {
-        var width = 0
-        if (isBoardNavOpen) {
-          width = window.innerWidth - 1510
-        } else {
-          width = window.innerWidth - 1260
-        }
-
+      if (window.innerWidth > 1450 && !isBoardNavOpen) {
+        var width = window.innerWidth - 1260
         return `${width}px`
-      } else return '260px'
+      } else return '430px'
     },
   },
   methods: {

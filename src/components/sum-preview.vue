@@ -44,15 +44,10 @@ export default {
   computed: {
     leftSpacer() {
       const isBoardNavOpen = this.$store.getters.boardNav
-      if (window.innerWidth > 1450) {
-        var width = 0
-        if (isBoardNavOpen) {
-          width = window.innerWidth - 1510
-        } else {
-          width = window.innerWidth - 1260
-        }
+      if (window.innerWidth > 1450 && !isBoardNavOpen) {
+        var width = window.innerWidth - 1260
         return `translate(${width}px)`
-      } else return `translate(336px)`
+      } else return `translate(435px)`
     },
 
     cmpsOrder() {

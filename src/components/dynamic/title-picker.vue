@@ -115,20 +115,10 @@ export default {
   computed: {
     titleWidth() {
       const isBoardNavOpen = this.$store.getters.boardNav
-      if (window.innerWidth > 1450) {
-        var width = 0
-        if (isBoardNavOpen) {
-          width = window.innerWidth - 1600
-        } else {
-          width = window.innerWidth - 1350
-        }
-        console.log(
-          'width, isBoardNavOpen',
-          width,
-          isBoardNavOpen
-        )
+      if (window.innerWidth > 1450 && !isBoardNavOpen) {
+        var width = window.innerWidth - 1350
         return `${width}px`
-      } else return '260px'
+      } else return '340px'
     },
     labelColor() {
       return this.$store.getters.board?.groups.find(
