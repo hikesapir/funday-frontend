@@ -13,6 +13,7 @@ import {
   SOCKET_EMIT_TASK_ADD,
   SOCKET_EMIT_EDIT_GROUPS_ORDER,
   SOCKET_EMIT_SAVE_BOARD,
+  SOCKET_EMIT_EDIT_TASKS_ORDER,
 } from '../../services/socket-service.js'
 
 export default {
@@ -22,6 +23,7 @@ export default {
     boards: null,
     board: null,
     isDraggingGroup: false,
+    isBoardNavOpen: false,
     filterBy: {
       txt: '',
       member: '',
@@ -145,12 +147,12 @@ export default {
           case 'status-picker':
             boardForDisplay.groups.forEach(
               (group, idx) =>
-              (boardForDisplay.groups[idx].tasks =
-                group.tasks.sort(
-                  (t1, t2) =>
-                    t1.status.localeCompare(t2.status) *
-                    sortBy.dir
-                ))
+                (boardForDisplay.groups[idx].tasks =
+                  group.tasks.sort(
+                    (t1, t2) =>
+                      t1.status.localeCompare(t2.status) *
+                      sortBy.dir
+                  ))
             )
             break
           case 'priority-picker':
@@ -196,9 +198,10 @@ export default {
             boardForDisplay.groups.forEach((group) => {
               group.tasks.sort((t1, t2) => {
                 if (t1.number && t2.number) {
-                  return (t1.number - t2.number) * sortBy.dir
-                }
-                else return sortBy.dir
+                  return (
+                    (t1.number - t2.number) * sortBy.dir
+                  )
+                } else return sortBy.dir
               })
             })
             break
@@ -407,8 +410,14 @@ export default {
     isTaskUpdatesOpen({ isTaskUpdatesOpen }) {
       return isTaskUpdatesOpen
     },
+    boardNav({ isBoardNavOpen }) {
+      return isBoardNavOpen
+    },
   },
   mutations: {
+    toggleBoardNav(state) {
+      state.isBoardNavOpen = !state.isBoardNavOpen
+    },
     setKTasksOrder(state, { result, idx }) {
       state.boardByStatus[idx].tasks = result
     },
@@ -608,12 +617,20 @@ export default {
       }
     },
     async updateTask({ commit, state }, { data }) {
-      console.log('data', data)
+      // Getting a deep copy of the current board
       const board = JSON.parse(JSON.stringify(state.board))
+
+      // Destructure data for update task
       const { cmpType, groupId } = data
       var { task } = data
+
+      // For optimistic mutation later if needed
       var backupTask = JSON.parse(JSON.stringify(task))
+
+      // Breaking the pointer from backupTask
       task = JSON.parse(JSON.stringify(task))
+
+      // Description for task update
       const type = cmpType.split('-')[0]
       const description = {
         type: 'task',
@@ -653,7 +670,7 @@ export default {
           task.number = data.number
           break
       }
-
+      // Update user's state
       commit({
         type: 'updateTask',
         groupId,
@@ -817,6 +834,10 @@ export default {
             idx,
             entities
           )
+          socketService.emit(SOCKET_EMIT_EDIT_TASKS_ORDER, {
+            result: entities,
+            idx,
+          })
         } catch (err) {
           console.log(
             'could not save tasks order to backend',

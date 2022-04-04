@@ -7,7 +7,10 @@
       >
         <div
           class="th-title title-picker-col"
-          :style="{ color: group.style?.color }"
+          :style="{
+            color: group.style?.color,
+            width: titleWidth,
+          }"
           @mouseover="isHover = true"
           @mouseleave="isHover = false"
         >
@@ -84,7 +87,10 @@
                 :class="['th-header', cmp.cmpName + '-col']"
               >
                 <i
-                  v-if="cmp.cmpName !== 'title-picker'"
+                  v-if="
+                    cmp.cmpName !== 'title-picker' &&
+                    !isEditing(cmp.preName)
+                  "
                   class="cols-drag-handle fa-solid fa-grip-vertical"
                 ></i>
                 <span
@@ -216,6 +222,13 @@ export default {
     isDraggingGroups() {
       return this.$store.getters.groupDragMode
     },
+    titleWidth() {
+      const isBoardNavOpen = this.$store.getters.boardNav
+      if (window.innerWidth > 1450 && !isBoardNavOpen) {
+        var width = window.innerWidth - 1260
+        return `${width}px`
+      } else return '430px'
+    },
   },
   methods: {
     toggleGroupContext() {
@@ -251,11 +264,11 @@ export default {
       this.newCmpTitle = cmp
     },
     saveCmpTitle(cmpName) {
-      if (cmpName === this.newCmpTitle) {
-        this.newCmpTitle = ''
-        this.prevCmpTitle = ''
-        return
-      }
+      // if (cmpName === this.newCmpTitle) {
+      //   this.newCmpTitle = ''
+      //   this.prevCmpTitle = ''
+      //   return
+      // }
       this.$store.dispatch({
         type: 'saveCmpTitle',
         prevCmpTitle: this.prevCmpTitle,

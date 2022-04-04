@@ -5,15 +5,11 @@
     tabindex="-1"
     @blur="$emit('closeModal')"
   >
-    <button @click="openNewTab" tabindex="-1">
-      Open Board in New Tab
-    </button>
-    <button @click="renameBoard">Rename Board</button>
-    <button @click="starred">
-      {{ starTitle }} favorites
-    </button>
-    <button @click="duplicate">Duplicate Board</button>
-    <button @click="remove">Delete</button>
+    <a @click="openNewTab"> Open Board in New Tab </a>
+    <a @click="renameBoard">Rename Board</a>
+    <a @click="starred"> {{ starTitle }} favorites </a>
+    <a @click="duplicate">Duplicate Board</a>
+    <a @click="remove">Delete</a>
   </section>
 </template>
 

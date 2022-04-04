@@ -52,6 +52,7 @@ import {
   SOCKET_EVENT_UPDATE_ADDED,
   SOCKET_EVENT_GROUPS_ORDER_EDITED,
   SOCKET_EVENT_BOARD_SEVED,
+  SOCKET_EVENT_TASKS_ORDER_EDITED,
 } from '../services/socket-service.js'
 import boardHeader from '../components/board-header.vue'
 import boardViewMode from '../components/board-view-mode.vue'
@@ -116,6 +117,16 @@ export default {
       this.$store.commit({ type: 'loadBoard', board })
     })
     socketService.on(
+      SOCKET_EVENT_TASKS_ORDER_EDITED,
+      ({ result, idx }) => {
+        this.$store.commit({
+          type: 'setTasksOrder',
+          result,
+          idx,
+        })
+      }
+    )
+    socketService.on(
       SOCKET_EVENT_UPDATE_ADDED,
       ({ taskId, boardId, groupId, update }) => {
         this.$store.commit({
@@ -130,7 +141,7 @@ export default {
   },
   data() {
     return {
-      isOpen: true,
+      // isOpen: true,
     }
   },
   unmounted() {
@@ -138,7 +149,9 @@ export default {
   },
   methods: {
     changeModalStatus() {
-      this.isOpen = !this.isOpen
+      // this.isOpen = !this.isOpen
+      // this.$store.getters.boardNav
+      this.$store.commit('toggleBoardNav')
     },
     setBoard(boardId) {
       this.$store.commit({ type: 'loadBoard', id: boardId })
@@ -162,6 +175,9 @@ export default {
     },
   },
   computed: {
+    isOpen() {
+      return this.$store.getters.boardNav
+    },
     board() {
       return this.$store.getters.board
     },

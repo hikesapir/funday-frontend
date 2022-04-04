@@ -49,7 +49,8 @@ export default {
       if (this.displayMode === "count") return count;
       else if (this.displayMode === "sum") {
         return sum;
-      } else if (this.displayMode === "average") return sum / count;
+      } else if (this.displayMode === "average")
+        return parseInt(sum / count).toFixed(2);
       else if (this.displayMode === "min")
         return Math.min(...this.groupData.numbers);
       else if (this.displayMode === "max")

@@ -1,5 +1,5 @@
 <template>
-  <section class="board-view-mode">
+  <section class="board-view-mode" :style="addMargin">
     <router-link :to="'/boards/' + boardId">
       <div class="space-btn">
         <span>
@@ -42,6 +42,14 @@ export default {
   name: "board-view-mode",
   props: {
     boardId: String,
+  },
+  computed: {
+    addMargin() {
+      if (this.isTaskUpdatesOpen) return { "margin-right": -700 + "px" };
+    },
+    isTaskUpdatesOpen() {
+      return this.$store.getters.isTaskUpdatesOpen;
+    },
   },
 };
 </script>

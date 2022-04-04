@@ -40,6 +40,7 @@ export default {
     Draggable,
     boardGroup,
   },
+
   data() {
     return {
       dropPlaceholderOptions: {
