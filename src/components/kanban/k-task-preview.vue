@@ -1,5 +1,5 @@
 <template>
-  <div class="k-tast-preview">
+  <div class="k-task-preview">
     <div class="task-body">
       <div class="k-task-title">
         <div class="word-size ellipsis">
@@ -27,7 +27,7 @@ import memberPicker from '../dynamic/member-picker.vue'
 import timelinePicker from '../dynamic/timeline-picker.vue'
 import tagPicker from '../dynamic/tag-picker.vue'
 export default {
-  name: 'k-tast-preview',
+  name: 'k-task-preview',
   props: {
     task: Object,
   },
