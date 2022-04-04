@@ -52,6 +52,7 @@ import {
   SOCKET_EVENT_UPDATE_ADDED,
   SOCKET_EVENT_GROUPS_ORDER_EDITED,
   SOCKET_EVENT_BOARD_SEVED,
+  SOCKET_EVENT_TASKS_ORDER_EDITED,
 } from '../services/socket-service.js'
 import boardHeader from '../components/board-header.vue'
 import boardViewMode from '../components/board-view-mode.vue'
@@ -115,6 +116,16 @@ export default {
     socketService.on(SOCKET_EVENT_BOARD_SEVED, (board) => {
       this.$store.commit({ type: 'loadBoard', board })
     })
+    socketService.on(
+      SOCKET_EVENT_TASKS_ORDER_EDITED,
+      ({ result, idx }) => {
+        this.$store.commit({
+          type: 'setTasksOrder',
+          result,
+          idx,
+        })
+      }
+    )
     socketService.on(
       SOCKET_EVENT_UPDATE_ADDED,
       ({ taskId, boardId, groupId, update }) => {

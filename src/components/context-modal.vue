@@ -5,7 +5,7 @@
     tabindex="-1"
     @blur="$emit('closeModal')"
   >
-    <button @click="openNewTab" tabindex="-1">
+    <button @click="openNewTab">
       Open Board in New Tab
     </button>
     <button @click="renameBoard">Rename Board</button>
