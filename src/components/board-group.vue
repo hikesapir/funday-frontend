@@ -260,8 +260,8 @@ export default {
       window.addEventListener('mouseup', this.mouseUp)
     },
     editCmpTitle(cmp) {
-      this.prevCmpTitle = cmp.preName
-      this.newCmpTitle = cmp.preName
+      this.prevCmpTitle = cmp
+      this.newCmpTitle = cmp
     },
     saveCmpTitle(cmpName) {
       // if (cmpName === this.newCmpTitle) {
