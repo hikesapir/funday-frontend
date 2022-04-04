@@ -24,6 +24,7 @@
     .k-task-list {
       max-height: calc(65vh - 50px);
       // border: 1px solid $main-text-gray;
+      padding: 3px 0 3px 1px;
       border: 1px solid $main-gray;
       border-bottom-right-radius: 8px;
       border-bottom-left-radius: 8px;
@@ -36,19 +37,21 @@
       -webkit-box-shadow: 0px 9px 18px -4px rgba(0, 0, 0, 0.36);
       box-shadow: 0px 9px 18px -4px rgba(0, 0, 0, 0.36);
     }
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
     .task-body {
       cursor: pointer;
-      border: 1px solid $main-gray;
+      // border: 1px solid $main-gray;
       background-color: $main-white;
-      border-radius: 8px;
+      border-radius: 4px;
       width: 240px;
       height: 80px;
-      margin: 10px auto;
+      margin: 6px auto;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
-      -webkit-box-shadow: 0px 9px 18px -4px rgba(0, 0, 0, 0.2);
       box-shadow: 0px 9px 18px -4px rgba(0, 0, 0, 0.2);
       .k-task-title {
         display: flex;
@@ -73,6 +76,9 @@
           vertical-align: middle;
           font-size: 12px;
         }
+        .drop-down{
+          left: -12px;
+        }
       }
     }
 
@@ -88,6 +94,11 @@
         width: 80px;
         justify-content: center;
         margin-left: 35px;
+        position: relative;
+      }
+      .context-modal{
+        left: -125px;
+        top: 20px;
       }
 
       .timeline-picker label.timeline {

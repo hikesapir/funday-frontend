@@ -33,7 +33,7 @@
       .task-title {
         padding-right: 2px;
         padding-left: 8px;
-        width: 300px;
+        // width: 300px;
         display: inline-block;
         overflow-x: hidden;
         overflow-y: hidden;
@@ -61,7 +61,7 @@
         margin-left: 4px;
       }
       // width: calc(100% - 34px);
-      width: 295px;
+      width: 100%;
     }
 
     .edit-title-btn {
