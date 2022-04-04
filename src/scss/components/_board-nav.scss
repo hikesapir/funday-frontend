@@ -158,6 +158,11 @@
   }
   .context-modal {
     width: 220px;
+    a {
+      @include btn(8px 8px);
+
+      cursor: pointer;
+    }
   }
 }
 
