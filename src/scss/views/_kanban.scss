@@ -1,4 +1,7 @@
 .kanban-main {
+  div.smooth-dnd-container.horizontal {
+    display: grid;
+  }
   .kanban-view-container {
     margin-left: 20px;
     padding: 0 30px;
@@ -76,7 +79,7 @@
           vertical-align: middle;
           font-size: 12px;
         }
-        .drop-down{
+        .drop-down {
           left: -12px;
         }
       }
@@ -96,7 +99,7 @@
         margin-left: 35px;
         position: relative;
       }
-      .context-modal{
+      .context-modal {
         left: -125px;
         top: 20px;
       }
