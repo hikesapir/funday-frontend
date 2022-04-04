@@ -10,6 +10,7 @@
           v-model="task.title"
           placeholder="+ Add task"
           :class="leftBoxStyle"
+          :style="{ width: inputWidth }"
         />
       </label>
       <button v-if="isFocused" :class="btnClass">Add</button>
@@ -44,6 +45,15 @@ export default {
     },
   },
   computed: {
+    inputWidth() {
+      const isBoardNavOpen = this.$store.getters.boardNav;
+      const isUpdateBarOpen = this.$store.getters.isTaskUpdatesOpen;
+      if (window.innerWidth > 1450 && !isBoardNavOpen && isUpdateBarOpen)
+        return `${1051}px`;
+      else if (window.innerWidth > 1450 && !isBoardNavOpen) return `${1671}px`;
+      else if (window.innerWidth > 1450 && isUpdateBarOpen) return `${840}px`;
+      else return "1441px";
+    },
     leftBoxStyle() {
       const group = this.$store.getters.board?.groups.find(
         (group) => group.id === this.groupId
