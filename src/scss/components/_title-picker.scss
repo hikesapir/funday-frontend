@@ -9,7 +9,7 @@
     display: flex;
     justify-content: left;
 
-    width: 334px;
+    // width: 334px;
     background-color: rgba(255, 255, 255, 0.658);
     overflow: unset;
     padding-right: 8px;
@@ -26,11 +26,11 @@
 
     .editable-component {
       // width: 260px;
-      width: 100%;
+      // width: 100%;
       .task-title {
         padding-right: 2px;
         padding-left: 8px;
-        width: 100%;
+        width: 300px;
         display: inline-block;
         overflow-x: hidden;
         overflow-y: hidden;
