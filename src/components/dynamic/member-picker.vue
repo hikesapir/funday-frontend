@@ -4,7 +4,7 @@
     @mouseover="isHover = true"
     @mouseleave="isHover = false"
   >
-    <div v-if="membersLength < 3">
+    <div class="img-preview" v-if="membersLength < 3">
       <img
         v-for="member in members"
         :src="member.imgUrl"
@@ -15,10 +15,7 @@
     </div>
     <div v-else>
       <img :src="firstMemberPic" />
-      <div
-        class="small-number"
-        :data-title="restOfMemberList"
-      >
+      <div class="small-number" :data-title="restOfMemberList">
         +{{ membersLength - 1 }}
       </div>
     </div>
@@ -29,11 +26,7 @@
       @click.stop="openModal"
     />
 
-    <div
-      v-show="addMembersMode"
-      ref="memberPickerModal"
-      class="context-modal"
-    >
+    <div v-show="addMembersMode" ref="memberPickerModal" class="context-modal">
       <div class="small-name-preview">
         <div
           class="member-name"
@@ -41,19 +34,12 @@
           :key="member.id"
         >
           <span>{{ member.fullname }}</span>
-          <i
-            @click="removeFromTask(idx)"
-            class="fa-solid fa-circle-xmark"
-          ></i>
+          <i @click="removeFromTask(idx)" class="fa-solid fa-circle-xmark"></i>
         </div>
       </div>
 
       <label>
-        <input
-          type="text"
-          placeholder="Enter name"
-          v-model="filterBy"
-        />
+        <input type="text" placeholder="Enter name" v-model="filterBy" />
       </label>
 
       <div class="relative">
@@ -78,95 +64,80 @@
 
 <script>
 export default {
-  name: 'member-picker',
+  name: "member-picker",
   props: {
     task: Object,
   },
   data() {
     return {
       addMembersMode: false,
-      filterBy: '',
+      filterBy: "",
       isHover: false,
-    }
+    };
   },
   computed: {
     membersLength() {
-      return this.task.members.length
+      return this.task.members.length;
     },
     firstMemberPic() {
-      return this.task.members[0].imgUrl
+      return this.task.members[0].imgUrl;
     },
     restOfMemberList() {
-      var list = JSON.parse(
-        JSON.stringify(this.task.members)
-      )
-      list.shift()
+      var list = JSON.parse(JSON.stringify(this.task.members));
+      list.shift();
       list = list.reduce((acc, member) => {
-        acc.push(member.fullname)
-        return acc
-      }, [])
-      return list.join(' ')
+        acc.push(member.fullname);
+        return acc;
+      }, []);
+      return list.join(" ");
     },
     members() {
-      return this.task.members
+      return this.task.members;
     },
     membersList() {
-      var membersList = this.$store.getters.board.members
+      var membersList = this.$store.getters.board.members;
       membersList = membersList.filter((boardMember) => {
         return !this.task.members.some(
           (taskMember) => taskMember._id === boardMember._id
-        )
-      })
-      const regex = new RegExp(this.filterBy, 'i')
-      membersList = membersList.filter((member) =>
-        regex.test(member.fullname)
-      )
-      return membersList
+        );
+      });
+      const regex = new RegExp(this.filterBy, "i");
+      membersList = membersList.filter((member) => regex.test(member.fullname));
+      return membersList;
     },
   },
   methods: {
     openModal() {
-      this.addMembersMode = true
-      document.body.addEventListener(
-        'click',
-        this.isClosingModal
-      )
+      this.addMembersMode = true;
+      document.body.addEventListener("click", this.isClosingModal);
     },
     closeModal() {
-      this.addMembersMode = false
-      document.body.removeEventListener(
-        'click',
-        this.isClosingModal
-      )
+      this.addMembersMode = false;
+      document.body.removeEventListener("click", this.isClosingModal);
     },
     isClosingModal(e) {
-      e.stopPropagation()
-      if (!this.$refs.memberPickerModal.contains(e.target))
-        this.closeModal()
+      e.stopPropagation();
+      if (!this.$refs.memberPickerModal.contains(e.target)) this.closeModal();
     },
     addMember(member) {
-      const members = JSON.parse(
-        JSON.stringify(this.task.members)
-      )
-      members.push(JSON.parse(JSON.stringify(member)))
-      this.$emit('update', {
+      const members = JSON.parse(JSON.stringify(this.task.members));
+      members.push(JSON.parse(JSON.stringify(member)));
+      this.$emit("update", {
         cmpType: `member-picker`,
         members,
         task: this.task,
-      })
-      this.addMembersMode = !this.addMembersMode
+      });
+      this.addMembersMode = !this.addMembersMode;
     },
     removeFromTask(idx) {
-      var members = JSON.parse(
-        JSON.stringify(this.task.members)
-      )
-      members.splice(idx, 1)
-      this.$emit('update', {
+      var members = JSON.parse(JSON.stringify(this.task.members));
+      members.splice(idx, 1);
+      this.$emit("update", {
         cmpType: `member-picker`,
         members,
         task: this.task,
-      })
+      });
     },
   },
-}
+};
 </script>
