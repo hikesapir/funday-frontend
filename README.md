@@ -8,7 +8,7 @@ This is our final project from the coding academy bootcamp. We built it in colla
 The team members:
 - Lior Amar
 - Roee Furman
-- Sapir Hike
+- Sapir Hiki
 
 
 The technology stack we used is MEVN: Vue.js and Vuex for state management, MongoDB with Express and NodeJS for the backend.
